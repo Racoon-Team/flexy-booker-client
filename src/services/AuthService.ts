@@ -1,5 +1,5 @@
 import ApiService from './ApiService'
-import endpointConfig from '@/configs/endpoint.config'
+import endpointConfig, { apiPrefix } from '@/configs/endpoint.config'
 import type {
     SignInCredential,
     SignUpCredential,
@@ -11,7 +11,7 @@ import type {
 
 export async function apiSignIn(data: SignInCredential) {
     return ApiService.fetchDataWithAxios<SignInResponse>({
-        url: endpointConfig.signIn,
+      url: apiPrefix + endpointConfig.signIn, 
         method: 'post',
         data,
     })
@@ -19,7 +19,7 @@ export async function apiSignIn(data: SignInCredential) {
 
 export async function apiSignUp(data: SignUpCredential) {
     return ApiService.fetchDataWithAxios<SignUpResponse>({
-        url: endpointConfig.signUp,
+          url: apiPrefix + endpointConfig.signUp,
         method: 'post',
         data,
     })
@@ -27,7 +27,7 @@ export async function apiSignUp(data: SignUpCredential) {
 
 export async function apiSignOut() {
     return ApiService.fetchDataWithAxios({
-        url: endpointConfig.signOut,
+           url: apiPrefix + endpointConfig.signOut,
         method: 'post',
     })
 }
