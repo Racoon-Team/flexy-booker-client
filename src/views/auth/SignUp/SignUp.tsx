@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Alert from '@/components/ui/Alert'
 import ActionLink from '@/components/shared/ActionLink'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-
+import CompanySignUpForm from './components/CompanySignUpForm'
 import ClientSignUpForm from './components/ClientSignUpForm'
 
 type ActiveTab = 'client' | 'business'
@@ -63,9 +63,10 @@ export const SignUpBase = ({
                     setMessage={setMessage}
                 />
             ) : (
-                <div className="text-center text-gray-400 py-8">
-                    ---- Registro de empresa ----
-                </div>
+                <CompanySignUpForm
+                    disableSubmit={disableSubmit}
+                    setMessage={setMessage}
+                />
             )}
 
             <div className="mt-6 text-center">
