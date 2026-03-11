@@ -77,6 +77,14 @@ export const SignUpBase = ({
                 >
                     Iniciar sesión
                 </ActionLink>
+                <span className="mx-2 text-gray-300">|</span>
+                <button
+                    type="button"
+                    className="font-bold heading-text"
+                    onClick={() => {}}
+                >
+                    Continuar Explorando
+                </button>
             </div>
         </>
     )
