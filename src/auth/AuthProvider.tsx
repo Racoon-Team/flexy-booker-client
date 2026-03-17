@@ -64,7 +64,10 @@ function AuthProvider({ children }: AuthProviderProps) {
         setSessionSignedIn(true)
 
         if (user) {
-            setUser(user)
+            setUser({
+    userName: user.userName,
+    email: user.email,
+})
         }
     }
 
