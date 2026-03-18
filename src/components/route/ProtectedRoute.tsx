@@ -6,23 +6,20 @@ import { useAuth } from '@/auth';
 const { unAuthenticatedEntryPath } = appConfig;
 
 const ProtectedRoute = () => {
-    const { authenticated } = useAuth();
+  const { authenticated } = useAuth();
 
-    const pathName = location.pathname;
+  const pathName = location.pathname;
 
-    const getPathName =
-        pathName === '/' ? '' : `?${REDIRECT_URL_KEY}=${pathName}`;
+  const getPathName =
+    pathName === '/' ? '' : `?${REDIRECT_URL_KEY}=${pathName}`;
 
-    if (!authenticated) {
-        return (
-            <Navigate
-                replace
-                to={`${unAuthenticatedEntryPath}${getPathName}`}
-            />
-        );
-    }
+  if (!authenticated) {
+    return (
+      <Navigate replace to={`${unAuthenticatedEntryPath}${getPathName}`} />
+    );
+  }
 
-    return <Outlet />;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

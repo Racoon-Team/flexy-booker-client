@@ -13,12 +13,12 @@ export type { CarouselNextProps } from './CarouselNext';
 export type { CarouselApi, CarouselOrientation } from './context';
 
 type CompoundedComponent = ForwardRefExoticComponent<
-    CarouselProps & RefAttributes<HTMLDivElement>
+  CarouselProps & RefAttributes<HTMLDivElement>
 > & {
-    Content: typeof CarouselContent;
-    Item: typeof CarouselItem;
-    Previous: typeof CarouselPrevious;
-    Next: typeof CarouselNext;
+  Content: typeof CarouselContent;
+  Item: typeof CarouselItem;
+  Previous: typeof CarouselPrevious;
+  Next: typeof CarouselNext;
 };
 
 const Carousel = _Carousel as CompoundedComponent;

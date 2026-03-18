@@ -3,21 +3,21 @@ import { useThemeStore } from '@/store/themeStore';
 import type { Direction } from '@/@types/theme';
 
 function useDirection(): [
-    direction: Direction,
-    setDirection: (dir: Direction) => void,
+  direction: Direction,
+  setDirection: (dir: Direction) => void,
 ] {
-    const direction = useThemeStore((state) => state.direction);
-    const setDirection = useThemeStore((state) => state.setDirection);
+  const direction = useThemeStore((state) => state.direction);
+  const setDirection = useThemeStore((state) => state.setDirection);
 
-    useEffect(() => {
-        if (window === undefined) {
-            return;
-        }
-        const root = window.document.documentElement;
-        root.setAttribute('dir', direction);
-    }, [direction]);
+  useEffect(() => {
+    if (window === undefined) {
+      return;
+    }
+    const root = window.document.documentElement;
+    root.setAttribute('dir', direction);
+  }, [direction]);
 
-    return [direction, setDirection];
+  return [direction, setDirection];
 }
 
 export default useDirection;

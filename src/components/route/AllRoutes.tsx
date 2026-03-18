@@ -11,8 +11,8 @@ import { Routes, Route, Navigate } from 'react-router';
 import type { LayoutType } from '@/@types/theme';
 
 interface ViewsProps {
-    pageContainerType?: 'default' | 'gutterless' | 'contained';
-    layout?: LayoutType;
+  pageContainerType?: 'default' | 'gutterless' | 'contained';
+  layout?: LayoutType;
 }
 
 type AllRoutesProps = ViewsProps;
@@ -20,55 +20,55 @@ type AllRoutesProps = ViewsProps;
 const { authenticatedEntryPath } = appConfig;
 
 const AllRoutes = (props: AllRoutesProps) => {
-    const { user } = useAuth();
+  const { user } = useAuth();
 
-    return (
-        <Routes>
-            <Route path="/" element={<PublicRoute />}>
-                <Route index element={<FallbackRoute />} />
-                {publicRoutes.map((route) => (
-                    <Route
-                        key={route.path}
-                        path={route.path}
-                        element={
-                            <AppRoute
-                                routeKey={route.key}
-                                component={route.component}
-                                {...route.meta}
-                            />
-                        }
-                    />
-                ))}
-            </Route>
-            <Route path="/" element={<ProtectedRoute />}>
-                <Route
-                    index
-                    element={<Navigate replace to={authenticatedEntryPath} />}
-                />
-                {protectedRoutes.map((route, index) => (
-                    <Route
-                        key={route.key + index}
-                        path={route.path}
-                        element={
-                            <AuthorityGuard
-                                userAuthority={user.authority}
-                                authority={route.authority}
-                            >
-                                <PageContainer {...props} {...route.meta}>
-                                    <AppRoute
-                                        routeKey={route.key}
-                                        component={route.component}
-                                        {...route.meta}
-                                    />
-                                </PageContainer>
-                            </AuthorityGuard>
-                        }
-                    />
-                ))}
-                <Route path="*" element={<Navigate replace to="/" />} />
-            </Route>
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<PublicRoute />}>
+        <Route index element={<FallbackRoute />} />
+        {publicRoutes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              <AppRoute
+                routeKey={route.key}
+                component={route.component}
+                {...route.meta}
+              />
+            }
+          />
+        ))}
+      </Route>
+      <Route path="/" element={<ProtectedRoute />}>
+        <Route
+          index
+          element={<Navigate replace to={authenticatedEntryPath} />}
+        />
+        {protectedRoutes.map((route, index) => (
+          <Route
+            key={route.key + index}
+            path={route.path}
+            element={
+              <AuthorityGuard
+                userAuthority={user.authority}
+                authority={route.authority}
+              >
+                <PageContainer {...props} {...route.meta}>
+                  <AppRoute
+                    routeKey={route.key}
+                    component={route.component}
+                    {...route.meta}
+                  />
+                </PageContainer>
+              </AuthorityGuard>
+            }
+          />
+        ))}
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default AllRoutes;

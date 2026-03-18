@@ -5,18 +5,14 @@ import { Navigate } from 'react-router';
 const { authenticatedEntryPath, unAuthenticatedEntryPath } = appConfig;
 
 const FallbackRoute = () => {
-    const { authenticated } = useAuth();
+  const { authenticated } = useAuth();
 
-    return (
-        <Navigate
-            replace
-            to={
-                authenticated
-                    ? authenticatedEntryPath
-                    : unAuthenticatedEntryPath
-            }
-        />
-    );
+  return (
+    <Navigate
+      replace
+      to={authenticated ? authenticatedEntryPath : unAuthenticatedEntryPath}
+    />
+  );
 };
 
 export default FallbackRoute;

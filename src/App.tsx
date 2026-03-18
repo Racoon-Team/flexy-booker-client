@@ -6,21 +6,21 @@ import Views from '@/views';
 import appConfig from './configs/app.config';
 
 if (appConfig.enableMock) {
-    import('./mock');
+  import('./mock');
 }
 
 function App() {
-    return (
-        <Theme>
-            <BrowserRouter>
-                <AuthProvider>
-                    <Layout>
-                        <Views />
-                    </Layout>
-                </AuthProvider>
-            </BrowserRouter>
-        </Theme>
-    );
+  return (
+    <Theme>
+      <BrowserRouter>
+        <AuthProvider>
+          <Layout>
+            <Views />
+          </Layout>
+        </AuthProvider>
+      </BrowserRouter>
+    </Theme>
+  );
 }
 
 export default App;
