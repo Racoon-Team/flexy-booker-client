@@ -3,9 +3,9 @@ import ConfigProvider, {
     ConfigConsumer,
     useConfig,
     defaultConfig,
-} from './ConfigProvider'
+} from './ConfigProvider';
 
-export type { Config } from './ConfigProvider'
+export type { Config } from './ConfigProvider';
 
 export {
     ConfigProvider,
@@ -13,6 +13,6 @@ export {
     ConfigConsumer,
     useConfig,
     defaultConfig,
-}
+};
 
-export default ConfigProvider
+export default ConfigProvider;

@@ -1,17 +1,17 @@
-import HorizontalMenuContent from './HorizontalMenuContent'
-import { useRouteKeyStore } from '@/store/routeKeyStore'
-import { useSessionUser } from '@/store/authStore'
-import appConfig from '@/configs/app.config'
-import navigationConfig from '@/configs/navigation.config'
+import HorizontalMenuContent from './HorizontalMenuContent';
+import { useRouteKeyStore } from '@/store/routeKeyStore';
+import { useSessionUser } from '@/store/authStore';
+import appConfig from '@/configs/app.config';
+import navigationConfig from '@/configs/navigation.config';
 
 const HorizontalNav = ({
     translationSetup = appConfig.activeNavTranslation,
 }: {
-    translationSetup?: boolean
+    translationSetup?: boolean;
 }) => {
-    const currentRouteKey = useRouteKeyStore((state) => state.currentRouteKey)
+    const currentRouteKey = useRouteKeyStore((state) => state.currentRouteKey);
 
-    const userAuthority = useSessionUser((state) => state.user.authority)
+    const userAuthority = useSessionUser((state) => state.user.authority);
 
     return (
         <HorizontalMenuContent
@@ -20,7 +20,7 @@ const HorizontalNav = ({
             userAuthority={userAuthority || []}
             translationSetup={translationSetup}
         />
-    )
-}
+    );
+};
 
-export default HorizontalNav
+export default HorizontalNav;

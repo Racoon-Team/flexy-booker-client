@@ -1,75 +1,75 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
     SPLITTED_SIDE_NAV_MINI_WIDTH,
     STACKED_SIDE_NAV_SECONDARY_WIDTH,
     DIR_LTR,
     DIR_RTL,
-} from '@/constants/theme.constant'
-import StackedSideNavMini, { SelectedMenuItem } from './StackedSideNavMini'
-import StackedSideNavSecondary from './StackedSideNavSecondary'
-import useResponsive from '@/utils/hooks/useResponsive'
-import { useThemeStore } from '@/store/themeStore'
-import { useRouteKeyStore } from '@/store/routeKeyStore'
-import { useSessionUser } from '@/store/authStore'
-import navigationConfig from '@/configs/navigation.config'
-import appConfig from '@/configs/app.config'
-import isEmpty from 'lodash/isEmpty'
-import useTranslation from '@/utils/hooks/useTranslation'
-import type { TraslationFn } from '@/@types/common'
+} from '@/constants/theme.constant';
+import StackedSideNavMini, { SelectedMenuItem } from './StackedSideNavMini';
+import StackedSideNavSecondary from './StackedSideNavSecondary';
+import useResponsive from '@/utils/hooks/useResponsive';
+import { useThemeStore } from '@/store/themeStore';
+import { useRouteKeyStore } from '@/store/routeKeyStore';
+import { useSessionUser } from '@/store/authStore';
+import navigationConfig from '@/configs/navigation.config';
+import appConfig from '@/configs/app.config';
+import isEmpty from 'lodash/isEmpty';
+import useTranslation from '@/utils/hooks/useTranslation';
+import type { TraslationFn } from '@/@types/common';
 
 const stackedSideNavDefaultStyle = {
     width: SPLITTED_SIDE_NAV_MINI_WIDTH,
-}
+};
 
 const StackedSideNav = ({
     translationSetup = appConfig.activeNavTranslation,
 }: {
-    translationSetup?: boolean
+    translationSetup?: boolean;
 }) => {
-    const { t } = useTranslation(!translationSetup)
+    const { t } = useTranslation(!translationSetup);
 
-    const [selectedMenu, setSelectedMenu] = useState<SelectedMenuItem>({})
-    const [activeKeys, setActiveKeys] = useState<string[]>([])
+    const [selectedMenu, setSelectedMenu] = useState<SelectedMenuItem>({});
+    const [activeKeys, setActiveKeys] = useState<string[]>([]);
 
-    const mode = useThemeStore((state) => state.mode)
-    const direction = useThemeStore((state) => state.direction)
+    const mode = useThemeStore((state) => state.mode);
+    const direction = useThemeStore((state) => state.direction);
 
-    const currentRouteKey = useRouteKeyStore((state) => state.currentRouteKey)
+    const currentRouteKey = useRouteKeyStore((state) => state.currentRouteKey);
 
-    const userAuthority = useSessionUser((state) => state.user.authority)
+    const userAuthority = useSessionUser((state) => state.user.authority);
 
-    const { larger } = useResponsive()
+    const { larger } = useResponsive();
 
     const navColor = (navType: string, mode: string) => {
-        return `${navType}-${mode}`
-    }
+        return `${navType}-${mode}`;
+    };
 
     const handleChange = (selected: SelectedMenuItem) => {
-        setSelectedMenu(selected)
-    }
+        setSelectedMenu(selected);
+    };
 
     const handleCollpase = () => {
-        setSelectedMenu({})
-        setActiveKeys([])
-    }
+        setSelectedMenu({});
+        setActiveKeys([]);
+    };
 
     const handleSetActiveKey = (key: string[]) => {
-        setActiveKeys(key)
-    }
+        setActiveKeys(key);
+    };
 
     const stackedSideNavSecondaryDirStyle = () => {
-        let style = {}
-        const marginValue = `${-STACKED_SIDE_NAV_SECONDARY_WIDTH}px`
+        let style = {};
+        const marginValue = `${-STACKED_SIDE_NAV_SECONDARY_WIDTH}px`;
         if (direction === DIR_LTR) {
-            style = { marginLeft: marginValue }
+            style = { marginLeft: marginValue };
         }
 
         if (direction === DIR_RTL) {
-            style = { marginRight: marginValue }
+            style = { marginRight: marginValue };
         }
 
-        return style
-    }
+        return style;
+    };
 
     return (
         <>
@@ -122,7 +122,7 @@ const StackedSideNav = ({
                 </div>
             )}
         </>
-    )
-}
+    );
+};
 
-export default StackedSideNav
+export default StackedSideNav;

@@ -1,22 +1,22 @@
-import classNames from '@/utils/classNames'
-import { SIZES } from '../utils/constants'
-import type { CommonProps } from '../@types/common'
+import classNames from '@/utils/classNames';
+import { SIZES } from '../utils/constants';
+import type { CommonProps } from '../@types/common';
 
 interface LineProps extends CommonProps {
-    percent: number
-    strokeColor?: string
-    trailClass?: string
-    size?: 'sm' | 'md'
+    percent: number;
+    strokeColor?: string;
+    trailClass?: string;
+    size?: 'sm' | 'md';
 }
 
 const Line = (props: LineProps) => {
-    const { percent, size, children, strokeColor, trailClass } = props
+    const { percent, size, children, strokeColor, trailClass } = props;
 
     const progressBackgroundClass = classNames(
         'progress-bg',
         size === SIZES.SM ? 'h-1.5' : 'h-2',
         strokeColor,
-    )
+    );
 
     return (
         <>
@@ -30,9 +30,9 @@ const Line = (props: LineProps) => {
             </div>
             {children}
         </>
-    )
-}
+    );
+};
 
-Line.displayName = 'ProgressLine'
+Line.displayName = 'ProgressLine';
 
-export default Line
+export default Line;

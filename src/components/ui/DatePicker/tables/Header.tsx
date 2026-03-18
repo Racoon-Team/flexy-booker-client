@@ -1,19 +1,19 @@
-import classNames from 'classnames'
-import { HiChevronRight, HiChevronLeft } from 'react-icons/hi'
-import type { CommonProps } from '../../@types/common'
+import classNames from 'classnames';
+import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
+import type { CommonProps } from '../../@types/common';
 
 export interface HeaderProps extends CommonProps {
-    hasNext: boolean
-    hasPrevious: boolean
-    onNext?: () => void
-    onPrevious?: () => void
-    onNextLevel?: () => void
-    label?: string
-    nextLevelDisabled?: boolean
-    nextLabel?: string
-    previousLabel?: string
-    preventLevelFocus?: boolean
-    preventFocus?: boolean
+    hasNext: boolean;
+    hasPrevious: boolean;
+    onNext?: () => void;
+    onPrevious?: () => void;
+    onNextLevel?: () => void;
+    label?: string;
+    nextLevelDisabled?: boolean;
+    nextLabel?: string;
+    previousLabel?: string;
+    preventLevelFocus?: boolean;
+    preventFocus?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
@@ -32,7 +32,7 @@ const Header = (props: HeaderProps) => {
         children,
         className,
         ...rest
-    } = props
+    } = props;
 
     const headerLabel = (
         <button
@@ -45,9 +45,9 @@ const Header = (props: HeaderProps) => {
         >
             {label}
         </button>
-    )
+    );
 
-    const renderChildren = children ? children : headerLabel
+    const renderChildren = children ? children : headerLabel;
 
     return (
         <div
@@ -95,7 +95,7 @@ const Header = (props: HeaderProps) => {
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;

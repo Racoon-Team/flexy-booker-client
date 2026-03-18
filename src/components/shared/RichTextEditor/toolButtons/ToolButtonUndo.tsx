@@ -1,8 +1,8 @@
-import { CgUndo } from 'react-icons/cg'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { CgUndo } from 'react-icons/cg';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonUndoProp = BaseToolButtonProps
+type ToolButtonUndoProp = BaseToolButtonProps;
 
 const ToolButtonUndo = ({ editor }: ToolButtonUndoProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonUndo = ({ editor }: ToolButtonUndoProp) => {
         >
             <CgUndo />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonUndo
+export default ToolButtonUndo;

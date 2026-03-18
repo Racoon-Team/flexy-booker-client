@@ -1,25 +1,25 @@
-import Button from '@/components/ui/Button'
-import InputGroup from '@/components/ui/InputGroup'
-import useDirection from '@/utils/hooks/useDirection'
-import { THEME_ENUM } from '@/constants/theme.constant'
-import type { Direction } from '@/@types/theme'
+import Button from '@/components/ui/Button';
+import InputGroup from '@/components/ui/InputGroup';
+import useDirection from '@/utils/hooks/useDirection';
+import { THEME_ENUM } from '@/constants/theme.constant';
+import type { Direction } from '@/@types/theme';
 
 const dirList = [
     { value: THEME_ENUM.DIR_LTR, label: 'LTR' },
     { value: THEME_ENUM.DIR_RTL, label: 'RTL' },
-]
+];
 
 const DirectionSwitcher = ({
     callBackClose,
 }: {
-    callBackClose?: () => void
+    callBackClose?: () => void;
 }) => {
-    const [direction, setDirection] = useDirection()
+    const [direction, setDirection] = useDirection();
 
     const onDirChange = (val: Direction) => {
-        setDirection(val)
-        callBackClose?.()
-    }
+        setDirection(val);
+        callBackClose?.();
+    };
 
     return (
         <InputGroup size="sm">
@@ -33,7 +33,7 @@ const DirectionSwitcher = ({
                 </Button>
             ))}
         </InputGroup>
-    )
-}
+    );
+};
 
-export default DirectionSwitcher
+export default DirectionSwitcher;

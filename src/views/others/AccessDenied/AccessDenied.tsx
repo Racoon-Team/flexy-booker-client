@@ -1,5 +1,5 @@
-import Container from '@/components/shared/Container'
-import SpaceSignBoard from '@/assets/svg/SpaceSignBoard'
+import Container from '@/components/shared/Container';
+import SpaceSignBoard from '@/assets/svg/SpaceSignBoard';
 
 const AccessDenied = () => {
     return (
@@ -14,7 +14,7 @@ const AccessDenied = () => {
                 </div>
             </div>
         </Container>
-    )
-}
+    );
+};
 
-export default AccessDenied
+export default AccessDenied;

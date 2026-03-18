@@ -1149,4 +1149,4 @@ export const countryList = [
         dialCode: '+263',
         value: 'ZW',
     },
-]
+];

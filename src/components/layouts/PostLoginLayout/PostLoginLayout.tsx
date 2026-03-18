@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense } from 'react';
 import {
     LAYOUT_COLLAPSIBLE_SIDE,
     LAYOUT_STACKED_SIDE,
@@ -6,19 +6,19 @@ import {
     LAYOUT_FRAMELESS_SIDE,
     LAYOUT_CONTENT_OVERLAY,
     LAYOUT_BLANK,
-} from '@/constants/theme.constant'
-import Loading from '@/components/shared/Loading'
-import type { CommonProps } from '@/@types/common'
-import type { LazyExoticComponent, JSX } from 'react'
-import type { LayoutType } from '@/@types/theme'
+} from '@/constants/theme.constant';
+import Loading from '@/components/shared/Loading';
+import type { CommonProps } from '@/@types/common';
+import type { LazyExoticComponent, JSX } from 'react';
+import type { LayoutType } from '@/@types/theme';
 
 type Layouts = Record<
     string,
     LazyExoticComponent<<T extends CommonProps>(props: T) => JSX.Element>
->
+>;
 
 interface PostLoginLayoutProps extends CommonProps {
-    layoutType: LayoutType
+    layoutType: LayoutType;
 }
 
 const layouts: Layouts = {
@@ -30,10 +30,10 @@ const layouts: Layouts = {
     [LAYOUT_FRAMELESS_SIDE]: lazy(() => import('./components/FrameLessSide')),
     [LAYOUT_CONTENT_OVERLAY]: lazy(() => import('./components/ContentOverlay')),
     [LAYOUT_BLANK]: lazy(() => import('./components/Blank')),
-}
+};
 
 const PostLoginLayout = ({ layoutType, children }: PostLoginLayoutProps) => {
-    const AppLayout = layouts[layoutType] ?? layouts[Object.keys(layouts)[0]]
+    const AppLayout = layouts[layoutType] ?? layouts[Object.keys(layouts)[0]];
 
     return (
         <Suspense
@@ -45,7 +45,7 @@ const PostLoginLayout = ({ layoutType, children }: PostLoginLayoutProps) => {
         >
             <AppLayout>{children}</AppLayout>
         </Suspense>
-    )
-}
+    );
+};
 
-export default PostLoginLayout
+export default PostLoginLayout;

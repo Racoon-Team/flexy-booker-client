@@ -2,8 +2,8 @@ const FrameLessSideSvg = ({
     height = 100,
     width = 100,
 }: {
-    height?: number | string
-    width?: number | string
+    height?: number | string;
+    width?: number | string;
 }) => {
     return (
         <svg
@@ -69,7 +69,7 @@ const FrameLessSideSvg = ({
                 rx={20}
             />
         </svg>
-    )
-}
+    );
+};
 
-export default FrameLessSideSvg
+export default FrameLessSideSvg;

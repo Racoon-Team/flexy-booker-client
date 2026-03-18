@@ -1,35 +1,35 @@
-import cookiesStorage from '@/utils/cookiesStorage'
-import appConfig from '@/configs/app.config'
-import { TOKEN_NAME_IN_STORAGE } from '@/constants/api.constant'
-import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
-import type { User } from '@/@types/auth'
+import cookiesStorage from '@/utils/cookiesStorage';
+import appConfig from '@/configs/app.config';
+import { TOKEN_NAME_IN_STORAGE } from '@/constants/api.constant';
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import type { User } from '@/@types/auth';
 
 type Session = {
-    signedIn: boolean
-}
+    signedIn: boolean;
+};
 
 type AuthState = {
-    session: Session
-    user: User
-}
+    session: Session;
+    user: User;
+};
 
 type AuthAction = {
-    setSessionSignedIn: (payload: boolean) => void
-    setUser: (payload: User) => void
-}
+    setSessionSignedIn: (payload: boolean) => void;
+    setUser: (payload: User) => void;
+};
 
 const getPersistStorage = () => {
     if (appConfig.accessTokenPersistStrategy === 'localStorage') {
-        return localStorage
+        return localStorage;
     }
 
     if (appConfig.accessTokenPersistStrategy === 'sessionStorage') {
-        return sessionStorage
+        return sessionStorage;
     }
 
-    return cookiesStorage
-}
+    return cookiesStorage;
+};
 
 const initialState: AuthState = {
     session: {
@@ -41,7 +41,7 @@ const initialState: AuthState = {
         email: '',
         authority: [],
     },
-}
+};
 
 export const useSessionUser = create<AuthState & AuthAction>()(
     persist(
@@ -64,17 +64,17 @@ export const useSessionUser = create<AuthState & AuthAction>()(
         }),
         { name: 'sessionUser', storage: createJSONStorage(() => localStorage) },
     ),
-)
+);
 
 export const useToken = () => {
-    const storage = getPersistStorage()
+    const storage = getPersistStorage();
 
     const setToken = (token: string) => {
-        storage.setItem(TOKEN_NAME_IN_STORAGE, token)
-    }
+        storage.setItem(TOKEN_NAME_IN_STORAGE, token);
+    };
 
     return {
         setToken,
         token: storage.getItem(TOKEN_NAME_IN_STORAGE),
-    }
-}
+    };
+};

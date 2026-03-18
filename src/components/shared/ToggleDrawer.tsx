@@ -1,37 +1,37 @@
-import { useState, useImperativeHandle } from 'react'
-import Drawer from '@/components/ui/Drawer'
-import NavToggle from './NavToggle'
-import type { DrawerProps } from '@/components/ui/Drawer'
-import type { Ref } from 'react'
+import { useState, useImperativeHandle } from 'react';
+import Drawer from '@/components/ui/Drawer';
+import NavToggle from './NavToggle';
+import type { DrawerProps } from '@/components/ui/Drawer';
+import type { Ref } from 'react';
 
 export type ToggleDrawerProps = Omit<DrawerProps, 'isOpen'> & {
-    ref?: Ref<ToggleDrawerRef>
-}
+    ref?: Ref<ToggleDrawerRef>;
+};
 
 export type ToggleDrawerRef = {
-    handleCloseDrawer: () => void
-    handleOpenDrawer: () => void
-}
+    handleCloseDrawer: () => void;
+    handleOpenDrawer: () => void;
+};
 
 const ToggleDrawer = (props: ToggleDrawerProps) => {
-    const { children, placement = 'left', ref, ...rest } = props
+    const { children, placement = 'left', ref, ...rest } = props;
 
-    const [toggled, setToggled] = useState(false)
+    const [toggled, setToggled] = useState(false);
 
     const handleCloseDrawer = () => {
-        setToggled(false)
-    }
+        setToggled(false);
+    };
 
     const handleOpenDrawer = () => {
-        setToggled(true)
-    }
+        setToggled(true);
+    };
 
     useImperativeHandle(ref, () => {
         return {
             handleCloseDrawer,
             handleOpenDrawer,
-        }
-    }, [])
+        };
+    }, []);
 
     return (
         <>
@@ -53,7 +53,7 @@ const ToggleDrawer = (props: ToggleDrawerProps) => {
                 {children}
             </Drawer>
         </>
-    )
-}
+    );
+};
 
-export default ToggleDrawer
+export default ToggleDrawer;

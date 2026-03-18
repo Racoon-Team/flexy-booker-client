@@ -1,36 +1,36 @@
-import Avatar from '@/components/ui/Avatar'
-import acronym from '@/utils/acronym'
-import useRandomBgColor from '@/utils/hooks/useRandomBgColor'
+import Avatar from '@/components/ui/Avatar';
+import acronym from '@/utils/acronym';
+import useRandomBgColor from '@/utils/hooks/useRandomBgColor';
 import {
     HiOutlineCalendar,
     HiOutlineClipboardCheck,
     HiOutlineBan,
-} from 'react-icons/hi'
+} from 'react-icons/hi';
 
-const imagePath = '/img/avatars/'
+const imagePath = '/img/avatars/';
 
 const GeneratedAvatar = ({ target }: { target: string }) => {
-    const color = useRandomBgColor()
+    const color = useRandomBgColor();
     return (
         <Avatar shape="circle" className={`text-gray-900 ${color(target)}`}>
             {acronym(target)}
         </Avatar>
-    )
-}
+    );
+};
 
 const NotificationAvatar = (props: {
-    type: number
-    target: string
-    image: string
-    status: string
+    type: number;
+    target: string;
+    image: string;
+    status: string;
 }) => {
-    const { type, target, image, status } = props
+    const { type, target, image, status } = props;
     switch (type) {
         case 0:
             if (image) {
-                return <Avatar shape="circle" src={`${imagePath}${image}`} />
+                return <Avatar shape="circle" src={`${imagePath}${image}`} />;
             } else {
-                return <GeneratedAvatar target={target} />
+                return <GeneratedAvatar target={target} />;
             }
         case 1:
             return (
@@ -39,7 +39,7 @@ const NotificationAvatar = (props: {
                     className="bg-sky-200 text-gray-900"
                     icon={<HiOutlineCalendar />}
                 />
-            )
+            );
         case 2:
             return (
                 <Avatar
@@ -57,10 +57,10 @@ const NotificationAvatar = (props: {
                         )
                     }
                 />
-            )
+            );
         default:
-            return <Avatar />
+            return <Avatar />;
     }
-}
+};
 
-export default NotificationAvatar
+export default NotificationAvatar;

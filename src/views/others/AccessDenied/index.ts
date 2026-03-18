@@ -1,3 +1,3 @@
-import AccessDenied from './AccessDenied'
+import AccessDenied from './AccessDenied';
 
-export default AccessDenied
+export default AccessDenied;

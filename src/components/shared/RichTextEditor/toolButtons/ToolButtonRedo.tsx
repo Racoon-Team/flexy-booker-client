@@ -1,8 +1,8 @@
-import { CgRedo } from 'react-icons/cg'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { CgRedo } from 'react-icons/cg';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonRedoProp = BaseToolButtonProps
+type ToolButtonRedoProp = BaseToolButtonProps;
 
 const ToolButtonRedo = ({ editor }: ToolButtonRedoProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonRedo = ({ editor }: ToolButtonRedoProp) => {
         >
             <CgRedo />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonRedo
+export default ToolButtonRedo;

@@ -1,24 +1,24 @@
-import { useRef } from 'react'
-import classNames from 'classnames'
-import useMergedRef from '../hooks/useMergeRef'
-import type { CommonProps } from '../@types/common'
+import { useRef } from 'react';
+import classNames from 'classnames';
+import useMergedRef from '../hooks/useMergeRef';
+import type { CommonProps } from '../@types/common';
 import type {
     FocusEvent,
     MouseEvent,
     KeyboardEvent,
     ChangeEvent,
     Ref,
-} from 'react'
+} from 'react';
 
 interface AmPmInputProps extends CommonProps {
-    disabled?: boolean
-    amLabel?: string
-    onChange: (value: string, triggerShift: boolean) => void
-    onFocus?: (e: FocusEvent<HTMLInputElement>) => void
-    ref?: Ref<HTMLInputElement>
-    placeholder?: string
-    pmLabel?: string
-    value: string | number | readonly string[]
+    disabled?: boolean;
+    amLabel?: string;
+    onChange: (value: string, triggerShift: boolean) => void;
+    onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
+    ref?: Ref<HTMLInputElement>;
+    placeholder?: string;
+    pmLabel?: string;
+    value: string | number | readonly string[];
 }
 
 const AmPmInput = (props: AmPmInputProps) => {
@@ -31,47 +31,47 @@ const AmPmInput = (props: AmPmInputProps) => {
         pmLabel,
         ref = null,
         ...rest
-    } = props
+    } = props;
 
-    const inputRef = useRef<HTMLInputElement>(undefined)
+    const inputRef = useRef<HTMLInputElement>(undefined);
 
     const handleClick = (event: MouseEvent<HTMLInputElement>) => {
-        event.stopPropagation()
-        inputRef?.current?.select()
-    }
+        event.stopPropagation();
+        inputRef?.current?.select();
+    };
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-            event.preventDefault()
+            event.preventDefault();
             onChange(
                 value === amLabel ? (pmLabel as string) : (amLabel as string),
                 true,
-            )
+            );
         }
-    }
+    };
 
     const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
-        typeof onFocus === 'function' && onFocus(event)
-        inputRef?.current?.select()
-    }
+        typeof onFocus === 'function' && onFocus(event);
+        inputRef?.current?.select();
+    };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const lastInputVal = event.target.value.slice(-1).toLowerCase()
+        const lastInputVal = event.target.value.slice(-1).toLowerCase();
 
         if (lastInputVal === 'p') {
-            event.preventDefault()
-            onChange(pmLabel as string, true)
-            return
+            event.preventDefault();
+            onChange(pmLabel as string, true);
+            return;
         }
 
         if (lastInputVal === 'a') {
-            event.preventDefault()
-            onChange(amLabel as string, true)
-            return
+            event.preventDefault();
+            onChange(amLabel as string, true);
+            return;
         }
 
-        onChange(value.toString(), true)
-    }
+        onChange(value.toString(), true);
+    };
 
     return (
         <input
@@ -85,7 +85,7 @@ const AmPmInput = (props: AmPmInputProps) => {
             onChange={handleChange}
             {...rest}
         />
-    )
-}
+    );
+};
 
-export default AmPmInput
+export default AmPmInput;

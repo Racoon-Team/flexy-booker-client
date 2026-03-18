@@ -1,12 +1,12 @@
-import FormContainer from './FormContainer'
-import type { ComponentPropsWithoutRef, Ref } from 'react'
-import type { FormContainerProps } from './FormContainer'
+import FormContainer from './FormContainer';
+import type { ComponentPropsWithoutRef, Ref } from 'react';
+import type { FormContainerProps } from './FormContainer';
 
 export type FormProps = ComponentPropsWithoutRef<'form'> &
     FormContainerProps & {
-        containerClassName?: string
-        ref?: Ref<HTMLFormElement>
-    }
+        containerClassName?: string;
+        ref?: Ref<HTMLFormElement>;
+    };
 
 export const Form = (props: FormProps) => {
     const {
@@ -17,7 +17,7 @@ export const Form = (props: FormProps) => {
         size,
         ref,
         ...rest
-    } = props
+    } = props;
 
     return (
         <form ref={ref} {...rest}>
@@ -30,7 +30,7 @@ export const Form = (props: FormProps) => {
                 {children}
             </FormContainer>
         </form>
-    )
-}
+    );
+};
 
-export default Form
+export default Form;

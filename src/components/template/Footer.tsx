@@ -1,14 +1,14 @@
-import Container from '@/components/shared/Container'
-import classNames from '@/utils/classNames'
-import { APP_NAME } from '@/constants/app.constant'
-import { PAGE_CONTAINER_GUTTER_X } from '@/constants/theme.constant'
+import Container from '@/components/shared/Container';
+import classNames from '@/utils/classNames';
+import { APP_NAME } from '@/constants/app.constant';
+import { PAGE_CONTAINER_GUTTER_X } from '@/constants/theme.constant';
 
-export type FooterPageContainerType = 'gutterless' | 'contained'
+export type FooterPageContainerType = 'gutterless' | 'contained';
 
 type FooterProps = {
-    pageContainerType: FooterPageContainerType
-    className?: string
-}
+    pageContainerType: FooterPageContainerType;
+    className?: string;
+};
 
 const FooterContent = () => {
     return (
@@ -36,8 +36,8 @@ const FooterContent = () => {
                 </a>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default function Footer({
     pageContainerType = 'contained',
@@ -58,5 +58,5 @@ export default function Footer({
                 <FooterContent />
             )}
         </footer>
-    )
+    );
 }

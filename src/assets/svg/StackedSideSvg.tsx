@@ -2,8 +2,8 @@ const StackedSideSvg = ({
     height = 100,
     width = 100,
 }: {
-    height?: number | string
-    width?: number | string
+    height?: number | string;
+    width?: number | string;
 }) => {
     return (
         <svg
@@ -150,7 +150,7 @@ const StackedSideSvg = ({
                 rx={20}
             />
         </svg>
-    )
-}
+    );
+};
 
-export default StackedSideSvg
+export default StackedSideSvg;

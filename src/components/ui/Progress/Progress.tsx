@@ -1,25 +1,25 @@
-import classNames from '@/utils/classNames'
-import Line from './Line'
-import Circle from './Circle'
-import { SIZES, DIRECTIONS } from '../utils/constants'
-import type { CommonProps } from '../@types/common'
-import type { StrokeLinecap, GapPosition } from './Circle'
-import type { ReactNode, Ref } from 'react'
+import classNames from '@/utils/classNames';
+import Line from './Line';
+import Circle from './Circle';
+import { SIZES, DIRECTIONS } from '../utils/constants';
+import type { CommonProps } from '../@types/common';
+import type { StrokeLinecap, GapPosition } from './Circle';
+import type { ReactNode, Ref } from 'react';
 
 export interface ProgressProps extends CommonProps {
-    customInfo?: string | ReactNode
-    customColorClass?: string
-    gapDegree?: number
-    gapPosition?: GapPosition
-    percent?: number
-    ref?: Ref<HTMLDivElement>
-    showInfo?: boolean
-    size?: 'sm' | 'md'
-    strokeLinecap?: StrokeLinecap
-    strokeWidth?: number
-    trailClass?: string
-    width?: string | number
-    variant?: 'line' | 'circle'
+    customInfo?: string | ReactNode;
+    customColorClass?: string;
+    gapDegree?: number;
+    gapPosition?: GapPosition;
+    percent?: number;
+    ref?: Ref<HTMLDivElement>;
+    showInfo?: boolean;
+    size?: 'sm' | 'md';
+    strokeLinecap?: StrokeLinecap;
+    strokeWidth?: number;
+    trailClass?: string;
+    width?: string | number;
+    variant?: 'line' | 'circle';
 }
 
 const Progress = (props: ProgressProps) => {
@@ -37,34 +37,34 @@ const Progress = (props: ProgressProps) => {
         strokeWidth = 6,
         width = 120,
         variant = 'line',
-    } = props
+    } = props;
 
     const renderProcessInfo = () => {
         if (!showInfo) {
-            return null
+            return null;
         }
         return (
             <span className={`progress-info heading-text font-bold ${variant}`}>
                 {customInfo || `${percent}%`}
             </span>
-        )
-    }
+        );
+    };
 
     const strokeColor = customColorClass
         ? customColorClass
         : variant === 'line'
           ? 'bg-primary'
-          : 'text-primary'
+          : 'text-primary';
 
     const progressClass = classNames(
         'progress',
         className,
         variant === 'circle' ? 'circle' : 'line',
-    )
+    );
 
     const renderProgress = () => {
-        const progressInfo = renderProcessInfo()
-        let progress
+        const progressInfo = renderProcessInfo();
+        let progress;
 
         if (variant === 'line') {
             progress = (
@@ -76,7 +76,7 @@ const Progress = (props: ProgressProps) => {
                 >
                     {progressInfo}
                 </Line>
-            )
+            );
         }
 
         if (variant === 'circle') {
@@ -93,17 +93,17 @@ const Progress = (props: ProgressProps) => {
                 >
                     {progressInfo}
                 </Circle>
-            )
+            );
         }
 
-        return progress
-    }
+        return progress;
+    };
 
     return (
         <div ref={ref} className={progressClass}>
             {renderProgress()}
         </div>
-    )
-}
+    );
+};
 
-export default Progress
+export default Progress;

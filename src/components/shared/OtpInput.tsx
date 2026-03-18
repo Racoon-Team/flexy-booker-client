@@ -1,18 +1,18 @@
-import { useEffect, useState, useRef } from 'react'
-import Input from '@/components/ui/Input'
-import classNames from '@/utils/classNames'
-import type { ChangeEvent, KeyboardEvent, ClipboardEvent } from 'react'
+import { useEffect, useState, useRef } from 'react';
+import Input from '@/components/ui/Input';
+import classNames from '@/utils/classNames';
+import type { ChangeEvent, KeyboardEvent, ClipboardEvent } from 'react';
 
 interface OTPInputProps {
-    length?: number
-    value?: string
-    onChange?: (value: string) => void
-    disabled?: boolean
-    className?: string
-    inputClass?: string
-    autoFocus?: boolean
-    placeholder?: string
-    invalid?: boolean
+    length?: number;
+    value?: string;
+    onChange?: (value: string) => void;
+    disabled?: boolean;
+    className?: string;
+    inputClass?: string;
+    autoFocus?: boolean;
+    placeholder?: string;
+    invalid?: boolean;
 }
 
 const OTPInput = ({
@@ -27,68 +27,68 @@ const OTPInput = ({
     invalid = false,
 }: OTPInputProps) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, setActiveInput] = useState<number>(0)
-    const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+    const [_, setActiveInput] = useState<number>(0);
+    const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
     useEffect(() => {
         inputRefs.current = Array(length)
             .fill(null)
-            .map((_, i) => inputRefs.current[i] || null)
-    }, [length])
+            .map((_, i) => inputRefs.current[i] || null);
+    }, [length]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-        const newValue = e.target.value
-        if (newValue.length > 1) return
+        const newValue = e.target.value;
+        if (newValue.length > 1) return;
 
         const newOTPValue =
-            value.slice(0, index) + newValue + value.slice(index + 1)
+            value.slice(0, index) + newValue + value.slice(index + 1);
 
-        onChange?.(newOTPValue)
+        onChange?.(newOTPValue);
 
         if (newValue && index < length - 1) {
-            setActiveInput(index + 1)
-            inputRefs.current[index + 1]?.focus()
+            setActiveInput(index + 1);
+            inputRefs.current[index + 1]?.focus();
         }
-    }
+    };
 
     const handleKeyDown = (
         e: KeyboardEvent<HTMLInputElement>,
         index: number,
     ) => {
         if (e.key === 'Backspace') {
-            e.preventDefault()
+            e.preventDefault();
             if (value[index]) {
                 const newOTPValue =
-                    value.slice(0, index) + '' + value.slice(index + 1)
-                onChange?.(newOTPValue)
+                    value.slice(0, index) + '' + value.slice(index + 1);
+                onChange?.(newOTPValue);
             } else if (index > 0) {
-                setActiveInput(index - 1)
-                inputRefs.current[index - 1]?.focus()
+                setActiveInput(index - 1);
+                inputRefs.current[index - 1]?.focus();
             }
         } else if (e.key === 'ArrowLeft' && index > 0) {
-            e.preventDefault()
-            setActiveInput(index - 1)
-            inputRefs.current[index - 1]?.focus()
+            e.preventDefault();
+            setActiveInput(index - 1);
+            inputRefs.current[index - 1]?.focus();
         } else if (e.key === 'ArrowRight' && index < length - 1) {
-            e.preventDefault()
-            setActiveInput(index + 1)
-            inputRefs.current[index + 1]?.focus()
+            e.preventDefault();
+            setActiveInput(index + 1);
+            inputRefs.current[index + 1]?.focus();
         }
-    }
+    };
 
     const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
-        e.preventDefault()
+        e.preventDefault();
         const pastedData = e.clipboardData
             .getData('text/plain')
-            .slice(0, length)
+            .slice(0, length);
         if (pastedData.match(/^[0-9]+$/)) {
-            onChange?.(pastedData.padEnd(length, ''))
+            onChange?.(pastedData.padEnd(length, ''));
         }
-    }
+    };
 
     const setRef = (index: number) => (ref: HTMLInputElement | null) => {
-        inputRefs.current[index] = ref
-    }
+        inputRefs.current[index] = ref;
+    };
 
     return (
         <div className={`flex gap-2 ${className}`}>
@@ -129,7 +129,7 @@ const OTPInput = ({
                     />
                 ))}
         </div>
-    )
-}
+    );
+};
 
-export default OTPInput
+export default OTPInput;

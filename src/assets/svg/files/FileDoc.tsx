@@ -2,8 +2,8 @@ const FileDoc = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -27,7 +27,7 @@ const FileDoc = ({
                 transform="translate(-605.74 -408.45)"
             ></path>
         </svg>
-    )
-}
+    );
+};
 
-export default FileDoc
+export default FileDoc;

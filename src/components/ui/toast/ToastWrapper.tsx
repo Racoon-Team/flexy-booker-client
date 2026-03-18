@@ -6,98 +6,99 @@ import {
     useCallback,
     cloneElement,
     createRef,
-} from 'react'
-import classNames from 'classnames'
-import chainedFunction from '../utils/chainedFunction'
-import { motion } from 'framer-motion'
-import { getPlacementTransition } from './transition'
-import { PLACEMENT } from '../utils/constants'
-import { createRoot } from 'react-dom/client'
-import { NotificationPlacement } from '../@types/placement'
-import type { DetailedReactHTMLElement, ReactNode, Ref } from 'react'
+} from 'react';
+import classNames from 'classnames';
+import chainedFunction from '../utils/chainedFunction';
+import { motion } from 'framer-motion';
+import { getPlacementTransition } from './transition';
+import { PLACEMENT } from '../utils/constants';
+import { createRoot } from 'react-dom/client';
+import { NotificationPlacement } from '../@types/placement';
+import type { DetailedReactHTMLElement, ReactNode, Ref } from 'react';
 
-type NodeProps = DetailedReactHTMLElement<any, HTMLDivElement>
+type NodeProps = DetailedReactHTMLElement<any, HTMLDivElement>;
 
 type Message = {
-    key: string
-    visible: boolean
-    node: NodeProps
-}
+    key: string;
+    visible: boolean;
+    node: NodeProps;
+};
 
 const useMessages = (msgKey: string) => {
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages, setMessages] = useState<Message[]>([]);
 
     const getKey = useCallback(
         (key: string) => {
             if (typeof key === 'undefined' && messages.length) {
-                key = messages[messages.length - 1].key
+                key = messages[messages.length - 1].key;
             }
-            return key
+            return key;
         },
         [messages],
-    )
+    );
 
     const push = useCallback(
         (message: NodeProps) => {
-            const key = msgKey || '_' + Math.random().toString(36).substr(2, 12)
-            setMessages([...messages, { key, visible: true, node: message }])
-            return key
+            const key =
+                msgKey || '_' + Math.random().toString(36).substr(2, 12);
+            setMessages([...messages, { key, visible: true, node: message }]);
+            return key;
         },
         [messages, msgKey],
-    )
+    );
 
     const removeAll = useCallback(() => {
-        setMessages(messages.map((msg) => ({ ...msg, visible: false })))
+        setMessages(messages.map((msg) => ({ ...msg, visible: false })));
         setTimeout(() => {
-            setMessages([])
-        }, 50)
-    }, [messages])
+            setMessages([]);
+        }, 50);
+    }, [messages]);
 
     const remove = useCallback(
         (key: string) => {
             setMessages(
                 messages.map((elm) => {
                     if (elm.key === getKey(key)) {
-                        elm.visible = false
+                        elm.visible = false;
                     }
-                    return elm
+                    return elm;
                 }),
-            )
+            );
 
             setTimeout(() => {
-                setMessages(messages.filter((msg) => msg.visible))
-            }, 50)
+                setMessages(messages.filter((msg) => msg.visible));
+            }, 50);
         },
         [messages, getKey],
-    )
+    );
 
-    return { messages, push, removeAll, remove }
-}
+    return { messages, push, removeAll, remove };
+};
 
 export interface ToastProps {
-    transitionType?: 'scale' | 'fade'
-    placement?: NotificationPlacement | 'top-full' | 'bottom-full'
-    offsetX?: string | number
-    offsetY?: string | number
-    block?: boolean
+    transitionType?: 'scale' | 'fade';
+    placement?: NotificationPlacement | 'top-full' | 'bottom-full';
+    offsetX?: string | number;
+    offsetY?: string | number;
+    block?: boolean;
 }
 
 export interface ToastWrapperInstance {
-    root: HTMLElement | null
-    push: (message: NodeProps) => string
-    remove: (key: string) => void
-    removeAll: () => void
+    root: HTMLElement | null;
+    push: (message: NodeProps) => string;
+    remove: (key: string) => void;
+    removeAll: () => void;
 }
 
 export interface ToastWrapperProps extends ToastProps {
-    messageKey: string
-    callback: (ref: HTMLDivElement | null) => void
-    ref: Ref<ToastWrapperInstance>
-    wrapper?: HTMLElement | (() => HTMLElement)
+    messageKey: string;
+    callback: (ref: HTMLDivElement | null) => void;
+    ref: Ref<ToastWrapperInstance>;
+    wrapper?: HTMLElement | (() => HTMLElement);
 }
 
 const ToastWrapper = (props: ToastWrapperProps) => {
-    const rootRef = useRef<HTMLDivElement | null>(null)
+    const rootRef = useRef<HTMLDivElement | null>(null);
 
     const {
         transitionType = 'scale',
@@ -109,25 +110,25 @@ const ToastWrapper = (props: ToastWrapperProps) => {
         ref,
         callback,
         ...rest
-    } = props
+    } = props;
 
-    const { push, removeAll, remove, messages } = useMessages(messageKey)
+    const { push, removeAll, remove, messages } = useMessages(messageKey);
 
     useImperativeHandle(ref, () => {
-        return { root: rootRef.current, push, removeAll, remove }
-    })
+        return { root: rootRef.current, push, removeAll, remove };
+    });
 
     const placementTransition = getPlacementTransition({
         offsetX,
         offsetY,
         placement: placement as NotificationPlacement,
         transitionType,
-    })
+    });
 
     const toastProps = {
         triggerByToast: true,
         ...rest,
-    }
+    };
 
     const messageElements = messages.map((item) => {
         return (
@@ -152,47 +153,47 @@ const ToastWrapper = (props: ToastWrapperProps) => {
                     },
                 )}
             </motion.div>
-        )
-    })
+        );
+    });
 
     return (
         <div
             style={placementTransition.default}
             {...rest}
             ref={(thisRef) => {
-                rootRef.current = thisRef
-                callback?.(thisRef)
+                rootRef.current = thisRef;
+                callback?.(thisRef);
             }}
             className={classNames('toast', block && 'w-full')}
         >
             {messageElements}
         </div>
-    )
-}
+    );
+};
 
 ToastWrapper.getInstance = (props: ToastWrapperProps) => {
-    const { wrapper, ...rest } = props
+    const { wrapper, ...rest } = props;
 
-    const wrapperRef = createRef<ToastWrapperInstance>()
+    const wrapperRef = createRef<ToastWrapperInstance>();
 
     const wrapperElement =
-        (typeof wrapper === 'function' ? wrapper() : wrapper) || document.body
+        (typeof wrapper === 'function' ? wrapper() : wrapper) || document.body;
 
     return new Promise((resolve) => {
         const renderCallback = () => {
-            resolve([wrapperRef, unmount])
-        }
+            resolve([wrapperRef, unmount]);
+        };
 
         function renderElement(element: ReactNode) {
-            const mountElement = document.createElement('div')
+            const mountElement = document.createElement('div');
 
-            wrapperElement.appendChild(mountElement)
+            wrapperElement.appendChild(mountElement);
 
-            const root = createRoot(mountElement)
+            const root = createRoot(mountElement);
 
-            root.render(element)
+            root.render(element);
 
-            return root
+            return root;
         }
 
         const { unmount } = renderElement(
@@ -201,8 +202,8 @@ ToastWrapper.getInstance = (props: ToastWrapperProps) => {
                 ref={wrapperRef}
                 callback={renderCallback}
             />,
-        )
-    })
-}
+        );
+    });
+};
 
-export default ToastWrapper
+export default ToastWrapper;

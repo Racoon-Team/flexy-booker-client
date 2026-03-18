@@ -2,8 +2,8 @@ const StartConverstation = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -142,7 +142,7 @@ const StartConverstation = ({
             />
             <path d="M49.5 184.6c-.7 0-1.4 0-2.1-.1-4.2-.6-7.9-2.7-10.5-6.1-2.6-3.4-3.7-7.5-3.1-11.8l.7.1-.7-.1c1.2-8.7 9.2-14.8 17.9-13.6 4.2.6 7.9 2.7 10.5 6.1 2.6 3.4 3.7 7.5 3.1 11.8-1.1 7.9-8 13.7-15.8 13.7zm0-30.4c-7.1 0-13.3 5.3-14.3 12.5-.5 3.8.5 7.6 2.8 10.7 2.3 3.1 5.7 5 9.6 5.6.7.1 1.3.1 1.9.1 7.1 0 13.3-5.3 14.3-12.5.5-3.8-.5-7.6-2.8-10.7-2.3-3.1-5.7-5-9.6-5.6-.6 0-1.3-.1-1.9-.1z" />
         </svg>
-    )
-}
+    );
+};
 
-export default StartConverstation
+export default StartConverstation;

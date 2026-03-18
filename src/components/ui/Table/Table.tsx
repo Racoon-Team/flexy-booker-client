@@ -1,12 +1,12 @@
-import classNames from 'classnames'
-import type { ComponentPropsWithRef, ElementType } from 'react'
+import classNames from 'classnames';
+import type { ComponentPropsWithRef, ElementType } from 'react';
 
 export interface TableProps extends ComponentPropsWithRef<'table'> {
-    asElement?: ElementType
-    cellBorder?: boolean
-    compact?: boolean
-    hoverable?: boolean
-    overflow?: boolean
+    asElement?: ElementType;
+    cellBorder?: boolean;
+    compact?: boolean;
+    hoverable?: boolean;
+    overflow?: boolean;
 }
 
 const Table = (props: TableProps) => {
@@ -20,7 +20,7 @@ const Table = (props: TableProps) => {
         overflow = true,
         ref,
         ...rest
-    } = props
+    } = props;
 
     const tableClass = classNames(
         Component === 'table' ? 'table-default' : 'table-flex',
@@ -28,7 +28,7 @@ const Table = (props: TableProps) => {
         compact && 'table-compact',
         cellBorder && 'table-border',
         className,
-    )
+    );
 
     return (
         <div className={classNames(overflow && 'overflow-x-auto')}>
@@ -36,7 +36,7 @@ const Table = (props: TableProps) => {
                 {children}
             </Component>
         </div>
-    )
-}
+    );
+};
 
-export default Table
+export default Table;

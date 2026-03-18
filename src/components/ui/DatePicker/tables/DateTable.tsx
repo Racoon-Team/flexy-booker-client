@@ -1,34 +1,34 @@
-import classNames from 'classnames'
-import dayjs from 'dayjs'
-import { isMonthInRange } from '../utils/isMonthInRange'
-import Header from './Header'
-import Month from './components/Month'
-import capitalize from '../../utils/capitalize'
-import type { CommonProps } from '../../@types/common'
-import type { MonthBaseProps } from './components/Month'
-import type { DayKeydownPayload } from './components/types'
-import type { RefObject } from 'react'
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+import { isMonthInRange } from '../utils/isMonthInRange';
+import Header from './Header';
+import Month from './components/Month';
+import capitalize from '../../utils/capitalize';
+import type { CommonProps } from '../../@types/common';
+import type { MonthBaseProps } from './components/Month';
+import type { DayKeydownPayload } from './components/types';
+import type { RefObject } from 'react';
 
 export interface DateTableProps extends CommonProps, MonthBaseProps {
-    dateViewCount: number
-    paginateBy: number
-    locale: string
-    enableHeaderLabel: boolean
-    daysRefs: RefObject<HTMLButtonElement[][][] | null>
-    onMonthChange: (month: Date) => void
-    onNextLevel: (unit: 'month' | 'year') => void
+    dateViewCount: number;
+    paginateBy: number;
+    locale: string;
+    enableHeaderLabel: boolean;
+    daysRefs: RefObject<HTMLButtonElement[][][] | null>;
+    onMonthChange: (month: Date) => void;
+    onNextLevel: (unit: 'month' | 'year') => void;
     onDayKeyDown: (
         monthIndex: number,
         payload: DayKeydownPayload,
         event: React.KeyboardEvent<HTMLButtonElement>,
-    ) => void
-    labelFormat?: { month: string; year: string }
-    weekdayLabelFormat?: string
-    onChange?: (value: Date) => void
-    onDayMouseEnter?: (date: Date, event: React.MouseEvent) => void
-    preventFocus?: boolean
-    renderDay?: (date: Date) => React.ReactNode
-    range?: [Date, Date]
+    ) => void;
+    labelFormat?: { month: string; year: string };
+    weekdayLabelFormat?: string;
+    onChange?: (value: Date) => void;
+    onDayMouseEnter?: (date: Date, event: React.MouseEvent) => void;
+    preventFocus?: boolean;
+    renderDay?: (date: Date) => React.ReactNode;
+    range?: [Date, Date];
 }
 
 function formatMonthLabel({
@@ -36,11 +36,11 @@ function formatMonthLabel({
     locale,
     format,
 }: {
-    month: Date
-    locale: string
-    format: string
+    month: Date;
+    locale: string;
+    format: string;
 }) {
-    return capitalize(dayjs(month).locale(locale).format(format))
+    return capitalize(dayjs(month).locale(locale).format(format));
 }
 
 const DateTable = (props: DateTableProps) => {
@@ -62,17 +62,17 @@ const DateTable = (props: DateTableProps) => {
         preventFocus,
         renderDay,
         ...rest
-    } = props
+    } = props;
 
-    const nextMonth = dayjs(month).add(dateViewCount, 'months').toDate()
-    const previousMonth = dayjs(month).subtract(1, 'months').toDate()
+    const nextMonth = dayjs(month).add(dateViewCount, 'months').toDate();
+    const previousMonth = dayjs(month).subtract(1, 'months').toDate();
 
-    const pickerHeaderLabelClass = 'picker-header-label hover:text-primary'
+    const pickerHeaderLabelClass = 'picker-header-label hover:text-primary';
 
     const months = Array(dateViewCount)
         .fill(0)
         .map((_, index) => {
-            const monthDate = dayjs(month).add(index, 'months').toDate()
+            const monthDate = dayjs(month).add(index, 'months').toDate();
             return (
                 <div key={index} className="day-picker">
                     <Header
@@ -158,10 +158,10 @@ const DateTable = (props: DateTableProps) => {
                         {...rest}
                     />
                 </div>
-            )
-        })
+            );
+        });
 
-    return <>{months}</>
-}
+    return <>{months}</>;
+};
 
-export default DateTable
+export default DateTable;

@@ -1,10 +1,10 @@
-import classNames from '@/utils/classNames'
-import type { CommonProps } from '@/@types/common'
-import type { ReactNode, ElementType } from 'react'
+import classNames from '@/utils/classNames';
+import type { CommonProps } from '@/@types/common';
+import type { ReactNode, ElementType } from 'react';
 
 export interface IconTextProps extends CommonProps {
-    icon?: ReactNode | string
-    asElement?: ElementType
+    icon?: ReactNode | string;
+    asElement?: ElementType;
 }
 
 const IconText = ({
@@ -18,7 +18,7 @@ const IconText = ({
             {icon}
             {children}
         </Component>
-    )
-}
+    );
+};
 
-export default IconText
+export default IconText;

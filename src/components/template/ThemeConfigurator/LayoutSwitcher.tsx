@@ -1,6 +1,6 @@
-import classNames from 'classnames'
-import Segment from '@/components/ui/Segment'
-import { useThemeStore } from '@/store/themeStore'
+import classNames from 'classnames';
+import Segment from '@/components/ui/Segment';
+import { useThemeStore } from '@/store/themeStore';
 import {
     LAYOUT_COLLAPSIBLE_SIDE,
     LAYOUT_STACKED_SIDE,
@@ -8,14 +8,14 @@ import {
     LAYOUT_FRAMELESS_SIDE,
     LAYOUT_CONTENT_OVERLAY,
     LAYOUT_BLANK,
-} from '@/constants/theme.constant'
-import CollapsibleSideSvg from '@/assets/svg/CollapsibleSideSvg'
-import StackedSideSvg from '@/assets/svg/StackedSideSvg'
-import TopBarClassicSvg from '@/assets/svg/TopBarClassicSvg'
-import FrameLessSideSvg from '@/assets/svg/FrameLessSideSvg'
-import ContentOverlaySvg from '@/assets/svg/ContentOverlaySvg'
-import BlankSvg from '@/assets/svg/BlankSvg'
-import type { LayoutType } from '@/@types/theme'
+} from '@/constants/theme.constant';
+import CollapsibleSideSvg from '@/assets/svg/CollapsibleSideSvg';
+import StackedSideSvg from '@/assets/svg/StackedSideSvg';
+import TopBarClassicSvg from '@/assets/svg/TopBarClassicSvg';
+import FrameLessSideSvg from '@/assets/svg/FrameLessSideSvg';
+import ContentOverlaySvg from '@/assets/svg/ContentOverlaySvg';
+import BlankSvg from '@/assets/svg/BlankSvg';
+import type { LayoutType } from '@/@types/theme';
 
 const layouts = [
     {
@@ -60,11 +60,11 @@ const layouts = [
         srcDark: '/img/thumbs/layouts/blank-dark.jpg',
         svg: <BlankSvg height={'100%'} width={'100%'} />,
     },
-]
+];
 
 const LayoutSwitcher = () => {
-    const themeLayout = useThemeStore((state) => state.layout)
-    const setLayout = useThemeStore((state) => state.setLayout)
+    const themeLayout = useThemeStore((state) => state.layout);
+    const setLayout = useThemeStore((state) => state.setLayout);
 
     return (
         <div>
@@ -77,7 +77,8 @@ const LayoutSwitcher = () => {
                     {layouts.map((layout) => (
                         <Segment.Item key={layout.value} value={layout.value}>
                             {({ onSegmentItemClick }) => {
-                                const active = themeLayout.type === layout.value
+                                const active =
+                                    themeLayout.type === layout.value;
                                 return (
                                     <div className="text-center">
                                         <button
@@ -95,14 +96,14 @@ const LayoutSwitcher = () => {
                                             {layout.label}
                                         </div>
                                     </div>
-                                )
+                                );
                             }}
                         </Segment.Item>
                     ))}
                 </div>
             </Segment>
         </div>
-    )
-}
+    );
+};
 
-export default LayoutSwitcher
+export default LayoutSwitcher;

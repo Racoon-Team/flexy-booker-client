@@ -1,21 +1,21 @@
-import Modal from 'react-modal'
-import classNames from 'classnames'
-import CloseButton from '../CloseButton'
-import { motion } from 'framer-motion'
-import useWindowSize from '../hooks/useWindowSize'
-import type ReactModal from 'react-modal'
-import type { MouseEvent } from 'react'
+import Modal from 'react-modal';
+import classNames from 'classnames';
+import CloseButton from '../CloseButton';
+import { motion } from 'framer-motion';
+import useWindowSize from '../hooks/useWindowSize';
+import type ReactModal from 'react-modal';
+import type { MouseEvent } from 'react';
 
 export interface DialogProps extends ReactModal.Props {
-    closable?: boolean
-    contentClassName?: string
-    height?: string | number
-    onClose?: (e: MouseEvent<HTMLSpanElement>) => void
-    width?: number
+    closable?: boolean;
+    contentClassName?: string;
+    height?: string | number;
+    onClose?: (e: MouseEvent<HTMLSpanElement>) => void;
+    width?: number;
 }
 
 const Dialog = (props: DialogProps) => {
-    const currentSize = useWindowSize()
+    const currentSize = useWindowSize();
 
     const {
         bodyOpenClassName,
@@ -32,11 +32,11 @@ const Dialog = (props: DialogProps) => {
         style,
         width = 520,
         ...rest
-    } = props
+    } = props;
 
     const onCloseClick = (e: MouseEvent<HTMLSpanElement>) => {
-        onClose?.(e)
-    }
+        onClose?.(e);
+    };
 
     const renderCloseButton = (
         <CloseButton
@@ -44,33 +44,33 @@ const Dialog = (props: DialogProps) => {
             className="ltr:right-6 rtl:left-6 top-4.5"
             onClick={onCloseClick}
         />
-    )
+    );
 
     const contentStyle = {
         content: {
             inset: 'unset',
         },
         ...style,
-    }
+    };
 
     if (width !== undefined) {
-        contentStyle.content.width = width
+        contentStyle.content.width = width;
 
         if (
             typeof currentSize.width !== 'undefined' &&
             currentSize.width <= width
         ) {
-            contentStyle.content.width = 'auto'
+            contentStyle.content.width = 'auto';
         }
     }
 
     if (height !== undefined) {
-        contentStyle.content.height = height
+        contentStyle.content.height = height;
     }
 
-    const defaultDialogContentClass = 'dialog-content'
+    const defaultDialogContentClass = 'dialog-content';
 
-    const dialogClass = classNames(defaultDialogContentClass, contentClassName)
+    const dialogClass = classNames(defaultDialogContentClass, contentClassName);
 
     return (
         <Modal
@@ -103,9 +103,9 @@ const Dialog = (props: DialogProps) => {
                 {children}
             </motion.div>
         </Modal>
-    )
-}
+    );
+};
 
-Dialog.displayName = 'Dialog'
+Dialog.displayName = 'Dialog';
 
-export default Dialog
+export default Dialog;

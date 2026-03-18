@@ -1,25 +1,25 @@
-import Logo from '@/components/template/Logo'
-import Alert from '@/components/ui/Alert'
-import SignInForm from './components/SignInForm'
-import OauthSignIn from './components/OauthSignIn'
-import ActionLink from '@/components/shared/ActionLink'
-import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import { useThemeStore } from '@/store/themeStore'
+import Logo from '@/components/template/Logo';
+import Alert from '@/components/ui/Alert';
+import SignInForm from './components/SignInForm';
+import OauthSignIn from './components/OauthSignIn';
+import ActionLink from '@/components/shared/ActionLink';
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage';
+import { useThemeStore } from '@/store/themeStore';
 
 type SignInProps = {
-    signUpUrl?: string
-    forgetPasswordUrl?: string
-    disableSubmit?: boolean
-}
+    signUpUrl?: string;
+    forgetPasswordUrl?: string;
+    disableSubmit?: boolean;
+};
 
 export const SignInBase = ({
     signUpUrl = '/sign-up',
     forgetPasswordUrl = '/forgot-password',
     disableSubmit,
 }: SignInProps) => {
-    const [message, setMessage] = useTimeOutMessage()
+    const [message, setMessage] = useTimeOutMessage();
 
-    const mode = useThemeStore((state) => state.mode)
+    const mode = useThemeStore((state) => state.mode);
 
     return (
         <>
@@ -83,11 +83,11 @@ export const SignInBase = ({
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 const SignIn = () => {
-    return <SignInBase />
-}
+    return <SignInBase />;
+};
 
-export default SignIn
+export default SignIn;

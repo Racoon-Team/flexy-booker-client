@@ -1,15 +1,15 @@
-import Header from '@/components/template/Header'
-import UserProfileDropdown from '@/components//template/UserProfileDropdown'
-import HeaderLogo from '@/components/template/HeaderLogo'
-import MobileNav from '@/components/template/MobileNav'
-import HorizontalNav from '@/components/template/HorizontalNav'
-import LayoutBase from '@/components//template/LayoutBase'
-import useResponsive from '@/utils/hooks/useResponsive'
-import { LAYOUT_TOP_BAR_CLASSIC } from '@/constants/theme.constant'
-import type { CommonProps } from '@/@types/common'
+import Header from '@/components/template/Header';
+import UserProfileDropdown from '@/components//template/UserProfileDropdown';
+import HeaderLogo from '@/components/template/HeaderLogo';
+import MobileNav from '@/components/template/MobileNav';
+import HorizontalNav from '@/components/template/HorizontalNav';
+import LayoutBase from '@/components//template/LayoutBase';
+import useResponsive from '@/utils/hooks/useResponsive';
+import { LAYOUT_TOP_BAR_CLASSIC } from '@/constants/theme.constant';
+import type { CommonProps } from '@/@types/common';
 
 const TopBarClassic = ({ children }: CommonProps) => {
-    const { larger, smaller } = useResponsive()
+    const { larger, smaller } = useResponsive();
 
     return (
         <LayoutBase
@@ -38,7 +38,7 @@ const TopBarClassic = ({ children }: CommonProps) => {
                 </div>
             </div>
         </LayoutBase>
-    )
-}
+    );
+};
 
-export default TopBarClassic
+export default TopBarClassic;

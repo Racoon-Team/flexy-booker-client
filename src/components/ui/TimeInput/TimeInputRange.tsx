@@ -1,41 +1,41 @@
-import { useState, useRef } from 'react'
-import useMergedRef from '../hooks/useMergeRef'
-import useDidUpdate from '../hooks/useDidUpdate'
-import TimeInput from './TimeInput'
-import CloseButton from '../CloseButton'
-import { HiOutlineClock } from 'react-icons/hi'
-import Input from '../Input/Input'
-import type { CommonProps, TypeAttributes } from '../@types/common'
-import type { RefObject, Ref, ReactNode } from 'react'
+import { useState, useRef } from 'react';
+import useMergedRef from '../hooks/useMergeRef';
+import useDidUpdate from '../hooks/useDidUpdate';
+import TimeInput from './TimeInput';
+import CloseButton from '../CloseButton';
+import { HiOutlineClock } from 'react-icons/hi';
+import Input from '../Input/Input';
+import type { CommonProps, TypeAttributes } from '../@types/common';
+import type { RefObject, Ref, ReactNode } from 'react';
 
-type Value = [Date | null, Date | null]
+type Value = [Date | null, Date | null];
 
 export interface TimeInputRangeProps extends CommonProps {
-    amLabel?: string
-    amPmPlaceholder?: string
-    clearable?: boolean
-    defaultValue?: Value
-    disabled?: boolean
-    format?: '12' | '24'
-    id?: string
-    invalid?: boolean
-    name?: string
-    nextRef?: RefObject<HTMLInputElement | null>
-    onChange?: (value: Value) => void
-    pmLabel?: string
-    prefix?: string | ReactNode
-    ref?: Ref<HTMLInputElement>
-    showSeconds?: boolean
-    seperator?: string
-    size?: TypeAttributes.ControlSize
-    suffix?: string | ReactNode
-    timeFieldPlaceholder?: string
-    timeFieldClass?: string
-    value?: Value
+    amLabel?: string;
+    amPmPlaceholder?: string;
+    clearable?: boolean;
+    defaultValue?: Value;
+    disabled?: boolean;
+    format?: '12' | '24';
+    id?: string;
+    invalid?: boolean;
+    name?: string;
+    nextRef?: RefObject<HTMLInputElement | null>;
+    onChange?: (value: Value) => void;
+    pmLabel?: string;
+    prefix?: string | ReactNode;
+    ref?: Ref<HTMLInputElement>;
+    showSeconds?: boolean;
+    seperator?: string;
+    size?: TypeAttributes.ControlSize;
+    suffix?: string | ReactNode;
+    timeFieldPlaceholder?: string;
+    timeFieldClass?: string;
+    value?: Value;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    field?: any
+    field?: any;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    form?: any
+    form?: any;
 }
 
 const TimeInputRange = (props: TimeInputRangeProps) => {
@@ -60,15 +60,15 @@ const TimeInputRange = (props: TimeInputRangeProps) => {
         timeFieldPlaceholder = '--',
         value,
         ...rest
-    } = props
+    } = props;
 
-    const fromTimeRef = useRef<HTMLInputElement>(undefined)
-    const toTimeRef = useRef<HTMLInputElement>(undefined)
-    const [_value, setValue] = useState(value ?? defaultValue)
+    const fromTimeRef = useRef<HTMLInputElement>(undefined);
+    const toTimeRef = useRef<HTMLInputElement>(undefined);
+    const [_value, setValue] = useState(value ?? defaultValue);
 
     useDidUpdate(() => {
-        typeof onChange === 'function' && onChange(_value)
-    }, [_value])
+        typeof onChange === 'function' && onChange(_value);
+    }, [_value]);
 
     useDidUpdate(() => {
         if (
@@ -76,21 +76,21 @@ const TimeInputRange = (props: TimeInputRangeProps) => {
             (value[0]?.getTime() !== _value[0]?.getTime() ||
                 value[1]?.getTime() !== _value[1]?.getTime())
         ) {
-            setValue(value)
+            setValue(value);
         }
-    }, [value])
+    }, [value]);
 
     const handleClear = () => {
-        setValue([null, null])
-        fromTimeRef.current?.focus()
-    }
+        setValue([null, null]);
+        fromTimeRef.current?.focus();
+    };
 
     const suffixSlot =
         clearable && _value ? (
             <CloseButton onClick={handleClear} />
         ) : (
             <>{suffix}</>
-        )
+        );
 
     const forwardProps = {
         amPmPlaceholder,
@@ -99,7 +99,7 @@ const TimeInputRange = (props: TimeInputRangeProps) => {
         size,
         timeFieldPlaceholder,
         showSeconds,
-    }
+    };
 
     return (
         <Input
@@ -112,7 +112,7 @@ const TimeInputRange = (props: TimeInputRangeProps) => {
             suffix={suffixSlot}
             prefix={prefix}
             onClick={() => {
-                fromTimeRef.current?.focus()
+                fromTimeRef.current?.focus();
             }}
             {...rest}
         >
@@ -147,7 +147,7 @@ const TimeInputRange = (props: TimeInputRangeProps) => {
                 />
             </div>
         </Input>
-    )
-}
+    );
+};
 
-export default TimeInputRange
+export default TimeInputRange;

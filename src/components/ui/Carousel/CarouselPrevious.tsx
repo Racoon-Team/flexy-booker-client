@@ -1,22 +1,22 @@
-import Button from '../Button'
-import classNames from '../utils/classNames'
-import { useCarousel } from './context'
-import { HiChevronLeft } from 'react-icons/hi'
-import type { ComponentPropsWithoutRef } from 'react'
+import Button from '../Button';
+import classNames from '../utils/classNames';
+import { useCarousel } from './context';
+import { HiChevronLeft } from 'react-icons/hi';
+import type { ComponentPropsWithoutRef } from 'react';
 
 export type CarouselPreviousProps = Omit<
     ComponentPropsWithoutRef<typeof Button>,
     'icon' | 'shape' | 'aria-label'
->
+>;
 
 const CarouselPrevious = (props: CarouselPreviousProps) => {
-    const { className, variant = 'default', size = 'sm', ...rest } = props
-    const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+    const { className, variant = 'default', size = 'sm', ...rest } = props;
+    const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
     const buttonClass = classNames(
         orientation === 'vertical' && 'rotate-90',
         className,
-    )
+    );
 
     return (
         <Button
@@ -30,7 +30,7 @@ const CarouselPrevious = (props: CarouselPreviousProps) => {
             onClick={scrollPrev}
             {...rest}
         />
-    )
-}
+    );
+};
 
-export default CarouselPrevious
+export default CarouselPrevious;

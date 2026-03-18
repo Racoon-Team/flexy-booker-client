@@ -1,33 +1,33 @@
-import { useRef, useEffect, useCallback, useMemo } from 'react'
-import ApexChart from 'react-apexcharts'
+import { useRef, useEffect, useCallback, useMemo } from 'react';
+import ApexChart from 'react-apexcharts';
 import {
     apexLineChartDefaultOption,
     apexBarChartDefaultOption,
     apexAreaChartDefaultOption,
     apexDonutChartDefaultOption,
     apexRadarChartDefultOption,
-} from '@/configs/chart.config'
-import { DIR_RTL } from '@/constants/theme.constant'
-import type { ApexOptions } from 'apexcharts'
-import type { Direction } from '@/@types/theme'
-import type { ReactNode } from 'react'
+} from '@/configs/chart.config';
+import { DIR_RTL } from '@/constants/theme.constant';
+import type { ApexOptions } from 'apexcharts';
+import type { Direction } from '@/@types/theme';
+import type { ReactNode } from 'react';
 
-const notDonut = ['line', 'bar', 'area']
+const notDonut = ['line', 'bar', 'area'];
 
-type ChartType = 'line' | 'bar' | 'area' | 'donut' | 'radar'
+type ChartType = 'line' | 'bar' | 'area' | 'donut' | 'radar';
 
 export interface ChartProps {
-    series?: ApexOptions['series']
-    width?: string | number
-    height?: string | number
+    series?: ApexOptions['series'];
+    width?: string | number;
+    height?: string | number;
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    xAxis?: any
-    customOptions?: ApexOptions
-    type?: ChartType
-    direction?: Direction
-    donutTitle?: string | ReactNode
-    donutText?: string | ReactNode
-    className?: string
+    xAxis?: any;
+    customOptions?: ApexOptions;
+    type?: ChartType;
+    direction?: Direction;
+    donutTitle?: string | ReactNode;
+    donutText?: string | ReactNode;
+    className?: string;
 }
 
 const Chart = (props: ChartProps) => {
@@ -43,69 +43,69 @@ const Chart = (props: ChartProps) => {
         donutText,
         className,
         ...rest
-    } = props
+    } = props;
 
-    const chartRef = useRef<HTMLDivElement>(null)
+    const chartRef = useRef<HTMLDivElement>(null);
 
     const chartDefaultOption = useMemo(() => {
         switch (type) {
             case 'line':
-                return apexLineChartDefaultOption
+                return apexLineChartDefaultOption;
             case 'bar':
-                return apexBarChartDefaultOption
+                return apexBarChartDefaultOption;
             case 'area':
-                return apexAreaChartDefaultOption
+                return apexAreaChartDefaultOption;
             case 'donut':
-                return apexDonutChartDefaultOption
+                return apexDonutChartDefaultOption;
             case 'radar':
-                return apexRadarChartDefultOption
+                return apexRadarChartDefultOption;
             default:
-                return apexLineChartDefaultOption
+                return apexLineChartDefaultOption;
         }
-    }, [type])
+    }, [type]);
 
-    let options = JSON.parse(JSON.stringify(chartDefaultOption))
-    const isMobile = window.innerWidth < 768
+    let options = JSON.parse(JSON.stringify(chartDefaultOption));
+    const isMobile = window.innerWidth < 768;
 
     const setLegendOffset = useCallback(() => {
         if (chartRef.current) {
             const lengend = chartRef.current.querySelectorAll<HTMLDivElement>(
                 'div.apexcharts-legend',
-            )[0]
+            )[0];
             if (direction === DIR_RTL) {
-                lengend.style.right = 'auto'
-                lengend.style.left = '0'
+                lengend.style.right = 'auto';
+                lengend.style.left = '0';
             }
             if (isMobile) {
-                lengend.style.position = 'relative'
-                lengend.style.top = '0'
-                lengend.style.justifyContent = 'start'
-                lengend.style.padding = '0'
+                lengend.style.position = 'relative';
+                lengend.style.top = '0';
+                lengend.style.justifyContent = 'start';
+                lengend.style.padding = '0';
             }
         }
-    }, [direction, isMobile])
+    }, [direction, isMobile]);
 
     useEffect(() => {
         if (notDonut.includes(type as ChartType)) {
-            setLegendOffset()
+            setLegendOffset();
         }
-    }, [type, setLegendOffset])
+    }, [type, setLegendOffset]);
 
     if (notDonut.includes(type as ChartType)) {
-        options.xaxis.categories = xAxis
+        options.xaxis.categories = xAxis;
     }
 
     if (customOptions) {
-        options = { ...options, ...customOptions }
+        options = { ...options, ...customOptions };
     }
 
     if (type === 'donut') {
         if (donutTitle) {
-            options.plotOptions.pie.donut.labels.total.label = donutTitle
+            options.plotOptions.pie.donut.labels.total.label = donutTitle;
         }
         if (donutText) {
             options.plotOptions.pie.donut.labels.total.formatter = () =>
-                donutText
+                donutText;
         }
     }
 
@@ -125,7 +125,7 @@ const Chart = (props: ChartProps) => {
                 {...rest}
             />
         </div>
-    )
-}
+    );
+};
 
-export default Chart
+export default Chart;

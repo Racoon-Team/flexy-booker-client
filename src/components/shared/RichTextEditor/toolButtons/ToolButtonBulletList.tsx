@@ -1,8 +1,8 @@
-import { TbList } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbList } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonBulletListProp = BaseToolButtonProps
+type ToolButtonBulletListProp = BaseToolButtonProps;
 
 const ToolButtonBulletList = ({ editor }: ToolButtonBulletListProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonBulletList = ({ editor }: ToolButtonBulletListProp) => {
         >
             <TbList />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonBulletList
+export default ToolButtonBulletList;

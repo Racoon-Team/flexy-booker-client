@@ -1,6 +1,6 @@
 /** Example purpose only */
 const SingleMenuView = () => {
-    return <div>Single Menu View</div>
-}
+    return <div>Single Menu View</div>;
+};
 
-export default SingleMenuView
+export default SingleMenuView;

@@ -1,4 +1,4 @@
-import OtpVerification from './OtpVerification'
+import OtpVerification from './OtpVerification';
 
-export { OtpVerificationBase } from './OtpVerification'
-export default OtpVerification
+export { OtpVerificationBase } from './OtpVerification';
+export default OtpVerification;

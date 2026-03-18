@@ -1,14 +1,14 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
-export type ExtraHeader = string | ReactNode
+export type ExtraHeader = string | ReactNode;
 
 type TaskListHeaderProps = {
-    headerHeight: number
-    rowWidth: string
-    fontFamily: string
-    fontSize: string
-    extraHeaders?: ExtraHeader[]
-}
+    headerHeight: number;
+    rowWidth: string;
+    fontFamily: string;
+    fontSize: string;
+    extraHeaders?: ExtraHeader[];
+};
 
 const TaskListHeader = ({
     headerHeight,
@@ -63,7 +63,7 @@ const TaskListHeader = ({
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default TaskListHeader
+export default TaskListHeader;

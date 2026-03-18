@@ -1,23 +1,23 @@
-import classNames from 'classnames'
-import Modal from 'react-modal'
-import CloseButton from '../CloseButton'
-import { motion } from 'framer-motion'
-import type ReactModal from 'react-modal'
-import type { MouseEvent, ReactNode } from 'react'
+import classNames from 'classnames';
+import Modal from 'react-modal';
+import CloseButton from '../CloseButton';
+import { motion } from 'framer-motion';
+import type ReactModal from 'react-modal';
+import type { MouseEvent, ReactNode } from 'react';
 
 export interface DrawerProps extends ReactModal.Props {
-    bodyClass?: string
-    closable?: boolean
-    footer?: string | ReactNode
-    footerClass?: string
-    headerClass?: string
-    height?: string | number
-    lockScroll?: boolean
-    onClose?: (e: MouseEvent<HTMLSpanElement>) => void
-    placement?: 'top' | 'right' | 'bottom' | 'left'
-    showBackdrop?: boolean
-    title?: string | ReactNode
-    width?: string | number
+    bodyClass?: string;
+    closable?: boolean;
+    footer?: string | ReactNode;
+    footerClass?: string;
+    headerClass?: string;
+    height?: string | number;
+    lockScroll?: boolean;
+    onClose?: (e: MouseEvent<HTMLSpanElement>) => void;
+    placement?: 'top' | 'right' | 'bottom' | 'left';
+    showBackdrop?: boolean;
+    title?: string | ReactNode;
+    width?: string | number;
 }
 
 const Drawer = (props: DrawerProps) => {
@@ -42,23 +42,23 @@ const Drawer = (props: DrawerProps) => {
         title,
         width = 400,
         ...rest
-    } = props
+    } = props;
 
     const onCloseClick = (e: MouseEvent<HTMLSpanElement>) => {
-        onClose?.(e)
-    }
+        onClose?.(e);
+    };
 
-    const renderCloseButton = <CloseButton onClick={onCloseClick} />
+    const renderCloseButton = <CloseButton onClick={onCloseClick} />;
 
     const getStyle = (): {
-        dimensionClass?: string
+        dimensionClass?: string;
         contentStyle?: {
-            width?: string | number
-            height?: string | number
-        }
+            width?: string | number;
+            height?: string | number;
+        };
         motionStyle: {
-            [x: string]: string
-        }
+            [x: string]: string;
+        };
     } => {
         if (placement === 'left' || placement === 'right') {
             return {
@@ -69,7 +69,7 @@ const Drawer = (props: DrawerProps) => {
                         typeof width === 'number' && 'px'
                     }`,
                 },
-            }
+            };
         }
 
         if (placement === 'top' || placement === 'bottom') {
@@ -81,15 +81,15 @@ const Drawer = (props: DrawerProps) => {
                         typeof height === 'number' && 'px'
                     }`,
                 },
-            }
+            };
         }
 
         return {
             motionStyle: {},
-        }
-    }
+        };
+    };
 
-    const { dimensionClass, contentStyle, motionStyle } = getStyle()
+    const { dimensionClass, contentStyle, motionStyle } = getStyle();
 
     return (
         <Modal
@@ -148,9 +148,9 @@ const Drawer = (props: DrawerProps) => {
                 )}
             </motion.div>
         </Modal>
-    )
-}
+    );
+};
 
-Drawer.displayName = 'Drawer'
+Drawer.displayName = 'Drawer';
 
-export default Drawer
+export default Drawer;

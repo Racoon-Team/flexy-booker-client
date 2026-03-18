@@ -1,71 +1,71 @@
-import classNames from '@/utils/classNames'
-import ToolButtonBold from './toolButtons/ToolButtonBold'
-import ToolButtonItalic from './toolButtons/ToolButtonItalic'
-import ToolButtonStrike from './toolButtons/ToolButtonStrike'
-import ToolButtonCode from './toolButtons/ToolButtonCode'
-import ToolButtonOrderedList from './toolButtons/ToolButtonOrderedList'
-import ToolButtonCodeBlock from './toolButtons/ToolButtonCodeBlock'
-import ToolButtonBlockquote from './toolButtons/ToolButtonBlockquote'
-import ToolButtonHorizontalRule from './toolButtons/ToolButtonHorizontalRule'
-import ToolButtonHeading from './toolButtons/ToolButtonHeading'
-import ToolButtonParagraph from './toolButtons/ToolButtonParagraph'
-import ToolButtonUndo from './toolButtons/ToolButtonUndo'
-import ToolButtonRedo from './toolButtons/ToolButtonRedo'
-import ToolButtonBulletList from './toolButtons/ToolButtonBulletList'
-import { EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import type { Editor, EditorContentProps, JSONContent } from '@tiptap/react'
-import type { ReactNode, JSX, Ref } from 'react'
-import type { BaseToolButtonProps, HeadingLevel } from './toolButtons/types'
+import classNames from '@/utils/classNames';
+import ToolButtonBold from './toolButtons/ToolButtonBold';
+import ToolButtonItalic from './toolButtons/ToolButtonItalic';
+import ToolButtonStrike from './toolButtons/ToolButtonStrike';
+import ToolButtonCode from './toolButtons/ToolButtonCode';
+import ToolButtonOrderedList from './toolButtons/ToolButtonOrderedList';
+import ToolButtonCodeBlock from './toolButtons/ToolButtonCodeBlock';
+import ToolButtonBlockquote from './toolButtons/ToolButtonBlockquote';
+import ToolButtonHorizontalRule from './toolButtons/ToolButtonHorizontalRule';
+import ToolButtonHeading from './toolButtons/ToolButtonHeading';
+import ToolButtonParagraph from './toolButtons/ToolButtonParagraph';
+import ToolButtonUndo from './toolButtons/ToolButtonUndo';
+import ToolButtonRedo from './toolButtons/ToolButtonRedo';
+import ToolButtonBulletList from './toolButtons/ToolButtonBulletList';
+import { EditorContent, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import type { Editor, EditorContentProps, JSONContent } from '@tiptap/react';
+import type { ReactNode, JSX, Ref } from 'react';
+import type { BaseToolButtonProps, HeadingLevel } from './toolButtons/types';
 
-export type RichTextEditorRef = HTMLDivElement
+export type RichTextEditorRef = HTMLDivElement;
 
 type RichTextEditorProps = {
-    content?: string
-    invalid?: boolean
+    content?: string;
+    invalid?: boolean;
     customToolBar?: (
         editor: Editor,
         components: {
-            ToolButtonBold: ({ editor }: BaseToolButtonProps) => JSX.Element
-            ToolButtonItalic: ({ editor }: BaseToolButtonProps) => JSX.Element
-            ToolButtonStrike: ({ editor }: BaseToolButtonProps) => JSX.Element
-            ToolButtonCode: ({ editor }: BaseToolButtonProps) => JSX.Element
+            ToolButtonBold: ({ editor }: BaseToolButtonProps) => JSX.Element;
+            ToolButtonItalic: ({ editor }: BaseToolButtonProps) => JSX.Element;
+            ToolButtonStrike: ({ editor }: BaseToolButtonProps) => JSX.Element;
+            ToolButtonCode: ({ editor }: BaseToolButtonProps) => JSX.Element;
             ToolButtonBlockquote: ({
                 editor,
-            }: BaseToolButtonProps) => JSX.Element
+            }: BaseToolButtonProps) => JSX.Element;
             ToolButtonHeading: ({
                 editor,
             }: BaseToolButtonProps & {
-                headingLevel?: HeadingLevel[]
-            }) => JSX.Element
+                headingLevel?: HeadingLevel[];
+            }) => JSX.Element;
             ToolButtonBulletList: ({
                 editor,
-            }: BaseToolButtonProps) => JSX.Element
+            }: BaseToolButtonProps) => JSX.Element;
             ToolButtonOrderedList: ({
                 editor,
-            }: BaseToolButtonProps) => JSX.Element
+            }: BaseToolButtonProps) => JSX.Element;
             ToolButtonCodeBlock: ({
                 editor,
-            }: BaseToolButtonProps) => JSX.Element
+            }: BaseToolButtonProps) => JSX.Element;
             ToolButtonHorizontalRule: ({
                 editor,
-            }: BaseToolButtonProps) => JSX.Element
+            }: BaseToolButtonProps) => JSX.Element;
             ToolButtonParagraph: ({
                 editor,
-            }: BaseToolButtonProps) => JSX.Element
-            ToolButtonUndo: ({ editor }: BaseToolButtonProps) => JSX.Element
-            ToolButtonRedo: ({ editor }: BaseToolButtonProps) => JSX.Element
+            }: BaseToolButtonProps) => JSX.Element;
+            ToolButtonUndo: ({ editor }: BaseToolButtonProps) => JSX.Element;
+            ToolButtonRedo: ({ editor }: BaseToolButtonProps) => JSX.Element;
         },
-    ) => ReactNode
+    ) => ReactNode;
     onChange?: (content: {
-        text: string
-        html: string
-        json: JSONContent
-    }) => void
-    editorContentClass?: string
-    customEditor?: Editor | null
-    ref?: Ref<RichTextEditorRef>
-} & Omit<EditorContentProps, 'editor' | 'ref' | 'onChange'>
+        text: string;
+        html: string;
+        json: JSONContent;
+    }) => void;
+    editorContentClass?: string;
+    customEditor?: Editor | null;
+    ref?: Ref<RichTextEditorRef>;
+} & Omit<EditorContentProps, 'editor' | 'ref' | 'onChange'>;
 
 const RichTextEditor = (props: RichTextEditorProps) => {
     const {
@@ -77,7 +77,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         customEditor,
         ref,
         ...rest
-    } = props
+    } = props;
 
     const editor = customEditor
         ? customEditor
@@ -103,11 +103,11 @@ const RichTextEditor = (props: RichTextEditorProps) => {
                       text: editor.getText(),
                       html: editor.getHTML(),
                       json: editor.getJSON(),
-                  })
+                  });
               },
-          })
+          });
 
-    if (!editor) return null
+    if (!editor) return null;
 
     return (
         <div
@@ -163,7 +163,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
                 {...rest}
             />
         </div>
-    )
-}
+    );
+};
 
-export default RichTextEditor
+export default RichTextEditor;

@@ -1,17 +1,17 @@
-import classNames from 'classnames'
-import { HiCheck } from 'react-icons/hi'
-import type { ReactNode } from 'react'
-import type { OptionProps as ReactSelectOptionProps } from 'react-select'
+import classNames from 'classnames';
+import { HiCheck } from 'react-icons/hi';
+import type { ReactNode } from 'react';
+import type { OptionProps as ReactSelectOptionProps } from 'react-select';
 
 type DefaultOptionProps<T> = {
-    customLabel?: (data: T, label: string) => ReactNode
-}
+    customLabel?: (data: T, label: string) => ReactNode;
+};
 
 const Option = <T,>(
     props: ReactSelectOptionProps<T> & DefaultOptionProps<T>,
 ) => {
     const { innerProps, label, isSelected, isDisabled, data, customLabel } =
-        props
+        props;
 
     return (
         <div
@@ -32,7 +32,7 @@ const Option = <T,>(
             )}
             {isSelected && <HiCheck className="text-xl" />}
         </div>
-    )
-}
+    );
+};
 
-export default Option
+export default Option;

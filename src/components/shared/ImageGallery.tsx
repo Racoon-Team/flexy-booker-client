@@ -1,12 +1,12 @@
-import Lightbox, { LightboxProps } from 'yet-another-react-lightbox'
-import 'yet-another-react-lightbox/styles.css'
-import type { ReactNode } from 'react'
+import Lightbox, { LightboxProps } from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import type { ReactNode } from 'react';
 
 export type ImageGalleryProps = Partial<LightboxProps> & {
-    children?: ReactNode
-    index?: number
-    onClose?: () => void
-}
+    children?: ReactNode;
+    index?: number;
+    onClose?: () => void;
+};
 
 const ImageGallery = ({
     children,
@@ -26,7 +26,7 @@ const ImageGallery = ({
                 close={() => onClose?.()}
             />
         </>
-    )
-}
+    );
+};
 
-export default ImageGallery
+export default ImageGallery;

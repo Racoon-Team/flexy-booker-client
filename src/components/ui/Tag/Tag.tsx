@@ -1,14 +1,14 @@
-import classNames from '../utils/classNames'
-import type { CommonProps } from '../@types/common'
-import type { ReactNode, Ref } from 'react'
+import classNames from '../utils/classNames';
+import type { CommonProps } from '../@types/common';
+import type { ReactNode, Ref } from 'react';
 
 export interface TagProps extends CommonProps {
-    children: ReactNode
-    prefix?: boolean | ReactNode
-    prefixClass?: string
-    ref?: Ref<HTMLDivElement>
-    suffix?: boolean | ReactNode
-    suffixClass?: string
+    children: ReactNode;
+    prefix?: boolean | ReactNode;
+    prefixClass?: string;
+    ref?: Ref<HTMLDivElement>;
+    suffix?: boolean | ReactNode;
+    suffixClass?: string;
 }
 
 const Tag = (props: TagProps) => {
@@ -21,10 +21,10 @@ const Tag = (props: TagProps) => {
         prefixClass,
         suffixClass,
         ...rest
-    } = props
+    } = props;
 
     const tagDefaultColor =
-        'bg-gray-100 dark:bg-gray-700 border-gray-100 dark:border-gray-700 text-gray-900 dark:text-gray-50'
+        'bg-gray-100 dark:bg-gray-700 border-gray-100 dark:border-gray-700 text-gray-900 dark:text-gray-50';
 
     return (
         <div
@@ -46,7 +46,7 @@ const Tag = (props: TagProps) => {
             )}
             {typeof suffix === 'object' && suffix}
         </div>
-    )
-}
+    );
+};
 
-export default Tag
+export default Tag;

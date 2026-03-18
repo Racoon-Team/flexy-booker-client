@@ -1,3 +1,3 @@
-export const notificationListData = []
+export const notificationListData = [];
 
-export const searchQueryPoolData = []
+export const searchQueryPoolData = [];

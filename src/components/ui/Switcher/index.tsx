@@ -1,6 +1,6 @@
-import Switcher from './Switcher'
+import Switcher from './Switcher';
 
-export type { SwitcherProps } from './Switcher'
-export { Switcher }
+export type { SwitcherProps } from './Switcher';
+export { Switcher };
 
-export default Switcher
+export default Switcher;

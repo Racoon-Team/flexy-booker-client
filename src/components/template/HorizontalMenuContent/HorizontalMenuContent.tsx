@@ -1,21 +1,21 @@
-import HorizontalMenuDropdownTrigger from './HorizontalMenuDropdownTrigger'
-import HorizontalMenuDropdown from './HorizontalMenuDropdown'
-import HorizontalMenuDropdownContent from './HorizontalMenuDropdownContent'
-import AuthorityCheck from '@/components/shared/AuthorityCheck'
-import useTranslation from '@/utils/hooks/useTranslation'
-import useMenuActive from '@/utils/hooks/useMenuActive'
-import { TbChevronDown } from 'react-icons/tb'
-import { Direction } from '@/@types/theme'
-import type { NavigationTree } from '@/@types/navigation'
-import type { TraslationFn } from '@/@types/common'
+import HorizontalMenuDropdownTrigger from './HorizontalMenuDropdownTrigger';
+import HorizontalMenuDropdown from './HorizontalMenuDropdown';
+import HorizontalMenuDropdownContent from './HorizontalMenuDropdownContent';
+import AuthorityCheck from '@/components/shared/AuthorityCheck';
+import useTranslation from '@/utils/hooks/useTranslation';
+import useMenuActive from '@/utils/hooks/useMenuActive';
+import { TbChevronDown } from 'react-icons/tb';
+import { Direction } from '@/@types/theme';
+import type { NavigationTree } from '@/@types/navigation';
+import type { TraslationFn } from '@/@types/common';
 
 type HorizontalMenuContentProps = {
-    routeKey: string
-    navigationTree?: NavigationTree[]
-    direction?: Direction
-    translationSetup?: boolean
-    userAuthority: string[]
-}
+    routeKey: string;
+    navigationTree?: NavigationTree[];
+    direction?: Direction;
+    translationSetup?: boolean;
+    userAuthority: string[];
+};
 
 const HorizontalMenuContent = (props: HorizontalMenuContentProps) => {
     const {
@@ -23,10 +23,10 @@ const HorizontalMenuContent = (props: HorizontalMenuContentProps) => {
         navigationTree = [],
         translationSetup,
         userAuthority,
-    } = props
+    } = props;
 
-    const { t } = useTranslation(!translationSetup)
-    const { activedRoute } = useMenuActive(navigationTree, routeKey)
+    const { t } = useTranslation(!translationSetup);
+    const { activedRoute } = useMenuActive(navigationTree, routeKey);
 
     return (
         <div className="flex gap-1">
@@ -84,7 +84,7 @@ const HorizontalMenuContent = (props: HorizontalMenuContentProps) => {
                 </AuthorityCheck>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default HorizontalMenuContent
+export default HorizontalMenuContent;

@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import classNames from 'classnames'
-import Header from './Header'
-import { getDecadeRange, formatYear } from '../utils'
-import type { CommonProps } from '../../@types/common'
+import { useState } from 'react';
+import classNames from 'classnames';
+import Header from './Header';
+import { getDecadeRange, formatYear } from '../utils';
+import type { CommonProps } from '../../@types/common';
 
 export interface YearTableProps extends CommonProps {
-    value: number
-    onChange: (value: number) => void
-    minYear?: number
-    maxYear?: number
-    yearLabelFormat?: string
-    preventFocus?: boolean
+    value: number;
+    onChange: (value: number) => void;
+    minYear?: number;
+    maxYear?: number;
+    yearLabelFormat?: string;
+    preventFocus?: boolean;
 }
 
 const YearTable = (props: YearTableProps) => {
@@ -23,16 +23,16 @@ const YearTable = (props: YearTableProps) => {
         preventFocus,
         yearLabelFormat = 'YYYY',
         ...rest
-    } = props
+    } = props;
 
-    const [decade, setDecade] = useState(value)
-    const range = getDecadeRange(decade)
+    const [decade, setDecade] = useState(value);
+    const range = getDecadeRange(decade);
 
     const years = range.map((year) => {
         const disabled =
-            year < (minYear as number) || year > (maxYear as number)
+            year < (minYear as number) || year > (maxYear as number);
 
-        const active = year === value
+        const active = year === value;
 
         return (
             <button
@@ -52,8 +52,8 @@ const YearTable = (props: YearTableProps) => {
             >
                 {formatYear(year, yearLabelFormat)}
             </button>
-        )
-    })
+        );
+    });
 
     return (
         <div className={classNames('year-picker', className)} {...rest}>
@@ -79,7 +79,7 @@ const YearTable = (props: YearTableProps) => {
             />
             <div className="year-table">{years}</div>
         </div>
-    )
-}
+    );
+};
 
-export default YearTable
+export default YearTable;

@@ -1,20 +1,20 @@
-import Header from '@/components/template/Header'
-import UserProfileDropdown from '@/components//template/UserProfileDropdown'
-import HeaderLogo from '@/components/template/HeaderLogo'
-import MobileNav from '@/components/template/MobileNav'
-import HorizontalNav from '@/components/template/HorizontalNav'
-import LayoutBase from '@/components//template/LayoutBase'
-import classNames from '@/utils/classNames'
-import useScrollTop from '@/utils/hooks/useScrollTop'
-import useResponsive from '@/utils/hooks/useResponsive'
-import { LAYOUT_CONTENT_OVERLAY } from '@/constants/theme.constant'
-import type { CommonProps } from '@/@types/common'
-import type { FooterPageContainerType } from '@/components/template/Footer'
+import Header from '@/components/template/Header';
+import UserProfileDropdown from '@/components//template/UserProfileDropdown';
+import HeaderLogo from '@/components/template/HeaderLogo';
+import MobileNav from '@/components/template/MobileNav';
+import HorizontalNav from '@/components/template/HorizontalNav';
+import LayoutBase from '@/components//template/LayoutBase';
+import classNames from '@/utils/classNames';
+import useScrollTop from '@/utils/hooks/useScrollTop';
+import useResponsive from '@/utils/hooks/useResponsive';
+import { LAYOUT_CONTENT_OVERLAY } from '@/constants/theme.constant';
+import type { CommonProps } from '@/@types/common';
+import type { FooterPageContainerType } from '@/components/template/Footer';
 
 const ContentOverlay = ({ children }: CommonProps) => {
-    const { isSticky } = useScrollTop()
+    const { isSticky } = useScrollTop();
 
-    const { larger, smaller } = useResponsive()
+    const { larger, smaller } = useResponsive();
 
     return (
         <LayoutBase
@@ -122,7 +122,7 @@ const ContentOverlay = ({ children }: CommonProps) => {
                 </div>
             </div>
         </LayoutBase>
-    )
-}
+    );
+};
 
-export default ContentOverlay
+export default ContentOverlay;

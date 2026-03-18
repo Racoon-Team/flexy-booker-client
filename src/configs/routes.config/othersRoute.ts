@@ -1,6 +1,6 @@
-import { lazy } from 'react'
-import { ADMIN, USER } from '@/constants/roles.constant'
-import type { Routes } from '@/@types/routes'
+import { lazy } from 'react';
+import { ADMIN, USER } from '@/constants/roles.constant';
+import type { Routes } from '@/@types/routes';
 
 const othersRoute: Routes = [
     {
@@ -13,6 +13,6 @@ const othersRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
-]
+];
 
-export default othersRoute
+export default othersRoute;

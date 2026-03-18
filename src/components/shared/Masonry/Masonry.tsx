@@ -1,12 +1,12 @@
-import { ElementType, useId } from 'react'
-import { MasonryProps } from './types'
-import useMasonry from './useMasonry'
-import { MasonryItemContext } from './context'
-import type { Ref } from 'react'
+import { ElementType, useId } from 'react';
+import { MasonryProps } from './types';
+import useMasonry from './useMasonry';
+import { MasonryItemContext } from './context';
+import type { Ref } from 'react';
 
 const MasonryBase = <T extends ElementType = 'div'>(
     props: MasonryProps<T> & {
-        ref?: Ref<T>
+        ref?: Ref<T>;
     },
 ) => {
     const {
@@ -16,10 +16,10 @@ const MasonryBase = <T extends ElementType = 'div'>(
         columns,
         ref: forwaredRef,
         ...rest
-    } = props
+    } = props;
 
-    const uniq = useId()
-    const columnsChildren = useMasonry(props.children, columns)
+    const uniq = useId();
+    const columnsChildren = useMasonry(props.children, columns);
 
     return (
         <Component
@@ -53,13 +53,13 @@ const MasonryBase = <T extends ElementType = 'div'>(
                                 >
                                     {child}
                                 </MasonryItemContext.Provider>
-                            )
+                            );
                         })}
                     </Component>
-                )
+                );
             })}
         </Component>
-    )
-}
+    );
+};
 
-export const Masonry = MasonryBase
+export const Masonry = MasonryBase;

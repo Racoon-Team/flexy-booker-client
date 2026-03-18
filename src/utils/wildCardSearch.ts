@@ -6,7 +6,7 @@ export default function wildCardSearch(
     const searchText = (item: Record<string, string | number>) => {
         for (const key in item) {
             if (item[specifyKey ? specifyKey : key] == null) {
-                continue
+                continue;
             }
             if (
                 item[specifyKey ? specifyKey : key]
@@ -14,10 +14,10 @@ export default function wildCardSearch(
                     .toUpperCase()
                     .indexOf(input.toString().toUpperCase()) !== -1
             ) {
-                return true
+                return true;
             }
         }
-    }
-    const result = list.filter((value) => searchText(value))
-    return result
+    };
+    const result = list.filter((value) => searchText(value));
+    return result;
 }

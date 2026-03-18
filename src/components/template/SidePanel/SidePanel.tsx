@@ -1,34 +1,34 @@
-import classNames from 'classnames'
-import Drawer from '@/components/ui/Drawer'
-import { PiGearDuotone } from 'react-icons/pi'
-import SidePanelContent, { SidePanelContentProps } from './SidePanelContent'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
-import { useThemeStore } from '@/store/themeStore'
-import type { CommonProps } from '@/@types/common'
+import classNames from 'classnames';
+import Drawer from '@/components/ui/Drawer';
+import { PiGearDuotone } from 'react-icons/pi';
+import SidePanelContent, { SidePanelContentProps } from './SidePanelContent';
+import withHeaderItem from '@/utils/hoc/withHeaderItem';
+import { useThemeStore } from '@/store/themeStore';
+import type { CommonProps } from '@/@types/common';
 
-type SidePanelProps = SidePanelContentProps & CommonProps
+type SidePanelProps = SidePanelContentProps & CommonProps;
 
 const _SidePanel = (props: SidePanelProps) => {
-    const { className, ...rest } = props
+    const { className, ...rest } = props;
 
-    const panelExpand = useThemeStore((state) => state.panelExpand)
-    const direction = useThemeStore((state) => state.direction)
-    const setPanelExpand = useThemeStore((state) => state.setPanelExpand)
+    const panelExpand = useThemeStore((state) => state.panelExpand);
+    const direction = useThemeStore((state) => state.direction);
+    const setPanelExpand = useThemeStore((state) => state.setPanelExpand);
 
     const openPanel = () => {
-        setPanelExpand(true)
-    }
+        setPanelExpand(true);
+    };
 
     const closePanel = () => {
-        setPanelExpand(false)
+        setPanelExpand(false);
 
         if (document) {
-            const bodyClassList = document.body.classList
+            const bodyClassList = document.body.classList;
             if (bodyClassList.contains('drawer-lock-scroll')) {
-                bodyClassList.remove('drawer-lock-scroll', 'drawer-open')
+                bodyClassList.remove('drawer-lock-scroll', 'drawer-open');
             }
         }
-    }
+    };
 
     return (
         <>
@@ -50,9 +50,9 @@ const _SidePanel = (props: SidePanelProps) => {
                 <SidePanelContent callBackClose={closePanel} />
             </Drawer>
         </>
-    )
-}
+    );
+};
 
-const SidePanel = withHeaderItem(_SidePanel)
+const SidePanel = withHeaderItem(_SidePanel);
 
-export default SidePanel
+export default SidePanel;

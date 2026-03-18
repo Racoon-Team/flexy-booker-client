@@ -1,15 +1,15 @@
-import classNames from 'classnames'
-import type { CommonProps } from '../@types/common'
-import type { ReactNode, Ref } from 'react'
+import classNames from 'classnames';
+import type { CommonProps } from '../@types/common';
+import type { ReactNode, Ref } from 'react';
 
 export interface TimeLineItemProps extends CommonProps {
-    isLast?: boolean
-    media?: string | ReactNode
-    ref?: Ref<HTMLLIElement>
+    isLast?: boolean;
+    media?: string | ReactNode;
+    ref?: Ref<HTMLLIElement>;
 }
 
 const TimeLineItem = (props: TimeLineItemProps) => {
-    const { children, className, isLast, media, ref } = props
+    const { children, className, isLast, media, ref } = props;
 
     return (
         <li
@@ -39,7 +39,7 @@ const TimeLineItem = (props: TimeLineItemProps) => {
                 </div>
             </div>
         </li>
-    )
-}
+    );
+};
 
-export default TimeLineItem
+export default TimeLineItem;

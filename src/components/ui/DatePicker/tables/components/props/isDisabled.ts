@@ -1,13 +1,13 @@
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 type IsDisabledParams = {
-    date: Date
-    minDate?: Date
-    maxDate?: Date
-    disableDate?(date: Date): boolean
-    disableOutOfMonth?: boolean
-    outOfMonth?: boolean
-}
+    date: Date;
+    minDate?: Date;
+    maxDate?: Date;
+    disableDate?(date: Date): boolean;
+    disableOutOfMonth?: boolean;
+    outOfMonth?: boolean;
+};
 
 export default function isDisabled({
     minDate,
@@ -18,10 +18,11 @@ export default function isDisabled({
     outOfMonth,
 }: IsDisabledParams) {
     const isAfterMax =
-        maxDate instanceof Date && dayjs(maxDate).isBefore(date, 'day')
+        maxDate instanceof Date && dayjs(maxDate).isBefore(date, 'day');
     const isBeforeMin =
-        minDate instanceof Date && dayjs(minDate).isAfter(date, 'day')
-    const shouldExclude = typeof disableDate === 'function' && disableDate(date)
-    const disabledOutside = !!disableOutOfMonth && !!outOfMonth
-    return isAfterMax || isBeforeMin || shouldExclude || disabledOutside
+        minDate instanceof Date && dayjs(minDate).isAfter(date, 'day');
+    const shouldExclude =
+        typeof disableDate === 'function' && disableDate(date);
+    const disabledOutside = !!disableOutOfMonth && !!outOfMonth;
+    return isAfterMax || isBeforeMin || shouldExclude || disabledOutside;
 }

@@ -1,3 +1,3 @@
-import StackedSideNav from './StackedSideNav'
+import StackedSideNav from './StackedSideNav';
 
-export default StackedSideNav
+export default StackedSideNav;

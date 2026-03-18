@@ -1,8 +1,8 @@
-import GanttChart from './GanttChart'
-import { ViewMode } from 'gantt-task-react'
+import GanttChart from './GanttChart';
+import { ViewMode } from 'gantt-task-react';
 
-export type { Task, ExtendedTask } from './GanttChart'
+export type { Task, ExtendedTask } from './GanttChart';
 
-export { ViewMode }
+export { ViewMode };
 
-export default GanttChart
+export default GanttChart;

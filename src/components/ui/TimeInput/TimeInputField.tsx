@@ -1,31 +1,31 @@
-import { useRef, useState } from 'react'
-import classNames from 'classnames'
-import useMergedRef from '../hooks/useMergeRef'
-import { padTime, createTimeHandler } from './utils'
-import { clamp } from '../utils/clamp'
-import type { CommonProps } from '../@types/common'
+import { useRef, useState } from 'react';
+import classNames from 'classnames';
+import useMergedRef from '../hooks/useMergeRef';
+import { padTime, createTimeHandler } from './utils';
+import { clamp } from '../utils/clamp';
+import type { CommonProps } from '../@types/common';
 import type {
     FocusEvent,
     Ref,
     KeyboardEvent,
     MouseEvent,
     ChangeEvent,
-} from 'react'
+} from 'react';
 
 interface TimeInputFieldProps extends CommonProps {
-    disabled?: boolean
-    id?: string
-    name?: string
-    max?: number
-    min?: number
-    onChange: ReturnType<typeof createTimeHandler>
-    onFocus?: (event: FocusEvent<HTMLInputElement, Element>) => void
-    onBlur?: (event: FocusEvent<HTMLInputElement, Element>) => void
-    placeholder?: string
-    ref?: Ref<HTMLInputElement>
-    setValue: (value: string) => void
-    withSeparator?: boolean
-    value: string | number | readonly string[]
+    disabled?: boolean;
+    id?: string;
+    name?: string;
+    max?: number;
+    min?: number;
+    onChange: ReturnType<typeof createTimeHandler>;
+    onFocus?: (event: FocusEvent<HTMLInputElement, Element>) => void;
+    onBlur?: (event: FocusEvent<HTMLInputElement, Element>) => void;
+    placeholder?: string;
+    ref?: Ref<HTMLInputElement>;
+    setValue: (value: string) => void;
+    withSeparator?: boolean;
+    value: string | number | readonly string[];
 }
 
 const TimeInputField = (props: TimeInputFieldProps) => {
@@ -41,74 +41,74 @@ const TimeInputField = (props: TimeInputFieldProps) => {
         min = 0,
         value,
         ...rest
-    } = props
+    } = props;
 
-    const [digitsEntered, setDigitsEntered] = useState(0)
+    const [digitsEntered, setDigitsEntered] = useState(0);
 
-    const inputRef = useRef<HTMLInputElement>(undefined)
+    const inputRef = useRef<HTMLInputElement>(undefined);
 
     const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
-        typeof onFocus === 'function' && onFocus(event)
-        inputRef?.current?.select()
-        setDigitsEntered(0)
-    }
+        typeof onFocus === 'function' && onFocus(event);
+        inputRef?.current?.select();
+        setDigitsEntered(0);
+    };
 
     const handleBlur = (event: FocusEvent<HTMLInputElement, Element>) => {
-        typeof onBlur === 'function' && onBlur(event)
+        typeof onBlur === 'function' && onBlur(event);
         if (digitsEntered === 1) {
             typeof onChange === 'function' &&
-                onChange(event.currentTarget.value, false)
+                onChange(event.currentTarget.value, false);
         }
-    }
+    };
 
     const handleClick = (event: MouseEvent<HTMLInputElement>) => {
-        event.stopPropagation()
-        inputRef?.current?.select()
-    }
+        event.stopPropagation();
+        inputRef?.current?.select();
+    };
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'ArrowUp') {
-            event.preventDefault()
+            event.preventDefault();
             const padded = padTime(
                 clamp(
                     parseInt(event.currentTarget.value, 10) + 1,
                     min,
                     max as number,
                 ).toString(),
-            )
+            );
 
             if (value !== padded) {
-                onChange(padded, false)
+                onChange(padded, false);
             }
         }
 
         if (event.key === 'ArrowDown') {
-            event.preventDefault()
+            event.preventDefault();
             const padded = padTime(
                 clamp(
                     parseInt(event.currentTarget.value, 10) - 1,
                     min,
                     max as number,
                 ).toString(),
-            )
+            );
 
             if (value !== padded) {
-                onChange(padded, false)
+                onChange(padded, false);
             }
         }
-    }
+    };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setDigitsEntered(digitsEntered + 1)
+        setDigitsEntered(digitsEntered + 1);
 
-        const _val = parseInt(event.currentTarget.value, 10).toString()
+        const _val = parseInt(event.currentTarget.value, 10).toString();
 
         if (_val === '0' && digitsEntered === 0) {
-            setValue('00')
-            return
+            setValue('00');
+            return;
         }
-        onChange(_val, true, digitsEntered > 0)
-    }
+        onChange(_val, true, digitsEntered > 0);
+    };
 
     return (
         <>
@@ -127,7 +127,7 @@ const TimeInputField = (props: TimeInputFieldProps) => {
             />
             {withSeparator && <span> : </span>}
         </>
-    )
-}
+    );
+};
 
-export default TimeInputField
+export default TimeInputField;

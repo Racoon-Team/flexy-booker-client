@@ -1,22 +1,22 @@
-import { useState, useEffect, useContext } from 'react'
-import { useConfig } from '../ConfigProvider'
-import { CollapseContextProvider } from './context/collapseContext'
-import classNames from 'classnames'
-import { motion } from 'framer-motion'
-import MenuContext from './context/menuContext'
-import { TbChevronDown } from 'react-icons/tb'
-import { PiDotOutlineFill } from 'react-icons/pi'
-import type { CommonProps } from '../@types/common'
-import type { ReactNode, MouseEvent } from 'react'
+import { useState, useEffect, useContext } from 'react';
+import { useConfig } from '../ConfigProvider';
+import { CollapseContextProvider } from './context/collapseContext';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import MenuContext from './context/menuContext';
+import { TbChevronDown } from 'react-icons/tb';
+import { PiDotOutlineFill } from 'react-icons/pi';
+import type { CommonProps } from '../@types/common';
+import type { ReactNode, MouseEvent } from 'react';
 
 export interface MenuCollapseProps extends CommonProps {
-    active?: boolean
-    eventKey?: string
-    expanded?: boolean
-    dotIndent?: boolean
-    indent?: boolean
-    label?: string | ReactNode
-    onToggle?: (expanded: boolean, e: MouseEvent<HTMLDivElement>) => void
+    active?: boolean;
+    eventKey?: string;
+    expanded?: boolean;
+    dotIndent?: boolean;
+    indent?: boolean;
+    label?: string | ReactNode;
+    onToggle?: (expanded: boolean, e: MouseEvent<HTMLDivElement>) => void;
 }
 
 const MenuCollapse = (props: MenuCollapseProps) => {
@@ -30,31 +30,31 @@ const MenuCollapse = (props: MenuCollapseProps) => {
         label = null,
         dotIndent,
         onToggle,
-    } = props
+    } = props;
 
-    const [isExpanded, setIsExpanded] = useState(expanded)
+    const [isExpanded, setIsExpanded] = useState(expanded);
 
     const { sideCollapsed, defaultExpandedKeys, defaultCollapseActiveKeys } =
-        useContext(MenuContext)
+        useContext(MenuContext);
 
-    const { direction } = useConfig()
+    const { direction } = useConfig();
 
     useEffect(() => {
         if ((defaultExpandedKeys as string[]).includes(eventKey as string)) {
-            setIsExpanded(true)
+            setIsExpanded(true);
         }
         if (expanded !== isExpanded) {
-            setIsExpanded(true)
+            setIsExpanded(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [expanded, eventKey, defaultExpandedKeys])
+    }, [expanded, eventKey, defaultExpandedKeys]);
 
     const toggleCollapse = (e: MouseEvent<HTMLDivElement>) => {
         if (typeof onToggle === 'function') {
-            onToggle(!isExpanded, e)
+            onToggle(!isExpanded, e);
         }
-        setIsExpanded(!isExpanded)
-    }
+        setIsExpanded(!isExpanded);
+    };
 
     const menuCollapseItemClass = classNames(
         'menu-collapse-item',
@@ -63,7 +63,7 @@ const MenuCollapse = (props: MenuCollapseProps) => {
             active) &&
             'menu-collapse-item-active',
         className,
-    )
+    );
 
     return (
         <div className="menu-collapse">
@@ -112,9 +112,9 @@ const MenuCollapse = (props: MenuCollapseProps) => {
                 </motion.ul>
             </CollapseContextProvider>
         </div>
-    )
-}
+    );
+};
 
-MenuCollapse.displayName = 'MenuCollapse'
+MenuCollapse.displayName = 'MenuCollapse';
 
-export default MenuCollapse
+export default MenuCollapse;

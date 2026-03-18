@@ -1,37 +1,37 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import cn from '../utils/classNames'
-import ReactSelect from 'react-select'
-import CreatableSelect from 'react-select/creatable'
-import AsyncSelect from 'react-select/async'
-import { useConfig } from '../ConfigProvider'
-import { useForm, useFormItem } from '../Form/context'
-import { useInputGroup } from '../InputGroup/context'
-import { HiChevronDown, HiX } from 'react-icons/hi'
-import DefaultOption from './Option'
-import Spinner from '../Spinner/Spinner'
-import { CONTROL_SIZES } from '../utils/constants'
-import type { CommonProps, TypeAttributes } from '../@types/common'
+import cn from '../utils/classNames';
+import ReactSelect from 'react-select';
+import CreatableSelect from 'react-select/creatable';
+import AsyncSelect from 'react-select/async';
+import { useConfig } from '../ConfigProvider';
+import { useForm, useFormItem } from '../Form/context';
+import { useInputGroup } from '../InputGroup/context';
+import { HiChevronDown, HiX } from 'react-icons/hi';
+import DefaultOption from './Option';
+import Spinner from '../Spinner/Spinner';
+import { CONTROL_SIZES } from '../utils/constants';
+import type { CommonProps, TypeAttributes } from '../@types/common';
 import type {
     Props as ReactSelectProps,
     StylesConfig,
     ClassNamesConfig,
     GroupBase,
-} from 'react-select'
-import type { AsyncProps } from 'react-select/async'
-import type { CreatableProps } from 'react-select/creatable'
-import type { Ref, JSX } from 'react'
+} from 'react-select';
+import type { AsyncProps } from 'react-select/async';
+import type { CreatableProps } from 'react-select/creatable';
+import type { Ref, JSX } from 'react';
 
 const DefaultDropdownIndicator = () => {
     return (
         <div className="select-dropdown-indicator">
             <HiChevronDown />
         </div>
-    )
-}
+    );
+};
 
 interface DefaultClearIndicatorProps {
-    innerProps: JSX.IntrinsicElements['div']
-    ref: Ref<HTMLElement>
+    innerProps: JSX.IntrinsicElements['div'];
+    ref: Ref<HTMLElement>;
 }
 
 const DefaultClearIndicator = ({
@@ -43,21 +43,21 @@ const DefaultClearIndicator = ({
                 <HiX />
             </div>
         </div>
-    )
-}
+    );
+};
 
 interface DefaultLoadingIndicatorProps {
-    selectProps: { themeColor?: string }
+    selectProps: { themeColor?: string };
 }
 
 const DefaultLoadingIndicator = ({
     selectProps,
 }: DefaultLoadingIndicatorProps) => {
-    const { themeColor } = selectProps
+    const { themeColor } = selectProps;
     return (
         <Spinner className={`select-loading-indicatior text-${themeColor}`} />
-    )
-}
+    );
+};
 
 export type SelectProps<
     Option,
@@ -67,12 +67,12 @@ export type SelectProps<
     ReactSelectProps<Option, IsMulti, Group> &
     AsyncProps<Option, IsMulti, Group> &
     CreatableProps<Option, IsMulti, Group> & {
-        invalid?: boolean
-        size?: TypeAttributes.ControlSize
+        invalid?: boolean;
+        size?: TypeAttributes.ControlSize;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        field?: any
-        componentAs?: ReactSelect | CreatableSelect | AsyncSelect
-    }
+        field?: any;
+        componentAs?: ReactSelect | CreatableSelect | AsyncSelect;
+    };
 
 function Select<
     Option,
@@ -89,21 +89,21 @@ function Select<
         field,
         invalid,
         ...rest
-    } = props
+    } = props;
 
-    const { controlSize } = useConfig()
-    const formControlSize = useForm()?.size
-    const formItemInvalid = useFormItem()?.invalid
-    const inputGroupSize = useInputGroup()?.size
+    const { controlSize } = useConfig();
+    const formControlSize = useForm()?.size;
+    const formItemInvalid = useFormItem()?.invalid;
+    const inputGroupSize = useInputGroup()?.size;
 
     const selectSize = (size ||
         inputGroupSize ||
         formControlSize ||
-        controlSize) as keyof typeof CONTROL_SIZES
+        controlSize) as keyof typeof CONTROL_SIZES;
 
-    const isSelectInvalid = invalid || formItemInvalid
+    const isSelectInvalid = invalid || formItemInvalid;
 
-    const selectClass = cn(`select select-${selectSize}`, className)
+    const selectClass = cn(`select select-${selectSize}`, className);
 
     return (
         <Component<Option, IsMulti, Group>
@@ -118,27 +118,27 @@ function Select<
                             (() => {
                                 const classes: string[] = [
                                     'bg-gray-100 dark:bg-gray-700',
-                                ]
+                                ];
 
-                                const { isFocused } = state
+                                const { isFocused } = state;
 
                                 if (isFocused) {
                                     classes.push(
                                         'select-control-focused ring-1 ring-primary border-primary bg-transparent',
-                                    )
+                                    );
                                 }
 
                                 if (isSelectInvalid) {
                                     classes.push(
                                         'select-control-invalid bg-error-subtle',
-                                    )
+                                    );
                                 }
 
                                 if (isFocused && isSelectInvalid) {
-                                    classes.push('ring-error border-error')
+                                    classes.push('ring-error border-error');
                                 }
 
-                                return classes
+                                return classes;
                             })(),
                         ),
                     valueContainer: ({ isMulti, hasValue, selectProps }) =>
@@ -209,7 +209,7 @@ function Select<
             {...field}
             {...rest}
         />
-    )
+    );
 }
 
-export default Select
+export default Select;

@@ -1,8 +1,8 @@
-import { TbCode } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbCode } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonCodeProp = BaseToolButtonProps
+type ToolButtonCodeProp = BaseToolButtonProps;
 
 const ToolButtonCode = ({ editor }: ToolButtonCodeProp) => {
     return (
@@ -14,7 +14,7 @@ const ToolButtonCode = ({ editor }: ToolButtonCodeProp) => {
         >
             <TbCode />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonCode
+export default ToolButtonCode;

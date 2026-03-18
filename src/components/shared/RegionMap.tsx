@@ -1,45 +1,45 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
     ComposableMap,
     Geographies,
     Geography,
     Marker,
-} from 'react-simple-maps'
-import classNames from '@/utils/classNames'
-import { PatternCircles } from '@visx/pattern'
-import WorldMap from '@/assets/maps/world-countries-sans-antarctica.json'
-import { Tooltip as ReactTooltip } from 'react-tooltip'
+} from 'react-simple-maps';
+import classNames from '@/utils/classNames';
+import { PatternCircles } from '@visx/pattern';
+import WorldMap from '@/assets/maps/world-countries-sans-antarctica.json';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
-import type { Dispatch, ReactNode, SetStateAction } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
-type MarkerCallback = (markerComponet: typeof Marker) => ReactNode
+type MarkerCallback = (markerComponet: typeof Marker) => ReactNode;
 
 type MapDataProp = {
-    name: string
-    value?: string | number
-    color?: string
-}[]
+    name: string;
+    value?: string | number;
+    color?: string;
+}[];
 
 type RegionMapProps = {
-    data: MapDataProp
+    data: MapDataProp;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mapSource?: string | Record<string, any> | string[]
-    valueSuffix?: string
-    valuePrefix?: string
-    marker?: MarkerCallback
-    hoverable?: boolean
-}
+    mapSource?: string | Record<string, any> | string[];
+    valueSuffix?: string;
+    valuePrefix?: string;
+    marker?: MarkerCallback;
+    hoverable?: boolean;
+};
 
 type MapProps = Omit<RegionMapProps, 'valueSuffix' | 'valuePrefix'> & {
-    prefix?: string
-    suffix?: string
-}
+    prefix?: string;
+    suffix?: string;
+};
 
 type MapChartProps = MapProps & {
-    setTooltipContent: Dispatch<SetStateAction<string>>
-}
+    setTooltipContent: Dispatch<SetStateAction<string>>;
+};
 
-const geoUrl = WorldMap
+const geoUrl = WorldMap;
 
 const getRegionValue = (
     name: unknown,
@@ -49,15 +49,15 @@ const getRegionValue = (
 ) => {
     if (data.length > 0 || name) {
         for (let i = 0; i < data.length; i++) {
-            const elm = data[i]
+            const elm = data[i];
             if (name === elm.name) {
-                return `${elm.name} - ${prefix}${elm.value}${suffix}`
+                return `${elm.name} - ${prefix}${elm.value}${suffix}`;
             }
         }
-        return ''
+        return '';
     }
-    return ''
-}
+    return '';
+};
 
 const MapChart = (props: MapChartProps) => {
     const {
@@ -68,7 +68,7 @@ const MapChart = (props: MapChartProps) => {
         prefix,
         marker,
         hoverable = true,
-    } = props
+    } = props;
 
     return (
         <ComposableMap
@@ -96,7 +96,7 @@ const MapChart = (props: MapChartProps) => {
             <Geographies geography={mapSource}>
                 {({ geographies }) =>
                     geographies.map((geo) => {
-                        const geoName = geo.properties.name
+                        const geoName = geo.properties.name;
                         return (
                             <Geography
                                 key={geo.rsmKey}
@@ -121,30 +121,30 @@ const MapChart = (props: MapChartProps) => {
                                             suffix,
                                             prefix,
                                         ),
-                                    )
+                                    );
                                 }}
                                 onMouseLeave={() => {
-                                    setTooltipContent('')
+                                    setTooltipContent('');
                                 }}
                             />
-                        )
+                        );
                     })
                 }
             </Geographies>
             {marker?.(Marker)}
         </ComposableMap>
-    )
-}
+    );
+};
 
 const Map = (props: MapProps) => {
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState('');
     return (
         <>
             <MapChart {...props} setTooltipContent={setContent} />
             <ReactTooltip>{content}</ReactTooltip>
         </>
-    )
-}
+    );
+};
 
 const RegionMap = (props: RegionMapProps) => {
     const {
@@ -154,7 +154,7 @@ const RegionMap = (props: RegionMapProps) => {
         valuePrefix,
         marker,
         hoverable,
-    } = props
+    } = props;
 
     return (
         <Map
@@ -165,7 +165,7 @@ const RegionMap = (props: RegionMapProps) => {
             marker={marker}
             hoverable={hoverable}
         />
-    )
-}
+    );
+};
 
-export default RegionMap
+export default RegionMap;

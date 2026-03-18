@@ -1,8 +1,8 @@
-import { HiOutlineMenuAlt2, HiOutlineMenu } from 'react-icons/hi'
-import type { CommonProps } from '@/@types/common'
+import { HiOutlineMenuAlt2, HiOutlineMenu } from 'react-icons/hi';
+import type { CommonProps } from '@/@types/common';
 
 export interface NavToggleProps extends CommonProps {
-    toggled?: boolean
+    toggled?: boolean;
 }
 
 const NavToggle = ({ toggled, className }: NavToggleProps) => {
@@ -10,7 +10,7 @@ const NavToggle = ({ toggled, className }: NavToggleProps) => {
         <div className={className}>
             {toggled ? <HiOutlineMenu /> : <HiOutlineMenuAlt2 />}
         </div>
-    )
-}
+    );
+};
 
-export default NavToggle
+export default NavToggle;

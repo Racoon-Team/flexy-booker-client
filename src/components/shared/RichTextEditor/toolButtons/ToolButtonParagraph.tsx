@@ -1,8 +1,8 @@
-import { BiParagraph } from 'react-icons/bi'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { BiParagraph } from 'react-icons/bi';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonParagraphProp = BaseToolButtonProps
+type ToolButtonParagraphProp = BaseToolButtonProps;
 
 const ToolButtonParagraph = ({ editor }: ToolButtonParagraphProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonParagraph = ({ editor }: ToolButtonParagraphProp) => {
         >
             <BiParagraph />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonParagraph
+export default ToolButtonParagraph;

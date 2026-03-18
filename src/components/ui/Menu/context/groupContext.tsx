@@ -1,9 +1,9 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
-const GroupContext = createContext(null)
+const GroupContext = createContext(null);
 
-export const GroupContextProvider = GroupContext.Provider
+export const GroupContextProvider = GroupContext.Provider;
 
-export const GroupContextConsumer = GroupContext.Consumer
+export const GroupContextConsumer = GroupContext.Consumer;
 
-export default GroupContext
+export default GroupContext;

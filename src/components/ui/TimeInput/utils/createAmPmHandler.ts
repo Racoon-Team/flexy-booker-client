@@ -1,11 +1,11 @@
-import type { RefObject } from 'react'
+import type { RefObject } from 'react';
 
 type CreateAmPmHandlerParams = {
-    amLabel: string
-    pmLabel: string
-    onChange(value: string): void
-    nextRef?: RefObject<HTMLInputElement | null>
-}
+    amLabel: string;
+    pmLabel: string;
+    onChange(value: string): void;
+    nextRef?: RefObject<HTMLInputElement | null>;
+};
 
 export function createAmPmHandler({
     amLabel,
@@ -14,20 +14,20 @@ export function createAmPmHandler({
     nextRef,
 }: CreateAmPmHandlerParams) {
     return (value: string, triggerShift: boolean) => {
-        const testRegex = new RegExp(`(^(${amLabel}|${pmLabel})?$)`)
-        const valLower = value.toLowerCase()
+        const testRegex = new RegExp(`(^(${amLabel}|${pmLabel})?$)`);
+        const valLower = value.toLowerCase();
 
         if (valLower === amLabel || valLower === pmLabel) {
-            onChange(valLower)
-            triggerShift && nextRef?.current?.focus()
-            triggerShift && nextRef?.current?.select()
-            return
+            onChange(valLower);
+            triggerShift && nextRef?.current?.focus();
+            triggerShift && nextRef?.current?.select();
+            return;
         }
 
         if (!testRegex.test(valLower)) {
-            return
+            return;
         }
 
-        onChange(valLower)
-    }
+        onChange(valLower);
+    };
 }

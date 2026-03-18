@@ -1,8 +1,8 @@
-import { TbQuote } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbQuote } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonBlockquoteProp = BaseToolButtonProps
+type ToolButtonBlockquoteProp = BaseToolButtonProps;
 
 const ToolButtonBlockquote = ({ editor }: ToolButtonBlockquoteProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonBlockquote = ({ editor }: ToolButtonBlockquoteProp) => {
         >
             <TbQuote />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonBlockquote
+export default ToolButtonBlockquote;

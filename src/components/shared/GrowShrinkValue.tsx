@@ -1,19 +1,19 @@
-import classNames from '@/utils/classNames'
-import { HiArrowUp, HiArrowDown } from 'react-icons/hi'
-import type { ReactNode, Ref } from 'react'
+import classNames from '@/utils/classNames';
+import { HiArrowUp, HiArrowDown } from 'react-icons/hi';
+import type { ReactNode, Ref } from 'react';
 
 type GrowShrinkTagProps = {
-    value?: number
-    showIcon?: boolean
-    prefix?: ReactNode | string
-    suffix?: ReactNode | string
-    positiveIcon?: ReactNode | string
-    negativeIcon?: ReactNode | string
-    positiveClass?: string
-    negativeClass?: string
-    className?: string
-    ref?: Ref<HTMLDivElement>
-}
+    value?: number;
+    showIcon?: boolean;
+    prefix?: ReactNode | string;
+    suffix?: ReactNode | string;
+    positiveIcon?: ReactNode | string;
+    negativeIcon?: ReactNode | string;
+    positiveClass?: string;
+    negativeClass?: string;
+    className?: string;
+    ref?: Ref<HTMLDivElement>;
+};
 
 const GrowShrinkValue = (props: GrowShrinkTagProps) => {
     const {
@@ -27,7 +27,7 @@ const GrowShrinkValue = (props: GrowShrinkTagProps) => {
         positiveClass,
         negativeClass,
         ref,
-    } = props
+    } = props;
 
     return (
         <span
@@ -62,7 +62,7 @@ const GrowShrinkValue = (props: GrowShrinkTagProps) => {
                 {suffix}
             </span>
         </span>
-    )
-}
+    );
+};
 
-export default GrowShrinkValue
+export default GrowShrinkValue;

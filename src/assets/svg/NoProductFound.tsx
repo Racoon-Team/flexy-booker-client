@@ -2,8 +2,8 @@ const NoProductFound = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -101,7 +101,7 @@ const NoProductFound = ({
                 className="fill-[#bababa]"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default NoProductFound
+export default NoProductFound;

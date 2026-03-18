@@ -1,28 +1,28 @@
-import classNames from '@/utils/classNames'
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import { CalendarOptions } from '@fullcalendar/core'
+import classNames from '@/utils/classNames';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { CalendarOptions } from '@fullcalendar/core';
 
 type EventColors = Record<
     string,
     {
-        bg: string
-        text: string
+        bg: string;
+        text: string;
     }
->
+>;
 
 interface CalendarViewProps extends CalendarOptions {
-    wrapperClass?: string
-    eventColors?: (colors: EventColors) => EventColors
+    wrapperClass?: string;
+    eventColors?: (colors: EventColors) => EventColors;
 }
 
 const defaultColorList: Record<
     string,
     {
-        bg: string
-        text: string
+        bg: string;
+        text: string;
     }
 > = {
     red: {
@@ -49,14 +49,14 @@ const defaultColorList: Record<
         bg: 'bg-[#ccbbfc]',
         text: 'text-gray-900',
     },
-}
+};
 
 const CalendarView = (props: CalendarViewProps) => {
     const {
         wrapperClass,
         eventColors = () => defaultColorList,
         ...rest
-    } = props
+    } = props;
 
     return (
         <div className={classNames('calendar', wrapperClass)}>
@@ -68,8 +68,8 @@ const CalendarView = (props: CalendarViewProps) => {
                     right: 'dayGridMonth,timeGridWeek,timeGridDay prev,next',
                 }}
                 eventContent={(arg) => {
-                    const { extendedProps } = arg.event
-                    const { isEnd, isStart } = arg
+                    const { extendedProps } = arg.event;
+                    const { isEnd, isStart } = arg;
                     return (
                         <div
                             className={classNames(
@@ -101,13 +101,13 @@ const CalendarView = (props: CalendarViewProps) => {
                                 {arg.event.title}
                             </span>
                         </div>
-                    )
+                    );
                 }}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 {...rest}
             />
         </div>
-    )
-}
+    );
+};
 
-export default CalendarView
+export default CalendarView;

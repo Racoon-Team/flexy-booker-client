@@ -8,4 +8,4 @@ export const signInUserData = [
         password: '123Qwe',
         accountUserName: 'admin',
     },
-]
+];

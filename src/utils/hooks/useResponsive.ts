@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const twBreakpoint: Record<'2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs', string> = {
     '2xl': '1536',
@@ -7,11 +7,11 @@ const twBreakpoint: Record<'2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs', string> = {
     md: '768',
     sm: '640',
     xs: '576',
-}
+};
 
 const breakpointInt = (str = '') => {
-    return parseInt(str.replace('px', ''))
-}
+    return parseInt(str.replace('px', ''));
+};
 
 const breakpoint = {
     '2xl': breakpointInt(twBreakpoint['2xl']), // 1536
@@ -20,11 +20,11 @@ const breakpoint = {
     md: breakpointInt(twBreakpoint.md), // 768
     sm: breakpointInt(twBreakpoint.sm), // 640
     xs: breakpointInt(twBreakpoint.xs), // 576
-}
+};
 
 const useResponsive = () => {
     const getAllSizes = (comparator = 'smaller') => {
-        const currentWindowWidth = window.innerWidth
+        const currentWindowWidth = window.innerWidth;
         return Object.fromEntries(
             Object.entries(breakpoint).map(([key, value]) => [
                 key,
@@ -32,32 +32,32 @@ const useResponsive = () => {
                     ? currentWindowWidth > value
                     : currentWindowWidth < value,
             ]),
-        )
-    }
+        );
+    };
 
     const getResponsiveState = () => {
-        const currentWindowWidth = window.innerWidth
+        const currentWindowWidth = window.innerWidth;
         return {
             windowWidth: currentWindowWidth,
             larger: getAllSizes('larger'),
             smaller: getAllSizes('smaller'),
-        }
-    }
+        };
+    };
 
-    const [responsive, setResponsive] = useState(getResponsiveState())
+    const [responsive, setResponsive] = useState(getResponsiveState());
 
     const resizeHandler = () => {
-        const responsiveState = getResponsiveState()
-        setResponsive(responsiveState)
-    }
+        const responsiveState = getResponsiveState();
+        setResponsive(responsiveState);
+    };
 
     useEffect(() => {
-        window.addEventListener('resize', resizeHandler)
-        return () => window.removeEventListener('resize', resizeHandler)
+        window.addEventListener('resize', resizeHandler);
+        return () => window.removeEventListener('resize', resizeHandler);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [responsive.windowWidth])
+    }, [responsive.windowWidth]);
 
-    return responsive
-}
+    return responsive;
+};
 
-export default useResponsive
+export default useResponsive;

@@ -1,12 +1,12 @@
-import Skeleton from '@/components/ui/Skeleton'
-import type { SkeletonProps } from '@/components/ui/Skeleton'
+import Skeleton from '@/components/ui/Skeleton';
+import type { SkeletonProps } from '@/components/ui/Skeleton';
 
 interface TextBlockSkeletonProps extends SkeletonProps {
-    rowCount?: number
-    lastChildWidth?: string | number
-    height?: string | number
-    titleWidth?: string | number
-    title?: boolean
+    rowCount?: number;
+    lastChildWidth?: string | number;
+    height?: string | number;
+    titleWidth?: string | number;
+    title?: boolean;
 }
 
 const TextBlockSkeleton = (props: TextBlockSkeletonProps) => {
@@ -16,7 +16,7 @@ const TextBlockSkeleton = (props: TextBlockSkeletonProps) => {
         rowCount = 3,
         title = true,
         titleWidth = '40%',
-    } = props
+    } = props;
 
     return (
         <div className="flex flex-col gap-4">
@@ -35,7 +35,7 @@ const TextBlockSkeleton = (props: TextBlockSkeletonProps) => {
                 ),
             )}
         </div>
-    )
-}
+    );
+};
 
-export default TextBlockSkeleton
+export default TextBlockSkeleton;

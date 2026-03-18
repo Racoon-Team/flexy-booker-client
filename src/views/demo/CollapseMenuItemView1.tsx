@@ -1,6 +1,6 @@
 /** Example purpose only */
 const CollapseMenuItemView1 = () => {
-    return <div>CollapseMenuItemView1</div>
-}
+    return <div>CollapseMenuItemView1</div>;
+};
 
-export default CollapseMenuItemView1
+export default CollapseMenuItemView1;

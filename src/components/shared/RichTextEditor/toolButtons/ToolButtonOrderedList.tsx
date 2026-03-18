@@ -1,8 +1,8 @@
-import { TbListNumbers } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbListNumbers } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonOrderedListProp = BaseToolButtonProps
+type ToolButtonOrderedListProp = BaseToolButtonProps;
 
 const ToolButtonOrderedList = ({ editor }: ToolButtonOrderedListProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonOrderedList = ({ editor }: ToolButtonOrderedListProp) => {
         >
             <TbListNumbers />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonOrderedList
+export default ToolButtonOrderedList;

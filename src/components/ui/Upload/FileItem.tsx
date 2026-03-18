@@ -1,24 +1,24 @@
-import { VscFilePdf, VscFileZip, VscFile } from 'react-icons/vsc'
-import classNames from '../utils/classNames'
-import type { CommonProps } from '../@types/common'
+import { VscFilePdf, VscFileZip, VscFile } from 'react-icons/vsc';
+import classNames from '../utils/classNames';
+import type { CommonProps } from '../@types/common';
 
-const BYTE = 1000
-const getKB = (bytes: number) => Math.round(bytes / BYTE)
+const BYTE = 1000;
+const getKB = (bytes: number) => Math.round(bytes / BYTE);
 
 const FileIcon = ({ children }: CommonProps) => {
-    return <span className="text-3xl heading-text">{children}</span>
-}
+    return <span className="text-3xl heading-text">{children}</span>;
+};
 
 export interface FileItemProps extends CommonProps {
-    file: File
+    file: File;
 }
 
 const FileItem = (props: FileItemProps) => {
-    const { file, children, className } = props
-    const { type, name, size } = file
+    const { file, children, className } = props;
+    const { type, name, size } = file;
 
     const renderThumbnail = () => {
-        const isImageFile = type.split('/')[0] === 'image'
+        const isImageFile = type.split('/')[0] === 'image';
 
         if (isImageFile) {
             return (
@@ -27,7 +27,7 @@ const FileItem = (props: FileItemProps) => {
                     src={URL.createObjectURL(file)}
                     alt={`file preview ${name}`}
                 />
-            )
+            );
         }
 
         if (type === 'application/zip') {
@@ -35,7 +35,7 @@ const FileItem = (props: FileItemProps) => {
                 <FileIcon>
                     <VscFileZip />
                 </FileIcon>
-            )
+            );
         }
 
         if (type === 'pdf') {
@@ -43,15 +43,15 @@ const FileItem = (props: FileItemProps) => {
                 <FileIcon>
                     <VscFilePdf />
                 </FileIcon>
-            )
+            );
         }
 
         return (
             <FileIcon>
                 <VscFile />
             </FileIcon>
-        )
-    }
+        );
+    };
 
     return (
         <div className={classNames('upload-file', className)}>
@@ -66,9 +66,9 @@ const FileItem = (props: FileItemProps) => {
             </div>
             {children}
         </div>
-    )
-}
+    );
+};
 
-FileItem.displayName = 'UploadFileItem'
+FileItem.displayName = 'UploadFileItem';
 
-export default FileItem
+export default FileItem;

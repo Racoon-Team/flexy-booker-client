@@ -1,8 +1,8 @@
-import { TbMinus } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbMinus } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonHorizontalRuleProp = BaseToolButtonProps
+type ToolButtonHorizontalRuleProp = BaseToolButtonProps;
 
 const ToolButtonHorizontalRule = ({ editor }: ToolButtonHorizontalRuleProp) => {
     return (
@@ -12,7 +12,7 @@ const ToolButtonHorizontalRule = ({ editor }: ToolButtonHorizontalRuleProp) => {
         >
             <TbMinus />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonHorizontalRule
+export default ToolButtonHorizontalRule;

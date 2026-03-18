@@ -1,21 +1,21 @@
-import ScrollBar from '@/components/ui/ScrollBar'
-import classNames from '@/utils/classNames'
-import { HEADER_HEIGHT, DIR_LTR, DIR_RTL } from '@/constants/theme.constant'
-import VerticalMenuContent from '@/components/template/VerticalMenuContent'
-import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from 'react-icons/hi'
-import type { NavigationTree } from '@/@types/navigation'
-import type { Direction } from '@/@types/theme'
+import ScrollBar from '@/components/ui/ScrollBar';
+import classNames from '@/utils/classNames';
+import { HEADER_HEIGHT, DIR_LTR, DIR_RTL } from '@/constants/theme.constant';
+import VerticalMenuContent from '@/components/template/VerticalMenuContent';
+import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from 'react-icons/hi';
+import type { NavigationTree } from '@/@types/navigation';
+import type { Direction } from '@/@types/theme';
 
 type StackedSideNavSecondaryProps = {
-    className?: string
-    title: string
-    menu?: NavigationTree[]
-    routeKey: string
-    onCollapse: () => void
-    direction?: Direction
-    translationSetup?: boolean
-    userAuthority: string[]
-}
+    className?: string;
+    title: string;
+    menu?: NavigationTree[];
+    routeKey: string;
+    onCollapse: () => void;
+    direction?: Direction;
+    translationSetup?: boolean;
+    userAuthority: string[];
+};
 
 const StackedSideNavSecondary = (props: StackedSideNavSecondaryProps) => {
     const {
@@ -28,11 +28,11 @@ const StackedSideNavSecondary = (props: StackedSideNavSecondaryProps) => {
         translationSetup,
         userAuthority,
         ...rest
-    } = props
+    } = props;
 
     const handleCollpase = () => {
-        onCollapse()
-    }
+        onCollapse();
+    };
 
     return (
         <div className={classNames('h-full', className)} {...rest}>
@@ -63,7 +63,7 @@ const StackedSideNavSecondary = (props: StackedSideNavSecondaryProps) => {
                 />
             </ScrollBar>
         </div>
-    )
-}
+    );
+};
 
-export default StackedSideNavSecondary
+export default StackedSideNavSecondary;

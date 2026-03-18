@@ -2,8 +2,8 @@ const FileNotFound = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -92,7 +92,7 @@ const FileNotFound = ({
                 className="fill-[#393f4f]"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default FileNotFound
+export default FileNotFound;

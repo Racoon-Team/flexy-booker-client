@@ -1,16 +1,16 @@
-import { useCallback } from 'react'
-import useDarkMode from '@/utils/hooks/useDarkMode'
-import Switcher from '@/components/ui/Switcher'
+import { useCallback } from 'react';
+import useDarkMode from '@/utils/hooks/useDarkMode';
+import Switcher from '@/components/ui/Switcher';
 
 const ModeSwitcher = () => {
-    const [isDark, setIsDark] = useDarkMode()
+    const [isDark, setIsDark] = useDarkMode();
 
     const onSwitchChange = useCallback(
         (checked: boolean) => {
-            setIsDark(checked ? 'dark' : 'light')
+            setIsDark(checked ? 'dark' : 'light');
         },
         [setIsDark],
-    )
+    );
 
     return (
         <div>
@@ -19,7 +19,7 @@ const ModeSwitcher = () => {
                 onChange={(checked) => onSwitchChange(checked)}
             />
         </div>
-    )
-}
+    );
+};
 
-export default ModeSwitcher
+export default ModeSwitcher;

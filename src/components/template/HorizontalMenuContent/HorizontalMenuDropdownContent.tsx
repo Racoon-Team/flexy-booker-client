@@ -1,30 +1,30 @@
-import { useState } from 'react'
-import Avatar from '@/components/ui/Avatar'
-import Dropdown from '@/components/ui/Dropdown'
-import HorizontalMenuNavLink from './HorizontalMenuNavLink'
-import AuthorityCheck from '@/components/shared/AuthorityCheck'
-import classNames from '@/utils/classNames'
+import { useState } from 'react';
+import Avatar from '@/components/ui/Avatar';
+import Dropdown from '@/components/ui/Dropdown';
+import HorizontalMenuNavLink from './HorizontalMenuNavLink';
+import AuthorityCheck from '@/components/shared/AuthorityCheck';
+import classNames from '@/utils/classNames';
 import {
     NAV_ITEM_TYPE_COLLAPSE,
     NAV_ITEM_TYPE_ITEM,
-} from '@/constants/navigation.constant'
-import navigationIcon from '@/configs/navigation-icon.config'
-import { TbCircle } from 'react-icons/tb'
-import type { CommonProps, TraslationFn } from '@/@types/common'
-import type { NavigationTree, HorizontalMenuMeta } from '@/@types/navigation'
-import type { ReactNode, HTMLProps } from 'react'
+} from '@/constants/navigation.constant';
+import navigationIcon from '@/configs/navigation-icon.config';
+import { TbCircle } from 'react-icons/tb';
+import type { CommonProps, TraslationFn } from '@/@types/common';
+import type { NavigationTree, HorizontalMenuMeta } from '@/@types/navigation';
+import type { ReactNode, HTMLProps } from 'react';
 
 interface LayoutProps extends CommonProps {
-    navigationTree: NavigationTree[]
-    t: TraslationFn
-    onDropdownClose: () => void
-    routeKey: string
-    routeParentKey?: string
-    userAuthority: string[]
+    navigationTree: NavigationTree[];
+    t: TraslationFn;
+    onDropdownClose: () => void;
+    routeKey: string;
+    routeParentKey?: string;
+    userAuthority: string[];
 }
 
 interface HorizontalMenuDropdownContentProps extends LayoutProps {
-    layoutMeta?: HorizontalMenuMeta
+    layoutMeta?: HorizontalMenuMeta;
 }
 
 const gridClasses = {
@@ -48,7 +48,7 @@ const gridClasses = {
         grid: 'grid-cols-5',
         width: 'w-[1150px]',
     },
-}
+};
 
 const MenuItem = ({
     children,
@@ -68,12 +68,12 @@ const MenuItem = ({
         >
             {children}
         </div>
-    )
-}
+    );
+};
 
 const MenuIcon = ({ icon }: { icon: string }) => {
     if (typeof icon !== 'string' && !icon) {
-        return <></>
+        return <></>;
     }
 
     return (
@@ -84,8 +84,8 @@ const MenuIcon = ({ icon }: { icon: string }) => {
                 </span>
             )}
         </>
-    )
-}
+    );
+};
 
 const MenuLink = ({
     path,
@@ -96,13 +96,13 @@ const MenuLink = ({
     description,
     active,
 }: {
-    path: string
-    isExternalLink?: boolean
-    onClick: () => void
-    icon: ReactNode
-    title: string
-    description: string
-    active?: boolean
+    path: string;
+    isExternalLink?: boolean;
+    onClick: () => void;
+    icon: ReactNode;
+    title: string;
+    description: string;
+    active?: boolean;
 }) => (
     <HorizontalMenuNavLink
         path={path}
@@ -130,12 +130,12 @@ const MenuLink = ({
             </div>
         </MenuItem>
     </HorizontalMenuNavLink>
-)
+);
 
 const ColumnsLayout = (
     props: LayoutProps & {
-        columns: 1 | 2 | 3 | 4 | 5
-        showColumnTitle?: boolean
+        columns: 1 | 2 | 3 | 4 | 5;
+        showColumnTitle?: boolean;
     },
 ) => {
     const {
@@ -146,7 +146,7 @@ const ColumnsLayout = (
         showColumnTitle = true,
         routeKey,
         userAuthority,
-    } = props
+    } = props;
 
     return (
         <div className="flex max-w-[1400px] w-full">
@@ -208,9 +208,9 @@ const ColumnsLayout = (
                                     ))}
                                 </div>
                             </AuthorityCheck>
-                        )
+                        );
                     }
-                    return null
+                    return null;
                 })}
             </div>
             {navigationTree.some((nav) => nav.type === NAV_ITEM_TYPE_ITEM) && (
@@ -249,15 +249,15 @@ const ColumnsLayout = (
                                         onClick={onDropdownClose}
                                     />
                                 </AuthorityCheck>
-                            )
+                            );
                         }
-                        return null
+                        return null;
                     })}
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
 const DefaultLayout = ({
     navigationTree,
@@ -267,7 +267,7 @@ const DefaultLayout = ({
     userAuthority,
 }: LayoutProps) => {
     const renderNavigation = (navTree: NavigationTree[], cascade: number) => {
-        const nextCascade = cascade + 1
+        const nextCascade = cascade + 1;
 
         return (
             <div className={classNames(cascade === 0 && 'p-3')}>
@@ -316,11 +316,11 @@ const DefaultLayout = ({
                     </AuthorityCheck>
                 ))}
             </div>
-        )
-    }
+        );
+    };
 
-    return <>{renderNavigation(navigationTree, 0)}</>
-}
+    return <>{renderNavigation(navigationTree, 0)}</>;
+};
 
 const TabLayout = ({
     navigationTree,
@@ -335,7 +335,7 @@ const TabLayout = ({
         navigationTree.some((nav) => nav.key === routeParentKey)
             ? routeParentKey
             : navigationTree[0]?.key || '',
-    )
+    );
 
     return (
         <div className="flex">
@@ -395,9 +395,9 @@ const TabLayout = ({
                                     </div>
                                 </div>
                             </AuthorityCheck>
-                        )
+                        );
                     }
-                    return null
+                    return null;
                 })}
             </div>
             {navigationTree.some(
@@ -450,13 +450,13 @@ const TabLayout = ({
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
 const HorizontalMenuDropdownContent = (
     props: HorizontalMenuDropdownContentProps,
 ) => {
-    const { style, navigationTree, layoutMeta, ...rest } = props
+    const { style, navigationTree, layoutMeta, ...rest } = props;
 
     return (
         <div
@@ -485,7 +485,7 @@ const HorizontalMenuDropdownContent = (
                 <DefaultLayout navigationTree={navigationTree} {...rest} />
             )}
         </div>
-    )
-}
+    );
+};
 
-export default HorizontalMenuDropdownContent
+export default HorizontalMenuDropdownContent;

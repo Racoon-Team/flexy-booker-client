@@ -1,45 +1,45 @@
-import { useState, useRef } from 'react'
-import useMergedRef from '../hooks/useMergeRef'
-import useDidUpdate from '../hooks/useDidUpdate'
-import { useFormItem } from '../Form/context'
-import TimeInputField from './TimeInputField'
-import AmPmInput from './AmPmInput'
-import CloseButton from '../CloseButton'
-import { Input } from '../Input'
+import { useState, useRef } from 'react';
+import useMergedRef from '../hooks/useMergeRef';
+import useDidUpdate from '../hooks/useDidUpdate';
+import { useFormItem } from '../Form/context';
+import TimeInputField from './TimeInputField';
+import AmPmInput from './AmPmInput';
+import CloseButton from '../CloseButton';
+import { Input } from '../Input';
 import {
     getTimeValues,
     getDate,
     createAmPmHandler,
     createTimeHandler,
-} from './utils'
-import { HiOutlineClock } from 'react-icons/hi'
-import type { CommonProps, TypeAttributes } from '../@types/common'
-import type { ReactNode, RefObject, Ref } from 'react'
+} from './utils';
+import { HiOutlineClock } from 'react-icons/hi';
+import type { CommonProps, TypeAttributes } from '../@types/common';
+import type { ReactNode, RefObject, Ref } from 'react';
 
-type Value = Date | null
+type Value = Date | null;
 
 export interface TimeInputProps extends CommonProps {
-    amLabel?: string
-    amPmPlaceholder?: string
-    clearable?: boolean
-    defaultValue?: Value
-    disabled?: boolean
-    format?: '12' | '24'
-    id?: string
-    invalid?: boolean
-    name?: string
-    nextRef?: RefObject<HTMLInputElement | null>
-    onChange?: (value: Value) => void
-    pmLabel?: string
-    prefix?: string | ReactNode
-    ref?: Ref<HTMLInputElement>
-    showSeconds?: boolean
-    size?: TypeAttributes.ControlSize
-    suffix?: string | ReactNode
-    timeFieldPlaceholder?: string
-    timeFieldClass?: string
-    unstyle?: boolean
-    value?: Value
+    amLabel?: string;
+    amPmPlaceholder?: string;
+    clearable?: boolean;
+    defaultValue?: Value;
+    disabled?: boolean;
+    format?: '12' | '24';
+    id?: string;
+    invalid?: boolean;
+    name?: string;
+    nextRef?: RefObject<HTMLInputElement | null>;
+    onChange?: (value: Value) => void;
+    pmLabel?: string;
+    prefix?: string | ReactNode;
+    ref?: Ref<HTMLInputElement>;
+    showSeconds?: boolean;
+    size?: TypeAttributes.ControlSize;
+    suffix?: string | ReactNode;
+    timeFieldPlaceholder?: string;
+    timeFieldClass?: string;
+    unstyle?: boolean;
+    value?: Value;
 }
 
 const TimeInput = (props: TimeInputProps) => {
@@ -67,12 +67,12 @@ const TimeInput = (props: TimeInputProps) => {
         timeFieldClass,
         value,
         ...rest
-    } = props
+    } = props;
 
-    const hoursRef = useRef<HTMLInputElement>(undefined)
-    const minutesRef = useRef<HTMLInputElement>(undefined)
-    const secondsRef = useRef<HTMLInputElement>(undefined)
-    const amPmRef = useRef<HTMLInputElement>(undefined)
+    const hoursRef = useRef<HTMLInputElement>(undefined);
+    const minutesRef = useRef<HTMLInputElement>(undefined);
+    const secondsRef = useRef<HTMLInputElement>(undefined);
+    const amPmRef = useRef<HTMLInputElement>(undefined);
     const [time, setTime] = useState(
         getTimeValues(
             value || (defaultValue as Date),
@@ -80,26 +80,26 @@ const TimeInput = (props: TimeInputProps) => {
             amLabel,
             pmLabel,
         ),
-    )
+    );
     const [_value, setValue] = useState<Value>(
         (value as Date) || (defaultValue as Date),
-    )
+    );
 
-    const formItemInvalid = useFormItem()?.invalid
-    const isTimeInputInvalid = invalid || formItemInvalid
+    const formItemInvalid = useFormItem()?.invalid;
+    const isTimeInputInvalid = invalid || formItemInvalid;
 
     useDidUpdate(() => {
-        setTime(getTimeValues(_value as Date, format, amLabel, pmLabel))
-    }, [_value, format, amLabel, pmLabel])
+        setTime(getTimeValues(_value as Date, format, amLabel, pmLabel));
+    }, [_value, format, amLabel, pmLabel]);
 
     useDidUpdate(() => {
         if (value?.getTime() !== _value?.getTime()) {
-            setValue(value as Date | null)
+            setValue(value as Date | null);
         }
-    }, [value])
+    }, [value]);
 
     const setDate = (change: Partial<typeof time>) => {
-        const timeWithChange = { ...time, ...change }
+        const timeWithChange = { ...time, ...change };
         const newDate = getDate(
             timeWithChange.hours,
             timeWithChange.minutes,
@@ -107,30 +107,30 @@ const TimeInput = (props: TimeInputProps) => {
             format,
             pmLabel,
             timeWithChange.amPm,
-        )
-        setValue(newDate)
-        typeof onChange === 'function' && onChange(newDate)
-    }
+        );
+        setValue(newDate);
+        typeof onChange === 'function' && onChange(newDate);
+    };
 
     const handleHoursChange = createTimeHandler({
         onChange: (val, carryOver) => {
             setDate({
                 hours: val,
                 minutes: carryOver ?? time.minutes,
-            })
+            });
         },
         min: format === '12' ? 1 : 0,
         max: format === '12' ? 12 : 23,
         nextRef: minutesRef as RefObject<HTMLInputElement | null>,
         nextMax: 59,
-    })
+    });
 
     const handleMinutesChange = createTimeHandler({
         onChange: (val, carryOver) => {
             setDate({
                 minutes: val,
                 seconds: carryOver ?? time.seconds,
-            })
+            });
         },
         min: 0,
         max: 59,
@@ -140,11 +140,11 @@ const TimeInput = (props: TimeInputProps) => {
               ? (amPmRef as RefObject<HTMLInputElement | null>)
               : (nextRef as RefObject<HTMLInputElement | null>),
         nextMax: showSeconds ? 59 : undefined,
-    })
+    });
 
     const handleSecondsChange = createTimeHandler({
         onChange: (val) => {
-            setDate({ seconds: val })
+            setDate({ seconds: val });
         },
         min: 0,
         max: 59,
@@ -152,26 +152,26 @@ const TimeInput = (props: TimeInputProps) => {
             format === '12'
                 ? (amPmRef as RefObject<HTMLInputElement | null>)
                 : (nextRef as RefObject<HTMLInputElement | null>),
-    })
+    });
 
     const handleAmPmChange = createAmPmHandler({
         amLabel,
         pmLabel,
         onChange: (val) => {
-            setDate({ amPm: val })
+            setDate({ amPm: val });
         },
         nextRef,
-    })
+    });
 
     const handleClear = () => {
-        setTime({ hours: '', minutes: '', seconds: '', amPm: '' })
-        setValue(null)
-        onChange?.(null)
-        hoursRef?.current?.focus()
-    }
+        setTime({ hours: '', minutes: '', seconds: '', amPm: '' });
+        setValue(null);
+        onChange?.(null);
+        hoursRef?.current?.focus();
+    };
 
     const suffixSlot =
-        clearable && _value ? <CloseButton onClick={handleClear} /> : suffix
+        clearable && _value ? <CloseButton onClick={handleClear} /> : suffix;
 
     return (
         <Input
@@ -246,7 +246,7 @@ const TimeInput = (props: TimeInputProps) => {
                 )}
             </div>
         </Input>
-    )
-}
+    );
+};
 
-export default TimeInput
+export default TimeInput;

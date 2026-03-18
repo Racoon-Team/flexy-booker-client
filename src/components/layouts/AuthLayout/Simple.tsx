@@ -1,10 +1,10 @@
-import { cloneElement } from 'react'
-import Container from '@/components/shared/Container'
-import type { ReactNode, ReactElement } from 'react'
-import type { CommonProps } from '@/@types/common'
+import { cloneElement } from 'react';
+import Container from '@/components/shared/Container';
+import type { ReactNode, ReactElement } from 'react';
+import type { CommonProps } from '@/@types/common';
 
 interface SimpleProps extends CommonProps {
-    content?: ReactNode
+    content?: ReactNode;
 }
 
 const Simple = ({ children, content, ...rest }: SimpleProps) => {
@@ -23,7 +23,7 @@ const Simple = ({ children, content, ...rest }: SimpleProps) => {
                 </div>
             </Container>
         </div>
-    )
-}
+    );
+};
 
-export default Simple
+export default Simple;

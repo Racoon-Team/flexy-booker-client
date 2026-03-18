@@ -1,15 +1,15 @@
-import Skeleton from '@/components/ui/Skeleton'
-import type { SkeletonProps } from '@/components/ui/Skeleton'
+import Skeleton from '@/components/ui/Skeleton';
+import type { SkeletonProps } from '@/components/ui/Skeleton';
 
 type MediaSkeletonProps = {
-    showAvatar?: boolean
-    avatarProps?: SkeletonProps
-    titleProps?: SkeletonProps
-    textProps?: SkeletonProps
-}
+    showAvatar?: boolean;
+    avatarProps?: SkeletonProps;
+    titleProps?: SkeletonProps;
+    textProps?: SkeletonProps;
+};
 
 const MediaSkeleton = (props: MediaSkeletonProps) => {
-    const { showAvatar = true, avatarProps, titleProps, textProps } = props
+    const { showAvatar = true, avatarProps, titleProps, textProps } = props;
 
     return (
         <div className="flex flex-auto items-center gap-2">
@@ -23,7 +23,7 @@ const MediaSkeleton = (props: MediaSkeletonProps) => {
                 <Skeleton width="20%" {...textProps} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default MediaSkeleton
+export default MediaSkeleton;

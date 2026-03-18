@@ -1,26 +1,26 @@
-import Progress from '@/components/ui/Progress'
-import { TbClock } from 'react-icons/tb'
-import dayjs from 'dayjs'
-import type { Task } from 'gantt-task-react'
+import Progress from '@/components/ui/Progress';
+import { TbClock } from 'react-icons/tb';
+import dayjs from 'dayjs';
+import type { Task } from 'gantt-task-react';
 
 type TooltipContentProps = {
-    task: Task
-}
+    task: Task;
+};
 
 const progressBarStatusClass = (progression: number) => {
     if (progression > 70) {
-        return 'bg-success'
+        return 'bg-success';
     }
 
     if (progression < 40) {
-        return 'bg-error'
+        return 'bg-error';
     }
 
-    return
-}
+    return;
+};
 
 const TooltipContent = (props: TooltipContentProps) => {
-    const { task } = props
+    const { task } = props;
 
     return (
         <div className="p-3 rounded-lg shadow-sm bg-gray-800 dark:bg-black  flex justify-between items-center min-w-[200px] z-10">
@@ -52,7 +52,7 @@ const TooltipContent = (props: TooltipContentProps) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default TooltipContent
+export default TooltipContent;

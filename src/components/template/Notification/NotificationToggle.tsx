@@ -1,13 +1,13 @@
-import classNames from '@/utils/classNames'
-import Badge from '@/components/ui/Badge'
-import { PiBellDuotone } from 'react-icons/pi'
+import classNames from '@/utils/classNames';
+import Badge from '@/components/ui/Badge';
+import { PiBellDuotone } from 'react-icons/pi';
 
 const NotificationToggle = ({
     className,
     dot,
 }: {
-    className?: string
-    dot: boolean
+    className?: string;
+    dot: boolean;
 }) => {
     return (
         <div className={classNames('text-2xl', className)}>
@@ -19,7 +19,7 @@ const NotificationToggle = ({
                 <PiBellDuotone />
             )}
         </div>
-    )
-}
+    );
+};
 
-export default NotificationToggle
+export default NotificationToggle;

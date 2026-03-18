@@ -1,25 +1,25 @@
-import { useEffect } from 'react'
-import i18n from 'i18next'
-import { useLocaleStore } from '@/store/localeStore'
+import { useLocaleStore } from '@/store/localeStore';
+import i18n from 'i18next';
+import { useEffect } from 'react';
 
 const useLocale = () => {
-    const currentLang = useLocaleStore((state) => state.currentLang)
+    const currentLang = useLocaleStore((state) => state.currentLang);
 
     useEffect(() => {
         if (i18n.language !== currentLang) {
             const formattedLang = currentLang.replace(
                 /-([a-z])/g,
                 function (g) {
-                    return g[1].toUpperCase()
+                    return g[1].toUpperCase();
                 },
-            )
-            i18n.changeLanguage(formattedLang)
+            );
+            i18n.changeLanguage(formattedLang);
         }
-    }, [currentLang])
+    }, [currentLang]);
 
     return {
         locale: currentLang,
-    }
-}
+    };
+};
 
-export default useLocale
+export default useLocale;

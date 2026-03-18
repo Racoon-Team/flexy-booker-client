@@ -1,13 +1,13 @@
-import classNames from '@/utils/classNames'
-import type { ComponentProps } from 'react'
+import classNames from '@/utils/classNames';
+import type { ComponentProps } from 'react';
 
 export type ToolButtonProps = ComponentProps<'button'> & {
-    active?: boolean
-    title?: string
-}
+    active?: boolean;
+    title?: string;
+};
 
 const ToolButton = (props: ToolButtonProps) => {
-    const { className, disabled, active, ...rest } = props
+    const { className, disabled, active, ...rest } = props;
 
     return (
         <button
@@ -21,7 +21,7 @@ const ToolButton = (props: ToolButtonProps) => {
             disabled={disabled}
             {...rest}
         />
-    )
-}
+    );
+};
 
-export default ToolButton
+export default ToolButton;

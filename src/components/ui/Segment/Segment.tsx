@@ -1,18 +1,18 @@
-import { useMemo } from 'react'
-import classNames from '../utils/classNames'
-import { SegmentContextProvider } from './context'
-import useControllableState from '../hooks/useControllableState'
-import type { CommonProps, TypeAttributes } from '../@types/common'
-import type { SegmentValue } from './context'
-import type { Ref } from 'react'
+import { useMemo } from 'react';
+import classNames from '../utils/classNames';
+import { SegmentContextProvider } from './context';
+import useControllableState from '../hooks/useControllableState';
+import type { CommonProps, TypeAttributes } from '../@types/common';
+import type { SegmentValue } from './context';
+import type { Ref } from 'react';
 
 export interface SegmentProps extends CommonProps {
-    defaultValue?: SegmentValue
-    onChange?: (segmentValue: SegmentValue) => void
-    ref?: Ref<HTMLDivElement>
-    selectionType?: 'single' | 'multiple'
-    size?: TypeAttributes.Size
-    value?: SegmentValue
+    defaultValue?: SegmentValue;
+    onChange?: (segmentValue: SegmentValue) => void;
+    ref?: Ref<HTMLDivElement>;
+    selectionType?: 'single' | 'multiple';
+    size?: TypeAttributes.Size;
+    value?: SegmentValue;
 }
 
 const Segment = (props: SegmentProps) => {
@@ -28,49 +28,49 @@ const Segment = (props: SegmentProps) => {
         size,
         value: valueProp,
         ...rest
-    } = props
+    } = props;
 
     const [value, setValue] = useControllableState({
         prop: valueProp,
         defaultProp: defaultValue,
         onChange: onChange,
-    })
+    });
 
     const onActive = (itemValue: SegmentValue) => {
-        setValue(itemValue)
-    }
+        setValue(itemValue);
+    };
 
     const onDeactivate = (itemValue: SegmentValue) => {
         if (selectionType === 'single') {
-            setValue('')
+            setValue('');
         }
 
         if (selectionType === 'multiple') {
             setValue((prevValue = []) => {
                 return (prevValue as string[]).filter(
                     (value) => value !== itemValue,
-                )
-            })
+                );
+            });
         }
-    }
+    };
 
     const segmentValue = useMemo(() => {
         if (selectionType === 'single') {
             if (value && typeof value === 'string') {
-                return [value]
+                return [value];
             }
 
             if (value && Array.isArray(value)) {
-                return value
+                return value;
             }
 
-            return []
+            return [];
         }
 
         if (selectionType === 'multiple') {
-            return value ? value : []
+            return value ? value : [];
         }
-    }, [selectionType, value])
+    }, [selectionType, value]);
 
     return (
         <SegmentContextProvider
@@ -94,7 +94,7 @@ const Segment = (props: SegmentProps) => {
                 {children}
             </div>
         </SegmentContextProvider>
-    )
-}
+    );
+};
 
-export default Segment
+export default Segment;

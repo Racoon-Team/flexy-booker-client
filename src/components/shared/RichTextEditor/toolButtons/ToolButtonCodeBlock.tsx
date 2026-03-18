@@ -1,8 +1,8 @@
-import { TbCodeDots } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbCodeDots } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonCodeBlockProp = BaseToolButtonProps
+type ToolButtonCodeBlockProp = BaseToolButtonProps;
 
 const ToolButtonCodeBlock = ({ editor }: ToolButtonCodeBlockProp) => {
     return (
@@ -13,7 +13,7 @@ const ToolButtonCodeBlock = ({ editor }: ToolButtonCodeBlockProp) => {
         >
             <TbCodeDots />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonCodeBlock
+export default ToolButtonCodeBlock;

@@ -1,18 +1,18 @@
-import classNames from 'classnames'
-import { HiCheckCircle } from 'react-icons/hi'
-import type { CommonProps } from '@/@types/common'
-import type { Ref } from 'react'
+import classNames from 'classnames';
+import { HiCheckCircle } from 'react-icons/hi';
+import type { CommonProps } from '@/@types/common';
+import type { Ref } from 'react';
 
 interface PresetSegmentItemOptionProps extends CommonProps {
-    active: boolean
-    customCheck?: string | React.ReactNode
-    defaultGutter?: boolean
-    disabled?: boolean
-    hoverable?: boolean
+    active: boolean;
+    customCheck?: string | React.ReactNode;
+    defaultGutter?: boolean;
+    disabled?: boolean;
+    hoverable?: boolean;
     onSegmentItemClick?: (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void
-    ref?: Ref<HTMLDivElement>
+    ) => void;
+    ref?: Ref<HTMLDivElement>;
 }
 
 const PresetSegmentItemOption = (props: PresetSegmentItemOptionProps) => {
@@ -26,7 +26,7 @@ const PresetSegmentItemOption = (props: PresetSegmentItemOptionProps) => {
         hoverable,
         onSegmentItemClick,
         ref,
-    } = props
+    } = props;
 
     return (
         <div
@@ -56,7 +56,7 @@ const PresetSegmentItemOption = (props: PresetSegmentItemOptionProps) => {
             )}
             {active && customCheck}
         </div>
-    )
-}
+    );
+};
 
-export default PresetSegmentItemOption
+export default PresetSegmentItemOption;

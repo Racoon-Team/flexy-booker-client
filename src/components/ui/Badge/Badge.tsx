@@ -1,13 +1,13 @@
-import classNames from '../utils/classNames'
-import type { CommonProps } from '../@types/common'
-import type { CSSProperties, Ref } from 'react'
+import classNames from '../utils/classNames';
+import type { CommonProps } from '../@types/common';
+import type { CSSProperties, Ref } from 'react';
 
 export interface BadgeProps extends CommonProps {
-    badgeStyle?: CSSProperties
-    content?: string | number
-    innerClass?: string
-    maxCount?: number
-    ref?: Ref<HTMLSpanElement>
+    badgeStyle?: CSSProperties;
+    content?: string | number;
+    innerClass?: string;
+    maxCount?: number;
+    ref?: Ref<HTMLSpanElement>;
 }
 
 const Badge = (props: BadgeProps) => {
@@ -20,12 +20,12 @@ const Badge = (props: BadgeProps) => {
         maxCount = 99,
         ref,
         ...rest
-    } = props
+    } = props;
 
     const badgeBaseClass =
-        'rounded-full text-xs font-semibold bg-error text-white'
+        'rounded-full text-xs font-semibold bg-error text-white';
 
-    const dot = typeof content !== 'number' && typeof content !== 'string'
+    const dot = typeof content !== 'number' && typeof content !== 'string';
 
     const badgeClass = classNames(
         dot
@@ -33,7 +33,7 @@ const Badge = (props: BadgeProps) => {
             : 'badge px-2 py-1 min-w-6',
         badgeBaseClass,
         innerClass,
-    )
+    );
 
     const renderBadge = () => {
         if (children) {
@@ -56,7 +56,7 @@ const Badge = (props: BadgeProps) => {
                     </span>
                     {children}
                 </span>
-            )
+            );
         }
         return (
             <span
@@ -67,12 +67,12 @@ const Badge = (props: BadgeProps) => {
             >
                 {content}
             </span>
-        )
-    }
+        );
+    };
 
-    return renderBadge()
-}
+    return renderBadge();
+};
 
-Badge.displayName = 'Badge'
+Badge.displayName = 'Badge';
 
-export default Badge
+export default Badge;

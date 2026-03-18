@@ -2,8 +2,8 @@ const CollapsibleSideSvg = ({
     height = 100,
     width = 100,
 }: {
-    height?: number | string
-    width?: number | string
+    height?: number | string;
+    width?: number | string;
 }) => {
     return (
         <svg
@@ -102,7 +102,7 @@ const CollapsibleSideSvg = ({
                 rx={20}
             />
         </svg>
-    )
-}
+    );
+};
 
-export default CollapsibleSideSvg
+export default CollapsibleSideSvg;

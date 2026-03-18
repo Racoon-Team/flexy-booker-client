@@ -1,37 +1,37 @@
-import { useRef, useState } from 'react'
-import classNames from 'classnames'
-import useControllableState from '../hooks/useControllableState'
-import { useConfig } from '../ConfigProvider'
-import DateTable from './tables/DateTable'
-import MonthTable from './tables/MonthTable'
-import YearTable from './tables/YearTable'
-import type { CommonProps } from '../@types/common'
-import type { MonthBaseProps } from './tables/components/Month'
-import type { DayKeydownPayload } from './tables/components/types'
-import type { ReactNode, KeyboardEvent, MouseEvent, Ref } from 'react'
+import { useRef, useState } from 'react';
+import classNames from 'classnames';
+import useControllableState from '../hooks/useControllableState';
+import { useConfig } from '../ConfigProvider';
+import DateTable from './tables/DateTable';
+import MonthTable from './tables/MonthTable';
+import YearTable from './tables/YearTable';
+import type { CommonProps } from '../@types/common';
+import type { MonthBaseProps } from './tables/components/Month';
+import type { DayKeydownPayload } from './tables/components/types';
+import type { ReactNode, KeyboardEvent, MouseEvent, Ref } from 'react';
 
 export interface CalendarSharedProps extends Omit<MonthBaseProps, 'value'> {
-    dateViewCount?: number
-    defaultView?: 'date' | 'month' | 'year'
-    defaultMonth?: Date
-    enableHeaderLabel?: boolean
-    locale?: string
-    labelFormat?: { month: string; year: string }
-    monthLabelFormat?: string
-    onDayMouseEnter?: (date: Date, event: MouseEvent) => void
-    onMonthChange?: (month: Date) => void
-    paginateBy?: number
-    lockView?: boolean
-    range?: [Date, Date]
-    renderDay?: (date: Date) => ReactNode
-    weekdayLabelFormat?: string
-    yearLabelFormat?: string
+    dateViewCount?: number;
+    defaultView?: 'date' | 'month' | 'year';
+    defaultMonth?: Date;
+    enableHeaderLabel?: boolean;
+    locale?: string;
+    labelFormat?: { month: string; year: string };
+    monthLabelFormat?: string;
+    onDayMouseEnter?: (date: Date, event: MouseEvent) => void;
+    onMonthChange?: (month: Date) => void;
+    paginateBy?: number;
+    lockView?: boolean;
+    range?: [Date, Date];
+    renderDay?: (date: Date) => ReactNode;
+    weekdayLabelFormat?: string;
+    yearLabelFormat?: string;
 }
 
 interface CalendarBaseProps extends CommonProps, CalendarSharedProps {
-    ref?: Ref<HTMLDivElement>
-    onChange?: (value: Date | Date[]) => void
-    value?: Date | Date[] | null
+    ref?: Ref<HTMLDivElement>;
+    onChange?: (value: Date | Date[]) => void;
+    value?: Date | Date[] | null;
 }
 
 const CalendarBase = (props: CalendarBaseProps) => {
@@ -75,33 +75,33 @@ const CalendarBase = (props: CalendarBaseProps) => {
         weekendDays,
         yearLabelFormat = 'YYYY',
         ...rest
-    } = props
+    } = props;
 
-    const { locale: themeLocale } = useConfig()
+    const { locale: themeLocale } = useConfig();
 
-    const [selectionState, setSelectionState] = useState(defaultView)
+    const [selectionState, setSelectionState] = useState(defaultView);
 
-    const finalLocale = locale || themeLocale
+    const finalLocale = locale || themeLocale;
 
     const daysRefs = useRef<HTMLButtonElement[][][]>(
         Array(dateViewCount)
             .fill(0)
             .map(() => []),
-    )
+    );
 
     const [_month, setMonth] = useControllableState({
         prop: month,
         defaultProp: defaultMonth !== undefined ? defaultMonth : new Date(),
         onChange: onMonthChange,
-    })
+    });
 
-    const [yearSelection, setYearSelection] = useState(_month?.getFullYear())
-    const [monthSelection, setMonthSelection] = useState(_month?.getMonth())
+    const [yearSelection, setYearSelection] = useState(_month?.getFullYear());
+    const [monthSelection, setMonthSelection] = useState(_month?.getMonth());
 
-    const minYear = minDate instanceof Date ? minDate.getFullYear() : 100
-    const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : 10000
+    const minYear = minDate instanceof Date ? minDate.getFullYear() : 100;
+    const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : 10000;
 
-    const daysPerRow = 6
+    const daysPerRow = 6;
 
     const focusOnNextFocusableDay = (
         direction: 'down' | 'up' | 'left' | 'right',
@@ -109,28 +109,28 @@ const CalendarBase = (props: CalendarBaseProps) => {
         payload: DayKeydownPayload,
         n = 1,
     ) => {
-        const changeRow = ['down', 'up'].includes(direction)
+        const changeRow = ['down', 'up'].includes(direction);
 
         const rowIndex = changeRow
             ? payload.rowIndex + (direction === 'down' ? n : -n)
-            : payload.rowIndex
+            : payload.rowIndex;
 
         const cellIndex = changeRow
             ? payload.cellIndex
-            : payload.cellIndex + (direction === 'right' ? n : -n)
+            : payload.cellIndex + (direction === 'right' ? n : -n);
 
-        const dayToFocus = daysRefs.current[monthIndex][rowIndex][cellIndex]
+        const dayToFocus = daysRefs.current[monthIndex][rowIndex][cellIndex];
 
         if (!dayToFocus) {
-            return
+            return;
         }
 
         if (dayToFocus.disabled) {
-            focusOnNextFocusableDay(direction, monthIndex, payload, n + 1)
+            focusOnNextFocusableDay(direction, monthIndex, payload, n + 1);
         } else {
-            dayToFocus.focus()
+            dayToFocus.focus();
         }
-    }
+    };
 
     const handleDayKeyDown = (
         monthIndex: number,
@@ -139,57 +139,57 @@ const CalendarBase = (props: CalendarBaseProps) => {
     ) => {
         switch (event.key) {
             case 'ArrowDown': {
-                event.preventDefault()
+                event.preventDefault();
 
                 const hasRowBelow =
-                    payload.rowIndex + 1 < daysRefs.current[monthIndex].length
+                    payload.rowIndex + 1 < daysRefs.current[monthIndex].length;
                 if (hasRowBelow) {
-                    focusOnNextFocusableDay('down', monthIndex, payload)
+                    focusOnNextFocusableDay('down', monthIndex, payload);
                 }
-                break
+                break;
             }
             case 'ArrowUp': {
-                event.preventDefault()
+                event.preventDefault();
 
-                const hasRowAbove = payload.rowIndex > 0
+                const hasRowAbove = payload.rowIndex > 0;
                 if (hasRowAbove) {
-                    focusOnNextFocusableDay('up', monthIndex, payload)
+                    focusOnNextFocusableDay('up', monthIndex, payload);
                 }
-                break
+                break;
             }
             case 'ArrowRight': {
-                event.preventDefault()
+                event.preventDefault();
 
-                const isNotLastCell = payload.cellIndex !== daysPerRow
+                const isNotLastCell = payload.cellIndex !== daysPerRow;
                 if (isNotLastCell) {
-                    focusOnNextFocusableDay('right', monthIndex, payload)
+                    focusOnNextFocusableDay('right', monthIndex, payload);
                 } else if (monthIndex + 1 < dateViewCount) {
                     if (daysRefs.current[monthIndex + 1][payload.rowIndex]) {
                         daysRefs.current[monthIndex + 1][
                             payload.rowIndex
-                        ][0]?.focus()
+                        ][0]?.focus();
                     }
                 }
-                break
+                break;
             }
             case 'ArrowLeft': {
-                event.preventDefault()
+                event.preventDefault();
 
                 if (payload.cellIndex !== 0) {
-                    focusOnNextFocusableDay('left', monthIndex, payload)
+                    focusOnNextFocusableDay('left', monthIndex, payload);
                 } else if (monthIndex > 0) {
                     if (daysRefs.current[monthIndex - 1][payload.rowIndex]) {
                         daysRefs.current[monthIndex - 1][payload.rowIndex][
                             daysPerRow
-                        ].focus()
+                        ].focus();
                     }
                 }
-                break
+                break;
             }
             default:
-                break
+                break;
         }
-    }
+    };
 
     return (
         <div
@@ -206,13 +206,13 @@ const CalendarBase = (props: CalendarBaseProps) => {
                     preventFocus={preventFocus}
                     yearLabelFormat={yearLabelFormat}
                     onChange={(year) => {
-                        setMonth(new Date(year, monthSelection as number, 1))
+                        setMonth(new Date(year, monthSelection as number, 1));
                         if (lockView) {
-                            onChange?.(new Date(year, 0, 1))
-                            return
+                            onChange?.(new Date(year, 0, 1));
+                            return;
                         }
-                        setYearSelection(year)
-                        setSelectionState('date')
+                        setYearSelection(year);
+                        setSelectionState('date');
                     }}
                 />
             )}
@@ -236,13 +236,19 @@ const CalendarBase = (props: CalendarBaseProps) => {
                     onChange={(monthValue) => {
                         setMonth(
                             new Date(yearSelection as number, monthValue, 1),
-                        )
+                        );
                         if (lockView) {
-                            onChange?.(new Date(yearSelection as number, monthValue, 1))
-                            return
+                            onChange?.(
+                                new Date(
+                                    yearSelection as number,
+                                    monthValue,
+                                    1,
+                                ),
+                            );
+                            return;
                         }
-                        setMonthSelection(monthValue)
-                        setSelectionState('date')
+                        setMonthSelection(monthValue);
+                        setSelectionState('date');
                     }}
                 />
             )}
@@ -282,7 +288,7 @@ const CalendarBase = (props: CalendarBaseProps) => {
                 />
             )}
         </div>
-    )
-}
+    );
+};
 
-export default CalendarBase
+export default CalendarBase;

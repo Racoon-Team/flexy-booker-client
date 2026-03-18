@@ -1,36 +1,36 @@
-import classNames from 'classnames'
-import { HiChevronLeft } from 'react-icons/hi'
-import type { CommonProps } from '../@types/common'
-import type { MouseEvent } from 'react'
+import classNames from 'classnames';
+import { HiChevronLeft } from 'react-icons/hi';
+import type { CommonProps } from '../@types/common';
+import type { MouseEvent } from 'react';
 
 interface PrevProps extends CommonProps {
-    currentPage: number
+    currentPage: number;
     pagerClass: {
-        default: string
-        inactive: string
-        active: string
-        disabled: string
-    }
-    onPrev: (e: MouseEvent<HTMLSpanElement>) => void
+        default: string;
+        inactive: string;
+        active: string;
+        disabled: string;
+    };
+    onPrev: (e: MouseEvent<HTMLSpanElement>) => void;
 }
 
 const Prev = (props: PrevProps) => {
-    const { currentPage, pagerClass, onPrev } = props
+    const { currentPage, pagerClass, onPrev } = props;
 
-    const disabled = currentPage <= 1
+    const disabled = currentPage <= 1;
 
     const onPrevClick = (e: MouseEvent<HTMLSpanElement>) => {
         if (disabled) {
-            return
+            return;
         }
-        onPrev(e)
-    }
+        onPrev(e);
+    };
 
     const pagerPrevClass = classNames(
         pagerClass.default,
         'pagination-pager-prev',
         disabled ? pagerClass.disabled : pagerClass.inactive,
-    )
+    );
 
     return (
         <span
@@ -40,7 +40,7 @@ const Prev = (props: PrevProps) => {
         >
             <HiChevronLeft />
         </span>
-    )
-}
+    );
+};
 
-export default Prev
+export default Prev;

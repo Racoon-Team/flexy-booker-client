@@ -1,47 +1,47 @@
-import { useState, useRef, useEffect } from 'react'
-import classNames from '@/utils/classNames'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
-import Button from '@/components/ui/Button'
-import Dialog from '@/components/ui/Dialog'
-import ScrollBar from '@/components/ui/ScrollBar'
-import navigationIcon from '@/configs/navigation-icon.config'
-import { apiGetSearchResult } from '@/services/CommonService'
-import debounce from 'lodash/debounce'
-import { HiOutlineSearch, HiChevronRight } from 'react-icons/hi'
-import { PiMagnifyingGlassDuotone } from 'react-icons/pi'
-import { Link } from 'react-router'
-import Highlighter from 'react-highlight-words'
+import { useState, useRef, useEffect } from 'react';
+import classNames from '@/utils/classNames';
+import withHeaderItem from '@/utils/hoc/withHeaderItem';
+import Button from '@/components/ui/Button';
+import Dialog from '@/components/ui/Dialog';
+import ScrollBar from '@/components/ui/ScrollBar';
+import navigationIcon from '@/configs/navigation-icon.config';
+import { apiGetSearchResult } from '@/services/CommonService';
+import debounce from 'lodash/debounce';
+import { HiOutlineSearch, HiChevronRight } from 'react-icons/hi';
+import { PiMagnifyingGlassDuotone } from 'react-icons/pi';
+import { Link } from 'react-router';
+import Highlighter from 'react-highlight-words';
 
 type SearchData = {
-    key: string
-    path: string
-    title: string
-    icon: string
-    category: string
-    categoryTitle: string
-}
+    key: string;
+    path: string;
+    title: string;
+    icon: string;
+    category: string;
+    categoryTitle: string;
+};
 
 type SearchResult = {
-    title: string
-    data: SearchData[]
-}
+    title: string;
+    data: SearchData[];
+};
 
 const recommendedSearch: SearchResult[] = [
     {
         title: 'Recommended',
         data: [],
     },
-]
+];
 
 const ListItem = (props: {
-    icon: string
-    label: string
-    url: string
-    isLast?: boolean
-    keyWord: string
-    onNavigate: () => void
+    icon: string;
+    label: string;
+    url: string;
+    isLast?: boolean;
+    keyWord: string;
+    onNavigate: () => void;
 }) => {
-    const { icon, label, url = '', keyWord, onNavigate } = props
+    const { icon, label, url = '', keyWord, onNavigate } = props;
 
     return (
         <Link to={url} onClick={onNavigate}>
@@ -74,69 +74,69 @@ const ListItem = (props: {
                 <HiChevronRight className="text-lg" />
             </div>
         </Link>
-    )
-}
+    );
+};
 
 const _Search = ({ className }: { className?: string }) => {
-    const [searchDialogOpen, setSearchDialogOpen] = useState(false)
+    const [searchDialogOpen, setSearchDialogOpen] = useState(false);
     const [searchResult, setSearchResult] =
-        useState<SearchResult[]>(recommendedSearch)
-    const [noResult, setNoResult] = useState(false)
+        useState<SearchResult[]>(recommendedSearch);
+    const [noResult, setNoResult] = useState(false);
 
-    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleReset = () => {
-        setNoResult(false)
-        setSearchResult(recommendedSearch)
-    }
+        setNoResult(false);
+        setSearchResult(recommendedSearch);
+    };
 
     const handleSearchOpen = () => {
-        setSearchDialogOpen(true)
-    }
+        setSearchDialogOpen(true);
+    };
 
     const handleSearchClose = () => {
-        setSearchDialogOpen(false)
-        handleReset()
-    }
+        setSearchDialogOpen(false);
+        handleReset();
+    };
 
-    const debounceFn = debounce(handleDebounceFn, 200)
+    const debounceFn = debounce(handleDebounceFn, 200);
 
     async function handleDebounceFn(query: string) {
         if (!query) {
-            setSearchResult(recommendedSearch)
-            return
+            setSearchResult(recommendedSearch);
+            return;
         }
 
         if (noResult) {
-            setNoResult(false)
+            setNoResult(false);
         }
 
-        const respond = await apiGetSearchResult<SearchResult[]>({ query })
+        const respond = await apiGetSearchResult<SearchResult[]>({ query });
 
         if (respond) {
             if (respond.length === 0) {
-                setNoResult(true)
+                setNoResult(true);
             }
-            setSearchResult(respond)
+            setSearchResult(respond);
         }
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        debounceFn(e.target.value)
-    }
+        debounceFn(e.target.value);
+    };
 
     useEffect(() => {
         if (searchDialogOpen) {
-            const timeout = setTimeout(() => inputRef.current?.focus(), 100)
+            const timeout = setTimeout(() => inputRef.current?.focus(), 100);
             return () => {
-                clearTimeout(timeout)
-            }
+                clearTimeout(timeout);
+            };
         }
-    }, [searchDialogOpen])
+    }, [searchDialogOpen]);
 
     const handleNavigate = () => {
-        handleSearchClose()
-    }
+        handleSearchClose();
+    };
 
     return (
         <>
@@ -201,9 +201,9 @@ const _Search = ({ className }: { className?: string }) => {
                 </div>
             </Dialog>
         </>
-    )
-}
+    );
+};
 
-const Search = withHeaderItem(_Search)
+const Search = withHeaderItem(_Search);
 
-export default Search
+export default Search;

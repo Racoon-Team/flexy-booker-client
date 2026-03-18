@@ -1,20 +1,21 @@
-import { useEffect, useRef, useState } from 'react'
-import dayjs from 'dayjs'
-import useControllableState from '../hooks/useControllableState'
-import useMergedRef from '../hooks/useMergeRef'
-import capitalize from '../utils/capitalize'
-import TimeInput from '../TimeInput/TimeInput'
-import Calendar from './Calendar'
-import BasePicker from './BasePicker'
-import Button from '../Button/Button'
-import { useConfig } from '../ConfigProvider'
-import type { CommonProps } from '../@types/common'
-import type { CalendarSharedProps } from './CalendarBase'
-import type { BasePickerSharedProps } from './BasePicker'
-import type { FocusEvent, ChangeEvent, Ref } from 'react'
+import { useEffect, useRef, useState } from 'react';
+import dayjs from 'dayjs';
+import useControllableState from '../hooks/useControllableState';
+import useMergedRef from '../hooks/useMergeRef';
+import capitalize from '../utils/capitalize';
+import TimeInput from '../TimeInput/TimeInput';
+import Calendar from './Calendar';
+import BasePicker from './BasePicker';
+import Button from '../Button/Button';
+import { useConfig } from '../ConfigProvider';
+import type { CommonProps } from '../@types/common';
+import type { CalendarSharedProps } from './CalendarBase';
+import type { BasePickerSharedProps } from './BasePicker';
+import type { FocusEvent, ChangeEvent, Ref } from 'react';
 
 export interface DateTimepickerProps
-    extends CommonProps,
+    extends
+        CommonProps,
         Omit<
             CalendarSharedProps,
             | 'onMonthChange'
@@ -25,19 +26,19 @@ export interface DateTimepickerProps
             | 'month'
         >,
         BasePickerSharedProps {
-    closePickerOnChange?: boolean
-    defaultOpen?: boolean
-    defaultValue?: Date | null
-    value?: Date | null
-    inputFormat?: string
-    openPickerOnClear?: boolean
-    onChange?: (value: Date | null) => void
-    ref?: Ref<HTMLInputElement>
-    amPm?: boolean
-    okButtonContent?: boolean
+    closePickerOnChange?: boolean;
+    defaultOpen?: boolean;
+    defaultValue?: Date | null;
+    value?: Date | null;
+    inputFormat?: string;
+    openPickerOnClear?: boolean;
+    onChange?: (value: Date | null) => void;
+    ref?: Ref<HTMLInputElement>;
+    amPm?: boolean;
+    okButtonContent?: boolean;
 }
 
-const DEFAULT_INPUT_FORMAT = 'DD-MMM-YYYY hh:mm a'
+const DEFAULT_INPUT_FORMAT = 'DD-MMM-YYYY hh:mm a';
 
 const DateTimepicker = (props: DateTimepickerProps) => {
     const {
@@ -86,114 +87,114 @@ const DateTimepicker = (props: DateTimepickerProps) => {
         weekendDays,
         yearLabelFormat,
         ...rest
-    } = props
+    } = props;
 
-    const { locale: themeLocale } = useConfig()
+    const { locale: themeLocale } = useConfig();
 
-    const finalLocale = locale || themeLocale
+    const finalLocale = locale || themeLocale;
 
-    const dateFormat = inputFormat || DEFAULT_INPUT_FORMAT
+    const dateFormat = inputFormat || DEFAULT_INPUT_FORMAT;
 
-    const [dropdownOpened, setDropdownOpened] = useState(defaultOpen)
+    const [dropdownOpened, setDropdownOpened] = useState(defaultOpen);
 
-    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, setLastValidValue] = useState(defaultValue ?? null)
+    const [_, setLastValidValue] = useState(defaultValue ?? null);
     const [_value, setValue] = useControllableState({
         prop: value,
         defaultProp: defaultValue,
         onChange,
-    })
+    });
 
     const [calendarMonth, setCalendarMonth] = useState(
         _value || defaultMonth || new Date(),
-    )
+    );
 
-    const [focused, setFocused] = useState(false)
+    const [focused, setFocused] = useState(false);
     const [inputState, setInputState] = useState(
         _value instanceof Date
             ? capitalize(dayjs(_value).locale(finalLocale).format(dateFormat))
             : '',
-    )
+    );
 
     const closeDropdown = () => {
-        setDropdownOpened(false)
-        onDropdownClose?.()
-    }
+        setDropdownOpened(false);
+        onDropdownClose?.();
+    };
 
     const openDropdown = () => {
-        setDropdownOpened(true)
-        onDropdownOpen?.()
-    }
+        setDropdownOpened(true);
+        onDropdownOpen?.();
+    };
 
     useEffect(() => {
         if (value === null && !focused) {
-            setInputState('')
+            setInputState('');
         }
 
         if (value instanceof Date && !focused) {
-            setInputState(dayjs(value).locale(finalLocale).format(dateFormat))
+            setInputState(dayjs(value).locale(finalLocale).format(dateFormat));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value, focused])
+    }, [value, focused]);
 
     const handleValueChange = (date: Date) => {
         if (_value) {
-            date.setHours(_value.getHours())
-            date.setMinutes(_value.getMinutes())
+            date.setHours(_value.getHours());
+            date.setMinutes(_value.getMinutes());
         } else {
-            const now = new Date(Date.now())
-            date.setHours(now.getHours())
-            date.setMinutes(now.getMinutes())
+            const now = new Date(Date.now());
+            date.setHours(now.getHours());
+            date.setMinutes(now.getMinutes());
         }
-        setValue(date)
+        setValue(date);
         if (!value && !closePickerOnChange) {
-            setInputState(dayjs(date).locale(finalLocale).format(dateFormat))
+            setInputState(dayjs(date).locale(finalLocale).format(dateFormat));
         }
         closePickerOnChange &&
             setInputState(
                 capitalize(dayjs(date).locale(finalLocale).format(dateFormat)),
-            )
-        closePickerOnChange && closeDropdown()
-        window.setTimeout(() => inputRef.current?.focus(), 0)
-    }
+            );
+        closePickerOnChange && closeDropdown();
+        window.setTimeout(() => inputRef.current?.focus(), 0);
+    };
 
     const handleClear = () => {
-        setValue(null)
-        setLastValidValue(null)
-        setInputState('')
-        openPickerOnClear && openDropdown()
-        inputRef.current?.focus()
-        onChange?.(null)
-    }
+        setValue(null);
+        setLastValidValue(null);
+        setInputState('');
+        openPickerOnClear && openDropdown();
+        inputRef.current?.focus();
+        onChange?.(null);
+    };
 
     const parseDate = (date: string) =>
-        dayjs(date, dateFormat, finalLocale).toDate()
+        dayjs(date, dateFormat, finalLocale).toDate();
 
     const handleInputBlur = (event: FocusEvent<HTMLInputElement, Element>) => {
-        typeof onBlur === 'function' && onBlur(event)
-        setFocused(false)
-    }
+        typeof onBlur === 'function' && onBlur(event);
+        setFocused(false);
+    };
 
     const handleInputFocus = (event: FocusEvent<HTMLInputElement, Element>) => {
-        typeof onFocus === 'function' && onFocus(event)
-        setFocused(true)
-    }
+        typeof onFocus === 'function' && onFocus(event);
+        setFocused(true);
+    };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        openDropdown()
+        openDropdown();
 
-        const date = parseDate(event.target.value)
+        const date = parseDate(event.target.value);
         if (dayjs(date).isValid()) {
-            setValue(date)
-            setLastValidValue(date)
-            closePickerOnChange && setInputState(event.target.value)
-            setCalendarMonth(date)
+            setValue(date);
+            setLastValidValue(date);
+            closePickerOnChange && setInputState(event.target.value);
+            setCalendarMonth(date);
         } else {
-            closePickerOnChange && setInputState(event.target.value)
+            closePickerOnChange && setInputState(event.target.value);
         }
-    }
+    };
 
     const handleTimeChange = (time: Date | null) => {
         if (_value instanceof Date && time instanceof Date) {
@@ -205,8 +206,8 @@ const DateTimepicker = (props: DateTimepickerProps) => {
                 time.getMinutes(),
                 time.getSeconds(),
                 time.getMilliseconds(),
-            )
-            setValue(newDateTime)
+            );
+            setValue(newDateTime);
 
             if (!value && !closePickerOnChange) {
                 setInputState(
@@ -215,7 +216,7 @@ const DateTimepicker = (props: DateTimepickerProps) => {
                             .locale(finalLocale)
                             .format(dateFormat),
                     ),
-                )
+                );
             }
 
             closePickerOnChange &&
@@ -225,19 +226,19 @@ const DateTimepicker = (props: DateTimepickerProps) => {
                             .locale(finalLocale)
                             .format(dateFormat),
                     ),
-                )
+                );
         }
-        closePickerOnChange && closeDropdown()
-    }
+        closePickerOnChange && closeDropdown();
+    };
 
     const handleOk = () => {
         setInputState(
             capitalize(dayjs(_value).locale(finalLocale).format(dateFormat)),
-        )
-        closeDropdown()
-        window.setTimeout(() => inputRef.current?.focus(), 0)
-        onChange?.(_value as Date | null)
-    }
+        );
+        closeDropdown();
+        window.setTimeout(() => inputRef.current?.focus(), 0);
+        onChange?.(_value as Date | null);
+    };
 
     return (
         <BasePicker
@@ -307,9 +308,9 @@ const DateTimepicker = (props: DateTimepickerProps) => {
                 </Button>
             </div>
         </BasePicker>
-    )
-}
+    );
+};
 
-DateTimepicker.displayName = 'DateTimepicker'
+DateTimepicker.displayName = 'DateTimepicker';
 
-export default DateTimepicker
+export default DateTimepicker;

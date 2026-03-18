@@ -4,12 +4,12 @@ import {
     useContext,
     useEffect,
     useImperativeHandle,
-} from 'react'
-import DropdownToggle from './DropdownToggle'
-import DropdownSubItem from './DropdownSubItem'
-import MenuContext from './context/menuContext'
-import classNames from '../utils/classNames'
-import { useConfig } from '../ConfigProvider'
+} from 'react';
+import DropdownToggle from './DropdownToggle';
+import DropdownSubItem from './DropdownSubItem';
+import MenuContext from './context/menuContext';
+import classNames from '../utils/classNames';
+import { useConfig } from '../ConfigProvider';
 import {
     autoUpdate,
     flip,
@@ -33,30 +33,28 @@ import {
     useRole,
     useTypeahead,
     useTransitionStyles,
-} from '@floating-ui/react'
-import type { CommonProps } from '../@types/common'
-import type { DropdownToggleSharedProps } from './DropdownToggle'
-import type { DropdownSubItemSharedProps } from './DropdownSubItem'
-import type { Placement } from '@floating-ui/react'
-import type { HTMLProps, FocusEvent, MouseEvent, ReactNode, Ref } from 'react'
+} from '@floating-ui/react';
+import type { CommonProps } from '../@types/common';
+import type { DropdownToggleSharedProps } from './DropdownToggle';
+import type { DropdownSubItemSharedProps } from './DropdownSubItem';
+import type { Placement } from '@floating-ui/react';
+import type { HTMLProps, FocusEvent, MouseEvent, ReactNode, Ref } from 'react';
 
 export interface DropdownMenuProps
-    extends CommonProps,
-        DropdownToggleSharedProps,
-        DropdownSubItemSharedProps {
-    activeKey?: string
-    title?: string | ReactNode
-    menuClass?: string
-    trigger?: 'click' | 'hover' | 'context'
-    placement?: Placement
-    onOpen?: (bool: boolean) => void
-    ref?: Ref<HTMLElement | DropdownMenuRef>
+    extends CommonProps, DropdownToggleSharedProps, DropdownSubItemSharedProps {
+    activeKey?: string;
+    title?: string | ReactNode;
+    menuClass?: string;
+    trigger?: 'click' | 'hover' | 'context';
+    placement?: Placement;
+    onOpen?: (bool: boolean) => void;
+    ref?: Ref<HTMLElement | DropdownMenuRef>;
 }
 
 export type DropdownMenuRef = {
-    handleDropdownOpen: () => void
-    handleDropdownClose: () => void
-}
+    handleDropdownOpen: () => void;
+    handleDropdownClose: () => void;
+};
 
 const DropdownMenu = (props: DropdownMenuProps & HTMLProps<HTMLElement>) => {
     const {
@@ -71,54 +69,54 @@ const DropdownMenu = (props: DropdownMenuProps & HTMLProps<HTMLElement>) => {
         onOpen,
         ref,
         ...rest
-    } = props
+    } = props;
 
-    const [isOpen, setIsOpen] = useState(false)
-    const [hasFocusInside, setHasFocusInside] = useState(false)
-    const [activeIndex, setActiveIndex] = useState<number | null>(null)
+    const [isOpen, setIsOpen] = useState(false);
+    const [hasFocusInside, setHasFocusInside] = useState(false);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-    const elementsRef = useRef<Array<HTMLElement | null>>([])
-    const labelsRef = useRef<Array<string | null>>([])
+    const elementsRef = useRef<Array<HTMLElement | null>>([]);
+    const labelsRef = useRef<Array<string | null>>([]);
 
-    const { direction } = useConfig()
+    const { direction } = useConfig();
 
-    const parent = useContext(MenuContext)
+    const parent = useContext(MenuContext);
 
-    const tree = useFloatingTree()
-    const nodeId = useFloatingNodeId()
-    const parentId = useFloatingParentNodeId()
-    const item = useListItem()
+    const tree = useFloatingTree();
+    const nodeId = useFloatingNodeId();
+    const parentId = useFloatingParentNodeId();
+    const item = useListItem();
 
-    const isNested = parentId != null
+    const isNested = parentId != null;
 
     const handleOpen = (open: boolean) => {
         if (disabled) {
-            return
+            return;
         }
-        setIsOpen(open)
-        onOpen?.(open)
-    }
+        setIsOpen(open);
+        onOpen?.(open);
+    };
 
     const getDefaultPlacement = () => {
-        return direction === 'ltr' ? 'bottom-start' : 'bottom-end'
-    }
+        return direction === 'ltr' ? 'bottom-start' : 'bottom-end';
+    };
 
     const getNestedDefaultPlacement = () => {
-        return direction === 'ltr' ? 'right-start' : 'left-start'
-    }
+        return direction === 'ltr' ? 'right-start' : 'left-start';
+    };
 
     const { floatingStyles, refs, context } = useFloating<HTMLElement>({
         nodeId,
         open: isOpen,
         onOpenChange: (open) => {
-            handleOpen(open)
+            handleOpen(open);
         },
         placement:
             placement ||
             (isNested ? getNestedDefaultPlacement() : getDefaultPlacement()),
         middleware: [flip(), shift()],
         whileElementsMounted: autoUpdate,
-    })
+    });
 
     const { isMounted, styles } = useTransitionStyles(context, {
         common: ({ side }) => ({
@@ -142,35 +140,35 @@ const DropdownMenu = (props: DropdownMenuProps & HTMLProps<HTMLElement>) => {
             opacity: 0,
             transform: 'translateY(-5%)',
         },
-    })
+    });
 
     const hover = useHover(context, {
         enabled: isNested || trigger === 'hover',
         delay: { open: 75 },
         handleClose: safePolygon({ blockPointerEvents: true }),
-    })
+    });
 
     const click = useClick(context, {
         event: 'mousedown',
         toggle: !isNested,
         ignoreMouse: isNested,
-    })
+    });
 
-    const role = useRole(context, { role: 'menu' })
+    const role = useRole(context, { role: 'menu' });
 
-    const dismiss = useDismiss(context, { bubbles: true })
+    const dismiss = useDismiss(context, { bubbles: true });
 
     const listNavigation = useListNavigation(context, {
         listRef: elementsRef,
         activeIndex,
         nested: isNested,
         onNavigate: setActiveIndex,
-    })
+    });
     const typeahead = useTypeahead(context, {
         listRef: labelsRef,
         onMatch: isOpen ? setActiveIndex : undefined,
         activeIndex,
-    })
+    });
 
     const { getReferenceProps, getFloatingProps, getItemProps } =
         useInteractions([
@@ -180,74 +178,74 @@ const DropdownMenu = (props: DropdownMenuProps & HTMLProps<HTMLElement>) => {
             listNavigation,
             typeahead,
             ...(trigger === 'click' ? [click] : []),
-        ])
+        ]);
 
     useEffect(() => {
-        if (!tree) return
+        if (!tree) return;
 
         function handleTreeClick() {
-            setIsOpen(false)
-            onOpen?.(false)
+            setIsOpen(false);
+            onOpen?.(false);
         }
 
         function onSubMenuOpen(event: { nodeId: string; parentId: string }) {
             if (event.nodeId !== nodeId && event.parentId === parentId) {
-                setIsOpen(false)
-                onOpen?.(false)
+                setIsOpen(false);
+                onOpen?.(false);
             }
         }
 
-        tree.events.on('click', handleTreeClick)
-        tree.events.on('menuopen', onSubMenuOpen)
+        tree.events.on('click', handleTreeClick);
+        tree.events.on('menuopen', onSubMenuOpen);
 
         return () => {
-            tree.events.off('click', handleTreeClick)
-            tree.events.off('menuopen', onSubMenuOpen)
-        }
+            tree.events.off('click', handleTreeClick);
+            tree.events.off('menuopen', onSubMenuOpen);
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [tree, nodeId, parentId])
+    }, [tree, nodeId, parentId]);
 
     useEffect(() => {
         if (isOpen && tree) {
-            tree.events.emit('menuopen', { parentId, nodeId })
+            tree.events.emit('menuopen', { parentId, nodeId });
         }
-    }, [tree, isOpen, nodeId, parentId])
+    }, [tree, isOpen, nodeId, parentId]);
 
-    const toggleRef = useMergeRefs([refs.setReference, item.ref, ref])
+    const toggleRef = useMergeRefs([refs.setReference, item.ref, ref]);
 
     useImperativeHandle(ref, () => {
         return {
             handleDropdownOpen: () => {
-                setIsOpen(true)
-                onOpen?.(true)
+                setIsOpen(true);
+                onOpen?.(true);
             },
             handleDropdownClose: () => {
-                setIsOpen(false)
-                onOpen?.(false)
+                setIsOpen(false);
+                onOpen?.(false);
             },
-        }
-    }, [onOpen])
+        };
+    }, [onOpen]);
 
     const toggleProps = {
         ...getReferenceProps(
             parent.getItemProps({
                 ...rest,
                 onFocus(event: FocusEvent<HTMLElement>) {
-                    rest.onFocus?.(event)
-                    setHasFocusInside(false)
-                    parent.setHasFocusInside(true)
+                    rest.onFocus?.(event);
+                    setHasFocusInside(false);
+                    parent.setHasFocusInside(true);
                 },
             }),
         ),
         ...(trigger === 'context'
             ? {
                   onContextMenu: (e: MouseEvent<HTMLElement>) => {
-                      e.preventDefault()
-                      handleOpen(true)
+                      e.preventDefault();
+                      handleOpen(true);
                   },
               }
             : {}),
-    }
+    };
 
     return (
         <FloatingNode id={nodeId}>
@@ -320,7 +318,7 @@ const DropdownMenu = (props: DropdownMenuProps & HTMLProps<HTMLElement>) => {
                 </FloatingList>
             </MenuContext.Provider>
         </FloatingNode>
-    )
-}
+    );
+};
 
-export default DropdownMenu
+export default DropdownMenu;

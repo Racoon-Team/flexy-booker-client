@@ -1,22 +1,22 @@
-import { useContext, useCallback, useState } from 'react'
-import classNames from 'classnames'
-import CheckboxGroupContext from './context'
-import type { CommonProps } from '../@types/common'
-import type { CheckboxValue } from './context'
-import type { ChangeEvent, Ref } from 'react'
+import { useContext, useCallback, useState } from 'react';
+import classNames from 'classnames';
+import CheckboxGroupContext from './context';
+import type { CommonProps } from '../@types/common';
+import type { CheckboxValue } from './context';
+import type { ChangeEvent, Ref } from 'react';
 
 export interface CheckboxProps extends CommonProps {
-    checked?: boolean
-    checkboxClass?: string
-    defaultChecked?: boolean
-    disabled?: boolean
-    indeterminate?: boolean
-    labelRef?: Ref<HTMLLabelElement>
-    name?: string
-    onChange?: (values: boolean, e: ChangeEvent<HTMLInputElement>) => void
-    readOnly?: boolean
-    ref?: Ref<HTMLInputElement>
-    value?: CheckboxValue
+    checked?: boolean;
+    checkboxClass?: string;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    indeterminate?: boolean;
+    labelRef?: Ref<HTMLLabelElement>;
+    name?: string;
+    onChange?: (values: boolean, e: ChangeEvent<HTMLInputElement>) => void;
+    readOnly?: boolean;
+    ref?: Ref<HTMLInputElement>;
+    value?: CheckboxValue;
 }
 
 const Checkbox = (props: CheckboxProps) => {
@@ -25,7 +25,7 @@ const Checkbox = (props: CheckboxProps) => {
         value: groupValue,
         onChange: onGroupChange,
         checkboxClass: checkboxClassContext,
-    } = useContext(CheckboxGroupContext)
+    } = useContext(CheckboxGroupContext);
 
     const {
         checked: controlledChecked,
@@ -42,57 +42,57 @@ const Checkbox = (props: CheckboxProps) => {
         labelRef,
         ref,
         ...rest
-    } = props
+    } = props;
 
     const isChecked = useCallback(() => {
         if (typeof groupValue !== 'undefined' && typeof value !== 'undefined') {
-            return groupValue.some((i) => i === value)
+            return groupValue.some((i) => i === value);
         }
-        return controlledChecked || defaultChecked
-    }, [controlledChecked, groupValue, value, defaultChecked])
+        return controlledChecked || defaultChecked;
+    }, [controlledChecked, groupValue, value, defaultChecked]);
 
-    const [checkboxChecked, setCheckboxChecked] = useState(isChecked())
+    const [checkboxChecked, setCheckboxChecked] = useState(isChecked());
 
     const getControlProps = () => {
-        const checkedValue = checkboxChecked
+        const checkedValue = checkboxChecked;
 
-        let groupChecked = { checked: checkedValue }
+        let groupChecked = { checked: checkedValue };
         const singleChecked: {
-            defaultChecked?: boolean
-            checked?: boolean
-        } = {}
+            defaultChecked?: boolean;
+            checked?: boolean;
+        } = {};
 
         if (typeof controlledChecked !== 'undefined') {
-            singleChecked.checked = controlledChecked
+            singleChecked.checked = controlledChecked;
         }
 
         if (typeof groupValue !== 'undefined') {
-            groupChecked = { checked: groupValue.includes(value as never) }
+            groupChecked = { checked: groupValue.includes(value as never) };
         }
 
         if (defaultChecked) {
-            singleChecked.defaultChecked = defaultChecked
+            singleChecked.defaultChecked = defaultChecked;
         }
-        return typeof groupValue !== 'undefined' ? groupChecked : singleChecked
-    }
+        return typeof groupValue !== 'undefined' ? groupChecked : singleChecked;
+    };
 
-    const controlProps = getControlProps()
+    const controlProps = getControlProps();
 
     const onCheckboxChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
-            let nextChecked = !checkboxChecked
+            let nextChecked = !checkboxChecked;
 
             if (typeof groupValue !== 'undefined') {
-                nextChecked = !groupValue.includes(value as never)
+                nextChecked = !groupValue.includes(value as never);
             }
 
             if (disabled || readOnly) {
-                return
+                return;
             }
 
-            setCheckboxChecked(nextChecked)
-            onChange?.(nextChecked, e)
-            onGroupChange?.(value as CheckboxValue, nextChecked, e)
+            setCheckboxChecked(nextChecked);
+            onChange?.(nextChecked, e);
+            onGroupChange?.(value as CheckboxValue, nextChecked, e);
         },
         [
             checkboxChecked,
@@ -104,21 +104,21 @@ const Checkbox = (props: CheckboxProps) => {
             onGroupChange,
             groupValue,
         ],
-    )
+    );
 
     const checkboxColor =
-        checkboxClass || checkboxClassContext || `text-primary`
+        checkboxClass || checkboxClassContext || `text-primary`;
 
-    const checkboxDefaultClass = `checkbox peer ${checkboxColor}`
-    const checkboxColorClass = disabled && 'disabled'
-    const labelDefaultClass = `checkbox-label`
-    const labelDisabledClass = disabled && 'disabled'
+    const checkboxDefaultClass = `checkbox peer ${checkboxColor}`;
+    const checkboxColorClass = disabled && 'disabled';
+    const labelDefaultClass = `checkbox-label`;
+    const labelDisabledClass = disabled && 'disabled';
 
     const labelClass = classNames(
         labelDefaultClass,
         labelDisabledClass,
         className,
-    )
+    );
 
     return (
         <label ref={labelRef} className={labelClass}>
@@ -165,7 +165,7 @@ const Checkbox = (props: CheckboxProps) => {
                 </span>
             ) : null}
         </label>
-    )
-}
+    );
+};
 
-export default Checkbox
+export default Checkbox;

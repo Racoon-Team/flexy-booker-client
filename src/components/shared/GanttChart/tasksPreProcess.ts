@@ -1,10 +1,10 @@
-import dayjs from 'dayjs'
-import type { ExtendedTask } from './GanttChart'
+import dayjs from 'dayjs';
+import type { ExtendedTask } from './GanttChart';
 
 function hexToRgb(hex: string): string | null {
-    hex = hex.replace(/^#/, '')
+    hex = hex.replace(/^#/, '');
 
-    let bigint: number
+    let bigint: number;
     if (hex.length === 3) {
         bigint = parseInt(
             hex.charAt(0) +
@@ -14,49 +14,49 @@ function hexToRgb(hex: string): string | null {
                 hex.charAt(2) +
                 hex.charAt(2),
             16,
-        )
+        );
     } else if (hex.length === 6) {
-        bigint = parseInt(hex, 16)
+        bigint = parseInt(hex, 16);
     } else {
-        return null
+        return null;
     }
 
-    const r = (bigint >> 16) & 255
-    const g = (bigint >> 8) & 255
-    const b = bigint & 255
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
 
-    return `rgb(${r}, ${g}, ${b})`
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 function isHexOrRgb(color: string): 'hex' | 'rgb' | 'invalid' {
-    const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
-    const rgbRegex = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/
+    const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+    const rgbRegex = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/;
 
     if (hexRegex.test(color)) {
-        return 'hex'
+        return 'hex';
     } else if (rgbRegex.test(color)) {
-        return 'rgb'
+        return 'rgb';
     } else {
-        return 'invalid'
+        return 'invalid';
     }
 }
 
 function applyOpacityToRgb(color: string, opacity: number): string | null {
-    const rgbRegex = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/
-    const match = color.match(rgbRegex)
+    const rgbRegex = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/;
+    const match = color.match(rgbRegex);
 
     if (match) {
-        const r = parseInt(match[1], 10)
-        const g = parseInt(match[2], 10)
-        const b = parseInt(match[3], 10)
+        const r = parseInt(match[1], 10);
+        const g = parseInt(match[2], 10);
+        const b = parseInt(match[3], 10);
 
         if (opacity < 0 || opacity > 1) {
-            return null // Invalid opacity value
+            return null; // Invalid opacity value
         }
 
-        return `rgba(${r}, ${g}, ${b}, ${opacity})`
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
     } else {
-        return null // Invalid RGB color
+        return null; // Invalid RGB color
     }
 }
 
@@ -65,19 +65,19 @@ export default function tasksPreProcess(
     colorsMap: Record<string, string>,
 ) {
     const coloredTask = tasks.map((task) => {
-        task.start = dayjs(task.start).toDate()
-        task.end = dayjs(task.end).toDate()
+        task.start = dayjs(task.start).toDate();
+        task.end = dayjs(task.end).toDate();
 
         if (task.barVariant && colorsMap[task.barVariant]) {
-            const inputColor = colorsMap[task.barVariant]
-            let color = ''
+            const inputColor = colorsMap[task.barVariant];
+            let color = '';
 
             if (isHexOrRgb(inputColor) === 'invalid') {
-                return task
+                return task;
             }
 
             if (isHexOrRgb(inputColor) === 'hex') {
-                color = hexToRgb(inputColor) as string
+                color = hexToRgb(inputColor) as string;
             }
 
             if (task.type === 'task') {
@@ -89,14 +89,14 @@ export default function tasksPreProcess(
                         color,
                         0.5,
                     ) as string,
-                }
+                };
             }
 
             if (task.type === 'milestone') {
                 task.styles = {
                     backgroundColor: color,
                     backgroundSelectedColor: color,
-                }
+                };
             }
 
             if (task.type === 'project') {
@@ -111,12 +111,12 @@ export default function tasksPreProcess(
                         0.3,
                     ) as string,
                     backgroundSelectedColor: color,
-                }
+                };
             }
         }
 
-        return task
-    })
+        return task;
+    });
 
-    return coloredTask
+    return coloredTask;
 }

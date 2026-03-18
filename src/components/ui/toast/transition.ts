@@ -1,35 +1,35 @@
-import { NotificationPlacement } from '../@types/placement'
+import { NotificationPlacement } from '../@types/placement';
 
 type GetPlacementTransitionParams = {
-    offsetX: string | number
-    offsetY: string | number
-    placement: NotificationPlacement
-    transitionType: 'scale' | 'fade'
-}
+    offsetX: string | number;
+    offsetY: string | number;
+    placement: NotificationPlacement;
+    transitionType: 'scale' | 'fade';
+};
 
 type Motion = {
-    opacity: number
-    transform?: string
-}
+    opacity: number;
+    transform?: string;
+};
 
 type MotionProps = {
-    initial: Motion
-    animate: Motion
-    exit: Motion
-}
+    initial: Motion;
+    animate: Motion;
+    exit: Motion;
+};
 
 type MotionDefault = {
-    top?: string | number
-    left?: string | number
-    right?: string | number
-    bottom?: string | number
-    transform?: string
-}
+    top?: string | number;
+    left?: string | number;
+    right?: string | number;
+    bottom?: string | number;
+    transform?: string;
+};
 
 type MotionTransition = {
-    default: MotionDefault
-    variants: MotionProps
-}
+    default: MotionDefault;
+    variants: MotionProps;
+};
 
 export const getPlacementTransition = ({
     offsetX,
@@ -38,11 +38,11 @@ export const getPlacementTransition = ({
     transitionType,
 }: GetPlacementTransitionParams) => {
     if (transitionType === 'fade') {
-        return fadeTransition(offsetX, offsetY)[placement]
+        return fadeTransition(offsetX, offsetY)[placement];
     }
 
-    return scaleTransition(offsetX, offsetY)[placement]
-}
+    return scaleTransition(offsetX, offsetY)[placement];
+};
 
 const scaleMotionProps = {
     initial: {
@@ -57,7 +57,7 @@ const scaleMotionProps = {
         opacity: 0,
         transform: 'scale(0.75)',
     },
-}
+};
 
 const fadeMotionProps = {
     initial: {
@@ -69,7 +69,7 @@ const fadeMotionProps = {
     exit: {
         opacity: 0,
     },
-}
+};
 
 const scaleTransition = (
     offsetX: number | string,
@@ -132,8 +132,8 @@ const scaleTransition = (
                 ...scaleMotionProps,
             },
         },
-    }
-}
+    };
+};
 
 const fadeTransition = (
     offsetX: number | string,
@@ -196,5 +196,5 @@ const fadeTransition = (
                 ...fadeMotionProps,
             },
         },
-    }
-}
+    };
+};

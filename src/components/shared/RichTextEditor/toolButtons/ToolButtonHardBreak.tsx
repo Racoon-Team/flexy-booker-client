@@ -1,8 +1,8 @@
-import { TbSpacingVertical } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbSpacingVertical } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonHardBreakProp = BaseToolButtonProps
+type ToolButtonHardBreakProp = BaseToolButtonProps;
 
 const ToolButtonHardBreak = ({ editor }: ToolButtonHardBreakProp) => {
     return (
@@ -12,7 +12,7 @@ const ToolButtonHardBreak = ({ editor }: ToolButtonHardBreakProp) => {
         >
             <TbSpacingVertical />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonHardBreak
+export default ToolButtonHardBreak;

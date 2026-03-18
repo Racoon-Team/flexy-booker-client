@@ -1,18 +1,18 @@
-import Skeleton from '@/components/ui/Skeleton'
-import Table from '@/components/ui/Table'
-import type { SkeletonProps } from '@/components/ui/Skeleton'
+import Skeleton from '@/components/ui/Skeleton';
+import Table from '@/components/ui/Table';
+import type { SkeletonProps } from '@/components/ui/Skeleton';
 
 type TableRowSkeletonProps = {
-    columns?: number
-    rows?: number
-    avatarInColumns?: number[]
-    avatarProps?: SkeletonProps
-}
+    columns?: number;
+    rows?: number;
+    avatarInColumns?: number[];
+    avatarProps?: SkeletonProps;
+};
 
-const { Tr, Td, TBody } = Table
+const { Tr, Td, TBody } = Table;
 
 const TableRowSkeleton = (props: TableRowSkeletonProps) => {
-    const { columns = 1, rows = 10, avatarInColumns = [], avatarProps } = props
+    const { columns = 1, rows = 10, avatarInColumns = [], avatarProps } = props;
 
     return (
         <TBody>
@@ -38,7 +38,7 @@ const TableRowSkeleton = (props: TableRowSkeletonProps) => {
                 </Tr>
             ))}
         </TBody>
-    )
-}
+    );
+};
 
-export default TableRowSkeleton
+export default TableRowSkeleton;

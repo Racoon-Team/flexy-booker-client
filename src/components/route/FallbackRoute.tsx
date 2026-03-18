@@ -1,16 +1,22 @@
-import appConfig from '@/configs/app.config'
-import { useAuth } from '@/auth'
-import { Navigate } from 'react-router'
+import appConfig from '@/configs/app.config';
+import { useAuth } from '@/auth';
+import { Navigate } from 'react-router';
 
-const { authenticatedEntryPath, unAuthenticatedEntryPath } = appConfig
+const { authenticatedEntryPath, unAuthenticatedEntryPath } = appConfig;
 
 const FallbackRoute = () => {
-
-    const { authenticated } = useAuth()
+    const { authenticated } = useAuth();
 
     return (
-        <Navigate replace to={ authenticated ? authenticatedEntryPath : unAuthenticatedEntryPath } />
-    )
-}
+        <Navigate
+            replace
+            to={
+                authenticated
+                    ? authenticatedEntryPath
+                    : unAuthenticatedEntryPath
+            }
+        />
+    );
+};
 
-export default FallbackRoute
+export default FallbackRoute;

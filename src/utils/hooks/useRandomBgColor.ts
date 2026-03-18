@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback } from 'react';
 
 const whiteListTwColor = [
     'bg-indigo-200',
@@ -13,25 +13,25 @@ const whiteListTwColor = [
     'bg-amber-200',
     'bg-violet-200',
     'bg-purple-200',
-]
+];
 
 function useRandomBgColor(): (name: string) => string {
     const hashName = (name: string) => {
-        let hash = 0
+        let hash = 0;
         for (let i = 0; i < name.length; i++) {
-            const charCode = name.charCodeAt(i)
-            hash += charCode
+            const charCode = name.charCodeAt(i);
+            hash += charCode;
         }
-        return hash
-    }
+        return hash;
+    };
 
     const generateBgColor = useCallback((name: string) => {
-        const hash = hashName(name)
-        const index = hash % whiteListTwColor.length
-        return whiteListTwColor[index]
-    }, [])
+        const hash = hashName(name);
+        const index = hash % whiteListTwColor.length;
+        return whiteListTwColor[index];
+    }, []);
 
-    return generateBgColor
+    return generateBgColor;
 }
 
-export default useRandomBgColor
+export default useRandomBgColor;

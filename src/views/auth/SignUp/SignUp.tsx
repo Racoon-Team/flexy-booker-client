@@ -1,22 +1,22 @@
-import Logo from '@/components/template/Logo'
-import Alert from '@/components/ui/Alert'
-import SignUpForm from './components/SignUpForm'
-import ActionLink from '@/components/shared/ActionLink'
-import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import { useThemeStore } from '@/store/themeStore'
+import Logo from '@/components/template/Logo';
+import Alert from '@/components/ui/Alert';
+import SignUpForm from './components/SignUpForm';
+import ActionLink from '@/components/shared/ActionLink';
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage';
+import { useThemeStore } from '@/store/themeStore';
 
 type SignUpProps = {
-    disableSubmit?: boolean
-    signInUrl?: string
-}
+    disableSubmit?: boolean;
+    signInUrl?: string;
+};
 
 export const SignUpBase = ({
     signInUrl = '/sign-in',
     disableSubmit,
 }: SignUpProps) => {
-    const [message, setMessage] = useTimeOutMessage()
+    const [message, setMessage] = useTimeOutMessage();
 
-    const mode = useThemeStore((state) => state.mode)
+    const mode = useThemeStore((state) => state.mode);
 
     return (
         <>
@@ -53,11 +53,11 @@ export const SignUpBase = ({
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 const SignUp = () => {
-    return <SignUpBase />
-}
+    return <SignUpBase />;
+};
 
-export default SignUp
+export default SignUp;

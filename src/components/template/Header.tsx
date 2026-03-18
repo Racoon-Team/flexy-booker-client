@@ -1,14 +1,14 @@
-import classNames from '@/utils/classNames'
-import { HEADER_HEIGHT } from '@/constants/theme.constant'
-import type { ReactNode } from 'react'
-import type { CommonProps } from '@/@types/common'
+import classNames from '@/utils/classNames';
+import { HEADER_HEIGHT } from '@/constants/theme.constant';
+import type { ReactNode } from 'react';
+import type { CommonProps } from '@/@types/common';
 
 interface HeaderProps extends CommonProps {
-    headerStart?: ReactNode
-    headerEnd?: ReactNode
-    headerMiddle?: ReactNode
-    container?: boolean
-    wrapperClass?: string
+    headerStart?: ReactNode;
+    headerEnd?: ReactNode;
+    headerMiddle?: ReactNode;
+    container?: boolean;
+    wrapperClass?: string;
 }
 
 const Header = (props: HeaderProps) => {
@@ -19,7 +19,7 @@ const Header = (props: HeaderProps) => {
         className,
         container,
         wrapperClass,
-    } = props
+    } = props;
 
     return (
         <header className={classNames('header', className)}>
@@ -44,7 +44,7 @@ const Header = (props: HeaderProps) => {
                 </div>
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;

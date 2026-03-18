@@ -1,20 +1,20 @@
-import { useRef, useState, useEffect } from 'react'
-import Thumb from './Thumb'
-import Track from './Track'
-import { useConfig } from '../ConfigProvider'
-import useControllableState from '../hooks/useControllableState'
-import getChangeValue from './utils/getChangeValue'
-import getFloatingValue from './utils/getFloatingValue'
-import getPosition from './utils/getPosition'
-import getPrecision from './utils/getPrecision'
-import getClosestNumber from './utils/getClosestNumber'
-import useMove from './utils/useMove'
+import { useRef, useState, useEffect } from 'react';
+import Thumb from './Thumb';
+import Track from './Track';
+import { useConfig } from '../ConfigProvider';
+import useControllableState from '../hooks/useControllableState';
+import getChangeValue from './utils/getChangeValue';
+import getFloatingValue from './utils/getFloatingValue';
+import getPosition from './utils/getPosition';
+import getPrecision from './utils/getPrecision';
+import getClosestNumber from './utils/getClosestNumber';
+import useMove from './utils/useMove';
 import {
     getFirstMarkValue,
     getLastMarkValue,
     getNextMarkValue,
     getPreviousMarkValue,
-} from './utils/getStepMarkValue'
+} from './utils/getStepMarkValue';
 import type {
     Ref,
     ComponentPropsWithoutRef,
@@ -22,49 +22,49 @@ import type {
     MouseEvent,
     TouchEvent,
     KeyboardEvent,
-} from 'react'
+} from 'react';
 
-export type RangeSliderValue = [number, number]
+export type RangeSliderValue = [number, number];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getClientPosition(event: any) {
     if ('TouchEvent' in window && event instanceof window.TouchEvent) {
-        const touch = event.touches[0]
-        return touch.clientX
+        const touch = event.touches[0];
+        return touch.clientX;
     }
 
-    return event.clientX
+    return event.clientX;
 }
 
 export type RangeSliderProps = {
     classNames?: {
-        thumb?: [string, string]
-        bar?: string
-        mark?: string
-        track?: string
-    }
-    alwaysShowTooltip?: boolean
-    defaultValue?: RangeSliderValue
-    disabled?: boolean
-    inputProps?: ComponentPropsWithoutRef<'input'>
-    marks?: { value: number; tooltip?: ReactNode }[]
-    max?: number
-    maxRange?: number
-    min?: number
-    minRange?: number
-    name?: string
-    precision?: number
-    onChange?: (value: RangeSliderValue) => void
-    onDraggingStop?: (value: RangeSliderValue) => void
-    ref?: Ref<HTMLDivElement>
-    showTooltipOnHover?: boolean
-    step?: number
-    stepOnMarks?: boolean
-    thumbArialLabelStart?: string
-    thumbAriaLabelEnd?: string
-    tooltip?: ReactNode | ((value: number) => ReactNode)
-    value?: RangeSliderValue
-}
+        thumb?: [string, string];
+        bar?: string;
+        mark?: string;
+        track?: string;
+    };
+    alwaysShowTooltip?: boolean;
+    defaultValue?: RangeSliderValue;
+    disabled?: boolean;
+    inputProps?: ComponentPropsWithoutRef<'input'>;
+    marks?: { value: number; tooltip?: ReactNode }[];
+    max?: number;
+    maxRange?: number;
+    min?: number;
+    minRange?: number;
+    name?: string;
+    precision?: number;
+    onChange?: (value: RangeSliderValue) => void;
+    onDraggingStop?: (value: RangeSliderValue) => void;
+    ref?: Ref<HTMLDivElement>;
+    showTooltipOnHover?: boolean;
+    step?: number;
+    stepOnMarks?: boolean;
+    thumbArialLabelStart?: string;
+    thumbAriaLabelEnd?: string;
+    tooltip?: ReactNode | ((value: number) => ReactNode);
+    value?: RangeSliderValue;
+};
 
 const RangeSlider = (props: RangeSliderProps) => {
     const {
@@ -91,44 +91,44 @@ const RangeSlider = (props: RangeSliderProps) => {
         stepOnMarks,
         ref = null,
         ...rest
-    } = props
+    } = props;
 
-    const { direction } = useConfig()
-    const [focused, setFocused] = useState(-1)
-    const [hovered, setHovered] = useState(false)
+    const { direction } = useConfig();
+    const [focused, setFocused] = useState(-1);
+    const [hovered, setHovered] = useState(false);
 
     const [controlableValue, setValue] = useControllableState({
         prop: value,
         defaultProp: defaultValue,
         onChange,
-    })
+    });
 
-    const _value = controlableValue as RangeSliderValue
+    const _value = controlableValue as RangeSliderValue;
 
-    const valueRef = useRef(_value as RangeSliderValue)
-    const thumbs = useRef<HTMLDivElement[]>([])
-    const thumbIndex = useRef<number | undefined>(undefined)
+    const valueRef = useRef(_value as RangeSliderValue);
+    const thumbs = useRef<HTMLDivElement[]>([]);
+    const thumbIndex = useRef<number | undefined>(undefined);
     const positions = [
         getPosition({ value: _value[0], min: min!, max: max! }),
         getPosition({ value: _value[1], min: min!, max: max! }),
-    ]
+    ];
 
-    const precision = _precision ?? getPrecision(step!)
+    const precision = _precision ?? getPrecision(step!);
 
     const _setValue = (val: RangeSliderValue) => {
-        setValue(val)
-        valueRef.current = val
-    }
+        setValue(val);
+        valueRef.current = val;
+    };
 
     useEffect(
         () => {
             if (Array.isArray(value)) {
-                valueRef.current = value
+                valueRef.current = value;
             }
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         Array.isArray(value) ? [value[0], value[1]] : [null, null],
-    )
+    );
 
     const setRangedValue = (
         val: number,
@@ -136,88 +136,88 @@ const RangeSlider = (props: RangeSliderProps) => {
         triggerChangeEnd: boolean,
     ) => {
         if (index === -1) {
-            return
+            return;
         }
 
-        const clone: RangeSliderValue = [...valueRef.current]
+        const clone: RangeSliderValue = [...valueRef.current];
 
         if (stepOnMarks && marks) {
             const closest = getClosestNumber(
                 val,
                 marks.map((m) => m.value),
-            )
+            );
 
-            const current = clone[index]
-            clone[index] = closest
-            const otherIndex = index === 0 ? 1 : 0
+            const current = clone[index];
+            clone[index] = closest;
+            const otherIndex = index === 0 ? 1 : 0;
 
-            const lastMarkValue = getLastMarkValue(marks)
-            const firstMarkValue = getFirstMarkValue(marks)
+            const lastMarkValue = getLastMarkValue(marks);
+            const firstMarkValue = getFirstMarkValue(marks);
 
             if (
                 closest === lastMarkValue &&
                 clone[otherIndex] === lastMarkValue
             ) {
-                clone[index] = current
+                clone[index] = current;
             } else if (
                 closest === firstMarkValue &&
                 clone[otherIndex] === firstMarkValue
             ) {
-                clone[index] = current
+                clone[index] = current;
             } else if (closest === clone[otherIndex]) {
                 if (current > clone[otherIndex]) {
-                    clone[otherIndex] = getPreviousMarkValue(closest, marks)
+                    clone[otherIndex] = getPreviousMarkValue(closest, marks);
                 } else {
-                    clone[otherIndex] = getNextMarkValue(closest, marks)
+                    clone[otherIndex] = getNextMarkValue(closest, marks);
                 }
             }
         } else {
-            clone[index] = val
+            clone[index] = val;
 
             if (index === 0) {
                 if (val > clone[1] - (minRange! - 0.000000001)) {
-                    clone[1] = Math.min(val + minRange!, max!)
+                    clone[1] = Math.min(val + minRange!, max!);
                 }
 
                 if (val > (max! - (minRange! - 0.000000001) || min!)) {
-                    clone[index] = valueRef.current[index]
+                    clone[index] = valueRef.current[index];
                 }
 
                 if (clone[1] - val > maxRange!) {
-                    clone[1] = val + maxRange!
+                    clone[1] = val + maxRange!;
                 }
             }
 
             if (index === 1) {
                 if (val < clone[0] + minRange!) {
-                    clone[0] = Math.max(val - minRange!, min!)
+                    clone[0] = Math.max(val - minRange!, min!);
                 }
 
                 if (val < clone[0] + minRange!) {
-                    clone[index] = valueRef.current[index]
+                    clone[index] = valueRef.current[index];
                 }
 
                 if (val - clone[0] > maxRange!) {
-                    clone[0] = val - maxRange!
+                    clone[0] = val - maxRange!;
                 }
             }
         }
 
-        clone[0] = getFloatingValue(clone[0], precision)
-        clone[1] = getFloatingValue(clone[1], precision)
+        clone[0] = getFloatingValue(clone[0], precision);
+        clone[1] = getFloatingValue(clone[1], precision);
 
         if (clone[0] > clone[1]) {
-            const temp = clone[0]
-            clone[0] = clone[1]
-            clone[1] = temp
+            const temp = clone[0];
+            clone[0] = clone[1];
+            clone[1] = temp;
         }
 
-        _setValue(clone)
+        _setValue(clone);
 
         if (triggerChangeEnd) {
-            onDraggingStop?.(valueRef.current)
+            onDraggingStop?.(valueRef.current);
         }
-    }
+    };
 
     const handleChange = (val: number) => {
         if (!disabled) {
@@ -227,54 +227,54 @@ const RangeSlider = (props: RangeSliderProps) => {
                 max: max!,
                 step: step!,
                 precision,
-            })
-            setRangedValue(nextValue, thumbIndex.current!, false)
+            });
+            setRangedValue(nextValue, thumbIndex.current!, false);
         }
-    }
+    };
 
     const { ref: container, active } = useMove(
         ({ x }) => handleChange(x),
         { onScrubEnd: () => !disabled && onDraggingStop?.(valueRef.current) },
         direction,
-    )
+    );
 
     function handleThumbMouseDown(index: number) {
-        thumbIndex.current = index
+        thumbIndex.current = index;
     }
 
     const handleTrackMouseDownCapture = (
         event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>,
     ) => {
-        container.current!.focus()
-        const rect = container.current!.getBoundingClientRect()
-        const changePosition = getClientPosition(event.nativeEvent)
+        container.current!.focus();
+        const rect = container.current!.getBoundingClientRect();
+        const changePosition = getClientPosition(event.nativeEvent);
         const changeValue = getChangeValue({
             value: changePosition - rect.left,
             max: max!,
             min: min!,
             step: step!,
             containerWidth: rect.width,
-        })
+        });
 
         const nearestHandle =
             Math.abs(_value[0] - changeValue) >
             Math.abs(_value[1] - changeValue)
                 ? 1
-                : 0
+                : 0;
         const _nearestHandle =
-            direction === 'ltr' ? nearestHandle : nearestHandle === 1 ? 0 : 1
+            direction === 'ltr' ? nearestHandle : nearestHandle === 1 ? 0 : 1;
 
-        thumbIndex.current = _nearestHandle
-    }
+        thumbIndex.current = _nearestHandle;
+    };
 
     const getFocusedThumbIndex = () => {
         if (focused !== 1 && focused !== 0) {
-            setFocused(0)
-            return 0
+            setFocused(0);
+            return 0;
         }
 
-        return focused
-    }
+        return focused;
+    };
 
     const handleTrackKeydownCapture = (
         event: KeyboardEvent<HTMLDivElement>,
@@ -282,9 +282,9 @@ const RangeSlider = (props: RangeSliderProps) => {
         if (!disabled) {
             switch (event.key) {
                 case 'ArrowUp': {
-                    event.preventDefault()
-                    const focusedIndex = getFocusedThumbIndex()
-                    thumbs.current[focusedIndex].focus()
+                    event.preventDefault();
+                    const focusedIndex = getFocusedThumbIndex();
+                    thumbs.current[focusedIndex].focus();
                     const nextValue =
                         stepOnMarks && marks
                             ? getNextMarkValue(
@@ -297,19 +297,19 @@ const RangeSlider = (props: RangeSliderProps) => {
                                       min!,
                                   ),
                                   max!,
-                              )
+                              );
                     setRangedValue(
                         getFloatingValue(nextValue, precision),
                         focusedIndex,
                         true,
-                    )
-                    break
+                    );
+                    break;
                 }
 
                 case 'ArrowRight': {
-                    event.preventDefault()
-                    const focusedIndex = getFocusedThumbIndex()
-                    thumbs.current[focusedIndex].focus()
+                    event.preventDefault();
+                    const focusedIndex = getFocusedThumbIndex();
+                    thumbs.current[focusedIndex].focus();
 
                     const nextValue =
                         stepOnMarks && marks
@@ -329,20 +329,20 @@ const RangeSlider = (props: RangeSliderProps) => {
                                       min!,
                                   ),
                                   max!,
-                              )
+                              );
 
                     setRangedValue(
                         getFloatingValue(nextValue, precision),
                         focusedIndex,
                         true,
-                    )
-                    break
+                    );
+                    break;
                 }
 
                 case 'ArrowDown': {
-                    event.preventDefault()
-                    const focusedIndex = getFocusedThumbIndex()
-                    thumbs.current[focusedIndex].focus()
+                    event.preventDefault();
+                    const focusedIndex = getFocusedThumbIndex();
+                    thumbs.current[focusedIndex].focus();
                     const nextValue =
                         stepOnMarks && marks
                             ? getPreviousMarkValue(
@@ -355,19 +355,19 @@ const RangeSlider = (props: RangeSliderProps) => {
                                       min!,
                                   ),
                                   max!,
-                              )
+                              );
                     setRangedValue(
                         getFloatingValue(nextValue, precision),
                         focusedIndex,
                         true,
-                    )
-                    break
+                    );
+                    break;
                 }
 
                 case 'ArrowLeft': {
-                    event.preventDefault()
-                    const focusedIndex = getFocusedThumbIndex()
-                    thumbs.current[focusedIndex].focus()
+                    event.preventDefault();
+                    const focusedIndex = getFocusedThumbIndex();
+                    thumbs.current[focusedIndex].focus();
 
                     const nextValue =
                         stepOnMarks && marks
@@ -387,29 +387,29 @@ const RangeSlider = (props: RangeSliderProps) => {
                                       min!,
                                   ),
                                   max!,
-                              )
+                              );
 
                     setRangedValue(
                         getFloatingValue(nextValue, precision),
                         focusedIndex,
                         true,
-                    )
-                    break
+                    );
+                    break;
                 }
 
                 default: {
-                    break
+                    break;
                 }
             }
         }
-    }
+    };
 
     const sharedThumbProps = {
         max: max!,
         min: min!,
         alwaysShowTooltip,
         onBlur: () => setFocused(-1),
-    }
+    };
 
     return (
         <div {...rest} ref={ref}>
@@ -436,11 +436,11 @@ const RangeSlider = (props: RangeSliderProps) => {
                         : undefined,
                     onTouchStartCapture: handleTrackMouseDownCapture,
                     onTouchEndCapture: () => {
-                        thumbIndex.current = -1
+                        thumbIndex.current = -1;
                     },
                     onMouseDownCapture: handleTrackMouseDownCapture,
                     onMouseUpCapture: () => {
-                        thumbIndex.current = -1
+                        thumbIndex.current = -1;
                     },
                     onKeyDownCapture: handleTrackKeydownCapture,
                 }}
@@ -448,7 +448,7 @@ const RangeSlider = (props: RangeSliderProps) => {
                 <Thumb
                     {...sharedThumbProps}
                     ref={(node) => {
-                        thumbs.current[0] = node!
+                        thumbs.current[0] = node!;
                     }}
                     value={_value[0]}
                     position={positions[0]}
@@ -470,7 +470,7 @@ const RangeSlider = (props: RangeSliderProps) => {
                 <Thumb
                     {...sharedThumbProps}
                     ref={(node) => {
-                        thumbs.current[1] = node!
+                        thumbs.current[1] = node!;
                     }}
                     thumbAriaLabel={thumbAriaLabelEnd}
                     value={_value[1]}
@@ -503,7 +503,7 @@ const RangeSlider = (props: RangeSliderProps) => {
                 {...inputProps}
             />
         </div>
-    )
-}
+    );
+};
 
-export default RangeSlider
+export default RangeSlider;

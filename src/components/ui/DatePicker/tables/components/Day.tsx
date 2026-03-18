@@ -1,27 +1,28 @@
-import classNames from 'classnames'
-import type { ComponentPropsWithRef, ReactNode, MouseEvent, Ref } from 'react'
-import type { CommonProps } from '../../../@types/common'
+import classNames from 'classnames';
+import type { ComponentPropsWithRef, ReactNode, MouseEvent, Ref } from 'react';
+import type { CommonProps } from '../../../@types/common';
 
 export interface DayProps
-    extends CommonProps,
+    extends
+        CommonProps,
         Omit<ComponentPropsWithRef<'button'>, 'value' | 'onMouseEnter'> {
-    value: Date
-    selected: boolean
-    weekend: boolean
-    outOfMonth: boolean
-    onMouseEnter: (date: Date, event: MouseEvent<HTMLButtonElement>) => void
-    hasValue: boolean
-    inRange: boolean
-    firstInRange: boolean
-    lastInRange: boolean
-    isToday: boolean
-    fullWidth: boolean
-    firstInMonth: boolean
-    focusable: boolean
-    hideOutOfMonthDates?: boolean
-    ref?: Ref<HTMLButtonElement>
-    renderDay?: (date: Date) => ReactNode
-    disabled: boolean
+    value: Date;
+    selected: boolean;
+    weekend: boolean;
+    outOfMonth: boolean;
+    onMouseEnter: (date: Date, event: MouseEvent<HTMLButtonElement>) => void;
+    hasValue: boolean;
+    inRange: boolean;
+    firstInRange: boolean;
+    lastInRange: boolean;
+    isToday: boolean;
+    fullWidth: boolean;
+    firstInMonth: boolean;
+    focusable: boolean;
+    hideOutOfMonthDates?: boolean;
+    ref?: Ref<HTMLButtonElement>;
+    renderDay?: (date: Date) => ReactNode;
+    disabled: boolean;
 }
 
 function getDayTabIndex({
@@ -30,20 +31,20 @@ function getDayTabIndex({
     selected,
     firstInMonth,
 }: {
-    focusable: boolean
-    hasValue: boolean
-    selected: boolean
-    firstInMonth: boolean
+    focusable: boolean;
+    hasValue: boolean;
+    selected: boolean;
+    firstInMonth: boolean;
 }) {
     if (!focusable) {
-        return -1
+        return -1;
     }
 
     if (hasValue) {
-        return selected ? 0 : -1
+        return selected ? 0 : -1;
     }
 
-    return firstInMonth ? 0 : -1
+    return firstInMonth ? 0 : -1;
 }
 
 const Day = (props: DayProps) => {
@@ -68,7 +69,7 @@ const Day = (props: DayProps) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         fullWidth,
         ...others
-    } = props
+    } = props;
 
     return (
         <button
@@ -118,7 +119,7 @@ const Day = (props: DayProps) => {
                 ? renderDay(value)
                 : value?.getDate()}
         </button>
-    )
-}
+    );
+};
 
-export default Day
+export default Day;

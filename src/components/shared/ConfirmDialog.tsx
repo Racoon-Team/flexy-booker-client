@@ -3,25 +3,25 @@ import {
     HiOutlineInformationCircle,
     HiOutlineExclamation,
     HiOutlineExclamationCircle,
-} from 'react-icons/hi'
-import Avatar from '@/components/ui/Avatar'
-import Button from '@/components/ui/Button'
-import Dialog from '@/components/ui/Dialog'
-import type { ReactNode } from 'react'
-import type { DialogProps } from '@/components/ui/Dialog'
-import type { ButtonProps } from '@/components/ui/Button'
+} from 'react-icons/hi';
+import Avatar from '@/components/ui/Avatar';
+import Button from '@/components/ui/Button';
+import Dialog from '@/components/ui/Dialog';
+import type { ReactNode } from 'react';
+import type { DialogProps } from '@/components/ui/Dialog';
+import type { ButtonProps } from '@/components/ui/Button';
 
-type StatusType = 'info' | 'success' | 'warning' | 'danger'
+type StatusType = 'info' | 'success' | 'warning' | 'danger';
 
 interface ConfirmDialogProps extends DialogProps {
-    cancelText?: ReactNode | string
-    confirmText?: ReactNode | string
-    confirmButtonProps?: ButtonProps
-    cancelButtonProps?: ButtonProps
-    type?: StatusType
-    title?: ReactNode | string
-    onCancel?: () => void
-    onConfirm?: () => void
+    cancelText?: ReactNode | string;
+    confirmText?: ReactNode | string;
+    confirmButtonProps?: ButtonProps;
+    cancelButtonProps?: ButtonProps;
+    type?: StatusType;
+    title?: ReactNode | string;
+    onCancel?: () => void;
+    onConfirm?: () => void;
 }
 
 const StatusIcon = ({ status }: { status: StatusType }) => {
@@ -36,7 +36,7 @@ const StatusIcon = ({ status }: { status: StatusType }) => {
                         <HiOutlineInformationCircle />
                     </span>
                 </Avatar>
-            )
+            );
         case 'success':
             return (
                 <Avatar
@@ -47,7 +47,7 @@ const StatusIcon = ({ status }: { status: StatusType }) => {
                         <HiCheckCircle />
                     </span>
                 </Avatar>
-            )
+            );
         case 'warning':
             return (
                 <Avatar
@@ -58,7 +58,7 @@ const StatusIcon = ({ status }: { status: StatusType }) => {
                         <HiOutlineExclamationCircle />
                     </span>
                 </Avatar>
-            )
+            );
         case 'danger':
             return (
                 <Avatar
@@ -69,12 +69,12 @@ const StatusIcon = ({ status }: { status: StatusType }) => {
                         <HiOutlineExclamation />
                     </span>
                 </Avatar>
-            )
+            );
 
         default:
-            return null
+            return null;
     }
-}
+};
 
 const ConfirmDialog = (props: ConfirmDialogProps) => {
     const {
@@ -88,15 +88,15 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
         confirmButtonProps,
         cancelButtonProps,
         ...rest
-    } = props
+    } = props;
 
     const handleCancel = () => {
-        onCancel?.()
-    }
+        onCancel?.();
+    };
 
     const handleConfirm = () => {
-        onConfirm?.()
-    }
+        onConfirm?.();
+    };
 
     return (
         <Dialog contentClassName="pb-0 px-0" {...rest}>
@@ -129,7 +129,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
                 </div>
             </div>
         </Dialog>
-    )
-}
+    );
+};
 
-export default ConfirmDialog
+export default ConfirmDialog;

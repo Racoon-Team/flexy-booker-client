@@ -1,24 +1,24 @@
-import classNames from '@/utils/classNames'
-import { TbChevronRight, TbChevronDown } from 'react-icons/tb'
-import type { Task } from 'gantt-task-react'
-import type { ReactNode } from 'react'
+import classNames from '@/utils/classNames';
+import { TbChevronRight, TbChevronDown } from 'react-icons/tb';
+import type { Task } from 'gantt-task-react';
+import type { ReactNode } from 'react';
 
-type ExtendedTask = Task & { barVariant?: string }
+type ExtendedTask = Task & { barVariant?: string };
 
-export type ExtraCell = (task: ExtendedTask) => ReactNode | string
+export type ExtraCell = (task: ExtendedTask) => ReactNode | string;
 
 type TaskListTableProps = {
-    rowHeight: number
-    rowWidth: string
-    fontFamily: string
-    fontSize: string
-    locale: string
-    tasks: ExtendedTask[]
-    selectedTaskId: string
-    setSelectedTask: (taskId: string) => void
-    onExpanderClick: (task: Task) => void
-    extraCells?: ExtraCell[]
-}
+    rowHeight: number;
+    rowWidth: string;
+    fontFamily: string;
+    fontSize: string;
+    locale: string;
+    tasks: ExtendedTask[];
+    selectedTaskId: string;
+    setSelectedTask: (taskId: string) => void;
+    onExpanderClick: (task: Task) => void;
+    extraCells?: ExtraCell[];
+};
 
 const TaskListTable = ({
     rowHeight,
@@ -81,10 +81,10 @@ const TaskListTable = ({
                             </div>
                         ))}
                     </div>
-                )
+                );
             })}
         </div>
-    )
-}
+    );
+};
 
-export default TaskListTable
+export default TaskListTable;

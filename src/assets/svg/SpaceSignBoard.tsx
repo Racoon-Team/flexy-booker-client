@@ -2,8 +2,8 @@ const SpaceSignBoard = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -79,7 +79,7 @@ const SpaceSignBoard = ({
             />
             <path d="M125.6 151.3c-.2 0-.4-.1-.5-.2L103.2 126c-.2-.2-.2-.6-.1-.8l17.2-28.5c.1-.2.3-.3.5-.3l131.5-11.5c.3 0 .5.1.7.3.1.2.1.5 0 .7L236 114l21.6 24.7c.2.2.2.5.1.7-.1.2-.3.4-.6.4l-131.5 11.5zm-21-25.9 21.3 24.5 129.7-11.3-21-24.1c-.2-.2-.2-.6-.1-.8L251 86.3 121.3 97.6l-16.7 27.8z" />
         </svg>
-    )
-}
+    );
+};
 
-export default SpaceSignBoard
+export default SpaceSignBoard;

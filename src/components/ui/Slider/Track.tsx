@@ -1,23 +1,23 @@
-import Marks from './Marks'
-import classNames from '../utils/classNames'
-import type { ComponentProps, ReactNode } from 'react'
-import type { TypeAttributes } from '../@types/common'
+import Marks from './Marks';
+import classNames from '../utils/classNames';
+import type { ComponentProps, ReactNode } from 'react';
+import type { TypeAttributes } from '../@types/common';
 
 export interface TrackProps {
-    filled: number
-    offset?: number
-    marksOffset?: number
-    marks?: { value: number; label?: ReactNode }[]
-    min: number
-    max: number
-    value: number
-    children: ReactNode
-    disabled?: boolean
-    containerProps?: ComponentProps<'div'>
-    trackClass?: string
-    barClass?: string
-    markClass?: string | ((isFilled: boolean) => string)
-    direction: TypeAttributes.Direction
+    filled: number;
+    offset?: number;
+    marksOffset?: number;
+    marks?: { value: number; label?: ReactNode }[];
+    min: number;
+    max: number;
+    value: number;
+    children: ReactNode;
+    disabled?: boolean;
+    containerProps?: ComponentProps<'div'>;
+    trackClass?: string;
+    barClass?: string;
+    markClass?: string | ((isFilled: boolean) => string);
+    direction: TypeAttributes.Direction;
 }
 
 export function Track({
@@ -59,6 +59,6 @@ export function Track({
                 />
             </div>
         </div>
-    )
+    );
 }
-export default Track
+export default Track;

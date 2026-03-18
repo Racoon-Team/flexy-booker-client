@@ -1,3 +1,3 @@
-import HorizontalMenuContent from './HorizontalMenuContent'
+import HorizontalMenuContent from './HorizontalMenuContent';
 
-export default HorizontalMenuContent
+export default HorizontalMenuContent;

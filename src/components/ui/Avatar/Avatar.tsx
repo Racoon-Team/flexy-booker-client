@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from 'react'
-import useMergedRef from '../hooks/useMergeRef'
-import classNames from 'classnames'
-import type { CommonProps, TypeAttributes } from '../@types/common'
-import type { ReactNode, Ref } from 'react'
+import { useState, useEffect, useRef } from 'react';
+import useMergedRef from '../hooks/useMergeRef';
+import classNames from 'classnames';
+import type { CommonProps, TypeAttributes } from '../@types/common';
+import type { ReactNode, Ref } from 'react';
 
 export interface AvatarProps extends CommonProps {
-    alt?: string
-    icon?: ReactNode
-    onClick?: () => void
-    ref?: Ref<HTMLSpanElement>
-    size?: 'lg' | 'md' | 'sm' | number
-    shape?: Exclude<TypeAttributes.Shape, 'none'> | 'square'
-    src?: string
-    srcSet?: string
+    alt?: string;
+    icon?: ReactNode;
+    onClick?: () => void;
+    ref?: Ref<HTMLSpanElement>;
+    size?: 'lg' | 'md' | 'sm' | number;
+    shape?: Exclude<TypeAttributes.Shape, 'none'> | 'square';
+    src?: string;
+    srcSet?: string;
 }
 
 const Avatar = (props: AvatarProps) => {
@@ -26,35 +26,35 @@ const Avatar = (props: AvatarProps) => {
         src,
         srcSet,
         ...rest
-    } = props
+    } = props;
 
-    let { children } = props
-    const [scale, setScale] = useState(1)
+    let { children } = props;
+    const [scale, setScale] = useState(1);
 
-    const avatarChildren = useRef<HTMLSpanElement>(null)
-    const avatarNode = useRef<HTMLSpanElement>(null)
+    const avatarChildren = useRef<HTMLSpanElement>(null);
+    const avatarNode = useRef<HTMLSpanElement>(null);
 
-    const avatarMergeRef = useMergedRef(ref, avatarNode)
+    const avatarMergeRef = useMergedRef(ref, avatarNode);
 
     const innerScale = () => {
         if (!avatarChildren.current || !avatarNode.current) {
-            return
+            return;
         }
-        const avatarChildrenWidth = avatarChildren.current.offsetWidth
-        const avatarNodeWidth = avatarNode.current.offsetWidth
+        const avatarChildrenWidth = avatarChildren.current.offsetWidth;
+        const avatarNodeWidth = avatarNode.current.offsetWidth;
         if (avatarChildrenWidth === 0 || avatarNodeWidth === 0) {
-            return
+            return;
         }
         setScale(
             avatarNodeWidth - 8 < avatarChildrenWidth
                 ? (avatarNodeWidth - 8) / avatarChildrenWidth
                 : 1,
-        )
-    }
+        );
+    };
 
     useEffect(() => {
-        innerScale()
-    }, [scale, children])
+        innerScale();
+    }, [scale, children]);
 
     const sizeStyle =
         typeof size === 'number'
@@ -65,14 +65,14 @@ const Avatar = (props: AvatarProps) => {
                   lineHeight: `${size}px`,
                   fontSize: icon ? size / 2 : 12,
               }
-            : {}
+            : {};
 
     const classes = classNames(
         'avatar',
         `avatar-${shape}`,
         typeof size === 'string' ? `avatar-${size}` : '',
         className,
-    )
+    );
 
     if (src) {
         children = (
@@ -83,19 +83,19 @@ const Avatar = (props: AvatarProps) => {
                 alt={alt}
                 loading="lazy"
             />
-        )
+        );
     } else if (icon) {
         children = (
             <span className={classNames('avatar-icon', `avatar-icon-${size}`)}>
                 {icon}
             </span>
-        )
+        );
     } else {
         const childrenSizeStyle =
-            typeof size === 'number' ? { lineHeight: `${size}px` } : {}
+            typeof size === 'number' ? { lineHeight: `${size}px` } : {};
         const stringCentralized = {
             transform: `translateX(-50%) scale(${scale})`,
-        }
+        };
         children = (
             <span
                 ref={avatarChildren}
@@ -110,7 +110,7 @@ const Avatar = (props: AvatarProps) => {
             >
                 {children}
             </span>
-        )
+        );
     }
 
     return (
@@ -122,7 +122,7 @@ const Avatar = (props: AvatarProps) => {
         >
             {children}
         </span>
-    )
-}
+    );
+};
 
-export default Avatar
+export default Avatar;

@@ -2,8 +2,8 @@ const NoDataFound = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -119,7 +119,7 @@ const NoDataFound = ({
                 className="fill-[#bababa]"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default NoDataFound
+export default NoDataFound;

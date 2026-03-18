@@ -1,21 +1,21 @@
-import { useCallback, useState } from 'react'
-import classNames from 'classnames'
-import useTimeout from '../hooks/useTimeout'
-import CloseButton from '../CloseButton'
-import StatusIcon from '../StatusIcon'
-import type { CommonProps, TypeAttributes } from '../@types/common'
-import type { ReactNode, MouseEvent, Ref } from 'react'
+import { useCallback, useState } from 'react';
+import classNames from 'classnames';
+import useTimeout from '../hooks/useTimeout';
+import CloseButton from '../CloseButton';
+import StatusIcon from '../StatusIcon';
+import type { CommonProps, TypeAttributes } from '../@types/common';
+import type { ReactNode, MouseEvent, Ref } from 'react';
 
 export interface NotificationProps extends CommonProps {
-    closable?: boolean
-    customIcon?: ReactNode | string
-    duration?: number
-    onClose?: (e: MouseEvent<HTMLSpanElement>) => void
-    ref?: Ref<HTMLDivElement>
-    title?: string
-    triggerByToast?: boolean
-    type?: TypeAttributes.Status
-    width?: number | string
+    closable?: boolean;
+    customIcon?: ReactNode | string;
+    duration?: number;
+    onClose?: (e: MouseEvent<HTMLSpanElement>) => void;
+    ref?: Ref<HTMLDivElement>;
+    title?: string;
+    triggerByToast?: boolean;
+    type?: TypeAttributes.Status;
+    width?: number | string;
 }
 
 const Notification = (props: NotificationProps) => {
@@ -33,30 +33,30 @@ const Notification = (props: NotificationProps) => {
         type,
         width = 350,
         ...rest
-    } = props
+    } = props;
 
-    const [display, setDisplay] = useState('show')
+    const [display, setDisplay] = useState('show');
 
-    const { clear } = useTimeout(onClose as () => void, duration, duration > 0)
+    const { clear } = useTimeout(onClose as () => void, duration, duration > 0);
 
     const handleClose = useCallback(
         (e: MouseEvent<HTMLSpanElement>) => {
-            setDisplay('hiding')
-            onClose?.(e)
-            clear()
+            setDisplay('hiding');
+            onClose?.(e);
+            clear();
             if (!triggerByToast) {
                 setTimeout(() => {
-                    setDisplay('hide')
-                }, 400)
+                    setDisplay('hide');
+                }, 400);
             }
         },
         [onClose, clear, triggerByToast],
-    )
+    );
 
-    const notificationClass = classNames('notification', className)
+    const notificationClass = classNames('notification', className);
 
     if (display === 'hide') {
-        return null
+        return null;
     }
 
     return (
@@ -107,7 +107,7 @@ const Notification = (props: NotificationProps) => {
                 />
             )}
         </div>
-    )
-}
+    );
+};
 
-export default Notification
+export default Notification;

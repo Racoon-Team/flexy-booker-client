@@ -1,14 +1,14 @@
-import classNames from '@/utils/classNames'
-import Card from '@/components/ui/Card'
-import useLayout from '@/utils/hooks/useLayout'
-import type { CardProps } from '@/components/ui/Card'
+import classNames from '@/utils/classNames';
+import Card from '@/components/ui/Card';
+import useLayout from '@/utils/hooks/useLayout';
+import type { CardProps } from '@/components/ui/Card';
 
-type AdaptableCardProps = CardProps
+type AdaptableCardProps = CardProps;
 
 const AdaptiveCard = (props: AdaptableCardProps) => {
-    const { adaptiveCardActive } = useLayout()
+    const { adaptiveCardActive } = useLayout();
 
-    const { className, bodyClass, ...rest } = props
+    const { className, bodyClass, ...rest } = props;
 
     return (
         <Card
@@ -19,7 +19,7 @@ const AdaptiveCard = (props: AdaptableCardProps) => {
             bodyClass={classNames(bodyClass, adaptiveCardActive && 'p-0')}
             {...rest}
         />
-    )
-}
+    );
+};
 
-export default AdaptiveCard
+export default AdaptiveCard;

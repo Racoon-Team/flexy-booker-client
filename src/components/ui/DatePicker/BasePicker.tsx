@@ -1,10 +1,10 @@
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-import { Input } from '../Input'
-import useMergedRef from '../hooks/useMergeRef'
-import { HiOutlineCalendar } from 'react-icons/hi'
-import CloseButton from '../CloseButton'
-import type { CommonProps, TypeAttributes } from '../@types/common'
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { Input } from '../Input';
+import useMergedRef from '../hooks/useMergeRef';
+import { HiOutlineCalendar } from 'react-icons/hi';
+import CloseButton from '../CloseButton';
+import type { CommonProps, TypeAttributes } from '../@types/common';
 import type {
     ReactNode,
     FocusEvent,
@@ -13,7 +13,7 @@ import type {
     MouseEvent,
     ChangeEvent,
     Ref,
-} from 'react'
+} from 'react';
 import {
     useFloating,
     useInteractions,
@@ -26,37 +26,37 @@ import {
     offset,
     flip,
     shift,
-} from '@floating-ui/react'
+} from '@floating-ui/react';
 
-dayjs.extend(localizedFormat)
+dayjs.extend(localizedFormat);
 
 export interface BasePickerSharedProps {
-    clearable?: boolean
-    clearButton?: string | ReactNode
-    disabled?: boolean
-    inputtable?: boolean
-    inputPrefix?: string | ReactNode
-    inputSuffix?: string | ReactNode
-    name?: string
-    onBlur?: (event: FocusEvent<HTMLInputElement, Element>) => void
-    onDropdownOpen?: () => void
-    onDropdownClose?: () => void
-    onFocus?: (event: FocusEvent<HTMLInputElement, Element>) => void
-    placeholder?: string
-    size?: TypeAttributes.ControlSize
-    type?: HTMLInputTypeAttribute
+    clearable?: boolean;
+    clearButton?: string | ReactNode;
+    disabled?: boolean;
+    inputtable?: boolean;
+    inputPrefix?: string | ReactNode;
+    inputSuffix?: string | ReactNode;
+    name?: string;
+    onBlur?: (event: FocusEvent<HTMLInputElement, Element>) => void;
+    onDropdownOpen?: () => void;
+    onDropdownClose?: () => void;
+    onFocus?: (event: FocusEvent<HTMLInputElement, Element>) => void;
+    placeholder?: string;
+    size?: TypeAttributes.ControlSize;
+    type?: HTMLInputTypeAttribute;
 }
 
 interface BasePickerProps extends CommonProps, BasePickerSharedProps {
-    dropdownOpened: boolean
-    inputtableBlurClose?: boolean
-    inputLabel?: string
-    lockView?: boolean
-    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
-    onClear?: (event: MouseEvent<HTMLElement>) => void
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-    setDropdownOpened: (opened: boolean) => void
-    ref?: Ref<HTMLInputElement>
+    dropdownOpened: boolean;
+    inputtableBlurClose?: boolean;
+    inputLabel?: string;
+    lockView?: boolean;
+    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+    onClear?: (event: MouseEvent<HTMLElement>) => void;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    setDropdownOpened: (opened: boolean) => void;
+    ref?: Ref<HTMLInputElement>;
 }
 
 const BasePicker = (props: BasePickerProps) => {
@@ -85,16 +85,16 @@ const BasePicker = (props: BasePickerProps) => {
         setDropdownOpened,
         size,
         type,
-    } = props
+    } = props;
 
     const handleInputClick = () => {
-        inputtable ? openDropdown() : toggleDropdown(!dropdownOpened)
-    }
+        inputtable ? openDropdown() : toggleDropdown(!dropdownOpened);
+    };
 
     const closeDropdown = () => {
-        setDropdownOpened(false)
-        onDropdownClose?.()
-    }
+        setDropdownOpened(false);
+        onDropdownClose?.();
+    };
 
     const suffixIconSlot = clearable ? (
         clearButton ? (
@@ -106,36 +106,36 @@ const BasePicker = (props: BasePickerProps) => {
         )
     ) : inputSuffix ? (
         <>{inputSuffix}</>
-    ) : null
+    ) : null;
 
     const toggleDropdown = (open: boolean) => {
-        setDropdownOpened(open)
-        open ? onDropdownOpen?.() : onDropdownClose?.()
-    }
+        setDropdownOpened(open);
+        open ? onDropdownOpen?.() : onDropdownClose?.();
+    };
 
     const openDropdown = () => {
-        setDropdownOpened(true)
-        onDropdownOpen?.()
-    }
+        setDropdownOpened(true);
+        onDropdownOpen?.();
+    };
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        typeof onKeyDown === 'function' && onKeyDown(event)
+        typeof onKeyDown === 'function' && onKeyDown(event);
         if ((event.key === 'Space' || event.key === 'Enter') && !inputtable) {
-            event.preventDefault()
-            openDropdown()
+            event.preventDefault();
+            openDropdown();
         }
-    }
+    };
 
     const handleInputBlur = (event: FocusEvent<HTMLInputElement, Element>) => {
-        onBlur?.(event)
+        onBlur?.(event);
         if (inputtable && inputtableBlurClose) {
-            closeDropdown()
+            closeDropdown();
         }
-    }
+    };
 
     const handleInputFocus = (event: FocusEvent<HTMLInputElement, Element>) => {
-        onFocus?.(event)
-    }
+        onFocus?.(event);
+    };
 
     const { refs, floatingStyles, context } = useFloating({
         open: dropdownOpened,
@@ -149,20 +149,20 @@ const BasePicker = (props: BasePickerProps) => {
             shift(),
         ],
         whileElementsMounted: autoUpdate,
-    })
+    });
 
-    const focus = useFocus(context)
-    const click = useClick(context)
-    const dismiss = useDismiss(context)
-    const role = useRole(context)
+    const focus = useFocus(context);
+    const click = useClick(context);
+    const dismiss = useDismiss(context);
+    const role = useRole(context);
 
     const { getReferenceProps, getFloatingProps } = useInteractions([
         inputtable ? focus : click,
         dismiss,
         role,
-    ])
+    ]);
 
-    const headingId = useId()
+    const headingId = useId();
 
     return (
         <>
@@ -200,7 +200,7 @@ const BasePicker = (props: BasePickerProps) => {
                 </div>
             )}
         </>
-    )
-}
+    );
+};
 
-export default BasePicker
+export default BasePicker;

@@ -1,48 +1,48 @@
-import { Suspense } from 'react'
-import Container from '@/components/shared/Container'
-import Footer from '@/components/template/Footer'
-import useLayout from '@/utils/hooks/useLayout'
-import classNames from '@/utils/classNames'
+import { Suspense } from 'react';
+import Container from '@/components/shared/Container';
+import Footer from '@/components/template/Footer';
+import useLayout from '@/utils/hooks/useLayout';
+import classNames from '@/utils/classNames';
 import {
     PAGE_CONTAINER_GUTTER_X,
     PAGE_CONTAINER_GUTTER_Y,
-} from '@/constants/theme.constant'
-import type { CommonProps } from '@/@types/common'
-import type { Meta, PageHeaderProps } from '@/@types/routes'
-import type { FooterPageContainerType } from '@/components/template/Footer'
-import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
+} from '@/constants/theme.constant';
+import type { CommonProps } from '@/@types/common';
+import type { Meta, PageHeaderProps } from '@/@types/routes';
+import type { FooterPageContainerType } from '@/components/template/Footer';
+import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react';
 
 export interface PageContainerProps extends CommonProps, Meta {
-    contained?: boolean
+    contained?: boolean;
 }
 
 type PageContainerHeaderProps = PageHeaderProps & {
-    className?: string
-    gutterLess?: boolean
-    customeHeader?: () => ReactNode
-}
+    className?: string;
+    gutterLess?: boolean;
+    customeHeader?: () => ReactNode;
+};
 
 interface PageContainerBodyProps {
-    className?: string
-    pageContainerType?: string
-    children: React.ReactNode
+    className?: string;
+    pageContainerType?: string;
+    children: React.ReactNode;
 }
 
 interface PageContainerFooterProps {
-    className?: string
-    footer?: boolean
-    pageContainerType: FooterPageContainerType
+    className?: string;
+    footer?: boolean;
+    pageContainerType: FooterPageContainerType;
 }
 
 const CustomHeader = <T extends ElementType>({
     header,
     ...props
 }: {
-    header: T
+    header: T;
 } & ComponentPropsWithRef<T>) => {
-    const Header = header
-    return <Header {...props} />
-}
+    const Header = header;
+    return <Header {...props} />;
+};
 
 export const PageContainerHeader = ({
     title,
@@ -52,7 +52,7 @@ export const PageContainerHeader = ({
     gutterLess,
     className,
 }: PageContainerHeaderProps) => {
-    if (!title && !extraHeader) return null
+    if (!title && !extraHeader) return null;
 
     return (
         <div
@@ -83,8 +83,8 @@ export const PageContainerHeader = ({
                 )}
             </Suspense>
         </div>
-    )
-}
+    );
+};
 
 export const PageContainerBody = ({
     pageContainerType,
@@ -97,20 +97,20 @@ export const PageContainerBody = ({
         </Container>
     ) : (
         <>{children}</>
-    )
-}
+    );
+};
 
 export const PageContainerFooter = ({
     footer,
     pageContainerType,
     className,
 }: PageContainerFooterProps) => {
-    if (!footer) return null
+    if (!footer) return null;
 
     return (
         <Footer className={className} pageContainerType={pageContainerType} />
-    )
-}
+    );
+};
 
 const PageContainer = (props: PageContainerProps) => {
     const {
@@ -119,14 +119,14 @@ const PageContainer = (props: PageContainerProps) => {
         children,
         header,
         footer = true,
-    } = props
+    } = props;
 
-    const { pageContainerReassemble } = useLayout()
+    const { pageContainerReassemble } = useLayout();
 
-    const defaultClass = 'h-full flex flex-auto flex-col justify-between'
+    const defaultClass = 'h-full flex flex-auto flex-col justify-between';
     const pageContainerDefaultClass =
-        'page-container relative h-full flex flex-auto flex-col'
-    const pageContainerGutterClass = `${PAGE_CONTAINER_GUTTER_X} ${PAGE_CONTAINER_GUTTER_Y}`
+        'page-container relative h-full flex flex-auto flex-col';
+    const pageContainerGutterClass = `${PAGE_CONTAINER_GUTTER_X} ${PAGE_CONTAINER_GUTTER_Y}`;
 
     return (
         <>
@@ -183,7 +183,7 @@ const PageContainer = (props: PageContainerProps) => {
                 </div>
             )}
         </>
-    )
-}
+    );
+};
 
-export default PageContainer
+export default PageContainer;

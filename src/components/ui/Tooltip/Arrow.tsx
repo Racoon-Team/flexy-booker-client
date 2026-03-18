@@ -1,10 +1,10 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 import {
     BsFillCaretDownFill,
     BsFillCaretLeftFill,
     BsFillCaretUpFill,
     BsFillCaretRightFill,
-} from 'react-icons/bs'
+} from 'react-icons/bs';
 
 export type ArrowPlacement =
     | 'top'
@@ -18,15 +18,15 @@ export type ArrowPlacement =
     | 'right-end'
     | 'left'
     | 'left-start'
-    | 'left-end'
+    | 'left-end';
 
 interface ArrowProps {
-    placement: ArrowPlacement
-    color: string
+    placement: ArrowPlacement;
+    color: string;
 }
 
 const Arrow = ({ placement, color }: ArrowProps) => {
-    const arrowDefaultClass = `absolute ${color}`
+    const arrowDefaultClass = `absolute ${color}`;
 
     const getArrow = () => {
         switch (placement) {
@@ -38,7 +38,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-bottom-2 w-full left-0',
                         )}
                     />
-                )
+                );
             case 'top-start':
                 return (
                     <BsFillCaretDownFill
@@ -47,7 +47,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-bottom-2 left-0 ml-3',
                         )}
                     />
-                )
+                );
             case 'top-end':
                 return (
                     <BsFillCaretDownFill
@@ -56,7 +56,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-bottom-2 right-0 mr-3',
                         )}
                     />
-                )
+                );
             case 'right':
                 return (
                     <BsFillCaretLeftFill
@@ -65,7 +65,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-left-2 top-1/2 transform -translate-y-1/2',
                         )}
                     />
-                )
+                );
             case 'right-start':
                 return (
                     <BsFillCaretLeftFill
@@ -74,7 +74,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-left-2 top-2',
                         )}
                     />
-                )
+                );
             case 'right-end':
                 return (
                     <BsFillCaretLeftFill
@@ -83,7 +83,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-left-2 bottom-2',
                         )}
                     />
-                )
+                );
             case 'bottom':
                 return (
                     <BsFillCaretUpFill
@@ -92,7 +92,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-top-2 w-full left-0',
                         )}
                     />
-                )
+                );
             case 'bottom-start':
                 return (
                     <BsFillCaretUpFill
@@ -101,7 +101,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-top-2 left-0 ml-3',
                         )}
                     />
-                )
+                );
             case 'bottom-end':
                 return (
                     <BsFillCaretUpFill
@@ -110,7 +110,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-top-2 right-0 mr-3',
                         )}
                     />
-                )
+                );
             case 'left':
                 return (
                     <BsFillCaretRightFill
@@ -119,7 +119,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-right-2 top-1/2 transform -translate-y-1/2',
                         )}
                     />
-                )
+                );
             case 'left-start':
                 return (
                     <BsFillCaretRightFill
@@ -128,7 +128,7 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-right-2 top-2',
                         )}
                     />
-                )
+                );
             case 'left-end':
                 return (
                     <BsFillCaretRightFill
@@ -137,13 +137,13 @@ const Arrow = ({ placement, color }: ArrowProps) => {
                             '-right-2 bottom-2',
                         )}
                     />
-                )
+                );
             default:
-                break
+                break;
         }
-    }
+    };
 
-    return <div>{getArrow()}</div>
-}
+    return <div>{getArrow()}</div>;
+};
 
-export default Arrow
+export default Arrow;

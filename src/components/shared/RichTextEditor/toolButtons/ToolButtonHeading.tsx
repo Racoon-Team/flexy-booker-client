@@ -6,24 +6,24 @@ import {
     LuHeading4,
     LuHeading5,
     LuHeading6,
-} from 'react-icons/lu'
-import ToolButton from './ToolButton'
-import Dropdown from '@/components/ui/Dropdown'
-import type { BaseToolButtonProps, HeadingLevel } from './types'
-import type { ReactNode } from 'react'
+} from 'react-icons/lu';
+import ToolButton from './ToolButton';
+import Dropdown from '@/components/ui/Dropdown';
+import type { BaseToolButtonProps, HeadingLevel } from './types';
+import type { ReactNode } from 'react';
 
 type ToolButtonCodeBlockProp = BaseToolButtonProps & {
-    headingLevel?: HeadingLevel[]
-}
+    headingLevel?: HeadingLevel[];
+};
 
 type HeadingMap = Record<
     number,
     {
-        label: string
-        value: HeadingLevel
-        icon: ReactNode
+        label: string;
+        value: HeadingLevel;
+        icon: ReactNode;
     }
->
+>;
 
 const headingMap: HeadingMap = {
     1: { label: 'Heading 1', value: 1, icon: <LuHeading1 /> },
@@ -32,7 +32,7 @@ const headingMap: HeadingMap = {
     4: { label: 'Heading 4', value: 4, icon: <LuHeading4 /> },
     5: { label: 'Heading 5', value: 5, icon: <LuHeading5 /> },
     6: { label: 'Heading 6', value: 6, icon: <LuHeading6 /> },
-}
+};
 
 const ToolButtonCodeBlock = ({
     editor,
@@ -72,7 +72,7 @@ const ToolButtonCodeBlock = ({
                 ))}
             </Dropdown>
         </>
-    )
-}
+    );
+};
 
-export default ToolButtonCodeBlock
+export default ToolButtonCodeBlock;

@@ -1,4 +1,4 @@
-import { ReactNode, ChangeEvent, useRef, useState, useEffect } from 'react'
+import { ReactNode, ChangeEvent, useRef, useState, useEffect } from 'react';
 import {
     autoUpdate,
     size,
@@ -11,23 +11,23 @@ import {
     useRole,
     FloatingFocusManager,
     FloatingPortal,
-} from '@floating-ui/react'
-import Input, { InputProps } from '@/components/ui/Input'
+} from '@floating-ui/react';
+import Input, { InputProps } from '@/components/ui/Input';
 
 interface ItemProps {
-    children: React.ReactNode
-    active: boolean
-    ref?: React.Ref<HTMLDivElement>
+    children: React.ReactNode;
+    active: boolean;
+    ref?: React.Ref<HTMLDivElement>;
 }
 
 type AutoCompleteProps<T> = Omit<InputProps, 'onChange'> & {
-    data: Array<T>
-    optionKey: (obj: T) => string
-    value: string
-    onInputChange: (value: string) => void
-    onOptionSelected: (option: T) => void
-    renderOption: (option: T) => ReactNode
-}
+    data: Array<T>;
+    optionKey: (obj: T) => string;
+    value: string;
+    onInputChange: (value: string) => void;
+    onOptionSelected: (option: T) => void;
+    renderOption: (option: T) => ReactNode;
+};
 
 const Item = ({
     children,
@@ -35,7 +35,7 @@ const Item = ({
     ref,
     ...rest
 }: ItemProps & React.HTMLProps<HTMLDivElement>) => {
-    const id = useId()
+    const id = useId();
     return (
         <div
             ref={ref}
@@ -47,8 +47,8 @@ const Item = ({
         >
             {children}
         </div>
-    )
-}
+    );
+};
 
 function AutoComplete<T>(props: AutoCompleteProps<T>) {
     const {
@@ -59,21 +59,21 @@ function AutoComplete<T>(props: AutoCompleteProps<T>) {
         onOptionSelected,
         renderOption,
         ...rest
-    } = props
-    const [open, setOpen] = useState(false)
-    const [activeIndex, setActiveIndex] = useState<number | null>(null)
+    } = props;
+    const [open, setOpen] = useState(false);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-    const [options, setOptions] = useState<Array<T>>([])
+    const [options, setOptions] = useState<Array<T>>([]);
 
-    const listRef = useRef<Array<HTMLElement | null>>([])
+    const listRef = useRef<Array<HTMLElement | null>>([]);
 
     useEffect(() => {
         const items = data.filter((item) =>
             optionKey(item).toLowerCase().includes(value.toLowerCase()),
-        )
-        setOptions(items)
+        );
+        setOptions(items);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value])
+    }, [value]);
 
     const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
         whileElementsMounted: autoUpdate,
@@ -86,37 +86,37 @@ function AutoComplete<T>(props: AutoCompleteProps<T>) {
                     Object.assign(elements.floating.style, {
                         width: `${rects.reference.width}px`,
                         maxHeight: `${availableHeight}px`,
-                    })
+                    });
                 },
                 padding: 10,
             }),
         ],
-    })
+    });
 
-    const role = useRole(context, { role: 'listbox' })
-    const dismiss = useDismiss(context)
+    const role = useRole(context, { role: 'listbox' });
+    const dismiss = useDismiss(context);
     const listNav = useListNavigation(context, {
         listRef,
         activeIndex,
         onNavigate: setActiveIndex,
         virtual: true,
         loop: true,
-    })
+    });
 
     const { getReferenceProps, getFloatingProps, getItemProps } =
-        useInteractions([role, dismiss, listNav])
+        useInteractions([role, dismiss, listNav]);
 
     function onAutoCompleteChange(event: ChangeEvent<HTMLInputElement>) {
-        const value = event.target.value
-        onInputChange(value)
+        const value = event.target.value;
+        onInputChange(value);
         const items = data.filter((item) =>
             optionKey(item).toLowerCase().includes(value.toLowerCase()),
-        )
+        );
         if (value && items.length > 0) {
-            setOpen(true)
-            setActiveIndex(0)
+            setOpen(true);
+            setActiveIndex(0);
         } else {
-            setOpen(false)
+            setOpen(false);
         }
     }
 
@@ -135,9 +135,9 @@ function AutoComplete<T>(props: AutoCompleteProps<T>) {
                             activeIndex != null &&
                             options[activeIndex]
                         ) {
-                            onInputChange(optionKey(options[activeIndex]))
-                            setActiveIndex(null)
-                            setOpen(false)
+                            onInputChange(optionKey(options[activeIndex]));
+                            setActiveIndex(null);
+                            setOpen(false);
                         }
                     },
                 })}
@@ -163,13 +163,13 @@ function AutoComplete<T>(props: AutoCompleteProps<T>) {
                                     {...getItemProps({
                                         key: optionKey(item),
                                         ref(node) {
-                                            listRef.current[index] = node
+                                            listRef.current[index] = node;
                                         },
                                         onClick() {
-                                            onInputChange(optionKey(item))
-                                            onOptionSelected(item)
-                                            setOpen(false)
-                                            refs.domReference.current?.focus()
+                                            onInputChange(optionKey(item));
+                                            onOptionSelected(item);
+                                            setOpen(false);
+                                            refs.domReference.current?.focus();
                                         },
                                     })}
                                     key={`auto-complete-item-${index}`}
@@ -183,7 +183,7 @@ function AutoComplete<T>(props: AutoCompleteProps<T>) {
                 )}
             </FloatingPortal>
         </>
-    )
+    );
 }
 
-export default AutoComplete
+export default AutoComplete;

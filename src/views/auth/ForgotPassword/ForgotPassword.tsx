@@ -1,26 +1,26 @@
-import { useState } from 'react'
-import Alert from '@/components/ui/Alert'
-import Button from '@/components/ui/Button'
-import ActionLink from '@/components/shared/ActionLink'
-import ForgotPasswordForm from './components/ForgotPasswordForm'
-import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import { useNavigate } from 'react-router'
+import { useState } from 'react';
+import Alert from '@/components/ui/Alert';
+import Button from '@/components/ui/Button';
+import ActionLink from '@/components/shared/ActionLink';
+import ForgotPasswordForm from './components/ForgotPasswordForm';
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage';
+import { useNavigate } from 'react-router';
 
 type ForgotPasswordProps = {
-    signInUrl?: string
-}
+    signInUrl?: string;
+};
 
 export const ForgotPasswordBase = ({
     signInUrl = '/sign-in',
 }: ForgotPasswordProps) => {
-    const [emailSent, setEmailSent] = useState(false)
-    const [message, setMessage] = useTimeOutMessage()
+    const [emailSent, setEmailSent] = useState(false);
+    const [message, setMessage] = useTimeOutMessage();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleContinue = () => {
-        navigate(signInUrl)
-    }
+        navigate(signInUrl);
+    };
 
     return (
         <div>
@@ -72,11 +72,11 @@ export const ForgotPasswordBase = ({
                 </ActionLink>
             </div>
         </div>
-    )
-}
+    );
+};
 
 const ForgotPassword = () => {
-    return <ForgotPasswordBase />
-}
+    return <ForgotPasswordBase />;
+};
 
-export default ForgotPassword
+export default ForgotPassword;

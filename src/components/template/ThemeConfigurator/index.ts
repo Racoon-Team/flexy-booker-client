@@ -1,5 +1,5 @@
-import ThemeConfigurator from './ThemeConfigurator'
+import ThemeConfigurator from './ThemeConfigurator';
 
-export type { ThemeConfiguratorProps } from './ThemeConfigurator'
+export type { ThemeConfiguratorProps } from './ThemeConfigurator';
 
-export default ThemeConfigurator
+export default ThemeConfigurator;

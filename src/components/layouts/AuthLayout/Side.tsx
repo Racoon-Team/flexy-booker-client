@@ -1,7 +1,7 @@
-import { cloneElement } from 'react'
-import type { CommonProps } from '@/@types/common'
+import { cloneElement } from 'react';
+import type { CommonProps } from '@/@types/common';
 
-type SideProps = CommonProps
+type SideProps = CommonProps;
 
 const Side = ({ children, ...rest }: SideProps) => {
     return (
@@ -22,7 +22,7 @@ const Side = ({ children, ...rest }: SideProps) => {
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Side
+export default Side;

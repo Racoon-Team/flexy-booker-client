@@ -1,20 +1,20 @@
-import { useMemo } from 'react'
-import Avatar from '@/components/ui/Avatar'
-import Dropdown from '@/components/ui/Dropdown'
-import classNames from 'classnames'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
-import { useLocaleStore } from '@/store/localeStore'
-import { HiCheck } from 'react-icons/hi'
-import type { CommonProps } from '@/@types/common'
+import { useMemo } from 'react';
+import Avatar from '@/components/ui/Avatar';
+import Dropdown from '@/components/ui/Dropdown';
+import classNames from 'classnames';
+import withHeaderItem from '@/utils/hoc/withHeaderItem';
+import { useLocaleStore } from '@/store/localeStore';
+import { HiCheck } from 'react-icons/hi';
+import type { CommonProps } from '@/@types/common';
 
-const languageList = [{ label: 'English', value: 'en', flag: 'US' }]
+const languageList = [{ label: 'English', value: 'en', flag: 'US' }];
 
 const _LanguageSelector = ({ className }: CommonProps) => {
-    const { currentLang: locale, setLang } = useLocaleStore((state) => state)
+    const { currentLang: locale, setLang } = useLocaleStore((state) => state);
 
     const selectLangFlag = useMemo(() => {
-        return languageList.find((lang) => lang.value === locale)?.flag
-    }, [locale])
+        return languageList.find((lang) => lang.value === locale)?.flag;
+    }, [locale]);
 
     const selectedLanguage = (
         <div className={classNames(className, 'flex items-center')}>
@@ -24,7 +24,7 @@ const _LanguageSelector = ({ className }: CommonProps) => {
                 src={`/img/countries/${selectLangFlag}.png`}
             />
         </div>
-    )
+    );
 
     return (
         <Dropdown renderTitle={selectedLanguage} placement="bottom-end">
@@ -49,9 +49,9 @@ const _LanguageSelector = ({ className }: CommonProps) => {
                 </Dropdown.Item>
             ))}
         </Dropdown>
-    )
-}
+    );
+};
 
-const LanguageSelector = withHeaderItem(_LanguageSelector)
+const LanguageSelector = withHeaderItem(_LanguageSelector);
 
-export default LanguageSelector
+export default LanguageSelector;

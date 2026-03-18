@@ -1,20 +1,19 @@
-import { NumericFormat, NumericFormatProps } from 'react-number-format'
-import Input from '@/components/ui/Input'
-import type { ReactNode, ComponentType } from 'react'
-import type { InputProps } from '@/components/ui'
+import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import Input from '@/components/ui/Input';
+import type { ReactNode, ComponentType } from 'react';
+import type { InputProps } from '@/components/ui';
 
 interface InputAffix {
-    inputSuffix?: string | ReactNode
-    inputPrefix?: string | ReactNode
+    inputSuffix?: string | ReactNode;
+    inputPrefix?: string | ReactNode;
 }
 
 interface NumberInputProps
-    extends Omit<InputProps, 'prefix' | 'suffix'>,
-        InputAffix {}
+    extends Omit<InputProps, 'prefix' | 'suffix'>, InputAffix {}
 
-type NumberFormatInputProps = Omit<NumericFormatProps, 'form'> & InputAffix
+type NumberFormatInputProps = Omit<NumericFormatProps, 'form'> & InputAffix;
 
-type NumericInputProps = NumberInputProps & NumberFormatInputProps
+type NumericInputProps = NumberInputProps & NumberFormatInputProps;
 
 const NumberInput = ({
     inputSuffix,
@@ -28,8 +27,8 @@ const NumberInput = ({
             suffix={inputSuffix}
             prefix={inputPrefix}
         />
-    )
-}
+    );
+};
 
 const NumberFormatInput = ({
     onValueChange,
@@ -41,8 +40,8 @@ const NumberFormatInput = ({
             onValueChange={onValueChange}
             {...rest}
         />
-    )
-}
+    );
+};
 
 const NumericInput = ({
     inputSuffix,
@@ -57,7 +56,7 @@ const NumericInput = ({
             onValueChange={onValueChange}
             {...rest}
         />
-    )
-}
+    );
+};
 
-export default NumericInput
+export default NumericInput;

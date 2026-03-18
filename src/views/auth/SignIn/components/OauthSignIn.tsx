@@ -1,51 +1,51 @@
-import Button from '@/components/ui/Button'
-import { useAuth } from '@/auth'
+import Button from '@/components/ui/Button';
+import { useAuth } from '@/auth';
 import {
     apiGoogleOauthSignIn,
     apiGithubOauthSignIn,
-} from '@/services/OAuthServices'
+} from '@/services/OAuthServices';
 
 type OauthSignInProps = {
-    setMessage?: (message: string) => void
-    disableSubmit?: boolean
-}
+    setMessage?: (message: string) => void;
+    disableSubmit?: boolean;
+};
 
 const OauthSignIn = ({ setMessage, disableSubmit }: OauthSignInProps) => {
-    const { oAuthSignIn } = useAuth()
+    const { oAuthSignIn } = useAuth();
 
     const handleGoogleSignIn = async () => {
         if (!disableSubmit) {
             oAuthSignIn(async ({ redirect, onSignIn }) => {
                 try {
-                    const resp = await apiGoogleOauthSignIn()
+                    const resp = await apiGoogleOauthSignIn();
                     if (resp) {
-                        const { token, user } = resp
-                        onSignIn({ accessToken: token }, user)
-                        redirect()
+                        const { token, user } = resp;
+                        onSignIn({ accessToken: token }, user);
+                        redirect();
                     }
                 } catch (error) {
-                    setMessage?.((error as string)?.toString() || '')
+                    setMessage?.((error as string)?.toString() || '');
                 }
-            })
+            });
         }
-    }
+    };
 
     const handleGithubSignIn = async () => {
         if (!disableSubmit) {
             oAuthSignIn(async ({ redirect, onSignIn }) => {
                 try {
-                    const resp = await apiGithubOauthSignIn()
+                    const resp = await apiGithubOauthSignIn();
                     if (resp) {
-                        const { token, user } = resp
-                        onSignIn({ accessToken: token }, user)
-                        redirect()
+                        const { token, user } = resp;
+                        onSignIn({ accessToken: token }, user);
+                        redirect();
                     }
                 } catch (error) {
-                    setMessage?.((error as string)?.toString() || '')
+                    setMessage?.((error as string)?.toString() || '');
                 }
-            })
+            });
         }
-    }
+    };
 
     return (
         <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ const OauthSignIn = ({ setMessage, disableSubmit }: OauthSignInProps) => {
                 </div>
             </Button>
         </div>
-    )
-}
+    );
+};
 
-export default OauthSignIn
+export default OauthSignIn;

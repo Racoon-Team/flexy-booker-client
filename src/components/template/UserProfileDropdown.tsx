@@ -1,32 +1,32 @@
-import Avatar from '@/components/ui/Avatar'
-import Dropdown from '@/components/ui/Dropdown'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
-import { useSessionUser } from '@/store/authStore'
-import { Link } from 'react-router'
-import { PiUserDuotone, PiSignOutDuotone } from 'react-icons/pi'
-import { useAuth } from '@/auth'
-import type { JSX } from 'react'
+import Avatar from '@/components/ui/Avatar';
+import Dropdown from '@/components/ui/Dropdown';
+import withHeaderItem from '@/utils/hoc/withHeaderItem';
+import { useSessionUser } from '@/store/authStore';
+import { Link } from 'react-router';
+import { PiUserDuotone, PiSignOutDuotone } from 'react-icons/pi';
+import { useAuth } from '@/auth';
+import type { JSX } from 'react';
 
 type DropdownList = {
-    label: string
-    path: string
-    icon: JSX.Element
-}
+    label: string;
+    path: string;
+    icon: JSX.Element;
+};
 
-const dropdownItemList: DropdownList[] = []
+const dropdownItemList: DropdownList[] = [];
 
 const _UserDropdown = () => {
-    const { avatar, userName, email } = useSessionUser((state) => state.user)
+    const { avatar, userName, email } = useSessionUser((state) => state.user);
 
-    const { signOut } = useAuth()
+    const { signOut } = useAuth();
 
     const handleSignOut = () => {
-        signOut()
-    }
+        signOut();
+    };
 
     const avatarProps = {
         ...(avatar ? { src: avatar } : { icon: <PiUserDuotone /> }),
-    }
+    };
 
     return (
         <Dropdown
@@ -78,9 +78,9 @@ const _UserDropdown = () => {
                 <span>Sign Out</span>
             </Dropdown.Item>
         </Dropdown>
-    )
-}
+    );
+};
 
-const UserDropdown = withHeaderItem(_UserDropdown)
+const UserDropdown = withHeaderItem(_UserDropdown);
 
-export default UserDropdown
+export default UserDropdown;

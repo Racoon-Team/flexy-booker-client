@@ -1,20 +1,20 @@
-import classNames from 'classnames'
-import Header from './Header'
-import { isMonthInRange, getMonthsNames, formatYear } from '../utils'
-import type { CommonProps } from '../../@types/common'
+import classNames from 'classnames';
+import Header from './Header';
+import { isMonthInRange, getMonthsNames, formatYear } from '../utils';
+import type { CommonProps } from '../../@types/common';
 
 export interface MonthTableProps extends CommonProps {
-    value: { year: number; month: number }
-    onChange: (value: number) => void
-    locale: string
-    year: number
-    onYearChange: (year: number) => void
-    onNextLevel?: () => void
-    minDate?: Date
-    maxDate?: Date
-    monthLabelFormat?: string
-    yearLabelFormat?: string
-    preventFocus?: boolean
+    value: { year: number; month: number };
+    onChange: (value: number) => void;
+    locale: string;
+    year: number;
+    onYearChange: (year: number) => void;
+    onNextLevel?: () => void;
+    minDate?: Date;
+    maxDate?: Date;
+    monthLabelFormat?: string;
+    yearLabelFormat?: string;
+    preventFocus?: boolean;
 }
 
 const MonthTable = (props: MonthTableProps) => {
@@ -32,20 +32,20 @@ const MonthTable = (props: MonthTableProps) => {
         monthLabelFormat = 'MMM',
         yearLabelFormat = 'YYYY',
         ...rest
-    } = props
+    } = props;
 
-    const range = getMonthsNames(locale, monthLabelFormat)
-    const minYear = minDate instanceof Date ? minDate.getFullYear() : undefined
-    const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : undefined
+    const range = getMonthsNames(locale, monthLabelFormat);
+    const minYear = minDate instanceof Date ? minDate.getFullYear() : undefined;
+    const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : undefined;
 
     const months = range.map((month, index) => {
         const disabled = !isMonthInRange({
             date: new Date(year, index),
             minDate,
             maxDate,
-        })
+        });
 
-        const active = index === value.month && year === value.year
+        const active = index === value.month && year === value.year;
 
         return (
             <button
@@ -65,8 +65,8 @@ const MonthTable = (props: MonthTableProps) => {
             >
                 {month}
             </button>
-        )
-    })
+        );
+    });
 
     return (
         <div className={classNames('month-picker', className)} {...rest}>
@@ -86,7 +86,7 @@ const MonthTable = (props: MonthTableProps) => {
             />
             <div className="month-table">{months}</div>
         </div>
-    )
-}
+    );
+};
 
-export default MonthTable
+export default MonthTable;

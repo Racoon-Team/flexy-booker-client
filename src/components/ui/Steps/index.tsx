@@ -1,20 +1,20 @@
-import type { ForwardRefExoticComponent, RefAttributes } from 'react'
-import _Steps, { StepsProps } from './Steps'
-import StepItem from './StepItem'
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
+import _Steps, { StepsProps } from './Steps';
+import StepItem from './StepItem';
 
-export type { StepsProps } from './Steps'
-export type { StepItemProps } from './StepItem'
+export type { StepsProps } from './Steps';
+export type { StepItemProps } from './StepItem';
 
 type CompoundedComponent = ForwardRefExoticComponent<
     StepsProps & RefAttributes<HTMLDivElement>
 > & {
-    Item: typeof StepItem
-}
+    Item: typeof StepItem;
+};
 
-const Steps = _Steps as CompoundedComponent
+const Steps = _Steps as CompoundedComponent;
 
-Steps.Item = StepItem
+Steps.Item = StepItem;
 
-export { Steps }
+export { Steps };
 
-export default Steps
+export default Steps;

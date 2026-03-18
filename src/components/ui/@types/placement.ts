@@ -4,4 +4,4 @@ export type NotificationPlacement =
     | 'top-end'
     | 'bottom-start'
     | 'bottom-center'
-    | 'bottom-end'
+    | 'bottom-end';

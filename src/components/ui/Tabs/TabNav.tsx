@@ -1,15 +1,15 @@
-import classNames from '../utils/classNames'
-import { useTabs } from './context'
-import useCallbackRef from '../hooks/useCallbackRef'
-import type { CommonProps } from '../@types/common'
-import type { TabsValue } from './context'
-import type { ReactNode, Ref } from 'react'
+import classNames from '../utils/classNames';
+import { useTabs } from './context';
+import useCallbackRef from '../hooks/useCallbackRef';
+import type { CommonProps } from '../@types/common';
+import type { TabsValue } from './context';
+import type { ReactNode, Ref } from 'react';
 
 export interface TabNavProps extends CommonProps {
-    disabled?: boolean
-    icon?: string | ReactNode
-    ref?: Ref<HTMLDivElement>
-    value: TabsValue
+    disabled?: boolean;
+    icon?: string | ReactNode;
+    ref?: Ref<HTMLDivElement>;
+    value: TabsValue;
 }
 
 const TabNav = (props: TabNavProps) => {
@@ -21,16 +21,16 @@ const TabNav = (props: TabNavProps) => {
         children,
         ref,
         ...rest
-    } = props
+    } = props;
 
-    const { value, onValueChange, variant } = useTabs()
-    const isSelected = valueProp === value
+    const { value, onValueChange, variant } = useTabs();
+    const isSelected = valueProp === value;
 
     const onTabNavClick = useCallbackRef(() => {
         if (!isSelected && !disabled) {
-            onValueChange?.(valueProp)
+            onValueChange?.(valueProp);
         }
-    })
+    });
 
     const tabNavClass = classNames(
         'tab-nav',
@@ -41,7 +41,7 @@ const TabNav = (props: TabNavProps) => {
         disabled && 'tab-nav-disabled',
         !disabled && !isSelected && `hover:text-primary`,
         className,
-    )
+    );
 
     return (
         <div
@@ -57,7 +57,7 @@ const TabNav = (props: TabNavProps) => {
             {icon && <div className="tab-nav-icon">{icon}</div>}
             {children}
         </div>
-    )
-}
+    );
+};
 
-export default TabNav
+export default TabNav;

@@ -1,10 +1,10 @@
-import classNames from 'classnames'
-import { CommonProps } from '@/@types/common'
-import type { ElementType, Ref } from 'react'
+import classNames from 'classnames';
+import { CommonProps } from '@/@types/common';
+import type { ElementType, Ref } from 'react';
 
 interface ContainerProps extends CommonProps {
-    asElement?: ElementType
-    ref?: Ref<HTMLElement>
+    asElement?: ElementType;
+    ref?: Ref<HTMLElement>;
 }
 
 const Container = (props: ContainerProps) => {
@@ -14,7 +14,7 @@ const Container = (props: ContainerProps) => {
         asElement: Component = 'div',
         ref,
         ...rest
-    } = props
+    } = props;
 
     return (
         <Component
@@ -24,7 +24,7 @@ const Container = (props: ContainerProps) => {
         >
             {children}
         </Component>
-    )
-}
+    );
+};
 
-export default Container
+export default Container;

@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useCallback, useMemo, useEffect } from 'react'
-import classNames from 'classnames'
-import { RadioGroupContextProvider } from './context'
-import type { CommonProps } from '../@types/common'
-import type { Ref } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react';
+import classNames from 'classnames';
+import { RadioGroupContextProvider } from './context';
+import type { CommonProps } from '../@types/common';
+import type { Ref } from 'react';
 
 export interface RadioGroupProps extends CommonProps {
-    radioClass?: string
-    disabled?: boolean
-    name?: string
-    onChange?: (values: any, e: MouseEvent) => void
-    ref?: Ref<HTMLDivElement>
-    value?: any
-    vertical?: boolean
+    radioClass?: string;
+    disabled?: boolean;
+    name?: string;
+    onChange?: (values: any, e: MouseEvent) => void;
+    ref?: Ref<HTMLDivElement>;
+    value?: any;
+    vertical?: boolean;
 }
 
 const Group = (props: RadioGroupProps) => {
@@ -26,24 +26,24 @@ const Group = (props: RadioGroupProps) => {
         vertical = false,
         className,
         ...rest
-    } = props
+    } = props;
 
-    const [value, setValue] = useState(valueProp)
+    const [value, setValue] = useState(valueProp);
 
     useEffect(() => {
         if (valueProp !== value) {
-            setValue(valueProp)
+            setValue(valueProp);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [valueProp])
+    }, [valueProp]);
 
     const onRadioGroupChange = useCallback(
         (nextValue: any, e: MouseEvent) => {
-            setValue(nextValue)
-            onChange?.(nextValue, e)
+            setValue(nextValue);
+            onChange?.(nextValue, e);
         },
         [onChange, setValue],
-    )
+    );
 
     const contextValue = useMemo(
         () => ({
@@ -55,13 +55,13 @@ const Group = (props: RadioGroupProps) => {
             onChange: onRadioGroupChange,
         }),
         [disabled, onRadioGroupChange, vertical, name, radioClass, value],
-    )
+    );
 
     const radioGroupClass = classNames(
         'radio-group',
         vertical && 'vertical',
         className,
-    )
+    );
 
     return (
         <RadioGroupContextProvider value={contextValue}>
@@ -69,7 +69,7 @@ const Group = (props: RadioGroupProps) => {
                 {props.children}
             </div>
         </RadioGroupContextProvider>
-    )
-}
+    );
+};
 
-export default Group
+export default Group;

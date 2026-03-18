@@ -1,27 +1,27 @@
-import { useState } from 'react'
-import Alert from '@/components/ui/Alert'
-import Button from '@/components/ui/Button'
-import ActionLink from '@/components/shared/ActionLink'
-import ResetPasswordForm from './components/ResetPasswordForm'
-import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import { useNavigate } from 'react-router'
+import { useState } from 'react';
+import Alert from '@/components/ui/Alert';
+import Button from '@/components/ui/Button';
+import ActionLink from '@/components/shared/ActionLink';
+import ResetPasswordForm from './components/ResetPasswordForm';
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage';
+import { useNavigate } from 'react-router';
 
 type ResetPasswordProps = {
-    signInUrl?: string
-}
+    signInUrl?: string;
+};
 
 export const ResetPasswordBase = ({
     signInUrl = '/sign-in',
 }: ResetPasswordProps) => {
-    const [resetComplete, setResetComplete] = useState(false)
+    const [resetComplete, setResetComplete] = useState(false);
 
-    const [message, setMessage] = useTimeOutMessage()
+    const [message, setMessage] = useTimeOutMessage();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleContinue = () => {
-        navigate(signInUrl)
-    }
+        navigate(signInUrl);
+    };
 
     return (
         <div>
@@ -72,11 +72,11 @@ export const ResetPasswordBase = ({
                 </ActionLink>
             </div>
         </div>
-    )
-}
+    );
+};
 
 const ResetPassword = () => {
-    return <ResetPasswordBase />
-}
+    return <ResetPasswordBase />;
+};
 
-export default ResetPassword
+export default ResetPassword;

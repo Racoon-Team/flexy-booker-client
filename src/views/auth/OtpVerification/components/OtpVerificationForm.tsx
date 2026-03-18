@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import Button from '@/components/ui/Button'
-import { FormItem, Form } from '@/components/ui/Form'
-import OtpInput from '@/components/shared/OtpInput'
-import sleep from '@/utils/sleep'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import type { CommonProps } from '@/@types/common'
+import { useState } from 'react';
+import Button from '@/components/ui/Button';
+import { FormItem, Form } from '@/components/ui/Form';
+import OtpInput from '@/components/shared/OtpInput';
+import sleep from '@/utils/sleep';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import type { CommonProps } from '@/@types/common';
 
 interface OtpVerificationFormProps extends CommonProps {
-    setOtpVerified?: (message: string) => void
-    setMessage?: (message: string) => void
+    setOtpVerified?: (message: string) => void;
+    setMessage?: (message: string) => void;
 }
 
 type ForgotPasswordFormSchema = {
-    otp: string
-}
+    otp: string;
+};
 
-const OTP_LENGTH = 6
+const OTP_LENGTH = 6;
 
 const validationSchema = z.object({
     otp: z.string().min(OTP_LENGTH, { message: 'Please enter a valid OTP' }),
-})
+});
 
 const OtpVerificationForm = (props: OtpVerificationFormProps) => {
-    const [isSubmitting, setSubmitting] = useState<boolean>(false)
+    const [isSubmitting, setSubmitting] = useState<boolean>(false);
 
-    const { className, setMessage, setOtpVerified } = props
+    const { className, setMessage, setOtpVerified } = props;
 
     const {
         handleSubmit,
@@ -34,26 +34,26 @@ const OtpVerificationForm = (props: OtpVerificationFormProps) => {
         control,
     } = useForm<ForgotPasswordFormSchema>({
         resolver: zodResolver(validationSchema),
-    })
+    });
 
     const onOtpSend = async (values: ForgotPasswordFormSchema) => {
-        const { otp } = values
-        setSubmitting(true)
+        const { otp } = values;
+        setSubmitting(true);
         try {
             /** simulate api call with sleep */
-            await sleep(1000)
-            setSubmitting(false)
-            setOtpVerified?.('OTP verified!')
+            await sleep(1000);
+            setSubmitting(false);
+            setOtpVerified?.('OTP verified!');
         } catch (errors) {
             setMessage?.(
                 typeof errors === 'string' ? errors : 'Some error occured!',
-            )
-            setSubmitting(false)
+            );
+            setSubmitting(false);
         }
 
-        console.log('otp', otp)
-        setSubmitting(false)
-    }
+        console.log('otp', otp);
+        setSubmitting(false);
+    };
 
     return (
         <div className={className}>
@@ -85,7 +85,7 @@ const OtpVerificationForm = (props: OtpVerificationFormProps) => {
                 </Button>
             </Form>
         </div>
-    )
-}
+    );
+};
 
-export default OtpVerificationForm
+export default OtpVerificationForm;

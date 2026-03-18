@@ -1,16 +1,16 @@
-import { TabsContextProvider } from './context'
-import useControllableState from '../hooks/useControllableState'
-import classNames from 'classnames'
-import type { CommonProps } from '../@types/common'
-import type { TabsVariant, TabsValue } from './context'
-import type { Ref } from 'react'
+import { TabsContextProvider } from './context';
+import useControllableState from '../hooks/useControllableState';
+import classNames from 'classnames';
+import type { CommonProps } from '../@types/common';
+import type { TabsVariant, TabsValue } from './context';
+import type { Ref } from 'react';
 
 export interface TabsProps extends CommonProps {
-    defaultValue?: TabsValue
-    onChange?: (tabValue: TabsValue) => void
-    ref?: Ref<HTMLDivElement>
-    value?: TabsValue
-    variant?: TabsVariant
+    defaultValue?: TabsValue;
+    onChange?: (tabValue: TabsValue) => void;
+    ref?: Ref<HTMLDivElement>;
+    value?: TabsValue;
+    variant?: TabsVariant;
 }
 
 const Tabs = (props: TabsProps) => {
@@ -22,15 +22,15 @@ const Tabs = (props: TabsProps) => {
         value: valueProp,
         variant = 'underline',
         ...rest
-    } = props
+    } = props;
 
     const [value, setValue] = useControllableState({
         prop: valueProp,
         onChange: onChange,
         defaultProp: defaultValue,
-    })
+    });
 
-    const tabsClass = classNames('tabs', className)
+    const tabsClass = classNames('tabs', className);
 
     return (
         <TabsContextProvider
@@ -42,7 +42,7 @@ const Tabs = (props: TabsProps) => {
         >
             <div className={tabsClass} {...rest} ref={ref} />
         </TabsContextProvider>
-    )
-}
+    );
+};
 
-export default Tabs
+export default Tabs;

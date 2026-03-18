@@ -1,12 +1,12 @@
-import ModeSwitcher from './ModeSwitcher'
-import LayoutSwitcher from './LayoutSwitcher'
-import ThemeSwitcher from './ThemeSwitcher'
-import DirectionSwitcher from './DirectionSwitcher'
-import CopyButton from './CopyButton'
+import ModeSwitcher from './ModeSwitcher';
+import LayoutSwitcher from './LayoutSwitcher';
+import ThemeSwitcher from './ThemeSwitcher';
+import DirectionSwitcher from './DirectionSwitcher';
+import CopyButton from './CopyButton';
 
 export type ThemeConfiguratorProps = {
-    callBackClose?: () => void
-}
+    callBackClose?: () => void;
+};
 
 const ThemeConfigurator = ({ callBackClose }: ThemeConfiguratorProps) => {
     return (
@@ -37,7 +37,7 @@ const ThemeConfigurator = ({ callBackClose }: ThemeConfiguratorProps) => {
             </div>
             <CopyButton />
         </div>
-    )
-}
+    );
+};
 
-export default ThemeConfigurator
+export default ThemeConfigurator;

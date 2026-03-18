@@ -1,26 +1,26 @@
-import { createContext, useContext } from 'react'
-import type { TypeAttributes } from '../@types/common'
+import { createContext, useContext } from 'react';
+import type { TypeAttributes } from '../@types/common';
 
-export type SegmentValue = string[] | string
+export type SegmentValue = string[] | string;
 
-export type SegmentSelectionType = 'single' | 'multiple'
+export type SegmentSelectionType = 'single' | 'multiple';
 
 export type SegmentContextProps = {
-    value?: SegmentValue
-    onActive?: (itemValue: SegmentValue) => void
-    onDeactivate?: (itemValue: SegmentValue) => void
-    selectionType?: SegmentSelectionType
-    size?: TypeAttributes.Size | TypeAttributes.ControlSize
-}
+    value?: SegmentValue;
+    onActive?: (itemValue: SegmentValue) => void;
+    onDeactivate?: (itemValue: SegmentValue) => void;
+    selectionType?: SegmentSelectionType;
+    size?: TypeAttributes.Size | TypeAttributes.ControlSize;
+};
 
-const SegmentContext = createContext<SegmentContextProps>({})
+const SegmentContext = createContext<SegmentContextProps>({});
 
-export const SegmentContextProvider = SegmentContext.Provider
+export const SegmentContextProvider = SegmentContext.Provider;
 
-export const SegmentContextConsumer = SegmentContext.Consumer
+export const SegmentContextConsumer = SegmentContext.Consumer;
 
 export function useSegment() {
-    return useContext(SegmentContext)
+    return useContext(SegmentContext);
 }
 
-export default SegmentContext
+export default SegmentContext;

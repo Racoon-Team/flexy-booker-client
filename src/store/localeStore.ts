@@ -1,14 +1,14 @@
-import appConfig from '@/configs/app.config'
-import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import i18n from 'i18next'
-import { dateLocales } from '@/locales'
-import dayjs from 'dayjs'
+import appConfig from '@/configs/app.config';
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import i18n from 'i18next';
+import { dateLocales } from '@/locales';
+import dayjs from 'dayjs';
 
 type LocaleState = {
-    currentLang: string
-    setLang: (payload: string) => void
-}
+    currentLang: string;
+    setLang: (payload: string) => void;
+};
 
 export const useLocaleStore = create<LocaleState>()(
     devtools(
@@ -19,20 +19,20 @@ export const useLocaleStore = create<LocaleState>()(
                     const formattedLang = lang.replace(
                         /-([a-z])/g,
                         function (g) {
-                            return g[1].toUpperCase()
+                            return g[1].toUpperCase();
                         },
-                    )
+                    );
 
-                    i18n.changeLanguage(formattedLang)
+                    i18n.changeLanguage(formattedLang);
 
                     dateLocales[formattedLang]().then(() => {
-                        dayjs.locale(formattedLang)
-                    })
+                        dayjs.locale(formattedLang);
+                    });
 
-                    return set({ currentLang: lang })
+                    return set({ currentLang: lang });
                 },
             }),
             { name: 'locale' },
         ),
     ),
-)
+);

@@ -1,8 +1,8 @@
-import { TbItalic } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbItalic } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonItalicProp = BaseToolButtonProps
+type ToolButtonItalicProp = BaseToolButtonProps;
 
 const ToolButtonItalic = ({ editor }: ToolButtonItalicProp) => {
     return (
@@ -14,7 +14,7 @@ const ToolButtonItalic = ({ editor }: ToolButtonItalicProp) => {
         >
             <TbItalic />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonItalic
+export default ToolButtonItalic;

@@ -1,15 +1,15 @@
-import classNames from 'classnames'
-import { APP_NAME } from '@/constants/app.constant'
-import type { CommonProps } from '@/@types/common'
+import classNames from 'classnames';
+import { APP_NAME } from '@/constants/app.constant';
+import type { CommonProps } from '@/@types/common';
 
 interface LogoProps extends CommonProps {
-    type?: 'full' | 'streamline'
-    mode?: 'light' | 'dark'
-    imgClass?: string
-    logoWidth?: number | string
+    type?: 'full' | 'streamline';
+    mode?: 'light' | 'dark';
+    imgClass?: string;
+    logoWidth?: number | string;
 }
 
-const LOGO_SRC_PATH = '/img/logo/'
+const LOGO_SRC_PATH = '/img/logo/';
 
 const Logo = (props: LogoProps) => {
     const {
@@ -19,7 +19,7 @@ const Logo = (props: LogoProps) => {
         imgClass,
         style,
         logoWidth = 'auto',
-    } = props
+    } = props;
 
     return (
         <div
@@ -35,7 +35,7 @@ const Logo = (props: LogoProps) => {
                 alt={`${APP_NAME} logo`}
             />
         </div>
-    )
-}
+    );
+};
 
-export default Logo
+export default Logo;

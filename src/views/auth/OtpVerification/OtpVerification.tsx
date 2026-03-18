@@ -1,24 +1,24 @@
-import Alert from '@/components/ui/Alert'
-import OtpVerificationForm from './components/OtpVerificationForm'
-import sleep from '@/utils/sleep'
-import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
+import Alert from '@/components/ui/Alert';
+import OtpVerificationForm from './components/OtpVerificationForm';
+import sleep from '@/utils/sleep';
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage';
 
 export const OtpVerificationBase = () => {
-    const [otpVerified, setOtpVerified] = useTimeOutMessage()
-    const [otpResend, setOtpResend] = useTimeOutMessage()
-    const [message, setMessage] = useTimeOutMessage()
+    const [otpVerified, setOtpVerified] = useTimeOutMessage();
+    const [otpResend, setOtpResend] = useTimeOutMessage();
+    const [message, setMessage] = useTimeOutMessage();
 
     const handleResendOtp = async () => {
         try {
             /** simulate api call with sleep */
-            await sleep(500)
-            setOtpResend('We have sent you One Time Password.')
+            await sleep(500);
+            setOtpResend('We have sent you One Time Password.');
         } catch (errors) {
             setMessage?.(
                 typeof errors === 'string' ? errors : 'Some error occured!',
-            )
+            );
         }
-    }
+    };
 
     return (
         <div>
@@ -57,11 +57,11 @@ export const OtpVerificationBase = () => {
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
 const OtpVerification = () => {
-    return <OtpVerificationBase />
-}
+    return <OtpVerificationBase />;
+};
 
-export default OtpVerification
+export default OtpVerification;

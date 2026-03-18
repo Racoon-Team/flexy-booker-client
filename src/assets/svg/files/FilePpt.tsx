@@ -2,8 +2,8 @@ const FilePpt = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -27,7 +27,7 @@ const FilePpt = ({
                 transform="translate(-601.57 -408.45)"
             ></path>
         </svg>
-    )
-}
+    );
+};
 
-export default FilePpt
+export default FilePpt;

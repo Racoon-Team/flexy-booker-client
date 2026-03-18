@@ -4,15 +4,15 @@ import {
     useEffect,
     useState,
     useImperativeHandle,
-} from 'react'
-import classNames from 'classnames'
-import Table from '@/components/ui/Table'
-import Pagination from '@/components/ui/Pagination'
-import Select from '@/components/ui/Select'
-import Checkbox from '@/components/ui/Checkbox'
-import TableRowSkeleton from './loaders/TableRowSkeleton'
-import Loading from './Loading'
-import FileNotFound from '@/assets/svg/FileNotFound'
+} from 'react';
+import classNames from 'classnames';
+import Table from '@/components/ui/Table';
+import Pagination from '@/components/ui/Pagination';
+import Select from '@/components/ui/Select';
+import Checkbox from '@/components/ui/Checkbox';
+import TableRowSkeleton from './loaders/TableRowSkeleton';
+import Loading from './Loading';
+import FileNotFound from '@/assets/svg/FileNotFound';
 import {
     useReactTable,
     getCoreRowModel,
@@ -24,50 +24,50 @@ import {
     ColumnSort,
     Row,
     CellContext,
-} from '@tanstack/react-table'
-import type { TableProps } from '@/components/ui/Table'
-import type { SkeletonProps } from '@/components/ui/Skeleton'
-import type { Ref, ChangeEvent, ReactNode } from 'react'
-import type { CheckboxProps } from '@/components/ui/Checkbox'
+} from '@tanstack/react-table';
+import type { TableProps } from '@/components/ui/Table';
+import type { SkeletonProps } from '@/components/ui/Skeleton';
+import type { Ref, ChangeEvent, ReactNode } from 'react';
+import type { CheckboxProps } from '@/components/ui/Checkbox';
 
-export type OnSortParam = { order: 'asc' | 'desc' | ''; key: string | number }
+export type OnSortParam = { order: 'asc' | 'desc' | ''; key: string | number };
 
 type DataTableProps<T> = {
-    columns: ColumnDef<T>[]
-    customNoDataIcon?: ReactNode
-    data?: unknown[]
-    loading?: boolean
-    noData?: boolean
-    instanceId?: string
-    onCheckBoxChange?: (checked: boolean, row: T) => void
-    onIndeterminateCheckBoxChange?: (checked: boolean, rows: Row<T>[]) => void
-    onPaginationChange?: (page: number) => void
-    onSelectChange?: (num: number) => void
-    onSort?: (sort: OnSortParam) => void
-    pageSizes?: number[]
-    selectable?: boolean
-    skeletonAvatarColumns?: number[]
-    skeletonAvatarProps?: SkeletonProps
+    columns: ColumnDef<T>[];
+    customNoDataIcon?: ReactNode;
+    data?: unknown[];
+    loading?: boolean;
+    noData?: boolean;
+    instanceId?: string;
+    onCheckBoxChange?: (checked: boolean, row: T) => void;
+    onIndeterminateCheckBoxChange?: (checked: boolean, rows: Row<T>[]) => void;
+    onPaginationChange?: (page: number) => void;
+    onSelectChange?: (num: number) => void;
+    onSort?: (sort: OnSortParam) => void;
+    pageSizes?: number[];
+    selectable?: boolean;
+    skeletonAvatarColumns?: number[];
+    skeletonAvatarProps?: SkeletonProps;
     pagingData?: {
-        total: number
-        pageIndex: number
-        pageSize: number
-    }
-    checkboxChecked?: (row: T) => boolean
-    indeterminateCheckboxChecked?: (row: Row<T>[]) => boolean
-    ref?: Ref<DataTableResetHandle | HTMLTableElement>
-} & TableProps
+        total: number;
+        pageIndex: number;
+        pageSize: number;
+    };
+    checkboxChecked?: (row: T) => boolean;
+    indeterminateCheckboxChecked?: (row: Row<T>[]) => boolean;
+    ref?: Ref<DataTableResetHandle | HTMLTableElement>;
+} & TableProps;
 
-type CheckBoxChangeEvent = ChangeEvent<HTMLInputElement>
+type CheckBoxChangeEvent = ChangeEvent<HTMLInputElement>;
 
 interface IndeterminateCheckboxProps extends Omit<CheckboxProps, 'onChange'> {
-    onChange: (event: CheckBoxChangeEvent) => void
-    indeterminate: boolean
-    onCheckBoxChange?: (event: CheckBoxChangeEvent) => void
-    onIndeterminateCheckBoxChange?: (event: CheckBoxChangeEvent) => void
+    onChange: (event: CheckBoxChangeEvent) => void;
+    indeterminate: boolean;
+    onCheckBoxChange?: (event: CheckBoxChangeEvent) => void;
+    onIndeterminateCheckBoxChange?: (event: CheckBoxChangeEvent) => void;
 }
 
-const { Tr, Th, Td, THead, TBody, Sorter } = Table
+const { Tr, Th, Td, THead, TBody, Sorter } = Table;
 
 const IndeterminateCheckbox = (props: IndeterminateCheckboxProps) => {
     const {
@@ -76,22 +76,22 @@ const IndeterminateCheckbox = (props: IndeterminateCheckboxProps) => {
         onCheckBoxChange,
         onIndeterminateCheckBoxChange,
         ...rest
-    } = props
+    } = props;
 
-    const ref = useRef<HTMLInputElement>(null)
+    const ref = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (typeof indeterminate === 'boolean' && ref.current) {
-            ref.current.indeterminate = !rest.checked && indeterminate
+            ref.current.indeterminate = !rest.checked && indeterminate;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ref, indeterminate])
+    }, [ref, indeterminate]);
 
     const handleChange = (e: CheckBoxChangeEvent) => {
-        onChange(e)
-        onCheckBoxChange?.(e)
-        onIndeterminateCheckBoxChange?.(e)
-    }
+        onChange(e);
+        onCheckBoxChange?.(e);
+        onIndeterminateCheckBoxChange?.(e);
+    };
 
     return (
         <Checkbox
@@ -100,13 +100,13 @@ const IndeterminateCheckbox = (props: IndeterminateCheckboxProps) => {
             onChange={(_, e) => handleChange(e)}
             {...rest}
         />
-    )
-}
+    );
+};
 
 export type DataTableResetHandle = {
-    resetSorting: () => void
-    resetSelected: () => void
-}
+    resetSorting: () => void;
+    resetSelected: () => void;
+};
 
 function DataTable<T>(props: DataTableProps<T>) {
     const {
@@ -134,11 +134,11 @@ function DataTable<T>(props: DataTableProps<T>) {
         instanceId = 'data-table',
         ref,
         ...rest
-    } = props
+    } = props;
 
-    const { pageSize, pageIndex, total } = pagingData
+    const { pageSize, pageIndex, total } = pagingData;
 
-    const [sorting, setSorting] = useState<ColumnSort[] | null>(null)
+    const [sorting, setSorting] = useState<ColumnSort[] | null>(null);
 
     const pageSizeOption = useMemo(
         () =>
@@ -147,35 +147,35 @@ function DataTable<T>(props: DataTableProps<T>) {
                 label: `${number} / page`,
             })),
         [pageSizes],
-    )
+    );
 
     useEffect(() => {
         if (Array.isArray(sorting)) {
             const sortOrder =
-                sorting.length > 0 ? (sorting[0].desc ? 'desc' : 'asc') : ''
-            const id = sorting.length > 0 ? sorting[0].id : ''
-            onSort?.({ order: sortOrder, key: id })
+                sorting.length > 0 ? (sorting[0].desc ? 'desc' : 'asc') : '';
+            const id = sorting.length > 0 ? sorting[0].id : '';
+            onSort?.({ order: sortOrder, key: id });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sorting])
+    }, [sorting]);
 
     const handleIndeterminateCheckBoxChange = (
         checked: boolean,
         rows: Row<T>[],
     ) => {
         if (!loading) {
-            onIndeterminateCheckBoxChange?.(checked, rows)
+            onIndeterminateCheckBoxChange?.(checked, rows);
         }
-    }
+    };
 
     const handleCheckBoxChange = (checked: boolean, row: T) => {
         if (!loading) {
-            onCheckBoxChange?.(checked, row)
+            onCheckBoxChange?.(checked, row);
         }
-    }
+    };
 
     const finalColumns: ColumnDef<T>[] = useMemo(() => {
-        const columns = columnsProp
+        const columns = columnsProp;
 
         if (selectable) {
             return [
@@ -197,7 +197,7 @@ function DataTable<T>(props: DataTableProps<T>) {
                                 handleIndeterminateCheckBoxChange(
                                     e.target.checked,
                                     table.getRowModel().rows,
-                                )
+                                );
                             }}
                         />
                     ),
@@ -221,11 +221,11 @@ function DataTable<T>(props: DataTableProps<T>) {
                     ),
                 },
                 ...columns,
-            ]
+            ];
         }
-        return columns
+        return columns;
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [columnsProp, selectable, loading, checkboxChecked])
+    }, [columnsProp, selectable, loading, checkboxChecked]);
 
     const table = useReactTable({
         data,
@@ -238,38 +238,38 @@ function DataTable<T>(props: DataTableProps<T>) {
         manualPagination: true,
         manualSorting: true,
         onSortingChange: (sorter) => {
-            setSorting(sorter as ColumnSort[])
+            setSorting(sorter as ColumnSort[]);
         },
         state: {
             sorting: sorting as ColumnSort[],
         },
-    })
+    });
 
     const resetSorting = () => {
-        table.resetSorting()
-    }
+        table.resetSorting();
+    };
 
     const resetSelected = () => {
-        table.resetRowSelection(true)
-    }
+        table.resetRowSelection(true);
+    };
 
     useImperativeHandle(ref, () => ({
         resetSorting,
         resetSelected,
-    }))
+    }));
 
     const handlePaginationChange = (page: number) => {
         if (!loading) {
-            resetSelected()
-            onPaginationChange?.(page)
+            resetSelected();
+            onPaginationChange?.(page);
         }
-    }
+    };
 
     const handleSelectChange = (value?: number) => {
         if (!loading) {
-            onSelectChange?.(Number(value))
+            onSelectChange?.(Number(value));
         }
-    }
+    };
 
     return (
         <Loading loading={Boolean(loading && data.length !== 0)} type="cover">
@@ -306,7 +306,7 @@ function DataTable<T>(props: DataTableProps<T>) {
                                             </div>
                                         )}
                                     </Th>
-                                )
+                                );
                             })}
                         </Tr>
                     ))}
@@ -364,10 +364,10 @@ function DataTable<T>(props: DataTableProps<T>) {
                                                                 cell.getContext(),
                                                             )}
                                                         </Td>
-                                                    )
+                                                    );
                                                 })}
                                         </Tr>
-                                    )
+                                    );
                                 })
                         )}
                     </TBody>
@@ -395,8 +395,8 @@ function DataTable<T>(props: DataTableProps<T>) {
                 </div>
             </div>
         </Loading>
-    )
+    );
 }
 
-export type { ColumnDef, Row, CellContext }
-export default DataTable
+export type { ColumnDef, Row, CellContext };
+export default DataTable;

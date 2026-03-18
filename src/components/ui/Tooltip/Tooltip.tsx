@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import classNames from 'classnames'
-import { motion, AnimatePresence } from 'framer-motion'
-import Arrow from './Arrow'
-import type { CommonProps } from '../@types/common'
-import type { ArrowPlacement } from './Arrow'
-import type { ReactNode } from 'react'
+import { useState } from 'react';
+import classNames from 'classnames';
+import { motion, AnimatePresence } from 'framer-motion';
+import Arrow from './Arrow';
+import type { CommonProps } from '../@types/common';
+import type { ArrowPlacement } from './Arrow';
+import type { ReactNode } from 'react';
 import {
     useFloating,
     autoUpdate,
@@ -17,14 +17,14 @@ import {
     useRole,
     useInteractions,
     FloatingPortal,
-} from '@floating-ui/react'
+} from '@floating-ui/react';
 
 export interface TooltipProps extends CommonProps {
-    isOpen?: boolean
-    placement?: ArrowPlacement
-    title: string | ReactNode
-    wrapperClass?: string
-    disabled?: boolean
+    isOpen?: boolean;
+    placement?: ArrowPlacement;
+    title: string | ReactNode;
+    wrapperClass?: string;
+    disabled?: boolean;
 }
 
 const Tooltip = (props: TooltipProps) => {
@@ -36,22 +36,22 @@ const Tooltip = (props: TooltipProps) => {
         title,
         wrapperClass,
         disabled,
-    } = props
+    } = props;
 
-    const [tooltipOpen, setTooltipOpen] = useState<boolean>(isOpen)
+    const [tooltipOpen, setTooltipOpen] = useState<boolean>(isOpen);
 
     const tooltipColor = {
         background: 'bg-gray-800 dark:bg-black',
         arrow: 'text-gray-800 dark:text-black',
-    }
+    };
 
-    const defaultTooltipClass = `tooltip ${tooltipColor.background}`
+    const defaultTooltipClass = `tooltip ${tooltipColor.background}`;
 
     const { refs, floatingStyles, context } = useFloating({
         open: isOpen,
         onOpenChange: (open) => {
             if (!disabled) {
-                setTooltipOpen(open)
+                setTooltipOpen(open);
             }
         },
         placement,
@@ -63,19 +63,19 @@ const Tooltip = (props: TooltipProps) => {
             }),
             shift(),
         ],
-    })
+    });
 
-    const hover = useHover(context, { move: false })
-    const focus = useFocus(context)
-    const dismiss = useDismiss(context)
-    const role = useRole(context, { role: 'tooltip' })
+    const hover = useHover(context, { move: false });
+    const focus = useFocus(context);
+    const dismiss = useDismiss(context);
+    const role = useRole(context, { role: 'tooltip' });
 
     const { getReferenceProps, getFloatingProps } = useInteractions([
         hover,
         focus,
         dismiss,
         role,
-    ])
+    ]);
 
     return (
         <>
@@ -127,9 +127,9 @@ const Tooltip = (props: TooltipProps) => {
                 )}
             </FloatingPortal>
         </>
-    )
-}
+    );
+};
 
-Tooltip.displayName = 'Tooltip'
+Tooltip.displayName = 'Tooltip';
 
-export default Tooltip
+export default Tooltip;

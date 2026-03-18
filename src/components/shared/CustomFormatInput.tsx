@@ -1,52 +1,51 @@
-import { NumberFormatBase, NumberFormatBaseProps } from 'react-number-format'
-import Input from '@/components/ui/Input'
-import type { ReactNode, ComponentType } from 'react'
-import type { InputProps } from '@/components/ui'
+import { NumberFormatBase, NumberFormatBaseProps } from 'react-number-format';
+import Input from '@/components/ui/Input';
+import type { ReactNode, ComponentType } from 'react';
+import type { InputProps } from '@/components/ui';
 
 interface InputAffix {
-    inputSuffix?: string | ReactNode
-    inputPrefix?: string | ReactNode
+    inputSuffix?: string | ReactNode;
+    inputPrefix?: string | ReactNode;
 }
 
 interface NumberInputProps
-    extends Omit<InputProps, 'prefix' | 'suffix'>,
-        InputAffix {}
+    extends Omit<InputProps, 'prefix' | 'suffix'>, InputAffix {}
 
-type NumberFormatInputProps = Omit<NumberFormatBaseProps, 'form'> & InputAffix
+type NumberFormatInputProps = Omit<NumberFormatBaseProps, 'form'> & InputAffix;
 
 type NumberFormatBasePropsOptional = {
-    format?: (value: string) => string
-    removeFormatting?: (value: string) => string
-    getCaretBoundary?: (formattedValue: string) => boolean[]
-}
+    format?: (value: string) => string;
+    removeFormatting?: (value: string) => string;
+    getCaretBoundary?: (formattedValue: string) => boolean[];
+};
 
 type CustomFormatInputProps = NumberInputProps &
     Omit<
         NumberFormatInputProps,
         'format' | 'removeFormatting' | 'getCaretBoundary'
     > &
-    NumberFormatBasePropsOptional
+    NumberFormatBasePropsOptional;
 
 function charIsNumber(char?: string) {
-    return !!(char || '').match(/\d/)
+    return !!(char || '').match(/\d/);
 }
 function caretUnknownFormatBoundary(formattedValue: string) {
     const boundaryAry = Array.from({ length: formattedValue.length + 1 }).map(
         () => true,
-    )
+    );
 
     for (let i = 0, ln = boundaryAry.length; i < ln; i++) {
         boundaryAry[i] = Boolean(
             charIsNumber(formattedValue[i]) ||
-                charIsNumber(formattedValue[i - 1]),
-        )
+            charIsNumber(formattedValue[i - 1]),
+        );
     }
 
-    return boundaryAry
+    return boundaryAry;
 }
 
 function defaultRemoveFormatting(value: string) {
-    return value.replace(/[^0-9]/g, '')
+    return value.replace(/[^0-9]/g, '');
 }
 
 const NumberInput = ({
@@ -61,8 +60,8 @@ const NumberInput = ({
             suffix={inputSuffix}
             prefix={inputPrefix}
         />
-    )
-}
+    );
+};
 
 const NumberFormatInput = ({
     onValueChange,
@@ -74,8 +73,8 @@ const NumberFormatInput = ({
             onValueChange={onValueChange}
             {...rest}
         />
-    )
-}
+    );
+};
 
 const FormCustomFormatInput = ({
     inputSuffix,
@@ -96,7 +95,7 @@ const FormCustomFormatInput = ({
             onValueChange={onValueChange}
             {...rest}
         />
-    )
-}
+    );
+};
 
-export default FormCustomFormatInput
+export default FormCustomFormatInput;

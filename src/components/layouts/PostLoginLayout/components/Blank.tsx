@@ -1,6 +1,6 @@
-import { CommonProps } from '@/@types/common'
-import LayoutBase from '@/components//template/LayoutBase'
-import { LAYOUT_BLANK } from '@/constants/theme.constant'
+import { CommonProps } from '@/@types/common';
+import LayoutBase from '@/components//template/LayoutBase';
+import { LAYOUT_BLANK } from '@/constants/theme.constant';
 
 const Blank = ({ children }: CommonProps) => {
     return (
@@ -10,7 +10,7 @@ const Blank = ({ children }: CommonProps) => {
         >
             <div className="flex min-w-0 w-full flex-1">{children}</div>
         </LayoutBase>
-    )
-}
+    );
+};
 
-export default Blank
+export default Blank;

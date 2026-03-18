@@ -1,51 +1,50 @@
-import classNames from '../utils/classNames'
-import { useConfig } from '../ConfigProvider'
-import { useForm } from '../Form/context'
-import { useInputGroup } from '../InputGroup/context'
-import { CONTROL_SIZES, SIZES } from '../utils/constants'
-import { Spinner } from '../Spinner'
-import type { CommonProps, TypeAttributes } from '../@types/common'
+import classNames from '../utils/classNames';
+import { useConfig } from '../ConfigProvider';
+import { useForm } from '../Form/context';
+import { useInputGroup } from '../InputGroup/context';
+import { CONTROL_SIZES, SIZES } from '../utils/constants';
+import { Spinner } from '../Spinner';
+import type { CommonProps, TypeAttributes } from '../@types/common';
 import type {
     ReactNode,
     ComponentPropsWithRef,
     MouseEvent,
     ElementType,
-} from 'react'
+} from 'react';
 
 export interface ButtonProps
-    extends CommonProps,
-        Omit<ComponentPropsWithRef<'button'>, 'onClick'> {
-    asElement?: ElementType
-    active?: boolean
-    block?: boolean
-    clickFeedback?: boolean
+    extends CommonProps, Omit<ComponentPropsWithRef<'button'>, 'onClick'> {
+    asElement?: ElementType;
+    active?: boolean;
+    block?: boolean;
+    clickFeedback?: boolean;
     customColorClass?: (state: {
-        active: boolean
-        unclickable: boolean
-    }) => string
-    disabled?: boolean
-    icon?: string | ReactNode
-    loading?: boolean
-    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
-    ref?: React.Ref<HTMLButtonElement>
-    shape?: TypeAttributes.Shape
-    size?: TypeAttributes.Size
-    variant?: 'solid' | 'plain' | 'default'
-    iconAlignment?: 'start' | 'end'
+        active: boolean;
+        unclickable: boolean;
+    }) => string;
+    disabled?: boolean;
+    icon?: string | ReactNode;
+    loading?: boolean;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+    ref?: React.Ref<HTMLButtonElement>;
+    shape?: TypeAttributes.Shape;
+    size?: TypeAttributes.Size;
+    variant?: 'solid' | 'plain' | 'default';
+    iconAlignment?: 'start' | 'end';
 }
 
 type ButtonColor = {
-    bgColor: string
-    hoverColor: string
-    activeColor: string
-    textColor: string
-}
+    bgColor: string;
+    hoverColor: string;
+    activeColor: string;
+    textColor: string;
+};
 
 const radiusShape: Record<TypeAttributes.Shape, string> = {
     round: 'rounded-xl',
     circle: 'rounded-full',
     none: 'rounded-none',
-}
+};
 
 const Button = (props: ButtonProps) => {
     const {
@@ -65,19 +64,19 @@ const Button = (props: ButtonProps) => {
         variant = 'default',
         iconAlignment = 'start',
         ...rest
-    } = props
-    const { controlSize, ui } = useConfig()
-    const formControlSize = useForm()?.size
-    const inputGroupSize = useInputGroup()?.size
-    const defaultClass = 'button'
-    const sizeIconClass = 'inline-flex items-center justify-center'
+    } = props;
+    const { controlSize, ui } = useConfig();
+    const formControlSize = useForm()?.size;
+    const inputGroupSize = useInputGroup()?.size;
+    const defaultClass = 'button';
+    const sizeIconClass = 'inline-flex items-center justify-center';
 
-    const buttonSize = size || inputGroupSize || formControlSize || controlSize
-    const feedback = !ui?.button?.disableClickFeedback || clickFeedback
-    const unclickable = disabled || loading
+    const buttonSize = size || inputGroupSize || formControlSize || controlSize;
+    const feedback = !ui?.button?.disableClickFeedback || clickFeedback;
+    const unclickable = disabled || loading;
 
     const getButtonSize = () => {
-        let sizeClass = ''
+        let sizeClass = '';
         switch (buttonSize) {
             case SIZES.LG:
                 sizeClass = classNames(
@@ -86,8 +85,8 @@ const Button = (props: ButtonProps) => {
                     icon && !children
                         ? `${CONTROL_SIZES.lg.w} ${sizeIconClass} text-2xl`
                         : 'px-8 py-2 text-base',
-                )
-                break
+                );
+                break;
             case SIZES.SM:
                 sizeClass = classNames(
                     CONTROL_SIZES.sm.h,
@@ -95,8 +94,8 @@ const Button = (props: ButtonProps) => {
                     icon && !children
                         ? `${CONTROL_SIZES.sm.w} ${sizeIconClass} text-lg`
                         : 'px-3 py-2 text-sm',
-                )
-                break
+                );
+                break;
             case SIZES.XS:
                 sizeClass = classNames(
                     CONTROL_SIZES.xs.h,
@@ -104,8 +103,8 @@ const Button = (props: ButtonProps) => {
                     icon && !children
                         ? `${CONTROL_SIZES.xs.w} ${sizeIconClass} text-base`
                         : 'px-3 py-1 text-xs',
-                )
-                break
+                );
+                break;
             default:
                 sizeClass = classNames(
                     CONTROL_SIZES.md.h,
@@ -113,13 +112,13 @@ const Button = (props: ButtonProps) => {
                     icon && !children
                         ? `${CONTROL_SIZES.md.w} ${sizeIconClass} text-xl`
                         : 'px-5 py-2',
-                )
-                break
+                );
+                break;
         }
-        return sizeClass
-    }
+        return sizeClass;
+    };
 
-    const disabledClass = 'opacity-50 cursor-not-allowed'
+    const disabledClass = 'opacity-50 cursor-not-allowed';
 
     const solidColor = () => {
         const btn = {
@@ -127,9 +126,9 @@ const Button = (props: ButtonProps) => {
             textColor: 'text-neutral',
             hoverColor: active ? '' : `hover:bg-primary-mild`,
             activeColor: ``,
-        }
-        return getBtnColor(btn)
-    }
+        };
+        return getBtnColor(btn);
+    };
 
     const plainColor = () => {
         const btn = {
@@ -137,9 +136,9 @@ const Button = (props: ButtonProps) => {
             textColor: ``,
             hoverColor: active ? '' : `hover:text-primary-mild`,
             activeColor: `dark:active:primary-mild`,
-        }
-        return getBtnColor(btn)
-    }
+        };
+        return getBtnColor(btn);
+    };
 
     const defaultColor = () => {
         const btn = {
@@ -151,9 +150,9 @@ const Button = (props: ButtonProps) => {
                 ? ''
                 : `ring-primary dark:ring-white hover:border-primary dark:hover:border-white hover:ring-1 hover:text-primary dark:hover:text-white dark:hover:bg-transparent`,
             activeColor: ``,
-        }
-        return getBtnColor(btn)
-    }
+        };
+        return getBtnColor(btn);
+    };
 
     const getBtnColor = ({
         bgColor,
@@ -163,21 +162,21 @@ const Button = (props: ButtonProps) => {
     }: ButtonColor) => {
         return `${bgColor} ${
             unclickable ? disabledClass : hoverColor + ' ' + activeColor
-        } ${textColor}`
-    }
+        } ${textColor}`;
+    };
 
     const btnColor = () => {
         switch (variant) {
             case 'solid':
-                return solidColor()
+                return solidColor();
             case 'plain':
-                return plainColor()
+                return plainColor();
             case 'default':
-                return defaultColor()
+                return defaultColor();
             default:
-                return defaultColor()
+                return defaultColor();
         }
-    }
+    };
 
     const classes = classNames(
         defaultClass,
@@ -190,16 +189,16 @@ const Button = (props: ButtonProps) => {
             active,
             unclickable,
         }),
-    )
+    );
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        const { onClick } = props
+        const { onClick } = props;
         if (unclickable) {
-            e.preventDefault()
-            return
+            e.preventDefault();
+            return;
         }
-        onClick?.(e)
-    }
+        onClick?.(e);
+    };
 
     const renderChildren = () => {
         if (loading && children) {
@@ -208,15 +207,15 @@ const Button = (props: ButtonProps) => {
                     <Spinner enableTheme={false} className="mr-1" />
                     {children}
                 </span>
-            )
+            );
         }
 
         if (icon && !children && loading) {
-            return <Spinner enableTheme={false} />
+            return <Spinner enableTheme={false} />;
         }
 
         if (icon && !children && !loading) {
-            return <>{icon}</>
+            return <>{icon}</>;
         }
 
         if (icon && children && !loading) {
@@ -230,11 +229,11 @@ const Button = (props: ButtonProps) => {
                         <span className="text-lg">{icon}</span>
                     )}
                 </span>
-            )
+            );
         }
 
-        return <>{children}</>
-    }
+        return <>{children}</>;
+    };
 
     return (
         <Component
@@ -245,7 +244,7 @@ const Button = (props: ButtonProps) => {
         >
             {renderChildren()}
         </Component>
-    )
-}
+    );
+};
 
-export default Button
+export default Button;

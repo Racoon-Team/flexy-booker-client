@@ -1,41 +1,41 @@
-import Tooltip from '@/components/ui/Tooltip'
-import Menu from '@/components/ui/Menu'
-import AuthorityCheck from '@/components/shared/AuthorityCheck'
-import VerticalMenuIcon from './VerticalMenuIcon'
-import { Link } from 'react-router'
-import Dropdown from '@/components/ui/Dropdown'
-import type { CommonProps } from '@/@types/common'
-import type { Direction } from '@/@types/theme'
-import type { NavigationTree } from '@/@types/navigation'
+import Tooltip from '@/components/ui/Tooltip';
+import Menu from '@/components/ui/Menu';
+import AuthorityCheck from '@/components/shared/AuthorityCheck';
+import VerticalMenuIcon from './VerticalMenuIcon';
+import { Link } from 'react-router';
+import Dropdown from '@/components/ui/Dropdown';
+import type { CommonProps } from '@/@types/common';
+import type { Direction } from '@/@types/theme';
+import type { NavigationTree } from '@/@types/navigation';
 
-const { MenuItem } = Menu
+const { MenuItem } = Menu;
 
 interface CollapsedItemProps extends CommonProps {
-    nav: NavigationTree
-    direction?: Direction
-    onLinkClick?: (link: { key: string; title: string; path: string }) => void
+    nav: NavigationTree;
+    direction?: Direction;
+    onLinkClick?: (link: { key: string; title: string; path: string }) => void;
     t: (
         key: string,
         fallback?: string | Record<string, string | number>,
-    ) => string
-    renderAsIcon?: boolean
-    userAuthority: string[]
-    currentKey?: string
-    parentKeys?: string[]
+    ) => string;
+    renderAsIcon?: boolean;
+    userAuthority: string[];
+    currentKey?: string;
+    parentKeys?: string[];
 }
 
 interface DefaultItemProps {
-    nav: NavigationTree
-    onLinkClick?: (link: { key: string; title: string; path: string }) => void
-    sideCollapsed?: boolean
+    nav: NavigationTree;
+    onLinkClick?: (link: { key: string; title: string; path: string }) => void;
+    sideCollapsed?: boolean;
     t: (
         key: string,
         fallback?: string | Record<string, string | number>,
-    ) => string
-    indent?: boolean
-    userAuthority: string[]
-    showIcon?: boolean
-    showTitle?: boolean
+    ) => string;
+    indent?: boolean;
+    userAuthority: string[];
+    showIcon?: boolean;
+    showTitle?: boolean;
 }
 
 interface VerticalMenuItemProps extends CollapsedItemProps, DefaultItemProps {}
@@ -82,8 +82,8 @@ const CollapsedItem = ({
                 </Dropdown.Item>
             )}
         </AuthorityCheck>
-    )
-}
+    );
+};
 
 const DefaultItem = (props: DefaultItemProps) => {
     const {
@@ -94,7 +94,7 @@ const DefaultItem = (props: DefaultItemProps) => {
         showIcon = true,
         userAuthority,
         t,
-    } = props
+    } = props;
 
     return (
         <AuthorityCheck userAuthority={userAuthority} authority={nav.authority}>
@@ -116,8 +116,8 @@ const DefaultItem = (props: DefaultItemProps) => {
                 </Link>
             </MenuItem>
         </AuthorityCheck>
-    )
-}
+    );
+};
 
 const VerticalSingleMenuItem = ({
     nav,
@@ -169,7 +169,7 @@ const VerticalSingleMenuItem = ({
                 />
             )}
         </>
-    )
-}
+    );
+};
 
-export default VerticalSingleMenuItem
+export default VerticalSingleMenuItem;

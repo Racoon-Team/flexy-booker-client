@@ -1,5 +1,5 @@
-import Alert from './Alert'
+import Alert from './Alert';
 
-export type { AlertProps } from './Alert'
-export { Alert }
-export default Alert
+export type { AlertProps } from './Alert';
+export { Alert };
+export default Alert;

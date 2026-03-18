@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react'
-import classNames from 'classnames'
-import { Spinner } from '../Spinner'
-import type { CommonProps } from '../@types/common'
-import type { ReactNode, ChangeEvent, Ref } from 'react'
+import { useState, useEffect } from 'react';
+import classNames from 'classnames';
+import { Spinner } from '../Spinner';
+import type { CommonProps } from '../@types/common';
+import type { ReactNode, ChangeEvent, Ref } from 'react';
 
 export interface SwitcherProps extends CommonProps {
-    checked?: boolean
-    checkedContent?: string | ReactNode
-    switcherClass?: string
-    defaultChecked?: boolean
-    disabled?: boolean
-    isLoading?: boolean
-    labelRef?: Ref<HTMLLabelElement>
-    name?: string
-    onChange?: (checked: boolean, e: ChangeEvent<HTMLInputElement>) => void
-    readOnly?: boolean
-    ref?: Ref<HTMLInputElement>
-    unCheckedContent?: string | ReactNode
+    checked?: boolean;
+    checkedContent?: string | ReactNode;
+    switcherClass?: string;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    isLoading?: boolean;
+    labelRef?: Ref<HTMLLabelElement>;
+    name?: string;
+    onChange?: (checked: boolean, e: ChangeEvent<HTMLInputElement>) => void;
+    readOnly?: boolean;
+    ref?: Ref<HTMLInputElement>;
+    unCheckedContent?: string | ReactNode;
 }
 
 const Switcher = (props: SwitcherProps) => {
@@ -35,59 +35,59 @@ const Switcher = (props: SwitcherProps) => {
         ref,
         unCheckedContent,
         ...rest
-    } = props
+    } = props;
 
     const [switcherChecked, setSwitcherChecked] = useState(
         defaultChecked || checked,
-    )
+    );
 
     useEffect(() => {
         if (typeof checked !== 'undefined') {
-            setSwitcherChecked(checked)
+            setSwitcherChecked(checked);
         }
-    }, [checked])
+    }, [checked]);
 
     const getControlProps = () => {
-        let checkedValue = switcherChecked
+        let checkedValue = switcherChecked;
 
         let propChecked: {
-            value?: string
-            defaultChecked?: boolean
-            checked?: boolean
+            value?: string;
+            defaultChecked?: boolean;
+            checked?: boolean;
         } = {
             value: `${checkedValue}`,
-        }
+        };
 
         if (typeof checked === 'boolean') {
             checkedValue =
-                typeof checked === 'boolean' ? checked : defaultChecked
-            propChecked = { checked: checkedValue }
+                typeof checked === 'boolean' ? checked : defaultChecked;
+            propChecked = { checked: checkedValue };
         }
 
         if (defaultChecked) {
-            propChecked.defaultChecked = defaultChecked
+            propChecked.defaultChecked = defaultChecked;
         }
-        return propChecked
-    }
+        return propChecked;
+    };
 
-    const controlProps = getControlProps()
+    const controlProps = getControlProps();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const nextChecked = !switcherChecked
+        const nextChecked = !switcherChecked;
 
         if (disabled || readOnly || isLoading) {
-            return
+            return;
         }
 
         if (typeof checked === 'undefined') {
-            setSwitcherChecked(nextChecked)
-            onChange?.(nextChecked, e)
+            setSwitcherChecked(nextChecked);
+            onChange?.(nextChecked, e);
         } else {
-            onChange?.(!switcherChecked as boolean, e)
+            onChange?.(!switcherChecked as boolean, e);
         }
-    }
+    };
 
-    const switcherColor = switcherClass || 'bg-primary dark:bg-primary'
+    const switcherColor = switcherClass || 'bg-primary dark:bg-primary';
 
     return (
         <label
@@ -126,7 +126,7 @@ const Switcher = (props: SwitcherProps) => {
                 {switcherChecked ? checkedContent : unCheckedContent}
             </span>
         </label>
-    )
-}
+    );
+};
 
-export default Switcher
+export default Switcher;

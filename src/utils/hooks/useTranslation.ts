@@ -1,4 +1,4 @@
-import { useTranslation as useReactI18NextTranslation } from 'react-i18next'
+import { useTranslation as useReactI18NextTranslation } from 'react-i18next';
 
 export const useTranslation = (usePlaceholder?: boolean) => {
     const translatePlaceholder = (
@@ -6,20 +6,20 @@ export const useTranslation = (usePlaceholder?: boolean) => {
         fallback?: string | Record<string, string | number>,
     ) => {
         if (typeof fallback === 'string') {
-            return fallback
+            return fallback;
         }
-        return ''
-    }
+        return '';
+    };
 
     const placehoderResponse = () => ({
         t: translatePlaceholder,
         ready: true,
         i18n: '',
-    })
+    });
 
-    const i18NextTranslation = useReactI18NextTranslation()
+    const i18NextTranslation = useReactI18NextTranslation();
 
-    return usePlaceholder ? placehoderResponse() : i18NextTranslation
-}
+    return usePlaceholder ? placehoderResponse() : i18NextTranslation;
+};
 
-export default useTranslation
+export default useTranslation;

@@ -1,27 +1,27 @@
-import { ViewMode, Gantt } from 'gantt-task-react'
-import TaskListTable from './TaskListTable'
-import TaskListHeader from './TaskListHeader'
-import TooltipContent from './TooltipContent'
-import tasksPreProcess from './tasksPreProcess'
-import { PatternLines } from '@visx/pattern'
-import type { ExtraCell } from './TaskListTable'
-import type { ExtraHeader } from './TaskListHeader'
-import type { Task, GanttProps } from 'gantt-task-react'
+import { ViewMode, Gantt } from 'gantt-task-react';
+import TaskListTable from './TaskListTable';
+import TaskListHeader from './TaskListHeader';
+import TooltipContent from './TooltipContent';
+import tasksPreProcess from './tasksPreProcess';
+import { PatternLines } from '@visx/pattern';
+import type { ExtraCell } from './TaskListTable';
+import type { ExtraHeader } from './TaskListHeader';
+import type { Task, GanttProps } from 'gantt-task-react';
 
 type ExtendedTask<T extends Record<string, unknown> = NonNullable<unknown>> =
     Task & {
-        barVariant?: string
-    } & T
+        barVariant?: string;
+    } & T;
 
 type GanttChartProps<T extends Record<string, unknown>> = GanttProps & {
     extraColumns?: Array<{
-        header: ExtraHeader
-        cell: ExtraCell
-    }>
-    tasks: ExtendedTask<T>[]
-    colorsMap?: Record<string, string>
-    showArrow?: boolean
-}
+        header: ExtraHeader;
+        cell: ExtraCell;
+    }>;
+    tasks: ExtendedTask<T>[];
+    colorsMap?: Record<string, string>;
+    showArrow?: boolean;
+};
 
 const GanttChart = <T extends Record<string, unknown>>(
     props: GanttChartProps<T>,
@@ -33,7 +33,7 @@ const GanttChart = <T extends Record<string, unknown>>(
         colorsMap = {},
         showArrow,
         ...rest
-    } = props
+    } = props;
 
     return (
         <>
@@ -83,9 +83,9 @@ const GanttChart = <T extends Record<string, unknown>>(
                 />
             </svg>
         </>
-    )
-}
+    );
+};
 
-export type { Task, ExtendedTask }
+export type { Task, ExtendedTask };
 
-export default GanttChart
+export default GanttChart;

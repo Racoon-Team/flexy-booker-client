@@ -1,12 +1,12 @@
-import classNames from '@/utils/classNames'
-import useLayout from '@/utils/hooks/useLayout'
-import type { CommonProps } from '@/@types/common'
-import { LAYOUT_CONTENT_OVERLAY } from '@/constants/theme.constant'
+import classNames from '@/utils/classNames';
+import useLayout from '@/utils/hooks/useLayout';
+import type { CommonProps } from '@/@types/common';
+import { LAYOUT_CONTENT_OVERLAY } from '@/constants/theme.constant';
 
-export type BottomStickyBarProps = CommonProps
+export type BottomStickyBarProps = CommonProps;
 
 const BottomStickyBar = ({ children }: BottomStickyBarProps) => {
-    const { type } = useLayout()
+    const { type } = useLayout();
 
     return (
         <div
@@ -17,7 +17,7 @@ const BottomStickyBar = ({ children }: BottomStickyBarProps) => {
         >
             {children}
         </div>
-    )
-}
+    );
+};
 
-export default BottomStickyBar
+export default BottomStickyBar;

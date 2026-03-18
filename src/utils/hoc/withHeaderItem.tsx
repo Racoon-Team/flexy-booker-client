@@ -1,16 +1,16 @@
-import classNames from 'classnames'
-import type { ComponentType, FC } from 'react'
+import classNames from 'classnames';
+import type { ComponentType, FC } from 'react';
 
 export type WithHeaderItemProps = {
-    className?: string
-    hoverable?: boolean
-}
+    className?: string;
+    hoverable?: boolean;
+};
 
 const withHeaderItem = <T extends WithHeaderItemProps>(
     Component: ComponentType<Omit<T, keyof WithHeaderItemProps>>,
 ): FC<T> => {
     const WithHeaderItem: FC<T> = (props: T) => {
-        const { className, hoverable = true } = props
+        const { className, hoverable = true } = props;
         return (
             <Component
                 {...(props as Omit<T, keyof WithHeaderItemProps>)}
@@ -20,12 +20,12 @@ const withHeaderItem = <T extends WithHeaderItemProps>(
                     className,
                 )}
             />
-        )
-    }
+        );
+    };
     WithHeaderItem.displayName = `withHeaderItem(${
         Component.displayName || Component.name || 'Component'
-    })`
-    return WithHeaderItem
-}
+    })`;
+    return WithHeaderItem;
+};
 
-export default withHeaderItem
+export default withHeaderItem;

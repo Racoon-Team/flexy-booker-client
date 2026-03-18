@@ -1,25 +1,26 @@
-import { useState, useMemo, useContext, useCallback, useEffect } from 'react'
-import classNames from '@/utils/classNames'
-import RadioGroupContext from './context'
-import type { CommonProps } from '../@types/common'
-import type { InputHTMLAttributes, Ref } from 'react'
+import { useState, useMemo, useContext, useCallback, useEffect } from 'react';
+import classNames from '@/utils/classNames';
+import RadioGroupContext from './context';
+import type { CommonProps } from '../@types/common';
+import type { InputHTMLAttributes, Ref } from 'react';
 
 export interface RadioProps
-    extends CommonProps,
+    extends
+        CommonProps,
         Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> {
-    checked?: boolean
-    radioClass?: string
-    defaultChecked?: boolean
-    disabled?: boolean
-    labelRef?: Ref<HTMLLabelElement>
-    name?: string
+    checked?: boolean;
+    radioClass?: string;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    labelRef?: Ref<HTMLLabelElement>;
+    name?: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onChange?: (value: any, e: MouseEvent) => void
-    ref?: Ref<HTMLInputElement>
+    onChange?: (value: any, e: MouseEvent) => void;
+    ref?: Ref<HTMLInputElement>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    value?: any
-    vertical?: boolean
-    readOnly?: boolean
+    value?: any;
+    vertical?: boolean;
+    readOnly?: boolean;
 }
 
 const Radio = (props: RadioProps) => {
@@ -29,7 +30,7 @@ const Radio = (props: RadioProps) => {
         value: groupValue,
         onChange: onGroupChange,
         radioClass: customColorContext,
-    } = useContext(RadioGroupContext)
+    } = useContext(RadioGroupContext);
 
     const {
         children,
@@ -45,33 +46,33 @@ const Radio = (props: RadioProps) => {
         ref,
         value,
         ...rest
-    } = props
+    } = props;
 
     const getChecked = () => {
         return typeof groupValue !== 'undefined'
             ? groupValue === value
-            : checkedProp
-    }
+            : checkedProp;
+    };
 
-    const [radioChecked, setRadioChecked] = useState(getChecked())
+    const [radioChecked, setRadioChecked] = useState(getChecked());
 
-    const radioColor = customColorContext || 'text-primary'
+    const radioColor = customColorContext || 'text-primary';
 
     const controlProps = useMemo(() => {
         if (typeof groupValue !== 'undefined') {
-            return { checked: radioChecked }
+            return { checked: radioChecked };
         }
-        return { checked: checkedProp, defaultChecked }
-    }, [radioChecked, checkedProp, defaultChecked, groupValue])
+        return { checked: checkedProp, defaultChecked };
+    }, [radioChecked, checkedProp, defaultChecked, groupValue]);
 
     const onRadioChange = useCallback(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (e: any) => {
             if (disabled || readOnly) {
-                return
+                return;
             }
-            onGroupChange?.(value, e)
-            onChange?.(value, e)
+            onGroupChange?.(value, e);
+            onChange?.(value, e);
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [
@@ -83,21 +84,21 @@ const Radio = (props: RadioProps) => {
             groupValue,
             readOnly,
         ],
-    )
+    );
 
     useEffect(() => {
-        const propChecked = getChecked()
+        const propChecked = getChecked();
         if (radioChecked !== propChecked) {
-            setRadioChecked(propChecked)
+            setRadioChecked(propChecked);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value, checkedProp, groupValue])
+    }, [value, checkedProp, groupValue]);
 
-    const radioDefaultClass = `radio peer ${radioColor}`
-    const radioColorClass = disabled && 'disabled'
-    const labelDisabledClass = disabled && 'disabled'
+    const radioDefaultClass = `radio peer ${radioColor}`;
+    const radioColorClass = disabled && 'disabled';
+    const labelDisabledClass = disabled && 'disabled';
 
-    const labelClass = classNames('radio-label', labelDisabledClass, className)
+    const labelClass = classNames('radio-label', labelDisabledClass, className);
 
     return (
         <label ref={labelRef} className={labelClass}>
@@ -132,7 +133,7 @@ const Radio = (props: RadioProps) => {
                 </span>
             ) : null}
         </label>
-    )
-}
+    );
+};
 
-export default Radio
+export default Radio;

@@ -1,1 +1,1 @@
-export const ROOT = '/'
+export const ROOT = '/';

@@ -1,65 +1,68 @@
-import { useMemo } from 'react'
-import classNames from 'classnames'
-import dayjs from 'dayjs'
-import Day from './Day'
-import getDayProps from './props/getDayProps'
-import { isSameDate, getWeekdaysNames, getMonthDays } from '../../utils'
-import { useConfig } from '../../../ConfigProvider'
-import type { CommonProps } from '../../../@types/common'
-import type { FirstDayOfWeek } from '../../../@types/date'
-import type { Modifiers, DayKeydownPayload } from './types'
-import type { GetDayPropsReturn } from './props/getDayProps'
+import { useMemo } from 'react';
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+import Day from './Day';
+import getDayProps from './props/getDayProps';
+import { isSameDate, getWeekdaysNames, getMonthDays } from '../../utils';
+import { useConfig } from '../../../ConfigProvider';
+import type { CommonProps } from '../../../@types/common';
+import type { FirstDayOfWeek } from '../../../@types/date';
+import type { Modifiers, DayKeydownPayload } from './types';
+import type { GetDayPropsReturn } from './props/getDayProps';
 import type {
     KeyboardEvent,
     ReactNode,
     MouseEvent,
     CSSProperties,
     Ref,
-} from 'react'
+} from 'react';
 
 export interface MonthBaseProps {
-    month?: Date
-    value?: Date | Date[]
-    dayClassName?: (date: Date, modifiers: Modifiers) => string
-    dayStyle?: (date: Date, modifiers: Modifiers) => CSSProperties
-    disableDate?: (date: Date) => boolean
-    disableOutOfMonth?: boolean
-    minDate?: Date
-    maxDate?: Date
-    hideWeekdays?: boolean
-    fullWidth?: boolean
-    preventFocus?: boolean
-    focusable?: boolean
-    firstDayOfWeek?: FirstDayOfWeek
-    hideOutOfMonthDates?: boolean
-    weekendDays?: [number, number]
+    month?: Date;
+    value?: Date | Date[];
+    dayClassName?: (date: Date, modifiers: Modifiers) => string;
+    dayStyle?: (date: Date, modifiers: Modifiers) => CSSProperties;
+    disableDate?: (date: Date) => boolean;
+    disableOutOfMonth?: boolean;
+    minDate?: Date;
+    maxDate?: Date;
+    hideWeekdays?: boolean;
+    fullWidth?: boolean;
+    preventFocus?: boolean;
+    focusable?: boolean;
+    firstDayOfWeek?: FirstDayOfWeek;
+    hideOutOfMonthDates?: boolean;
+    weekendDays?: [number, number];
     isDateInRange?:
         | (() => boolean)
-        | ((date: Date, props: GetDayPropsReturn) => boolean)
+        | ((date: Date, props: GetDayPropsReturn) => boolean);
     isDateFirstInRange?:
         | (() => boolean)
-        | ((date: Date, props: GetDayPropsReturn) => boolean)
+        | ((date: Date, props: GetDayPropsReturn) => boolean);
     isDateLastInRange?:
         | (() => boolean)
-        | ((date: Date, props: GetDayPropsReturn) => boolean)
+        | ((date: Date, props: GetDayPropsReturn) => boolean);
 }
 
 export interface MonthProps extends CommonProps, MonthBaseProps {
-    onChange?: (value: Date) => void
-    locale?: string
-    onDayMouseEnter?: (date: Date, event: MouseEvent<HTMLButtonElement>) => void
-    range?: [Date, Date]
+    onChange?: (value: Date) => void;
+    locale?: string;
+    onDayMouseEnter?: (
+        date: Date,
+        event: MouseEvent<HTMLButtonElement>,
+    ) => void;
+    range?: [Date, Date];
     onDayKeyDown?: (
         payload: DayKeydownPayload,
         event: KeyboardEvent<HTMLButtonElement>,
-    ) => void
-    daysRefs: HTMLButtonElement[][]
-    ref?: Ref<HTMLTableElement>
-    renderDay?: (date: Date) => ReactNode
-    weekdayLabelFormat?: string
+    ) => void;
+    daysRefs: HTMLButtonElement[][];
+    ref?: Ref<HTMLTableElement>;
+    renderDay?: (date: Date) => ReactNode;
+    weekdayLabelFormat?: string;
 }
 
-const noop = () => false
+const noop = () => false;
 
 const Month = (props: MonthProps) => {
     const {
@@ -92,12 +95,12 @@ const Month = (props: MonthProps) => {
         weekdayLabelFormat,
         weekendDays = [0, 6],
         ...rest
-    } = props
+    } = props;
 
-    const { locale: themeLocale } = useConfig()
+    const { locale: themeLocale } = useConfig();
 
-    const finalLocale = locale || themeLocale
-    const days = getMonthDays(month as Date, firstDayOfWeek)
+    const finalLocale = locale || themeLocale;
+    const days = getMonthDays(month as Date, firstDayOfWeek);
 
     const weekdays = getWeekdaysNames(
         finalLocale,
@@ -107,16 +110,16 @@ const Month = (props: MonthProps) => {
         <th key={weekday} className="week-day-cell">
             <span className="week-day-cell-content">{weekday}</span>
         </th>
-    ))
+    ));
 
     const hasValue = Array.isArray(value)
         ? value.every((item) => item instanceof Date)
-        : value instanceof Date
+        : value instanceof Date;
 
     const hasValueInMonthRange =
         value instanceof Date &&
         dayjs(value).isAfter(dayjs(month).startOf('month')) &&
-        dayjs(value).isBefore(dayjs(month).endOf('month'))
+        dayjs(value).isBefore(dayjs(month).endOf('month'));
 
     const getDayPropsParams = {
         month: month as Date,
@@ -128,7 +131,7 @@ const Month = (props: MonthProps) => {
         disableOutOfMonth: disableOutOfMonth as boolean,
         range: range as [Date, Date],
         weekendDays,
-    }
+    };
 
     const firstIncludedDay = useMemo(
         () =>
@@ -138,19 +141,19 @@ const Month = (props: MonthProps) => {
                     const dayProps = getDayProps({
                         ...getDayPropsParams,
                         ...{ date },
-                    })
+                    });
 
-                    return !dayProps.disabled && !dayProps.outOfMonth
+                    return !dayProps.disabled && !dayProps.outOfMonth;
                 }) || dayjs(month).startOf('month').toDate(),
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
-    )
+    );
 
     const rows = days.map((row, rowIndex) => {
         const cells = row.map((date, cellIndex) => {
-            const dayProps = getDayProps({ ...getDayPropsParams, ...{ date } })
+            const dayProps = getDayProps({ ...getDayPropsParams, ...{ date } });
 
-            const onKeyDownPayload = { rowIndex, cellIndex, date }
+            const onKeyDownPayload = { rowIndex, cellIndex, date };
 
             return (
                 <td key={cellIndex} className={classNames('date-picker-cell')}>
@@ -158,11 +161,11 @@ const Month = (props: MonthProps) => {
                         ref={(button) => {
                             if (daysRefs) {
                                 if (!Array.isArray(daysRefs[rowIndex])) {
-                                    daysRefs[rowIndex] = []
+                                    daysRefs[rowIndex] = [];
                                 }
 
                                 daysRefs[rowIndex][cellIndex] =
-                                    button as HTMLButtonElement
+                                    button as HTMLButtonElement;
                             }
                         }}
                         outOfMonth={dayProps.outOfMonth}
@@ -215,15 +218,15 @@ const Month = (props: MonthProps) => {
                         }
                     />
                 </td>
-            )
-        })
+            );
+        });
 
         return (
             <tr key={rowIndex} className={classNames('date-picker-week-cell')}>
                 {cells}
             </tr>
-        )
-    })
+        );
+    });
 
     return (
         <table
@@ -239,7 +242,7 @@ const Month = (props: MonthProps) => {
             )}
             <tbody>{rows}</tbody>
         </table>
-    )
-}
+    );
+};
 
-export default Month
+export default Month;

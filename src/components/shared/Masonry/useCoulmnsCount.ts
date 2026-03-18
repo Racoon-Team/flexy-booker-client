@@ -1,26 +1,26 @@
-import { useMemo } from 'react'
+import { useMemo } from 'react';
 
-import { Columns } from './types'
-import useWindowWidth from './useWindowWidth'
-import findBreakpoint from './breakpoints'
+import { Columns } from './types';
+import useWindowWidth from './useWindowWidth';
+import findBreakpoint from './breakpoints';
 
-const DEFAULT_COLUMNS = 3
+const DEFAULT_COLUMNS = 3;
 
 const useColumnsCount = (columns?: Columns): number => {
-    const isResponsive = typeof columns === 'object'
+    const isResponsive = typeof columns === 'object';
 
-    const windowWidth = useWindowWidth(isResponsive)
+    const windowWidth = useWindowWidth(isResponsive);
 
     const columnsCount = useMemo(() => {
         if (!isResponsive) {
-            return columns ?? DEFAULT_COLUMNS
+            return columns ?? DEFAULT_COLUMNS;
         }
 
-        const breakPoint = findBreakpoint(columns, windowWidth)
-        return columns[breakPoint] ?? DEFAULT_COLUMNS
-    }, [isResponsive, windowWidth, columns])
+        const breakPoint = findBreakpoint(columns, windowWidth);
+        return columns[breakPoint] ?? DEFAULT_COLUMNS;
+    }, [isResponsive, windowWidth, columns]);
 
-    return columnsCount
-}
+    return columnsCount;
+};
 
-export default useColumnsCount
+export default useColumnsCount;

@@ -1,8 +1,6 @@
-import {
-    NAV_ITEM_TYPE_ITEM,
-} from '@/constants/navigation.constant'
+import { NAV_ITEM_TYPE_ITEM } from '@/constants/navigation.constant';
 
-import type { NavigationTree } from '@/@types/navigation'
+import type { NavigationTree } from '@/@types/navigation';
 
 const navigationConfig: NavigationTree[] = [
     {
@@ -15,7 +13,6 @@ const navigationConfig: NavigationTree[] = [
         authority: [],
         subMenu: [],
     },
-    
-]
+];
 
-export default navigationConfig
+export default navigationConfig;

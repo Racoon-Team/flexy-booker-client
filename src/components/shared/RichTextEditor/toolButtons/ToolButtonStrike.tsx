@@ -1,8 +1,8 @@
-import { TbStrikethrough } from 'react-icons/tb'
-import ToolButton from './ToolButton'
-import type { BaseToolButtonProps } from './types'
+import { TbStrikethrough } from 'react-icons/tb';
+import ToolButton from './ToolButton';
+import type { BaseToolButtonProps } from './types';
 
-type ToolButtonStrikeProp = BaseToolButtonProps
+type ToolButtonStrikeProp = BaseToolButtonProps;
 
 const ToolButtonStrike = ({ editor }: ToolButtonStrikeProp) => {
     return (
@@ -14,7 +14,7 @@ const ToolButtonStrike = ({ editor }: ToolButtonStrikeProp) => {
         >
             <TbStrikethrough />
         </ToolButton>
-    )
-}
+    );
+};
 
-export default ToolButtonStrike
+export default ToolButtonStrike;

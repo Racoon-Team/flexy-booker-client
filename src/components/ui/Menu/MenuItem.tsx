@@ -1,13 +1,13 @@
-import { MenuContextConsumer } from './context/menuContext'
-import { GroupContextConsumer } from './context/groupContext'
-import { CollapseContextConsumer } from './context/collapseContext'
-import BaseMenuItem from '../MenuItem'
-import type { MenuItemProps as BaseMenuItemProps } from '../MenuItem'
+import { MenuContextConsumer } from './context/menuContext';
+import { GroupContextConsumer } from './context/groupContext';
+import { CollapseContextConsumer } from './context/collapseContext';
+import BaseMenuItem from '../MenuItem';
+import type { MenuItemProps as BaseMenuItemProps } from '../MenuItem';
 
-export type MenuItemProps = BaseMenuItemProps
+export type MenuItemProps = BaseMenuItemProps;
 
 const MenuItem = (props: MenuItemProps) => {
-    const { eventKey, ...rest } = props
+    const { eventKey, ...rest } = props;
 
     return (
         <MenuContextConsumer>
@@ -31,9 +31,9 @@ const MenuItem = (props: MenuItemProps) => {
                 </GroupContextConsumer>
             )}
         </MenuContextConsumer>
-    )
-}
+    );
+};
 
-MenuItem.displayName = 'MenuItem'
+MenuItem.displayName = 'MenuItem';
 
-export default MenuItem
+export default MenuItem;

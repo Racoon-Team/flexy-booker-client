@@ -3,9 +3,12 @@ export type Variables =
     | 'primaryDeep'
     | 'primaryMild'
     | 'primarySubtle'
-    | 'neutral'
+    | 'neutral';
 
-export type ThemeVariables = Record<'light' | 'dark', Record<Variables, string>>
+export type ThemeVariables = Record<
+    'light' | 'dark',
+    Record<Variables, string>
+>;
 
 const defaultTheme: ThemeVariables = {
     light: {
@@ -22,7 +25,7 @@ const defaultTheme: ThemeVariables = {
         primarySubtle: '#2a85ff1a',
         neutral: '#ffffff',
     },
-}
+};
 
 const darkTheme: ThemeVariables = {
     light: {
@@ -39,7 +42,7 @@ const darkTheme: ThemeVariables = {
         primarySubtle: '#ffffff1a',
         neutral: '#111827',
     },
-}
+};
 
 const greenTheme: ThemeVariables = {
     light: {
@@ -56,7 +59,7 @@ const greenTheme: ThemeVariables = {
         primarySubtle: '#0CAF601a',
         neutral: '#ffffff',
     },
-}
+};
 
 const purpleTheme: ThemeVariables = {
     light: {
@@ -73,7 +76,7 @@ const purpleTheme: ThemeVariables = {
         primarySubtle: '#8C62FF1a',
         neutral: '#ffffff',
     },
-}
+};
 
 const orangeTheme: ThemeVariables = {
     light: {
@@ -90,7 +93,7 @@ const orangeTheme: ThemeVariables = {
         primarySubtle: '#fb732c1a',
         neutral: '#ffffff',
     },
-}
+};
 
 const presetThemeSchemaConfig: Record<string, ThemeVariables> = {
     default: defaultTheme,
@@ -98,6 +101,6 @@ const presetThemeSchemaConfig: Record<string, ThemeVariables> = {
     green: greenTheme,
     purple: purpleTheme,
     orange: orangeTheme,
-}
+};
 
-export default presetThemeSchemaConfig
+export default presetThemeSchemaConfig;

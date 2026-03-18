@@ -1,7 +1,7 @@
-import getPosition from './utils/getPosition'
-import classNames from '../utils/classNames'
-import type { ReactNode } from 'react'
-import type { TypeAttributes } from '../@types/common'
+import getPosition from './utils/getPosition';
+import classNames from '../utils/classNames';
+import type { ReactNode } from 'react';
+import type { TypeAttributes } from '../@types/common';
 
 function isMarkFilled({
     mark,
@@ -9,24 +9,24 @@ function isMarkFilled({
     value,
 }: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mark: { value: number; label?: any }
-    offset?: number
-    value: number
+    mark: { value: number; label?: any };
+    offset?: number;
+    value: number;
 }) {
     return typeof offset === 'number'
         ? mark.value >= offset && mark.value <= value
-        : mark.value <= value
+        : mark.value <= value;
 }
 
 export interface MarksProps {
-    marks?: { value: number; label?: ReactNode }[]
-    min: number
-    max: number
-    value: number
-    offset?: number
-    disabled?: boolean
-    markClass?: string | ((isFilled: boolean) => string)
-    direction: TypeAttributes.Direction
+    marks?: { value: number; label?: ReactNode }[];
+    min: number;
+    max: number;
+    value: number;
+    offset?: number;
+    disabled?: boolean;
+    markClass?: string | ((isFilled: boolean) => string);
+    direction: TypeAttributes.Direction;
 }
 
 function Marks({
@@ -40,7 +40,7 @@ function Marks({
     direction,
 }: MarksProps) {
     if (!marks) {
-        return null
+        return null;
     }
 
     const items = marks.map((mark, index) => (
@@ -78,9 +78,9 @@ function Marks({
                 <div className="slider-mark-label">{mark.label}</div>
             )}
         </div>
-    ))
+    ));
 
-    return <div>{items}</div>
+    return <div>{items}</div>;
 }
 
-export default Marks
+export default Marks;

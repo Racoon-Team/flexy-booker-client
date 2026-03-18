@@ -2,8 +2,8 @@ const NoMedia = ({
     height = 100,
     width = 100,
 }: {
-    height?: number
-    width?: number
+    height?: number;
+    width?: number;
 }) => {
     return (
         <svg
@@ -25,7 +25,7 @@ const NoMedia = ({
                 fill="currentColor"
             ></path>
         </svg>
-    )
-}
+    );
+};
 
-export default NoMedia
+export default NoMedia;

@@ -1,13 +1,17 @@
-import { Navigate, Outlet } from 'react-router'
-import appConfig from '@/configs/app.config'
-import { useAuth } from '@/auth'
+import { Navigate, Outlet } from 'react-router';
+import appConfig from '@/configs/app.config';
+import { useAuth } from '@/auth';
 
-const { authenticatedEntryPath } = appConfig
+const { authenticatedEntryPath } = appConfig;
 
 const PublicRoute = () => {
-    const { authenticated } = useAuth()
+    const { authenticated } = useAuth();
 
-    return authenticated ? <Navigate to={authenticatedEntryPath} /> : <Outlet />
-}
+    return authenticated ? (
+        <Navigate to={authenticatedEntryPath} />
+    ) : (
+        <Outlet />
+    );
+};
 
-export default PublicRoute
+export default PublicRoute;

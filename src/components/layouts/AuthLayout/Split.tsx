@@ -1,9 +1,9 @@
-import { cloneElement } from 'react'
-import type { ReactNode } from 'react'
-import type { CommonProps } from '@/@types/common'
+import { cloneElement } from 'react';
+import type { ReactNode } from 'react';
+import type { CommonProps } from '@/@types/common';
 
 interface SplitProps extends CommonProps {
-    content?: ReactNode
+    content?: ReactNode;
 }
 
 const Split = ({ children, content, ...rest }: SplitProps) => {
@@ -38,7 +38,7 @@ const Split = ({ children, content, ...rest }: SplitProps) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Split
+export default Split;

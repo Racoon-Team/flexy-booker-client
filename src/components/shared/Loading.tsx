@@ -1,17 +1,17 @@
-import Spinner from '@/components/ui/Spinner'
-import classNames from 'classnames'
-import type { CommonProps } from '@/@types/common'
-import type { ElementType, ReactNode } from 'react'
+import Spinner from '@/components/ui/Spinner';
+import classNames from 'classnames';
+import type { CommonProps } from '@/@types/common';
+import type { ElementType, ReactNode } from 'react';
 
 interface BaseLoadingProps extends CommonProps {
-    asElement?: ElementType
-    customLoader?: ReactNode
-    loading: boolean
-    spinnerClass?: string
+    asElement?: ElementType;
+    customLoader?: ReactNode;
+    loading: boolean;
+    spinnerClass?: string;
 }
 
 interface LoadingProps extends BaseLoadingProps {
-    type?: 'default' | 'cover'
+    type?: 'default' | 'cover';
 }
 
 const DefaultLoading = (props: BaseLoadingProps) => {
@@ -22,7 +22,7 @@ const DefaultLoading = (props: BaseLoadingProps) => {
         className,
         asElement: Component = 'div',
         customLoader,
-    } = props
+    } = props;
 
     return loading ? (
         <Component
@@ -39,8 +39,8 @@ const DefaultLoading = (props: BaseLoadingProps) => {
         </Component>
     ) : (
         <>{children}</>
-    )
-}
+    );
+};
 
 const CoveredLoading = (props: BaseLoadingProps) => {
     const {
@@ -50,7 +50,7 @@ const CoveredLoading = (props: BaseLoadingProps) => {
         className,
         asElement: Component = 'div',
         customLoader,
-    } = props
+    } = props;
 
     return (
         <Component className={classNames(loading ? 'relative' : '', className)}>
@@ -68,8 +68,8 @@ const CoveredLoading = (props: BaseLoadingProps) => {
                 </div>
             )}
         </Component>
-    )
-}
+    );
+};
 
 const Loading = ({
     type = 'default',
@@ -85,7 +85,7 @@ const Loading = ({
                     asElement={asElement}
                     {...rest}
                 />
-            )
+            );
         case 'cover':
             return (
                 <CoveredLoading
@@ -93,7 +93,7 @@ const Loading = ({
                     asElement={asElement}
                     {...rest}
                 />
-            )
+            );
         default:
             return (
                 <DefaultLoading
@@ -101,8 +101,8 @@ const Loading = ({
                     asElement={asElement}
                     {...rest}
                 />
-            )
+            );
     }
-}
+};
 
-export default Loading
+export default Loading;

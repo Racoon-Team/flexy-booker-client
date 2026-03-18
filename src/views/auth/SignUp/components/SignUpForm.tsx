@@ -1,43 +1,45 @@
-import { useState } from 'react'
-import Input from '@/components/ui/Input'
-import Button from '@/components/ui/Button'
-import { FormItem, Form } from '@/components/ui/Form'
-import { useAuth } from '@/auth'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import type { CommonProps } from '@/@types/common'
+import { useState } from 'react';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import { FormItem, Form } from '@/components/ui/Form';
+import { useAuth } from '@/auth';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import type { CommonProps } from '@/@types/common';
 
 interface SignUpFormProps extends CommonProps {
-    disableSubmit?: boolean
-    setMessage?: (message: string) => void
+    disableSubmit?: boolean;
+    setMessage?: (message: string) => void;
 }
 
 type SignUpFormSchema = {
-    userName: string
-    password: string
-    email: string
-    confirmPassword: string
-}
+    userName: string;
+    password: string;
+    email: string;
+    confirmPassword: string;
+};
 
 const validationSchema = z
     .object({
         email: z.email({ message: 'Please enter a valid email' }),
         userName: z.string().min(1, { message: 'Please enter your name' }),
         password: z.string().min(1, { message: 'Password required' }),
-        confirmPassword: z.string().min(1, { message: 'Confirm Password Required' }),
+        confirmPassword: z
+            .string()
+            .min(1, { message: 'Confirm Password Required' }),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: 'Password not match',
         path: ['confirmPassword'],
-    })
+    });
 
 const SignUpForm = (props: SignUpFormProps) => {
-    const { disableSubmit = false, className, setMessage } = props
+    const { disableSubmit = false, className, setMessage } = props;
 
-    const [isSubmitting, setSubmitting] = useState<boolean>(false)
+    const [isSubmitting, setSubmitting] = useState<boolean>(false);
 
-    const { signUp } = useAuth()
+    const { signUp } = useAuth();
 
     const {
         handleSubmit,
@@ -45,22 +47,22 @@ const SignUpForm = (props: SignUpFormProps) => {
         control,
     } = useForm<SignUpFormSchema>({
         resolver: zodResolver(validationSchema),
-    })
+    });
 
     const onSignUp = async (values: SignUpFormSchema) => {
-        const { userName, password, email } = values
+        const { userName, password, email } = values;
 
         if (!disableSubmit) {
-            setSubmitting(true)
-            const result = await signUp({ userName, password, email })
+            setSubmitting(true);
+            const result = await signUp({ userName, password, email });
 
             if (result?.status === 'failed') {
-                setMessage?.(result.message)
+                setMessage?.(result.message);
             }
 
-            setSubmitting(false)
+            setSubmitting(false);
         }
-    }
+    };
 
     return (
         <div className={className}>
@@ -147,7 +149,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                 </Button>
             </Form>
         </div>
-    )
-}
+    );
+};
 
-export default SignUpForm
+export default SignUpForm;

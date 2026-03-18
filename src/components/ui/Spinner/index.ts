@@ -1,7 +1,7 @@
-import Spinner from './Spinner'
+import Spinner from './Spinner';
 
-export type { SpinnerProps } from './Spinner'
+export type { SpinnerProps } from './Spinner';
 
-export { Spinner }
+export { Spinner };
 
-export default Spinner
+export default Spinner;

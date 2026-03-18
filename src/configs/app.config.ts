@@ -1,12 +1,12 @@
 export type AppConfig = {
-    apiPrefix: string
-    authenticatedEntryPath: string
-    unAuthenticatedEntryPath: string
-    locale: string
-    accessTokenPersistStrategy: 'localStorage' | 'sessionStorage' | 'cookies'
-    enableMock: boolean
-    activeNavTranslation: boolean
-}
+    apiPrefix: string;
+    authenticatedEntryPath: string;
+    unAuthenticatedEntryPath: string;
+    locale: string;
+    accessTokenPersistStrategy: 'localStorage' | 'sessionStorage' | 'cookies';
+    enableMock: boolean;
+    activeNavTranslation: boolean;
+};
 
 const appConfig: AppConfig = {
     apiPrefix: 'http://localhost:3000/api',
@@ -16,6 +16,6 @@ const appConfig: AppConfig = {
     accessTokenPersistStrategy: 'cookies',
     enableMock: true,
     activeNavTranslation: false,
-}
+};
 
-export default appConfig
+export default appConfig;

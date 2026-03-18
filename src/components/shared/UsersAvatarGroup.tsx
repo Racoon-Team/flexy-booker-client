@@ -1,19 +1,19 @@
-import { useMemo } from 'react'
-import Tooltip from '@/components/ui/Tooltip'
-import Avatar from '@/components/ui/Avatar'
-import acronym from '@/utils/acronym'
-import useRandomBgColor from '@/utils/hooks/useRandomBgColor'
-import type { AvatarProps, AvatarGroupProps } from '@/components/ui/Avatar'
+import { useMemo } from 'react';
+import Tooltip from '@/components/ui/Tooltip';
+import Avatar from '@/components/ui/Avatar';
+import acronym from '@/utils/acronym';
+import useRandomBgColor from '@/utils/hooks/useRandomBgColor';
+import type { AvatarProps, AvatarGroupProps } from '@/components/ui/Avatar';
 
-type User = Record<string, string>
+type User = Record<string, string>;
 
 interface UsersAvatarGroupProps extends AvatarGroupProps {
-    avatarGroupProps?: AvatarGroupProps
-    avatarProps?: AvatarProps
-    imgKey?: string
-    nameKey?: string
-    onAvatarClick?: (avatar: User) => void
-    users?: User[]
+    avatarGroupProps?: AvatarGroupProps;
+    avatarProps?: AvatarProps;
+    imgKey?: string;
+    nameKey?: string;
+    onAvatarClick?: (avatar: User) => void;
+    users?: User[];
 }
 
 const UsersAvatarGroup = (props: UsersAvatarGroupProps) => {
@@ -25,9 +25,9 @@ const UsersAvatarGroup = (props: UsersAvatarGroupProps) => {
         onAvatarClick,
         users = [],
         ...rest
-    } = props
+    } = props;
 
-    const bgColor = useRandomBgColor()
+    const bgColor = useRandomBgColor();
 
     const defaultAvatarProps = useMemo(() => {
         return {
@@ -35,12 +35,12 @@ const UsersAvatarGroup = (props: UsersAvatarGroupProps) => {
             size: 30,
             className: 'cursor-pointer',
             ...avatarProps,
-        }
-    }, [avatarProps])
+        };
+    }, [avatarProps]);
 
     const handleAvatarClick = (avatar: User) => {
-        onAvatarClick?.(avatar)
-    }
+        onAvatarClick?.(avatar);
+    };
 
     return (
         <Avatar.Group
@@ -72,7 +72,7 @@ const UsersAvatarGroup = (props: UsersAvatarGroupProps) => {
                 </Tooltip>
             ))}
         </Avatar.Group>
-    )
-}
+    );
+};
 
-export default UsersAvatarGroup
+export default UsersAvatarGroup;

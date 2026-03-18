@@ -1,6 +1,6 @@
-import Notification from './Notification'
+import Notification from './Notification';
 
-export type { NotificationProps } from './Notification'
-export { Notification }
+export type { NotificationProps } from './Notification';
+export { Notification };
 
-export default Notification
+export default Notification;

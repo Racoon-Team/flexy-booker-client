@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable  @typescript-eslint/no-explicit-any
-import { useMemo } from 'react'
-import isPlainObject from 'lodash/isPlainObject'
-import type { NavigationTree } from '@/@types/navigation'
+import { useMemo } from 'react';
+import isPlainObject from 'lodash/isPlainObject';
+import type { NavigationTree } from '@/@types/navigation';
 
 interface NavInfo extends NavigationTree {
-    parentKey?: string
+    parentKey?: string;
 }
 
 const getRouteInfo = (
@@ -13,10 +13,10 @@ const getRouteInfo = (
     key: string,
 ): NavInfo | undefined => {
     if (!Array.isArray(navTree) && navTree.key === key) {
-        return navTree
+        return navTree;
     }
-    let activedRoute: NavInfo | undefined
-    let isIncludeActivedRoute = false
+    let activedRoute: NavInfo | undefined;
+    let isIncludeActivedRoute = false;
     for (const p in navTree) {
         if (
             p !== 'icon' &&
@@ -33,59 +33,59 @@ const getRouteInfo = (
                         (el: NavInfo) => el.key === key,
                     )
                 ) {
-                    isIncludeActivedRoute = true
+                    isIncludeActivedRoute = true;
                 }
             }
 
-            activedRoute = getRouteInfo((navTree as any)[p], key)
+            activedRoute = getRouteInfo((navTree as any)[p], key);
 
             if (activedRoute) {
                 if (isIncludeActivedRoute) {
-                    activedRoute.parentKey = (navTree as any)[p].key
+                    activedRoute.parentKey = (navTree as any)[p].key;
                 }
 
-                return activedRoute
+                return activedRoute;
             }
         }
     }
-    return activedRoute
-}
+    return activedRoute;
+};
 
 const findNestedRoute = (navTree: NavigationTree[], key: string): boolean => {
     const found = navTree.find((node) => {
-        return node.key === key
-    })
+        return node.key === key;
+    });
     if (found) {
-        return true
+        return true;
     }
-    return navTree.some((c) => findNestedRoute(c.subMenu, key))
-}
+    return navTree.some((c) => findNestedRoute(c.subMenu, key));
+};
 
 const getTopRouteKey = (
     navTree: NavigationTree[],
     key: string,
 ): NavigationTree => {
-    let foundNav = {} as NavigationTree
+    let foundNav = {} as NavigationTree;
     navTree.forEach((nav) => {
         if (findNestedRoute([nav], key)) {
-            foundNav = nav
+            foundNav = nav;
         }
-    })
-    return foundNav
-}
+    });
+    return foundNav;
+};
 
 function useMenuActive(navTree: NavigationTree[], key: string) {
     const activedRoute = useMemo(() => {
-        const route = getRouteInfo(navTree, key)
-        return route
-    }, [navTree, key])
+        const route = getRouteInfo(navTree, key);
+        return route;
+    }, [navTree, key]);
 
     const includedRouteTree = useMemo(() => {
-        const included = getTopRouteKey(navTree, key)
-        return included
-    }, [navTree, key])
+        const included = getTopRouteKey(navTree, key);
+        return included;
+    }, [navTree, key]);
 
-    return { activedRoute, includedRouteTree }
+    return { activedRoute, includedRouteTree };
 }
 
-export default useMenuActive
+export default useMenuActive;

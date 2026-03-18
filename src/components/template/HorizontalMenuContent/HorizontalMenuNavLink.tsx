@@ -1,14 +1,13 @@
-import { Link } from 'react-router'
-import classNames from 'classnames'
-import type { CommonProps } from '@/@types/common'
-import type { AnchorHTMLAttributes } from 'react'
+import { Link } from 'react-router';
+import classNames from 'classnames';
+import type { CommonProps } from '@/@types/common';
+import type { AnchorHTMLAttributes } from 'react';
 
 export interface HorizontalMenuNavLinkProps
-    extends CommonProps,
-        AnchorHTMLAttributes<HTMLAnchorElement> {
-    path: string
-    isExternalLink?: boolean
-    className?: string
+    extends CommonProps, AnchorHTMLAttributes<HTMLAnchorElement> {
+    path: string;
+    isExternalLink?: boolean;
+    className?: string;
 }
 
 const HorizontalMenuNavLink = ({
@@ -30,7 +29,7 @@ const HorizontalMenuNavLink = ({
         >
             {children}
         </Link>
-    )
-}
+    );
+};
 
-export default HorizontalMenuNavLink
+export default HorizontalMenuNavLink;
