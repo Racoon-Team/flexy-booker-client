@@ -57,5 +57,34 @@
                 "fullName": "Por favor ingresa tu nombre completo"
             }
         }
+    },
+
+    "signupBusiness": {
+        "fullName": "Nombre del Negocio",
+        "fullNamePH": "Nombre del Negocio",
+        "email": "Correo Electrónico",
+        "emailPH": "tu@ejemplo.com",
+        "password": "Contraseña",
+        "passwordPH": "Contraseña",
+        "confirmPassword": "Confirmar contraseña",
+        "confirmPasswordPH": "Confirmar contraseña",
+        "companyNumber": "Número de Empresa",
+        "companyNumberPH": "Número de Empresa",
+        "address": "Dirección",
+        "addressPH": "Dirección",
+        "acceptTerms": "Acepto los términos y condiciones",
+        "submit": "Crear Cuenta",
+        "submitting": "Creando cuenta...",
+
+        "errors": {
+            "fullName": "Por favor ingresa tu nombre completo",
+            "email": "Por favor ingresa un correo válido",
+            "password": "La contraseña debe tener al menos 6 caracteres",
+            "confirmPassword": "Por favor confirma tu contraseña",
+            "passwordMatch": "Las contraseñas no coinciden",
+            "companyNumber": "Ingresa el número de empresa",
+            "address": "Ingresa la dirección",
+            "acceptTerms": "Debes aceptar los términos y condiciones"
+        }
     }
 }

@@ -57,5 +57,32 @@
                 "fullName": "Please enter your full name"
             }
         }
+    },
+
+    "signupBusiness": {
+        "fullName": "Business Name",
+        "fullNamePH": "Business Name",
+        "email": "Email Address",
+        "emailPH": "your@email.com",
+        "password": "Password",
+        "passwordPH": "Password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPH": "Confirm password",
+        "companyNumber": "Company Number",
+        "companyNumberPH": "Company Number",
+        "address": "Address",
+        "addressPH": "Address",
+        "acceptTerms": "I accept the terms and conditions",
+        "submit": "Create Account",
+        "submitting": "Creating account...",
+
+        "errors": {
+            "fullName": "Please enter the business name",
+            "email": "Please enter a valid email",
+            "password": "Password must be at least 6 characters",
+            "companyNumber": "Enter company number",
+            "address": "Enter address",
+            "acceptTerms": "You must accept the terms and conditions"
+        }
     }
 }

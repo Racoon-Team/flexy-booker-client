@@ -8,10 +8,11 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import type { CommonProps } from '@/@types/common'
-
+import { useTranslation } from 'react-i18next'
 interface ClientSignUpFormProps extends CommonProps {
     disableSubmit?: boolean
     setMessage?: (message: string) => void
+    
 }
 
 type ClientSignUpFormSchema = {
@@ -24,39 +25,44 @@ type ClientSignUpFormSchema = {
     acceptTerms: boolean
 }
 
-const validationSchema = z
-    .object({
-        fullName: z
-            .string()
-            .min(1, { message: 'Por favor ingresa tu nombre completo' }),
-        email: z.email({ message: 'Por favor ingresa un correo válido' }),
-        password: z.string().min(6, {
-            message: 'La contraseña debe tener al menos 6 caracteres',
-        }),
-        confirmPassword: z
-            .string()
-            .min(1, { message: 'Por favor confirma tu contraseña' }),
-        acceptTerms: z.boolean().refine((val) => val === true, {
-            message: 'Debes aceptar los términos y condiciones',
-        }),
-        companyNumber: z.string().min(1, {
-            message: 'Ingresa el número de empresa',
-        }),
-        address: z.string().min(1, {
-            message: 'Ingresa la dirección',
-        }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: 'Las contraseñas no coinciden',
-        path: ['confirmPassword'],
-    })
+
 
 const ClientSignUpForm = (props: ClientSignUpFormProps) => {
     const { disableSubmit = false, className, setMessage } = props
 
+    const { t } = useTranslation()
     const [isSubmitting, setSubmitting] = useState<boolean>(false)
 
     const { signUp } = useAuth()
+    
+const validationSchema = z
+     .object({
+        fullName: z.string().min(1, {
+            message: t('signupBusiness.errors.fullName'),
+        }),
+        email: z.string().email({
+            message: t('signupBusiness.errors.email'),
+        }),
+        password: z.string().min(6, {
+            message: t('signupBusiness.errors.password'),
+        }),
+        confirmPassword: z.string().min(1, {
+            message: t('signupBusiness.errors.confirmPassword'),
+        }),
+        companyNumber: z.string().min(1, {
+            message: t('signupBusiness.errors.companyNumber'),
+        }),
+        address: z.string().min(1, {
+            message: t('signupBusiness.errors.address'),
+        }),
+        acceptTerms: z.boolean().refine((val) => val === true, {
+            message: t('signupBusiness.errors.acceptTerms'),
+        }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: t('signupBusiness.errors.passwordMatch'),
+        path: ['confirmPassword'],
+    })
 
     const {
         handleSubmit,
@@ -94,7 +100,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
             <Form onSubmit={handleSubmit(onSignUp)}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <FormItem
-                        label="Nombre del Negocio "
+                        label={t('signupBusiness.fullName')}
                         invalid={Boolean(errors.fullName)}
                         errorMessage={errors.fullName?.message}
                     >
@@ -104,7 +110,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                    placeholder="Nombre del Negocio"
+                                   placeholder={t('signupBusiness.fullNamePH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -112,7 +118,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label="Correo Electrónico"
+                        label={t('signupBusiness.email')}
                         invalid={Boolean(errors.email)}
                         errorMessage={errors.email?.message}
                     >
@@ -122,7 +128,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="email"
-                                    placeholder="tu@ejemplo.com"
+                                    placeholder={t('signupBusiness.emailPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -130,7 +136,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label="Contraseña"
+                        label={t('signupBusiness.password')}
                         invalid={Boolean(errors.password)}
                         errorMessage={errors.password?.message}
                     >
@@ -140,7 +146,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="password"
-                                    placeholder="Contraseña"
+                                    placeholder={t('signupBusiness.passwordPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -148,7 +154,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label="Confirmar Contraseña"
+                       label={t('signupBusiness.confirmPassword')}
                         invalid={Boolean(errors.confirmPassword)}
                         errorMessage={errors.confirmPassword?.message}
                     >
@@ -158,7 +164,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="password"
-                                    placeholder="Confirmar contraseña"
+                                    placeholder={t('signupBusiness.confirmPasswordPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -167,7 +173,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                     </FormItem>
 
                     <FormItem
-                        label="Número de Empresa"
+                        label={t('signupBusiness.companyNumber')}
                         invalid={Boolean(errors.companyNumber)}
                         errorMessage={errors.companyNumber?.message}
                     >
@@ -177,7 +183,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                    placeholder="Número de Empresa"
+                                    placeholder={t('signupBusiness.companyNumberPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -186,7 +192,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                     </FormItem>
 
                     <FormItem
-                        label="Dirección"
+                        label={t('signupBusiness.address')}
                         invalid={Boolean(errors.address)}
                         errorMessage={errors.address?.message}
                     >
@@ -196,7 +202,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                    placeholder="Dirección"
+                                   placeholder={t('signupBusiness.addressPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -217,7 +223,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                                 checked={field.value}
                                 onChange={field.onChange}
                             >
-                                Acepto los términos y condiciones
+                               {t('signupBusiness.acceptTerms')}
                             </Checkbox>
                         )}
                     />
@@ -228,7 +234,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                     variant="solid"
                     type="submit"
                 >
-                    {isSubmitting ? 'Creando cuenta...' : 'Crear Cuenta'}
+                    {isSubmitting  ? t('signupBusiness.submitting')  : t('signupBusiness.submit')}
                 </Button>
             </Form>
         </div>
