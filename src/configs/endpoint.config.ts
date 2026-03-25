@@ -1,9 +1,9 @@
 export const apiPrefix = 'http://localhost:3000/api'
 
 const endpointConfig = {
-    signIn: '/auth/sign-in',
-    signOut: '/auth/sign-out',
-    signUp: '/auth/sign-up',
+    signIn: '/auth/login',
+    signOut: '/auth/logout',
+    signUp: '/auth/register',
     forgotPassword: '/auth/forgot-password',
     resetPassword: '/auth/reset-password',
 }
