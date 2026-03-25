@@ -86,5 +86,26 @@
             "address": "Ingresa la dirección",
             "acceptTerms": "Debes aceptar los términos y condiciones"
         }
+    },
+
+    "signup": {
+        "userName": "Nombre",
+        "userNamePH": "Ingresa tu nombre",
+        "email": "Correo electrónico",
+        "emailPH": "Ingresa tu correo",
+        "password": "Contraseña",
+        "passwordPH": "Ingresa tu contraseña",
+        "confirmPassword": "Confirmar contraseña",
+        "confirmPasswordPH": "Confirma tu contraseña",
+        "submit": "Registrarse",
+        "submitting": "Creando cuenta...",
+
+        "errors": {
+            "userName": "Por favor ingresa tu nombre",
+            "email": "Correo inválido",
+            "password": "Contraseña requerida",
+            "confirmPassword": "Confirma tu contraseña",
+            "passwordMatch": "Las contraseñas no coinciden"
+        }
     }
 }

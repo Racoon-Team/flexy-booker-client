@@ -84,5 +84,25 @@
             "address": "Enter address",
             "acceptTerms": "You must accept the terms and conditions"
         }
+    },
+    "signup": {
+        "userName": "Name",
+        "userNamePH": "Enter your name",
+        "email": "Email",
+        "emailPH": "Enter your email",
+        "password": "Password",
+        "passwordPH": "Enter your password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPH": "Confirm your password",
+        "submit": "Sign Up",
+        "submitting": "Creating account...",
+
+        "errors": {
+            "userName": "Please enter your name",
+            "email": "Invalid email",
+            "password": "Password required",
+            "confirmPassword": "Confirm your password",
+            "passwordMatch": "Passwords do not match"
+        }
     }
 }

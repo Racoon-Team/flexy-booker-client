@@ -9,10 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import type { CommonProps } from '@/@types/common'
 import { useTranslation } from 'react-i18next'
+
 interface ClientSignUpFormProps extends CommonProps {
     disableSubmit?: boolean
     setMessage?: (message: string) => void
-    
 }
 
 type ClientSignUpFormSchema = {
@@ -25,8 +25,6 @@ type ClientSignUpFormSchema = {
     acceptTerms: boolean
 }
 
-
-
 const ClientSignUpForm = (props: ClientSignUpFormProps) => {
     const { disableSubmit = false, className, setMessage } = props
 
@@ -34,35 +32,35 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
     const [isSubmitting, setSubmitting] = useState<boolean>(false)
 
     const { signUp } = useAuth()
-    
-const validationSchema = z
-     .object({
-        fullName: z.string().min(1, {
-            message: t('signupBusiness.errors.fullName'),
-        }),
-        email: z.string().email({
-            message: t('signupBusiness.errors.email'),
-        }),
-        password: z.string().min(6, {
-            message: t('signupBusiness.errors.password'),
-        }),
-        confirmPassword: z.string().min(1, {
-            message: t('signupBusiness.errors.confirmPassword'),
-        }),
-        companyNumber: z.string().min(1, {
-            message: t('signupBusiness.errors.companyNumber'),
-        }),
-        address: z.string().min(1, {
-            message: t('signupBusiness.errors.address'),
-        }),
-        acceptTerms: z.boolean().refine((val) => val === true, {
-            message: t('signupBusiness.errors.acceptTerms'),
-        }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: t('signupBusiness.errors.passwordMatch'),
-        path: ['confirmPassword'],
-    })
+
+    const validationSchema = z
+        .object({
+            fullName: z.string().min(1, {
+                message: t('signupBusiness.errors.fullName'),
+            }),
+            email: z.string().email({
+                message: t('signupBusiness.errors.email'),
+            }),
+            password: z.string().min(6, {
+                message: t('signupBusiness.errors.password'),
+            }),
+            confirmPassword: z.string().min(1, {
+                message: t('signupBusiness.errors.confirmPassword'),
+            }),
+            companyNumber: z.string().min(1, {
+                message: t('signupBusiness.errors.companyNumber'),
+            }),
+            address: z.string().min(1, {
+                message: t('signupBusiness.errors.address'),
+            }),
+            acceptTerms: z.boolean().refine((val) => val === true, {
+                message: t('signupBusiness.errors.acceptTerms'),
+            }),
+        })
+        .refine((data) => data.password === data.confirmPassword, {
+            message: t('signupBusiness.errors.passwordMatch'),
+            path: ['confirmPassword'],
+        })
 
     const {
         handleSubmit,
@@ -78,15 +76,15 @@ const validationSchema = z
 
         if (!disableSubmit) {
             setSubmitting(true)
-            
-        const result = await signUp({
-            userName: fullName,
-            email,
-            password,
-            address,
-            phoneNumber: companyNumber,
-            userType: "empresa",
-        })
+
+            const result = await signUp({
+                userName: fullName,
+                email,
+                password,
+                address,
+                phoneNumber: companyNumber,
+                userType: 'empresa',
+            })
             if (result?.status === 'failed') {
                 setMessage?.(result.message)
             }
@@ -110,7 +108,7 @@ const validationSchema = z
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                   placeholder={t('signupBusiness.fullNamePH')}
+                                    placeholder={t('signupBusiness.fullNamePH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -154,7 +152,7 @@ const validationSchema = z
                         />
                     </FormItem>
                     <FormItem
-                       label={t('signupBusiness.confirmPassword')}
+                        label={t('signupBusiness.confirmPassword')}
                         invalid={Boolean(errors.confirmPassword)}
                         errorMessage={errors.confirmPassword?.message}
                     >
@@ -164,7 +162,9 @@ const validationSchema = z
                             render={({ field }) => (
                                 <Input
                                     type="password"
-                                    placeholder={t('signupBusiness.confirmPasswordPH')}
+                                    placeholder={t(
+                                        'signupBusiness.confirmPasswordPH',
+                                    )}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -183,7 +183,9 @@ const validationSchema = z
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                    placeholder={t('signupBusiness.companyNumberPH')}
+                                    placeholder={t(
+                                        'signupBusiness.companyNumberPH',
+                                    )}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -202,7 +204,7 @@ const validationSchema = z
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                   placeholder={t('signupBusiness.addressPH')}
+                                    placeholder={t('signupBusiness.addressPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -223,7 +225,7 @@ const validationSchema = z
                                 checked={field.value}
                                 onChange={field.onChange}
                             >
-                               {t('signupBusiness.acceptTerms')}
+                                {t('signupBusiness.acceptTerms')}
                             </Checkbox>
                         )}
                     />
@@ -234,7 +236,9 @@ const validationSchema = z
                     variant="solid"
                     type="submit"
                 >
-                    {isSubmitting  ? t('signupBusiness.submitting')  : t('signupBusiness.submit')}
+                    {isSubmitting
+                        ? t('signupBusiness.submitting')
+                        : t('signupBusiness.submit')}
                 </Button>
             </Form>
         </div>
