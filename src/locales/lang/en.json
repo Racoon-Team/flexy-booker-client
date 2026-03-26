@@ -107,5 +107,19 @@
             "confirmPassword": "Confirm your password",
             "passwordMatch": "Passwords do not match"
         }
+    },
+
+    "landing": {
+        "navbar": {
+            "home": "Home",
+            "myReservations": "My Reservations",
+            "loginBtn": "Login",
+            "registerBtn": "Register",
+            "logoutBtn": "Logout"
+        },
+
+        "exploreServices": "Explore our services",
+        "copyright": "© 2026 ReservaYa. All rights reserved.",
+        "showOptionsBtn": "Show Options"
     }
 }

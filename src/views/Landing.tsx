@@ -1,49 +1,52 @@
 import LandingNavbar from '@/components/template/LandingNavbar'
+import { useTranslation } from 'react-i18next'
 
 const services = [
     {
         id: 1,
-        title: 'Canchas Deportivas',
+        title: 'Sports Courts',
         description:
-            'Encuentra y reserva canchas de fútbol, tenis, baloncesto y más.',
+            'Find and book soccer, tennis, basketball courts and more.',
     },
     {
         id: 2,
-        title: 'Salones de Manicura',
+        title: 'Nail Salons',
         description:
-            'Reserva tu cita para manicura, pedicura y otros servicios de uñas.',
+            'Book your appointment for manicures, pedicures and other nail services.',
     },
     {
         id: 3,
-        title: 'Peluquerías',
+        title: 'Hair Salons',
         description:
-            'Encuentra tu estilista ideal y reserva tu próximo corte o peinado.',
+            'Find your ideal stylist and book your next haircut or hairstyle.',
     },
     {
         id: 4,
-        title: 'Reserva de Hospedaje',
-        description: 'Reserva tu hospedaje.',
+        title: 'Accommodation Booking',
+        description: 'Book your accommodation.',
     },
     {
         id: 5,
-        title: 'Salas de cine privadas',
-        description: 'Reserva películas.',
+        title: 'Private Movie Rooms',
+        description: 'Book private movie screenings.',
     },
     {
         id: 6,
-        title: 'Guardería de mascotas',
-        description: 'Reserva para cuidado de tu mascota.',
+        title: 'Pet Daycare',
+        description: 'Book care for your pet.',
     },
 ]
 
 const Landing = () => {
+    const { t } = useTranslation()
+
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <LandingNavbar />
 
             <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-10">
                 <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-                    Explora nuestros servicios
+                    {t('landing.exploreServices')}
                 </h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -59,7 +62,7 @@ const Landing = () => {
                                 {service.description}
                             </p>
                             <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors text-sm font-medium">
-                                Ver Opciones
+                                {t('landing.showOptionsBtn')}
                             </button>
                         </div>
                     ))}
@@ -67,7 +70,7 @@ const Landing = () => {
             </main>
 
             <footer className="bg-gray-100 border-t border-gray-200 py-4 text-center text-sm text-gray-500">
-                © 2026 ReservaYa. Todos los derechos reservados.
+                {t('landing.copyright')}
             </footer>
         </div>
     )

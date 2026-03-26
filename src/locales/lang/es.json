@@ -107,5 +107,19 @@
             "confirmPassword": "Confirma tu contraseña",
             "passwordMatch": "Las contraseñas no coinciden"
         }
+    },
+
+    "landing": {
+        "navbar": {
+            "home": "Inicio",
+            "myReservations": "Mis Reservas",
+            "loginBtn": "Iniciar Sesion",
+            "registerBtn": "Registrarse",
+            "logoutBtn": "Cerrar Sesion"
+        },
+
+        "exploreServices": "Explora nuestros servicios",
+        "copyright": "© 2026 ReservaYa. Todos los derechos reservados.",
+        "showOptionsBtn": "Ver Opciones"
     }
 }
