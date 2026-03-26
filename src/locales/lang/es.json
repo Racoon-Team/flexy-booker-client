@@ -1,0 +1,61 @@
+{
+    "nav": {
+        "home": "Inicio",
+        "singleMenuItem": "Elemento único del menú",
+        "collapseMenu": {
+            "collapseMenu": "Elemento de menú desplegable",
+            "item1": "Elemento 1 del menú desplegable",
+            "item2": "Elemento 2 del menú desplegable"
+        },
+        "groupMenu": {
+            "groupMenu": "Grupo de menú",
+            "single": "Elemento único del grupo",
+            "collapse": {
+                "collapse": "Menú desplegable del grupo",
+                "item1": "Elemento 1 del menú desplegable del grupo",
+                "item2": "Elemento 2 del menú desplegable del grupo"
+            }
+        }
+    },
+
+    "common": {
+        "signUp": {
+            "email": "Correo electrónico",
+            "emailPH": "tu@correo.com",
+            "password": "Contraseña",
+            "passwordPH": "Contraseña",
+            "confirmPassword": "Confirmar contraseña",
+            "confirmPasswordPH": "Confirmar contraseña",
+            "acceptTerms": "Acepto los términos y condiciones",
+            "submit": "Crear cuenta",
+            "submitting": "Creando cuenta..."
+        },
+
+        "errors": {
+            "email": "Ingresa un correo electrónico válido",
+            "password": "La contraseña debe tener al menos 6 caracteres",
+            "confirmPassword": "Por favor confirma tu contraseña",
+            "passwordMatch": "Las contraseñas no coinciden",
+            "address": "Ingresa una dirección",
+            "acceptTerms": "Debes aceptar los términos y condiciones"
+        }
+    },
+
+    "signUp": {
+        "createAccount": "Crear cuenta",
+        "submitting": "Creando cuenta...",
+        "imClient": "Soy Cliente",
+        "imBusiness": "Soy Empresa",
+        "haveAccout": "¿Ya tienes una cuenta?",
+        "signIn": "Iniciar sesión",
+        "exploring": "Continuar explorando",
+
+        "client": {
+            "fullName": "Nombre completo",
+            "fullNamePH": "Tu nombre completo",
+            "errors": {
+                "fullName": "Por favor ingresa tu nombre completo"
+            }
+        }
+    }
+}

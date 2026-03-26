@@ -16,5 +16,46 @@
                 "item2": "Group collapse menu item 2"
             }
         }
+    },
+
+    "common": {
+        "signUp": {
+            "email": "Email Address",
+            "emailPH": "your@email.com",
+            "password": "Password",
+            "passwordPH": "Password",
+            "confirmPassword": "Confirm Password",
+            "confirmPasswordPH": "Confirm password",
+            "acceptTerms": "I accept the terms and conditions",
+            "submit": "Create Account",
+            "submitting": "Creating account..."
+        },
+
+        "errors": {
+            "email": "Please enter a valid email",
+            "password": "Password must be at least 6 characters",
+            "confirmPassword": "Please confirm your password",
+            "passwordMatch": "Passwords do not match",
+            "address": "Enter address",
+            "acceptTerms": "You must accept the terms and conditions"
+        }
+    },
+
+    "signUp": {
+        "createAccount": "Create Account",
+        "submitting": "Creating account...",
+        "imClient": "Im Client",
+        "imBusiness": "Im Business",
+        "haveAccount": "Do you have an account?",
+        "signIn": "Sign In",
+        "exploring": "Continue exploring",
+
+        "client": {
+            "fullName": "Full Name",
+            "fullNamePH": "Your Full Name",
+            "errors": {
+                "fullName": "Please enter your full name"
+            }
+        }
     }
 }

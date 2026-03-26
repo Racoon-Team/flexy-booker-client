@@ -5,6 +5,7 @@ import ActionLink from '@/components/shared/ActionLink'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
 
 import ClientSignUpForm from './components/ClientSignUpForm'
+import { useTranslation } from 'react-i18next'
 
 type ActiveTab = 'client' | 'business'
 
@@ -19,11 +20,12 @@ export const SignUpBase = ({
 }: SignUpProps) => {
     const [message, setMessage] = useTimeOutMessage()
     const [activeTab, setActiveTab] = useState<ActiveTab>('client')
+    const { t } = useTranslation()
 
     return (
         <>
             <div className="mb-8">
-                <h3 className="mb-1">Crear Cuenta</h3>
+                <h3 className="mb-1">{t('signUp.createAccount')}</h3>
             </div>
 
             <div className="flex mb-6 border rounded-lg overflow-hidden">
@@ -36,7 +38,7 @@ export const SignUpBase = ({
                     }`}
                     onClick={() => setActiveTab('client')}
                 >
-                    Soy Cliente
+                    {t('signUp.imClient')}
                 </button>
                 <button
                     type="button"
@@ -47,7 +49,7 @@ export const SignUpBase = ({
                     }`}
                     onClick={() => setActiveTab('business')}
                 >
-                    Soy Empresa
+                    {t('signUp.imBusiness')}
                 </button>
             </div>
 
@@ -69,13 +71,13 @@ export const SignUpBase = ({
             )}
 
             <div className="mt-6 text-center">
-                <span>¿Ya tienes cuenta? </span>
+                <span>{t('signUp.haveAccount')} </span>
                 <ActionLink
                     to={signInUrl}
                     className="heading-text font-bold"
                     themeColor={false}
                 >
-                    Iniciar sesión
+                    {t('signUp.signIn')}
                 </ActionLink>
                 <span className="mx-2 text-gray-300">|</span>
                 <button
@@ -83,7 +85,7 @@ export const SignUpBase = ({
                     className="font-bold heading-text"
                     onClick={() => {}}
                 >
-                    Continuar Explorando
+                    {t('signUp.exploring')}
                 </button>
             </div>
         </>
