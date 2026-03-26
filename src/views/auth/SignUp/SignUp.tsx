@@ -1,9 +1,13 @@
-import Logo from '@/components/template/Logo'
+import { useState } from 'react'
+
 import Alert from '@/components/ui/Alert'
-import SignUpForm from './components/SignUpForm'
 import ActionLink from '@/components/shared/ActionLink'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import { useThemeStore } from '@/store/themeStore'
+
+import ClientSignUpForm from './components/ClientSignUpForm'
+import { useTranslation } from 'react-i18next'
+
+type ActiveTab = 'client' | 'business'
 
 type SignUpProps = {
     disableSubmit?: boolean
@@ -15,42 +19,74 @@ export const SignUpBase = ({
     disableSubmit,
 }: SignUpProps) => {
     const [message, setMessage] = useTimeOutMessage()
-
-    const mode = useThemeStore((state) => state.mode)
+    const [activeTab, setActiveTab] = useState<ActiveTab>('client')
+    const { t } = useTranslation()
 
     return (
         <>
             <div className="mb-8">
-                <Logo
-                    type="streamline"
-                    mode={mode}
-                    imgClass="mx-auto"
-                    logoWidth={60}
-                />
+                <h3 className="mb-1">{t('signUp.createAccount')}</h3>
             </div>
-            <div className="mb-8">
-                <h3 className="mb-1">Sign Up</h3>
-                <p className="font-semibold heading-text">
-                    And lets get started with your free trial
-                </p>
+
+            <div className="flex mb-6 border rounded-lg overflow-hidden">
+                <button
+                    type="button"
+                    className={`flex-1 py-2 text-sm font-semibold transition-colors ${
+                        activeTab === 'client'
+                            ? 'bg-primary text-white'
+                            : 'bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setActiveTab('client')}
+                >
+                    {t('signUp.imClient')}
+                </button>
+                <button
+                    type="button"
+                    className={`flex-1 py-2 text-sm font-semibold transition-colors ${
+                        activeTab === 'business'
+                            ? 'bg-primary text-white'
+                            : 'bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setActiveTab('business')}
+                >
+                    {t('signUp.imBusiness')}
+                </button>
             </div>
+
             {message && (
                 <Alert showIcon className="mb-4" type="danger">
                     <span className="break-all">{message}</span>
                 </Alert>
             )}
-            <SignUpForm disableSubmit={disableSubmit} setMessage={setMessage} />
-            <div>
-                <div className="mt-6 text-center">
-                    <span>Already have an account? </span>
-                    <ActionLink
-                        to={signInUrl}
-                        className="heading-text font-bold"
-                        themeColor={false}
-                    >
-                        Sign in
-                    </ActionLink>
+
+            {activeTab === 'client' ? (
+                <ClientSignUpForm
+                    disableSubmit={disableSubmit}
+                    setMessage={setMessage}
+                />
+            ) : (
+                <div className="text-center text-gray-400 py-8">
+                    ---- Registro de empresa ----
                 </div>
+            )}
+
+            <div className="mt-6 text-center">
+                <span>{t('signUp.haveAccount')} </span>
+                <ActionLink
+                    to={signInUrl}
+                    className="heading-text font-bold"
+                    themeColor={false}
+                >
+                    {t('signUp.signIn')}
+                </ActionLink>
+                <span className="mx-2 text-gray-300">|</span>
+                <button
+                    type="button"
+                    className="font-bold heading-text"
+                    onClick={() => {}}
+                >
+                    {t('signUp.exploring')}
+                </button>
             </div>
         </>
     )
