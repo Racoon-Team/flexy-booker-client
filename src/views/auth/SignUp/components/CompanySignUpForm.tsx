@@ -68,6 +68,16 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
         control,
     } = useForm<ClientSignUpFormSchema>({
         resolver: zodResolver(validationSchema),
+        defaultValues: {
+            fullName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            acceptTerms: false,
+            companyNumber:'',
+            address:''
+        },
+
     })
 
     const onSignUp = async (values: ClientSignUpFormSchema) => {
