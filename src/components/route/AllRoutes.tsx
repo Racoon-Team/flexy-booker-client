@@ -1,14 +1,14 @@
 import ProtectedRoute from './ProtectedRoute'
 import PublicRoute from './PublicRoute'
 import AuthorityGuard from './AuthorityGuard'
-import FallbackRoute from './FallbackRoute'
 import AppRoute from './AppRoute'
 import PageContainer from '@/components/template/PageContainer'
 import { protectedRoutes, publicRoutes } from '@/configs/routes.config'
-import appConfig from '@/configs/app.config'
+
 import { useAuth } from '@/auth'
 import { Routes, Route, Navigate } from 'react-router'
 import type { LayoutType } from '@/@types/theme'
+import Landing from '@/views/Landing'
 
 interface ViewsProps {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
@@ -17,18 +17,14 @@ interface ViewsProps {
 
 type AllRoutesProps = ViewsProps
 
-const { authenticatedEntryPath } = appConfig
-
 const AllRoutes = (props: AllRoutesProps) => {
     const { user } = useAuth()
 
     return (
         <Routes>
-            <Route path="/" element={<PublicRoute />}>
-                <Route
-                    index
-                    element={<FallbackRoute />}
-                />
+            <Route path="/" element={<Landing />} />
+
+            <Route element={<PublicRoute />}>
                 {publicRoutes.map((route) => (
                     <Route
                         key={route.path}
@@ -43,11 +39,8 @@ const AllRoutes = (props: AllRoutesProps) => {
                     />
                 ))}
             </Route>
-            <Route path="/" element={<ProtectedRoute />}>
-                <Route
-                    index
-                    element={<Navigate replace to={authenticatedEntryPath} />}
-                />
+
+            <Route element={<ProtectedRoute />}>
                 {protectedRoutes.map((route, index) => (
                     <Route
                         key={route.key + index}

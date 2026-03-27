@@ -74,10 +74,9 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
             password: '',
             confirmPassword: '',
             acceptTerms: false,
-            companyNumber:'',
-            address:''
+            companyNumber: '',
+            address: '',
         },
-
     })
 
     const onSignUp = async (values: ClientSignUpFormSchema) => {

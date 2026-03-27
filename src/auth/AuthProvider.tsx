@@ -3,7 +3,6 @@ import AuthContext from './AuthContext'
 import appConfig from '@/configs/app.config'
 import { useSessionUser, useToken } from '@/store/authStore'
 import { apiSignIn, apiSignOut, apiSignUp } from '@/services/AuthService'
-import { REDIRECT_URL_KEY } from '@/constants/app.constant'
 import { useNavigate } from 'react-router'
 import type {
     SignInCredential,
@@ -49,13 +48,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const navigatorRef = useRef<IsolatedNavigatorRef>(null)
 
     const redirect = () => {
-        const search = window.location.search
-        const params = new URLSearchParams(search)
-        const redirectUrl = params.get(REDIRECT_URL_KEY)
-
-        navigatorRef.current?.navigate(
-            redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath,
-        )
+        navigatorRef.current?.navigate(appConfig.authenticatedEntryPath)
     }
 
     const handleSignIn = (tokens: Token, user?: User) => {
@@ -65,9 +58,9 @@ function AuthProvider({ children }: AuthProviderProps) {
 
         if (user) {
             setUser({
-    userName: user.userName,
-    email: user.email,
-})
+                userName: user.userName,
+                email: user.email,
+            })
         }
     }
 
@@ -81,7 +74,14 @@ function AuthProvider({ children }: AuthProviderProps) {
         try {
             const resp = await apiSignIn(values)
             if (resp) {
-                handleSignIn({ accessToken: resp.token }, resp.user)
+                handleSignIn(
+                    { accessToken: resp.token },
+                    {
+                        userId: String(resp.id),
+                        userName: resp.name,
+                        email: resp.email,
+                    },
+                )
                 redirect()
                 return {
                     status: 'success',
@@ -105,7 +105,14 @@ function AuthProvider({ children }: AuthProviderProps) {
         try {
             const resp = await apiSignUp(values)
             if (resp) {
-                handleSignIn({ accessToken: resp.token }, resp.user)
+                handleSignIn(
+                    { accessToken: resp.token },
+                    {
+                        userId: String(resp.id),
+                        userName: resp.name,
+                        email: resp.email,
+                    },
+                )
                 redirect()
                 return {
                     status: 'success',
@@ -127,7 +134,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     const signOut = async () => {
         try {
-            await apiSignOut()
+            await apiSignOut(Number(user.userId))
         } finally {
             handleSignOut()
             navigatorRef.current?.navigate('/')
