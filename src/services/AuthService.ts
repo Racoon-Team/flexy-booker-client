@@ -11,7 +11,7 @@ import type {
 
 export async function apiSignIn(data: SignInCredential) {
     return ApiService.fetchDataWithAxios<SignInResponse>({
-        url: apiPrefix + endpointConfig.signIn,
+      url: apiPrefix + endpointConfig.signIn, 
         method: 'post',
         data,
     })
@@ -19,17 +19,16 @@ export async function apiSignIn(data: SignInCredential) {
 
 export async function apiSignUp(data: SignUpCredential) {
     return ApiService.fetchDataWithAxios<SignUpResponse>({
-        url: apiPrefix + endpointConfig.signUp,
+          url: apiPrefix + endpointConfig.signUp,
         method: 'post',
         data,
     })
 }
 
-export async function apiSignOut(userId: number) {
+export async function apiSignOut() {
     return ApiService.fetchDataWithAxios({
-        url: apiPrefix + endpointConfig.signOut,
+           url: apiPrefix + endpointConfig.signOut,
         method: 'post',
-        data: { userId },
     })
 }
 
