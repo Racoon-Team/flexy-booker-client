@@ -7,6 +7,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import type { CommonProps } from '@/@types/common'
+import { useTranslation } from 'react-i18next'
 
 interface SignUpFormProps extends CommonProps {
     disableSubmit?: boolean
@@ -20,24 +21,31 @@ type SignUpFormSchema = {
     confirmPassword: string
 }
 
-const validationSchema = z
-    .object({
-        email: z.email({ message: 'Please enter a valid email' }),
-        userName: z.string().min(1, { message: 'Please enter your name' }),
-        password: z.string().min(1, { message: 'Password required' }),
-        confirmPassword: z.string().min(1, { message: 'Confirm Password Required' }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: 'Password not match',
-        path: ['confirmPassword'],
-    })
-
 const SignUpForm = (props: SignUpFormProps) => {
     const { disableSubmit = false, className, setMessage } = props
-
+    const { t } = useTranslation()
     const [isSubmitting, setSubmitting] = useState<boolean>(false)
 
     const { signUp } = useAuth()
+    const validationSchema = z
+        .object({
+            email: z.string().email({
+                message: t('signup.errors.email'),
+            }),
+            userName: z.string().min(1, {
+                message: t('signup.errors.userName'),
+            }),
+            password: z.string().min(1, {
+                message: t('signup.errors.password'),
+            }),
+            confirmPassword: z.string().min(1, {
+                message: t('signup.errors.confirmPassword'),
+            }),
+        })
+        .refine((data) => data.password === data.confirmPassword, {
+            message: t('signup.errors.passwordMatch'),
+            path: ['confirmPassword'],
+        })
 
     const {
         handleSubmit,
@@ -66,7 +74,7 @@ const SignUpForm = (props: SignUpFormProps) => {
         <div className={className}>
             <Form onSubmit={handleSubmit(onSignUp)}>
                 <FormItem
-                    label="User name"
+                    label={t('signup.userName')}
                     invalid={Boolean(errors.userName)}
                     errorMessage={errors.userName?.message}
                 >
@@ -76,7 +84,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                         render={({ field }) => (
                             <Input
                                 type="text"
-                                placeholder="User Name"
+                                placeholder={t('signup.userNamePH')}
                                 autoComplete="off"
                                 {...field}
                             />
@@ -84,7 +92,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                     />
                 </FormItem>
                 <FormItem
-                    label="Email"
+                    label={t('signup.email')}
                     invalid={Boolean(errors.email)}
                     errorMessage={errors.email?.message}
                 >
@@ -94,7 +102,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                         render={({ field }) => (
                             <Input
                                 type="email"
-                                placeholder="Email"
+                                placeholder={t('signup.emailPH')}
                                 autoComplete="off"
                                 {...field}
                             />
@@ -102,7 +110,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                     />
                 </FormItem>
                 <FormItem
-                    label="Password"
+                    label={t('signup.password')}
                     invalid={Boolean(errors.password)}
                     errorMessage={errors.password?.message}
                 >
@@ -113,14 +121,14 @@ const SignUpForm = (props: SignUpFormProps) => {
                             <Input
                                 type="password"
                                 autoComplete="off"
-                                placeholder="Password"
+                                placeholder={t('signup.passwordPH')}
                                 {...field}
                             />
                         )}
                     />
                 </FormItem>
                 <FormItem
-                    label="Confirm Password"
+                    label={t('signup.confirmPassword')}
                     invalid={Boolean(errors.confirmPassword)}
                     errorMessage={errors.confirmPassword?.message}
                 >
@@ -131,7 +139,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                             <Input
                                 type="password"
                                 autoComplete="off"
-                                placeholder="Confirm Password"
+                                placeholder={t('signup.confirmPasswordPH')}
                                 {...field}
                             />
                         )}
@@ -143,7 +151,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                     variant="solid"
                     type="submit"
                 >
-                    {isSubmitting ? 'Creating Account...' : 'Sign Up'}
+                    {isSubmitting ? t('signup.submitting') : t('signup.submit')}
                 </Button>
             </Form>
         </div>
