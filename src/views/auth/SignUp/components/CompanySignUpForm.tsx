@@ -36,29 +36,29 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
     const validationSchema = z
         .object({
             fullName: z.string().min(1, {
-                message: t('signupBusiness.errors.fullName'),
+                message: t('signUp.signupBusiness.errors.fullName'),
             }),
             email: z.string().email({
-                message: t('signupBusiness.errors.email'),
+                message: t('common.errors.email'),
             }),
             password: z.string().min(6, {
-                message: t('signupBusiness.errors.password'),
+                message: t('common.errors.password'),
             }),
             confirmPassword: z.string().min(1, {
-                message: t('signupBusiness.errors.confirmPassword'),
+                message: t('common.errors.confirmPassword'),
             }),
             companyNumber: z.string().min(1, {
                 message: t('signupBusiness.errors.companyNumber'),
             }),
             address: z.string().min(1, {
-                message: t('signupBusiness.errors.address'),
+                message: t('common.errors.address'),
             }),
             acceptTerms: z.boolean().refine((val) => val === true, {
-                message: t('signupBusiness.errors.acceptTerms'),
+                message: t('common.errors.acceptTerms'),
             }),
         })
         .refine((data) => data.password === data.confirmPassword, {
-            message: t('signupBusiness.errors.passwordMatch'),
+            message: t('common.errors.passwordMatch'),
             path: ['confirmPassword'],
         })
 
@@ -117,7 +117,9 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                    placeholder={t('signupBusiness.fullNamePH')}
+                                    placeholder={t(
+                                        'signUp.signupBusiness.fullNamePH',
+                                    )}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -125,7 +127,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label={t('signupBusiness.email')}
+                        label={t('common.signUp.email')}
                         invalid={Boolean(errors.email)}
                         errorMessage={errors.email?.message}
                     >
@@ -135,7 +137,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="email"
-                                    placeholder={t('signupBusiness.emailPH')}
+                                    placeholder={t('common.signUp.emailPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -143,7 +145,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label={t('signupBusiness.password')}
+                        label={t('common.signUp.password')}
                         invalid={Boolean(errors.password)}
                         errorMessage={errors.password?.message}
                     >
@@ -153,7 +155,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="password"
-                                    placeholder={t('signupBusiness.passwordPH')}
+                                    placeholder={t('common.signUp.passwordPH')}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -161,7 +163,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label={t('signupBusiness.confirmPassword')}
+                        label={t('common.signUp.confirmPassword')}
                         invalid={Boolean(errors.confirmPassword)}
                         errorMessage={errors.confirmPassword?.message}
                     >
@@ -172,7 +174,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                                 <Input
                                     type="password"
                                     placeholder={t(
-                                        'signupBusiness.confirmPasswordPH',
+                                        'common.signUp.confirmPasswordPH',
                                     )}
                                     autoComplete="off"
                                     {...field}
@@ -182,7 +184,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                     </FormItem>
 
                     <FormItem
-                        label={t('signupBusiness.companyNumber')}
+                        label={t('signUp.signupBusiness.companyNumber')}
                         invalid={Boolean(errors.companyNumber)}
                         errorMessage={errors.companyNumber?.message}
                     >
@@ -193,7 +195,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                                 <Input
                                     type="text"
                                     placeholder={t(
-                                        'signupBusiness.companyNumberPH',
+                                        'signUp.signupBusiness.companyNumberPH',
                                     )}
                                     autoComplete="off"
                                     {...field}
@@ -203,7 +205,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                     </FormItem>
 
                     <FormItem
-                        label={t('signupBusiness.address')}
+                        label={t('signUp.signupBusiness.address')}
                         invalid={Boolean(errors.address)}
                         errorMessage={errors.address?.message}
                     >
@@ -213,7 +215,9 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                             render={({ field }) => (
                                 <Input
                                     type="text"
-                                    placeholder={t('signupBusiness.addressPH')}
+                                    placeholder={t(
+                                        'signUp.signupBusiness.addressPH',
+                                    )}
                                     autoComplete="off"
                                     {...field}
                                 />
@@ -234,7 +238,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                                 checked={field.value}
                                 onChange={field.onChange}
                             >
-                                {t('signupBusiness.acceptTerms')}
+                                {t('common.signUp.acceptTerms')}
                             </Checkbox>
                         )}
                     />
@@ -246,8 +250,8 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
                     type="submit"
                 >
                     {isSubmitting
-                        ? t('signupBusiness.submitting')
-                        : t('signupBusiness.submit')}
+                        ? t('common.signUp.submitting')
+                        : t('common.signUp.submit')}
                 </Button>
             </Form>
         </div>

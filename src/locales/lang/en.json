@@ -1,23 +1,4 @@
 {
-    "nav": {
-        "home": "Home",
-        "singleMenuItem": "Single menu item",
-        "collapseMenu": {
-            "collapseMenu": "Collapse menu item",
-            "item1": "Collapse menu item 1",
-            "item2": "Collapse menu item 2"
-        },
-        "groupMenu": {
-            "groupMenu": "Group menu",
-            "single": "Group single menu item",
-            "collapse": {
-                "collapse": "Group collapse menu",
-                "item1": "Group collapse menu item 1",
-                "item2": "Group collapse menu item 2"
-            }
-        }
-    },
-
     "common": {
         "signUp": {
             "email": "Email Address",
@@ -41,6 +22,25 @@
         }
     },
 
+    "nav": {
+        "home": "Home",
+        "singleMenuItem": "Single menu item",
+        "collapseMenu": {
+            "collapseMenu": "Collapse menu item",
+            "item1": "Collapse menu item 1",
+            "item2": "Collapse menu item 2"
+        },
+        "groupMenu": {
+            "groupMenu": "Group menu",
+            "single": "Group single menu item",
+            "collapse": {
+                "collapse": "Group collapse menu",
+                "item1": "Group collapse menu item 1",
+                "item2": "Group collapse menu item 2"
+            }
+        }
+    },
+
     "signUp": {
         "createAccount": "Create Account",
         "submitting": "Creating account...",
@@ -56,56 +56,20 @@
             "errors": {
                 "fullName": "Please enter your full name"
             }
-        }
-    },
+        },
 
-    "signupBusiness": {
-        "fullName": "Business Name",
-        "fullNamePH": "Business Name",
-        "email": "Email Address",
-        "emailPH": "your@email.com",
-        "password": "Password",
-        "passwordPH": "Password",
-        "confirmPassword": "Confirm Password",
-        "confirmPasswordPH": "Confirm password",
-        "companyNumber": "Company Number",
-        "companyNumberPH": "Company Number",
-        "address": "Address",
-        "addressPH": "Address",
-        "acceptTerms": "I accept the terms and conditions",
-        "submit": "Create Account",
-        "submitting": "Creating account...",
+        "signupBusiness": {
+            "fullName": "Business Name",
+            "fullNamePH": "Business Name",
+            "companyNumber": "Company Number",
+            "companyNumberPH": "Company Number",
+            "address": "Address",
+            "addressPH": "Address",
 
-        "errors": {
-            "fullName": "Please enter the business name",
-            "email": "Please enter a valid email",
-            "password": "Password must be at least 6 characters",
-            "confirmPassword": "Please confirm your password",
-            "passwordMatch": "Passwords do not match",
-            "companyNumber": "Enter company number",
-            "address": "Enter address",
-            "acceptTerms": "You must accept the terms and conditions"
-        }
-    },
-
-    "signup": {
-        "userName": "Name",
-        "userNamePH": "Enter your name",
-        "email": "Email",
-        "emailPH": "Enter your email",
-        "password": "Password",
-        "passwordPH": "Enter your password",
-        "confirmPassword": "Confirm Password",
-        "confirmPasswordPH": "Confirm your password",
-        "submit": "Sign Up",
-        "submitting": "Creating account...",
-
-        "errors": {
-            "userName": "Please enter your name",
-            "email": "Invalid email",
-            "password": "Password required",
-            "confirmPassword": "Confirm your password",
-            "passwordMatch": "Passwords do not match"
+            "errors": {
+                "fullName": "Please enter the business name",
+                "companyNumber": "Enter company number"
+            }
         }
     },
 
