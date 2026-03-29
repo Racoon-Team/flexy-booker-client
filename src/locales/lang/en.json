@@ -80,11 +80,14 @@
             "fullName": "Please enter the business name",
             "email": "Please enter a valid email",
             "password": "Password must be at least 6 characters",
+            "confirmPassword": "Please confirm your password",
+            "passwordMatch": "Passwords do not match",
             "companyNumber": "Enter company number",
             "address": "Enter address",
             "acceptTerms": "You must accept the terms and conditions"
         }
     },
+
     "signup": {
         "userName": "Name",
         "userNamePH": "Enter your name",
@@ -104,5 +107,19 @@
             "confirmPassword": "Confirm your password",
             "passwordMatch": "Passwords do not match"
         }
+    },
+
+    "landing": {
+        "navbar": {
+            "home": "Home",
+            "myReservations": "My Reservations",
+            "loginBtn": "Login",
+            "registerBtn": "Register",
+            "logoutBtn": "Logout"
+        },
+
+        "exploreServices": "Explore our services",
+        "copyright": "© 2026 ReservaYa. All rights reserved.",
+        "showOptionsBtn": "Show Options"
     }
 }
