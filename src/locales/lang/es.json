@@ -1,23 +1,4 @@
 {
-    "nav": {
-        "home": "Inicio",
-        "singleMenuItem": "Elemento único del menú",
-        "collapseMenu": {
-            "collapseMenu": "Elemento de menú desplegable",
-            "item1": "Elemento 1 del menú desplegable",
-            "item2": "Elemento 2 del menú desplegable"
-        },
-        "groupMenu": {
-            "groupMenu": "Grupo de menú",
-            "single": "Elemento único del grupo",
-            "collapse": {
-                "collapse": "Menú desplegable del grupo",
-                "item1": "Elemento 1 del menú desplegable del grupo",
-                "item2": "Elemento 2 del menú desplegable del grupo"
-            }
-        }
-    },
-
     "common": {
         "signUp": {
             "email": "Correo electrónico",
@@ -41,6 +22,25 @@
         }
     },
 
+    "nav": {
+        "home": "Inicio",
+        "singleMenuItem": "Elemento único del menú",
+        "collapseMenu": {
+            "collapseMenu": "Elemento de menú desplegable",
+            "item1": "Elemento 1 del menú desplegable",
+            "item2": "Elemento 2 del menú desplegable"
+        },
+        "groupMenu": {
+            "groupMenu": "Grupo de menú",
+            "single": "Elemento único del grupo",
+            "collapse": {
+                "collapse": "Menú desplegable del grupo",
+                "item1": "Elemento 1 del menú desplegable del grupo",
+                "item2": "Elemento 2 del menú desplegable del grupo"
+            }
+        }
+    },
+
     "signUp": {
         "createAccount": "Crear cuenta",
         "submitting": "Creando cuenta...",
@@ -56,56 +56,20 @@
             "errors": {
                 "fullName": "Por favor ingresa tu nombre completo"
             }
-        }
-    },
+        },
 
-    "signupBusiness": {
-        "fullName": "Nombre del Negocio",
-        "fullNamePH": "Nombre del Negocio",
-        "email": "Correo Electrónico",
-        "emailPH": "tu@ejemplo.com",
-        "password": "Contraseña",
-        "passwordPH": "Contraseña",
-        "confirmPassword": "Confirmar contraseña",
-        "confirmPasswordPH": "Confirmar contraseña",
-        "companyNumber": "Número de Empresa",
-        "companyNumberPH": "Número de Empresa",
-        "address": "Dirección",
-        "addressPH": "Dirección",
-        "acceptTerms": "Acepto los términos y condiciones",
-        "submit": "Crear Cuenta",
-        "submitting": "Creando cuenta...",
+        "signupBusiness": {
+            "fullName": "Nombre del Negocio",
+            "fullNamePH": "Nombre del Negocio",
+            "companyNumber": "Número de Empresa",
+            "companyNumberPH": "Número de Empresa",
+            "address": "Dirección",
+            "addressPH": "Dirección",
 
-        "errors": {
-            "fullName": "Por favor ingresa tu nombre completo",
-            "email": "Por favor ingresa un correo válido",
-            "password": "La contraseña debe tener al menos 6 caracteres",
-            "confirmPassword": "Por favor confirma tu contraseña",
-            "passwordMatch": "Las contraseñas no coinciden",
-            "companyNumber": "Ingresa el número de empresa",
-            "address": "Ingresa la dirección",
-            "acceptTerms": "Debes aceptar los términos y condiciones"
-        }
-    },
-
-    "signup": {
-        "userName": "Nombre",
-        "userNamePH": "Ingresa tu nombre",
-        "email": "Correo electrónico",
-        "emailPH": "Ingresa tu correo",
-        "password": "Contraseña",
-        "passwordPH": "Ingresa tu contraseña",
-        "confirmPassword": "Confirmar contraseña",
-        "confirmPasswordPH": "Confirma tu contraseña",
-        "submit": "Registrarse",
-        "submitting": "Creando cuenta...",
-
-        "errors": {
-            "userName": "Por favor ingresa tu nombre",
-            "email": "Correo inválido",
-            "password": "Contraseña requerida",
-            "confirmPassword": "Confirma tu contraseña",
-            "passwordMatch": "Las contraseñas no coinciden"
+            "errors": {
+                "fullName": "Por favor ingresa tu nombre completo",
+                "companyNumber": "Ingresa el número de empresa"
+            }
         }
     },
 
