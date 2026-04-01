@@ -4,6 +4,7 @@ import Layout from '@/components/layouts/Layouts'
 import { AuthProvider } from '@/auth'
 import Views from '@/views'
 import appConfig from './configs/app.config'
+import { ModalProvider } from './components/modal/ModalProvider'
 
 if (appConfig.enableMock) {
     import('./mock')
@@ -14,9 +15,11 @@ function App() {
         <Theme>
             <BrowserRouter>
                 <AuthProvider>
-                    <Layout>
-                        <Views />
-                    </Layout>
+                    <ModalProvider>
+                        <Layout>
+                            <Views />
+                        </Layout>
+                    </ModalProvider>
                 </AuthProvider>
             </BrowserRouter>
         </Theme>

@@ -1,3 +1,4 @@
+import { useModal } from '@/components/modal/ModalProvider'
 import LandingNavbar from '@/components/template/LandingNavbar'
 import { useTranslation } from 'react-i18next'
 
@@ -39,7 +40,7 @@ const services = [
 
 const Landing = () => {
     const { t } = useTranslation()
-
+    const { openModal } = useModal()
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <LandingNavbar />
@@ -61,7 +62,22 @@ const Landing = () => {
                             <p className="text-gray-500 text-sm flex-1">
                                 {service.description}
                             </p>
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors text-sm font-medium">
+
+                            <button
+
+                                onClick={() =>
+                                    openModal({
+                                        message: `¿Ver opciones de ${service.title}?`,
+                                        onAccept: () => {
+                                            console.log(
+                                                "Servicio seleccionado:",
+                                                service.title
+                                            )
+                                        },
+                                    })
+                                }
+
+                                className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors text-sm font-medium">
                                 {t('landing.showOptionsBtn')}
                             </button>
                         </div>
