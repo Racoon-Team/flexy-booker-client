@@ -1,4 +1,5 @@
 import '@/assets/styles/components/modal.css'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     message: string
@@ -7,13 +8,14 @@ type Props = {
 }
 
 const Modal = ({ message, onAccept, onClose }: Props) => {
+    const { t } = useTranslation()
     return (
         <div className="modal-overlay">
             <div className="modal-container">
                 <p>{message}</p>
 
                 <div className="modal-buttons">
-                    <button onClick={onClose}>Cancel</button>
+                    <button onClick={onClose}> {t('modal.cancel')}</button>
 
                     <button
                         onClick={() => {
@@ -21,12 +23,12 @@ const Modal = ({ message, onAccept, onClose }: Props) => {
                             onClose()
                         }}
                     >
-                        Accept
+                        {t('modal.accept')}
                     </button>
                 </div>
 
                 <button className="modal-close" onClick={onClose}>
-                    X
+                    {t('modal.close')}
                 </button>
             </div>
         </div>

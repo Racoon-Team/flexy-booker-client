@@ -64,20 +64,26 @@ const Landing = () => {
                             </p>
 
                             <button
-
                                 onClick={() =>
                                     openModal({
-                                        message: `¿Ver opciones de ${service.title}?`,
+                                        message: t(
+                                            'landing.modal.confirmService',
+                                            { service: service.title },
+                                        ),
                                         onAccept: () => {
                                             console.log(
-                                                "Servicio seleccionado:",
-                                                service.title
+                                                t(
+                                                    'landing.modal.selectedService',
+                                                    {
+                                                        service: service.title,
+                                                    },
+                                                ),
                                             )
                                         },
                                     })
                                 }
-
-                                className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors text-sm font-medium">
+                                className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors text-sm font-medium"
+                            >
                                 {t('landing.showOptionsBtn')}
                             </button>
                         </div>
