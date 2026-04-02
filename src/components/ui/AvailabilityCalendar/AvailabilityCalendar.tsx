@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
-
-const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+import { useState, useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const HOURS: string[] = []
 
@@ -27,6 +26,21 @@ export interface AvailabilityCalendarProps {
 export default function AvailabilityCalendar({
     onChange,
 }: AvailabilityCalendarProps) {
+    const { t } = useTranslation()
+
+    const DAYS = useMemo(
+        () => [
+            t('calendar.days.sun'),
+            t('calendar.days.mon'),
+            t('calendar.days.tue'),
+            t('calendar.days.wed'),
+            t('calendar.days.thu'),
+            t('calendar.days.fri'),
+            t('calendar.days.sat'),
+        ],
+        [t],
+    )
+
     const [selectedCells, setSelectedCells] = useState<string[]>([])
 
     const [isDragging, setIsDragging] = useState(false)
