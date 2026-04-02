@@ -81,9 +81,19 @@
             "registerBtn": "Register",
             "logoutBtn": "Logout"
         },
+        "modal": {
+            "confirmService": "View options for {{service}}?",
+            "selectedService": "Selected service: {{service}}"
+        },
 
         "exploreServices": "Explore our services",
         "copyright": "© 2026 ReservaYa. All rights reserved.",
         "showOptionsBtn": "Show Options"
+    },
+
+    "modal": {
+        "accept": "Accept",
+        "cancel": "Cancel",
+        "close": "Close"
     }
 }
