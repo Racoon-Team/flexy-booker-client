@@ -1,29 +1,35 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-const HOURS: string[] = []
-
-for (let i = 0; i < 24; i++) {
-    if (i === 0) {
-        HOURS.push('12 AM')
-    } else if (i < 12) {
-        HOURS.push(`${i} AM`)
-    } else if (i === 12) {
-        HOURS.push('12 PM')
-    } else {
-        HOURS.push(`${i - 12} PM`)
+function generateHours(): string[] {
+    const hours: string[] = []
+    for (let i = 0; i < 24; i++) {
+        if (i === 0) {
+            hours.push('12 AM')
+        } else if (i < 12) {
+            hours.push(`${i} AM`)
+        } else if (i === 12) {
+            hours.push('12 PM')
+        } else {
+            hours.push(`${i - 12} PM`)
+        }
     }
+    return hours
 }
+
+const HOURS = generateHours()
 
 function createCellId(dayIndex: number, hourIndex: number): string {
     return `${dayIndex}-${hourIndex}`
 }
 
 export interface AvailabilityCalendarProps {
+    initialValues?: string[]
     onChange?: (selectedCells: string[]) => void
 }
 
 export default function AvailabilityCalendar({
+    initialValues = [],
     onChange,
 }: AvailabilityCalendarProps) {
     const { t } = useTranslation()
@@ -41,7 +47,7 @@ export default function AvailabilityCalendar({
         [t],
     )
 
-    const [selectedCells, setSelectedCells] = useState<string[]>([])
+    const [selectedCells, setSelectedCells] = useState<string[]>(initialValues)
 
     const [isDragging, setIsDragging] = useState(false)
 
