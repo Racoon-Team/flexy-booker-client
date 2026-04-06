@@ -1,4 +1,5 @@
 export { default as Alert } from './Alert'
+export { default as AvailabilityCalendar } from './AvailabilityCalendar'
 export { default as Avatar } from './Avatar'
 export { default as Badge } from './Badge'
 export { default as Button } from './Button'
@@ -42,6 +43,7 @@ export { default as Tooltip } from './Tooltip'
 export { default as Upload } from './Upload'
 
 export type { AlertProps } from './Alert'
+export type { AvailabilityCalendarProps } from './AvailabilityCalendar'
 export type { AvatarProps, AvatarGroupProps } from './Avatar'
 export type { BadgeProps } from './Badge'
 export type { ButtonProps } from './Button'

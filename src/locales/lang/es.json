@@ -95,5 +95,17 @@
         "accept": "Aceptar",
         "cancel": "Cancelar",
         "close": "Cerrar"
+    },
+
+    "calendar": {
+        "days": {
+            "sun": "DOM",
+            "mon": "LUN",
+            "tue": "MAR",
+            "wed": "MIÉ",
+            "thu": "JUE",
+            "fri": "VIE",
+            "sat": "SÁB"
+        }
     }
 }
