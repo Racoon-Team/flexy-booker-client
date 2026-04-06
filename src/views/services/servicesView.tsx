@@ -1,150 +1,148 @@
 import LandingNavbar from '@/components/template/LandingNavbar'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
+type Service = {
+    id: number
+    name: string
+    description: string
+    date: string
+    time: string
+}
 const ServicesView = () => {
     const { t } = useTranslation()
-    const [active, setActive] = useState('servicios')
+    const [active, setActive] = useState('services')
 
     const [currentPage, setCurrentPage] = useState(1)
-    const itemsPerPage = 2
-
-    const servicios = [
-        {
-            id: 1,
-            nombre: 'Consultoría IT',
-            descripcion: 'Mantenimiento en infraestructuras.',
-            fecha: '15/07/2024',
-            hora: '10:00 AM - 12:00 PM',
-        },
-        {
-            id: 2,
-            nombre: 'Corte de Cabello',
-            descripcion: 'Corte y estilo para caballeros.',
-            fecha: '16/07/2024',
-            hora: '02:00 PM - 05:00 PM',
-        },
-        {
-            id: 3,
-            nombre: 'Diseño Web',
-            descripcion: 'Creación de páginas modernas.',
-            fecha: '17/07/2024',
-            hora: '09:00 AM - 11:00 AM',
-        },
-        {
-            id: 4,
-            nombre: 'Soporte Técnico',
-            descripcion: 'Reparación de equipos.',
-            fecha: '18/07/2024',
-            hora: '01:00 PM - 03:00 PM',
-        },
-    ]
+    const itemsPerPage = 3
+    const [services, setServices] = useState<Service[]>([])
 
     const indexOfLast = currentPage * itemsPerPage
     const indexOfFirst = indexOfLast - itemsPerPage
-    const currentServices = servicios.slice(indexOfFirst, indexOfLast)
+    const currentServices = services.slice(indexOfFirst, indexOfLast)
 
-    const totalPages = Math.ceil(servicios.length / itemsPerPage)
+    const totalPages = Math.ceil(services.length / itemsPerPage)
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await fetch(
+                    'http://localhost:3000/api/services',
+                )
 
+                const data = await response.json()
+
+                setServices(data)
+            } catch (error) {
+                console.error('Error fetching services:', error)
+            }
+        }
+
+        fetchServices()
+    }, [])
     return (
-       <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="min-h-screen w-full flex flex-col bg-gray-100">
             <LandingNavbar />
 
             <div className="flex flex-1 w-full">
                 <aside className="w-64 bg-white border-r border-gray-200 p-4">
                     <h2 className="text-lg font-semibold mb-4">
-                        Panel de Control de Empresa
+                        {t('servicesView.sidebar.title')}
                     </h2>
 
                     <ul className="space-y-2">
                         <li>
                             <button
-                                onClick={() => setActive('inicio')}
+                                onClick={() => setActive('home')}
                                 className={`w-full text-left px-4 py-2 rounded ${
-                                    active === 'inicio'
+                                    active === 'home'
                                         ? 'bg-blue-600 text-white'
                                         : 'hover:bg-gray-100'
                                 }`}
                             >
-                                Inicio
+                                {t('servicesView.sidebar.home')}
                             </button>
                         </li>
 
                         <li>
                             <button
-                                onClick={() => setActive('servicios')}
+                                onClick={() => setActive('services')}
                                 className={`w-full text-left px-4 py-2 rounded ${
-                                    active === 'servicios'
+                                    active === 'services'
                                         ? 'bg-blue-600 text-white'
                                         : 'hover:bg-gray-100'
                                 }`}
                             >
-                                Mis Servicios
+                                {t('servicesView.sidebar.services')}
                             </button>
                         </li>
 
                         <li>
                             <button
-                                onClick={() => setActive('reservas')}
+                                onClick={() => setActive('bookings')}
                                 className={`w-full text-left px-4 py-2 rounded ${
-                                    active === 'reservas'
+                                    active === 'bookings'
                                         ? 'bg-blue-600 text-white'
                                         : 'hover:bg-gray-100'
                                 }`}
                             >
-                                Mis Reservas
+                                {t('servicesView.sidebar.bookings')}
                             </button>
                         </li>
 
                         <li>
                             <button
-                                onClick={() => setActive('config')}
+                                onClick={() => setActive('settings')}
                                 className={`w-full text-left px-4 py-2 rounded ${
-                                    active === 'config'
+                                    active === 'settings'
                                         ? 'bg-blue-600 text-white'
                                         : 'hover:bg-gray-100'
                                 }`}
                             >
-                                Configuración
+                                {t('servicesView.sidebar.settings')}
                             </button>
                         </li>
                     </ul>
                 </aside>
                 <main className="flex-1 w-full p-10 bg-gray-50">
-                    {active === 'servicios' && (
+                    {active === 'services' && (
                         <>
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
                                 <h1 className="text-xl font-semibold">
-                                    Mis Servicios y Horarios Actuales
+                                    {t('servicesView.services.title')}
                                 </h1>
 
                                 <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                                    Agregar Servicio
+                                    {t('common.buttons.add')}
                                 </button>
                             </div>
 
                             <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6 shadow-sm">
-                                {currentServices.map((servicio) => (
-                                    <div key={servicio.id}>
-                                        <h2 className="font-semibold text-lg"> 
+                                {currentServices.map((service) => (
+                                    <div key={service.id}>
+                                        <h2 className="font-semibold text-lg">
+                                            {service.name}
                                         </h2>
-
                                         <p className="text-gray-600 text-sm">
-                                            Descripción: {servicio.descripcion}
+                                            {t(
+                                                'servicesView.services.description',
+                                            )}
+                                            : {service.description}
                                         </p>
 
                                         <p className="text-gray-600 text-sm">
-                                            Disponibilidad: {servicio.fecha},{' '}
-                                            {servicio.hora}
+                                            {t(
+                                                'servicesView.services.availability',
+                                            )}
+                                            : {service.date}, {service.time}
                                         </p>
 
                                         <div className="flex gap-2 mt-2">
                                             <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
-                                                Editar
+                                                {t('common.buttons.edit')}
                                             </button>
 
                                             <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-                                                Eliminar
+                                                {t('common.buttons.delete')}
                                             </button>
                                         </div>
 
@@ -161,11 +159,14 @@ const ServicesView = () => {
                                     disabled={currentPage === 1}
                                     className="px-3 py-1 border rounded disabled:opacity-50"
                                 >
-                                    Anterior
+                                    {t('common.buttons.previous')}
                                 </button>
 
                                 <span className="px-3 py-1">
-                                    Página {currentPage} de {totalPages}
+                                    {t('servicesView.pagination.page', {
+                                        current: currentPage,
+                                        total: totalPages,
+                                    })}
                                 </span>
 
                                 <button
@@ -175,19 +176,27 @@ const ServicesView = () => {
                                     disabled={currentPage === totalPages}
                                     className="px-3 py-1 border rounded disabled:opacity-50"
                                 >
-                                    Siguiente
+                                    {t('common.buttons.next')}
                                 </button>
                             </div>
                         </>
                     )}
 
-                    {active === 'inicio' && <h1>Inicio</h1>}
-                    {active === 'reservas' && <h1>Mis Reservas</h1>}
-                    {active === 'config' && <h1>Configuración</h1>}
+                    {active === 'home' && (
+                        <h1>{t('servicesView.sidebar.home')}</h1>
+                    )}
+
+                    {active === 'bookings' && (
+                        <h1>{t('servicesView.sidebar.bookings')}</h1>
+                    )}
+
+                    {active === 'settings' && (
+                        <h1>{t('servicesView.sidebar.settings')}</h1>
+                    )}
                 </main>
             </div>
 
-             <footer className="bg-gray-100 border-t border-gray-200 py-4 text-center text-sm text-gray-500">
+            <footer className="bg-gray-100 border-t border-gray-200 py-4 text-center text-sm text-gray-500">
                 {t('landing.copyright')}
             </footer>
         </div>

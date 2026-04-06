@@ -14,7 +14,7 @@ const Layout = ({ children }: CommonProps) => {
 
     const { pathname } = useLocation()
 
-    const isLanding = pathname === '/'
+    const isLanding = pathname === '/' || pathname === '/servicesView'
 
     return (
         <Suspense

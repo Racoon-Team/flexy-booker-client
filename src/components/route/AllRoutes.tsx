@@ -9,6 +9,7 @@ import { useAuth } from '@/auth'
 import { Routes, Route, Navigate } from 'react-router'
 import type { LayoutType } from '@/@types/theme'
 import Landing from '@/views/Landing'
+import ServicesView from '@/views/services/servicesView'
 
 interface ViewsProps {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
@@ -23,6 +24,7 @@ const AllRoutes = (props: AllRoutesProps) => {
     return (
         <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="/servicesView" element={<ServicesView />} />
 
             <Route element={<PublicRoute />}>
                 {publicRoutes.map((route) => (
