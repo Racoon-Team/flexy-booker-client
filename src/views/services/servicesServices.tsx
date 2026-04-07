@@ -1,6 +1,5 @@
-import endpointConfig from "@/configs/endpoint.config"
-import ApiService from "@/services/ApiService"
-
+import endpointConfig from '@/configs/endpoint.config'
+import ApiService from '@/services/ApiService'
 
 type Service = {
     id: number
@@ -11,8 +10,8 @@ type Service = {
 }
 
 export const getServices = async (): Promise<Service[]> => {
-   return ApiService.fetchDataWithAxios<Service[]>({
-    url: endpointConfig.services,
-    method: 'get',
-})
+    return ApiService.fetchDataWithAxios<Service[]>({
+        url: endpointConfig.services,
+        method: 'get',
+    })
 }

@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
-
 import ServicesHeader from './components/ServicesHeader'
 import ServicesList from './components/ServicesList'
 import Pagination from '../../components/Pagination'
-import { getServices } from './servicesServices'
+import { getServices, deleteService } from './servicesServices'
+import { useModal } from '@/components/modal/ModalProvider'
 
 type Service = {
     id: number
@@ -16,6 +16,8 @@ type Service = {
 
 const ServicesView = () => {
     const { t } = useTranslation()
+    const [active, setActive] = useState('services')
+    const { openModal } = useModal()
 
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 3
@@ -40,6 +42,22 @@ const ServicesView = () => {
         fetchServices()
     }, [])
 
+    const handleDelete = (id: number, name: string) => {
+        openModal({
+            message: t('servicesView.delete.confirm', { name }),
+            onAccept: async () => {
+                try {
+                    await deleteService(id)
+
+                    setServices((prev) =>
+                        prev.filter((service) => service.id !== id),
+                    )
+                } catch (error) {
+                    console.error(error)
+                }
+            },
+        })
+    }
     return (
         <div className="min-h-screen w-full flex flex-col bg-gray-100">
             <div className="flex flex-1">
@@ -47,7 +65,10 @@ const ServicesView = () => {
                     {
                         <>
                             <ServicesHeader />
-                            <ServicesList services={currentServices} />
+                            <ServicesList
+                                services={currentServices}
+                                onDelete={handleDelete}
+                            />
                             <Pagination
                                 currentPage={currentPage}
                                 totalPages={totalPages}
