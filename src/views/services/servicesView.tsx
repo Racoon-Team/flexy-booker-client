@@ -13,8 +13,8 @@ type Service = {
     id: number
     name: string
     description: string
-    date: string
-    time: string
+    price: number
+    schedule: string[]
 }
 
 const ServicesView = () => {

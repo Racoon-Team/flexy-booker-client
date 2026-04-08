@@ -4,8 +4,8 @@ type Service = {
     id: number
     name: string
     description: string
-    date: string
-    time: string
+    price: number
+    schedule: string[]
 }
 
 const ServicesList = ({ services }: { services: Service[] }) => {
@@ -15,9 +15,7 @@ const ServicesList = ({ services }: { services: Service[] }) => {
         <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6 shadow-sm">
             {services.map((service) => (
                 <div key={service.id}>
-                    <h2 className="font-semibold text-lg">
-                        {service.name}
-                    </h2>
+                    <h2 className="font-semibold text-lg">{service.name}</h2>
 
                     <p className="text-gray-600 text-sm">
                         {t('servicesView.services.description')}:
@@ -26,7 +24,7 @@ const ServicesList = ({ services }: { services: Service[] }) => {
 
                     <p className="text-gray-600 text-sm">
                         {t('servicesView.services.availability')}:
-                        {service.date}, {service.time}
+                        {service.price}, {service.schedule}
                     </p>
 
                     <div className="flex gap-2 mt-2">
