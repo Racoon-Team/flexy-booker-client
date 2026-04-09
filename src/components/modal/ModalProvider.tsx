@@ -2,7 +2,8 @@ import { createContext, useContext, useState } from 'react'
 import Modal from './Modal'
 
 export type ModalData = {
-    message: string
+    message?: string
+    content?: React.ReactNode
     onAccept?: () => void
 }
 
@@ -17,13 +18,15 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
     const [modal, setModal] = useState({
         isOpen: false,
         message: '',
+        content: null as React.ReactNode | null,
         onAccept: null as null | (() => void),
     })
 
     const openModal = (data: ModalData) => {
         setModal({
             isOpen: true,
-            message: data.message,
+            message: data.message || '',
+            content: data.content || null,
             onAccept: data.onAccept || null,
         })
     }
@@ -32,6 +35,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         setModal({
             isOpen: false,
             message: '',
+            content: null,
             onAccept: null,
         })
     }
@@ -43,6 +47,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
             {modal.isOpen && (
                 <Modal
                     message={modal.message}
+                    content={modal.content}
                     onAccept={modal.onAccept}
                     onClose={closeModal}
                 />
