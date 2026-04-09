@@ -1,4 +1,4 @@
-import httpServices from '@/httpServices'
+import httpServices from '@/views/services/api/httpServices'
 
 type Service = {
     id: number
