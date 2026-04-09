@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 import ServicesHeader from './components/ServicesHeader'
 import ServicesList from './components/ServicesList'
-import Pagination from './components/Pagination'
+import Pagination from '../../components/Pagination'
 import { getServices } from './servicesServices'
 
 type Service = {
