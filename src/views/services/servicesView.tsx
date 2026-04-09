@@ -1,13 +1,10 @@
-import LandingNavbar from '@/components/template/LandingNavbar'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
 
-import SidebarServices from './components/SidebarServices'
 import ServicesHeader from './components/ServicesHeader'
 import ServicesList from './components/ServicesList'
 import Pagination from './components/Pagination'
 import { getServices } from './servicesServices'
-
 
 type Service = {
     id: number
@@ -19,7 +16,6 @@ type Service = {
 
 const ServicesView = () => {
     const { t } = useTranslation()
-    const [active, setActive] = useState('services')
 
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 3
@@ -46,25 +42,9 @@ const ServicesView = () => {
 
     return (
         <div className="min-h-screen w-full flex flex-col bg-gray-100">
-            <LandingNavbar />
-
             <div className="flex flex-1">
-                <SidebarServices active={active} setActive={setActive} />
-
                 <main className="flex-1 p-10 bg-gray-50">
-                    {active === 'home' && (
-                        <h1>{t('servicesView.sidebar.home')}</h1>
-                    )}
-
-                    {active === 'bookings' && (
-                        <h1>{t('servicesView.sidebar.bookings')}</h1>
-                    )}
-
-                    {active === 'settings' && (
-                        <h1>{t('servicesView.sidebar.settings')}</h1>
-                    )}
-
-                    {active === 'services' && (
+                    {
                         <>
                             <ServicesHeader />
                             <ServicesList services={currentServices} />
@@ -74,7 +54,7 @@ const ServicesView = () => {
                                 setCurrentPage={setCurrentPage}
                             />
                         </>
-                    )}
+                    }
                 </main>
             </div>
 

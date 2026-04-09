@@ -29,7 +29,7 @@ const authRoute: Routes = [
 
       {
         key: 'services',
-        path: `/servicesView`,
+        path: `/services`,
         component: lazy(() => import('@/views/services/servicesView')),
         authority: [],
     },

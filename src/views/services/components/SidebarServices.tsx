@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next'
+import { useNavigate, useLocation } from 'react-router'
 
-type Props = {
-    active: string
-    setActive: (value: string) => void
-}
-
-const SidebarServices = ({ active, setActive }: Props) => {
+const SidebarServices = () => {
     const { t } = useTranslation()
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const active = location.pathname
 
     return (
         <aside className="w-64 bg-white border-r border-gray-200 p-4">
@@ -17,22 +17,9 @@ const SidebarServices = ({ active, setActive }: Props) => {
             <ul className="space-y-2">
                 <li>
                     <button
-                        onClick={() => setActive('home')}
+                        onClick={() => navigate('/services')}
                         className={`w-full text-left px-4 py-2 rounded ${
-                            active === 'home'
-                                ? 'bg-blue-600 text-white'
-                                : 'hover:bg-gray-100'
-                        }`}
-                    >
-                        {t('servicesView.sidebar.home')}
-                    </button>
-                </li>
-
-                <li>
-                    <button
-                        onClick={() => setActive('services')}
-                        className={`w-full text-left px-4 py-2 rounded ${
-                            active === 'services'
+                            active.startsWith('/services')
                                 ? 'bg-blue-600 text-white'
                                 : 'hover:bg-gray-100'
                         }`}
@@ -43,9 +30,9 @@ const SidebarServices = ({ active, setActive }: Props) => {
 
                 <li>
                     <button
-                        onClick={() => setActive('bookings')}
+                        onClick={() => navigate('/reservations')}
                         className={`w-full text-left px-4 py-2 rounded ${
-                            active === 'bookings'
+                            active.startsWith('/reservations')
                                 ? 'bg-blue-600 text-white'
                                 : 'hover:bg-gray-100'
                         }`}
@@ -56,9 +43,9 @@ const SidebarServices = ({ active, setActive }: Props) => {
 
                 <li>
                     <button
-                        onClick={() => setActive('settings')}
+                        onClick={() => navigate('/settings')}
                         className={`w-full text-left px-4 py-2 rounded ${
-                            active === 'settings'
+                            active.startsWith('/settings')
                                 ? 'bg-blue-600 text-white'
                                 : 'hover:bg-gray-100'
                         }`}
