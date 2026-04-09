@@ -12,7 +12,7 @@ const Modal = ({ message, content, onAccept, onClose }: Props) => {
     const { t } = useTranslation()
     return (
         <div className="modal-overlay">
-            <div className="modal-container">
+            <div className="modal-container overflow-y-auto max-h-[90vh]">
                 {content ? content : <p>{message}</p>}
                 {!content && (
                     <div className="modal-buttons">

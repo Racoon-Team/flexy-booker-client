@@ -20,6 +20,7 @@ export async function createService(data: {
     description?: string
     price?: number
     schedule: string[]
+    custom_fields?: object[]
 }) {
     return ApiService.fetchDataWithAxios({
         method: 'post',
