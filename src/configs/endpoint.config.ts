@@ -1,5 +1,3 @@
-export const apiPrefix = 'http://localhost:3000/api'
-
 const endpointConfig = {
     signIn: '/auth/login',
     signOut: '/auth/logout',

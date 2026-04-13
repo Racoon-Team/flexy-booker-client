@@ -107,7 +107,7 @@ const ClientSignUpForm = (props: ClientSignUpFormProps) => {
             <Form onSubmit={handleSubmit(onSignUp)}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <FormItem
-                        label={t('signupBusiness.fullName')}
+                        label={t('signUp.signupBusiness.fullName')}
                         invalid={Boolean(errors.fullName)}
                         errorMessage={errors.fullName?.message}
                     >
