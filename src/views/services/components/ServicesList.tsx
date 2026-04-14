@@ -16,13 +16,14 @@ type Props = {
 const ServicesList = ({ services, onDelete }: Props) => {
     return (
         <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6 shadow-sm">
-            {services.map((service) => (
-                <ServiceItem
-                    key={service.id}
-                    service={service}
-                    onDelete={onDelete}
-                />
-            ))}
+            {Array.isArray(services) &&
+                services.map((service) => (
+                    <ServiceItem
+                        key={service.id}
+                        service={service}
+                        onDelete={onDelete}
+                    />
+                ))}
         </div>
     )
 }

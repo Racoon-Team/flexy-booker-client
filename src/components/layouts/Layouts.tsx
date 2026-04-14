@@ -14,8 +14,11 @@ const Layout = ({ children }: CommonProps) => {
 
     const { pathname } = useLocation()
 
-    const isLanding = pathname === '/' || pathname === '/services'
-
+    const isLanding =
+        pathname === '/' ||
+        pathname === '/services' ||
+        pathname === '/reservations' ||
+        pathname === '/settings'
     return (
         <Suspense
             fallback={
