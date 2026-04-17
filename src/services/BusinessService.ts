@@ -1,5 +1,5 @@
 import ApiService from './ApiService'
-import { apiPrefix } from '@/configs/endpoint.config'
+import endpointConfig from '@/configs/endpoint.config'
 
 export async function getMyBusiness(userId: number) {
     return ApiService.fetchDataWithAxios<{
@@ -10,7 +10,7 @@ export async function getMyBusiness(userId: number) {
         description: string
     }>({
         method: 'get',
-        url: apiPrefix + `/businesses/user/${userId}`,
+        url: `${endpointConfig.businesses}/user/${userId}`,
     })
 }
 
@@ -24,7 +24,7 @@ export async function createService(data: {
 }) {
     return ApiService.fetchDataWithAxios({
         method: 'post',
-        url: apiPrefix + '/services',
+        url: endpointConfig.services,
         data,
     })
 }
