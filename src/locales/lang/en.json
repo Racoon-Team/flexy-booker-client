@@ -19,6 +19,13 @@
             "passwordMatch": "Passwords do not match",
             "address": "Enter address",
             "acceptTerms": "You must accept the terms and conditions"
+        },
+        "buttons": {
+            "add": "Add",
+            "edit": "Edit",
+            "delete": "Delete",
+            "previous": "Previous",
+            "next": "Next"
         }
     },
 
@@ -106,6 +113,23 @@
             "thu": "THU",
             "fri": "FRI",
             "sat": "SAT"
+        }
+    },
+    "servicesView": {
+        "sidebar": {
+            "title": "Company Control Panel",
+            "home": "Home",
+            "services": "My Services",
+            "bookings": "My Reservations",
+            "settings": "Settings"
+        },
+        "services": {
+            "title": "My Services and Current Schedules",
+            "description": "Description",
+            "availability": "Availability"
+        },
+        "pagination": {
+            "page": "Page {{current}} of {{total}}"
         }
     }
 }

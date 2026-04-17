@@ -14,7 +14,7 @@ const LandingNavbar = () => {
 
     return (
         <nav className="bg-white border-b border-gray-200 px-6 py-4">
-            <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="w-full flex items-center justify-between">
                 <span className="text-xl font-bold text-blue-600">
                     ReservaYa
                 </span>

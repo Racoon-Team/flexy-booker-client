@@ -19,6 +19,14 @@
             "passwordMatch": "Las contraseñas no coinciden",
             "address": "Ingresa una dirección",
             "acceptTerms": "Debes aceptar los términos y condiciones"
+        },
+
+        "buttons": {
+            "add": "Agregar",
+            "edit": "Editar",
+            "delete": "Eliminar",
+            "previous": "Anterior",
+            "next": "Siguiente"
         }
     },
 
@@ -106,6 +114,24 @@
             "thu": "JUE",
             "fri": "VIE",
             "sat": "SÁB"
+        }
+    },
+
+    "servicesView": {
+        "sidebar": {
+            "title": "Panel de Control de Empresa",
+            "home": "Inicio",
+            "services": "Mis Servicios",
+            "bookings": "Mis Reservas",
+            "settings": "Configuración"
+        },
+        "services": {
+            "title": "Mis Servicios y Horarios Actuales",
+            "description": "Descripción",
+            "availability": "Disponibilidad"
+        },
+        "pagination": {
+            "page": "Página {{current}} de {{total}}"
         }
     }
 }
