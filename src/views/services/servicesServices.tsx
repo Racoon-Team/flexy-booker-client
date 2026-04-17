@@ -15,3 +15,10 @@ export const getServices = async (): Promise<Service[]> => {
         method: 'get',
     })
 }
+
+export const deleteService = async (id: number) => {
+    return ApiService.fetchDataWithAxios({
+        url: `${endpointConfig.services}/${id}`,
+        method: 'delete',
+    })
+}
