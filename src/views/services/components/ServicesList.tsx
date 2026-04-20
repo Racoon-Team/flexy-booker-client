@@ -7,7 +7,6 @@ type Service = {
     price: number
     schedule: string[]
 }
-
 type Props = {
     services: Service[]
     onDelete: (id: number) => void

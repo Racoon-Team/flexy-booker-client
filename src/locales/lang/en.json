@@ -130,6 +130,9 @@
         },
         "pagination": {
             "page": "Page {{current}} of {{total}}"
+        },
+        "delete":{
+            "confirm":"Are you sure you want to delete \"{{name}}\"?"
         }
     }
 }
