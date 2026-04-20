@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AvailabilityCalendar } from '@/components/ui'
 import type { CustomField } from './addServiceTypes'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     isSubmitting: boolean
@@ -19,10 +20,11 @@ export default function AddServiceStep2({
 }: Props) {
     const [schedule, setSchedule] = useState<string[]>([])
     const [localError, setLocalError] = useState('')
+    const { t } = useTranslation()
 
     function handleSubmit() {
         if (schedule.length === 0) {
-            setLocalError('Please select at least one time slot')
+            setLocalError(t('servicesView.addService.errors.scheduleRequired'))
             return
         }
         setLocalError('')
@@ -45,7 +47,7 @@ export default function AddServiceStep2({
                     onClick={onCancel}
                     className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600"
                 >
-                    Cancel
+                    {t('modal.cancel')}
                 </button>
                 <div className="flex gap-2">
                     <button
@@ -53,7 +55,7 @@ export default function AddServiceStep2({
                         onClick={onBack}
                         className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700"
                     >
-                        Back
+                        {t('servicesView.addService.buttons.back')}
                     </button>
                     <button
                         type="button"
@@ -61,7 +63,9 @@ export default function AddServiceStep2({
                         disabled={isSubmitting}
                         className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700 disabled:opacity-50"
                     >
-                        {isSubmitting ? 'Saving...' : 'Create / Save'}
+                        {isSubmitting
+                            ? t('servicesView.addService.buttons.saving')
+                            : t('servicesView.addService.buttons.save')}
                     </button>
                 </div>
             </div>

@@ -12,12 +12,7 @@ import type {
     SelectField,
     MultiSelectField,
 } from './addServiceTypes'
-
-const step1Schema = z.object({
-    name: z.string().min(1, { message: 'Service name is required' }),
-    description: z.string().optional(),
-    price: z.number().positive().optional(),
-})
+import { useTranslation } from 'react-i18next'
 
 type Step1FormSchema = {
     name: string
@@ -31,6 +26,16 @@ type Props = {
 }
 
 export default function AddServiceStep1({ onNext, onCancel }: Props) {
+    const { t } = useTranslation()
+
+    const step1Schema = z.object({
+        name: z.string().min(1, {
+            message: t('servicesView.addService.errors.nameRequired'),
+        }),
+        description: z.string().optional(),
+        price: z.number().positive().optional(),
+    })
+
     const [showCustomFields, setShowCustomFields] = useState(false)
 
     const [numericActive, setNumericActive] = useState(false)
@@ -147,7 +152,7 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
     return (
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
             <FormItem
-                label="Service Name"
+                label={t('servicesView.addService.fields.name')}
                 invalid={Boolean(errors.name)}
                 errorMessage={errors.name?.message}
             >
@@ -157,16 +162,17 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                     render={({ field }) => (
                         <Input
                             type="text"
-                            placeholder="IT Consulting, Haircut..."
+                            placeholder={t(
+                                'servicesView.addService.fields.namePH',
+                            )}
                             autoComplete="off"
                             {...field}
                         />
                     )}
                 />
             </FormItem>
-
             <FormItem
-                label="Service Description"
+                label={t('servicesView.addService.fields.description')}
                 invalid={Boolean(errors.description)}
                 errorMessage={errors.description?.message}
             >
@@ -176,16 +182,17 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                     render={({ field }) => (
                         <Input
                             type="text"
-                            placeholder="Details about the service"
+                            placeholder={t(
+                                'servicesView.addService.fields.descriptionPH',
+                            )}
                             autoComplete="off"
                             {...field}
                         />
                     )}
                 />
             </FormItem>
-
             <FormItem
-                label="Price (optional)"
+                label={t('servicesView.addService.fields.price')}
                 invalid={Boolean(errors.price)}
                 errorMessage={errors.price?.message}
             >
@@ -195,7 +202,9 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                     render={({ field }) => (
                         <Input
                             type="number"
-                            placeholder="50"
+                            placeholder={t(
+                                'servicesView.addService.fields.pricePH',
+                            )}
                             autoComplete="off"
                             value={field.value ?? ''}
                             onChange={(e) =>
@@ -209,12 +218,10 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                     )}
                 />
             </FormItem>
-
-            {/* CUSTOM FIELDS */}
             <div className="mt-4 border-t border-gray-200 pt-4">
                 <div className="flex items-center gap-3 mb-4">
                     <span className="text-sm font-medium text-gray-700">
-                        Extra options
+                        {t('servicesView.addService.extraOptions.title')}
                     </span>
                     <Switcher
                         checked={showCustomFields}
@@ -224,7 +231,6 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
 
                 {showCustomFields && (
                     <div className="flex flex-col gap-6">
-                        {/* NUMERIC */}
                         <div>
                             <label className="flex items-center gap-2 mb-2 cursor-pointer">
                                 <input
@@ -235,14 +241,18 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                     }
                                 />
                                 <span className="text-sm font-medium text-gray-700">
-                                    Numeric
+                                    {t(
+                                        'servicesView.addService.extraOptions.numeric',
+                                    )}
                                 </span>
                             </label>
                             {numericActive && (
                                 <div className="pl-6">
                                     <Input
                                         type="text"
-                                        placeholder="Field name..."
+                                        placeholder={t(
+                                            'servicesView.addService.extraOptions.fieldNamePH',
+                                        )}
                                         value={numericField.label}
                                         onChange={(e) =>
                                             setNumericField((prev) => ({
@@ -254,8 +264,6 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                 </div>
                             )}
                         </div>
-
-                        {/* SELECT */}
                         <div>
                             <label className="flex items-center gap-2 mb-2 cursor-pointer">
                                 <input
@@ -266,14 +274,18 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                     }
                                 />
                                 <span className="text-sm font-medium text-gray-700">
-                                    Selection
+                                    {t(
+                                        'servicesView.addService.extraOptions.select',
+                                    )}
                                 </span>
                             </label>
                             {selectActive && (
                                 <div className="pl-6 flex flex-col gap-2">
                                     <Input
                                         type="text"
-                                        placeholder="Field name..."
+                                        placeholder={t(
+                                            'servicesView.addService.extraOptions.fieldNamePH',
+                                        )}
                                         value={selectField.label}
                                         onChange={(e) =>
                                             setSelectField((prev) => ({
@@ -290,7 +302,10 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                             >
                                                 <Input
                                                     type="text"
-                                                    placeholder={`Option ${index + 1}`}
+                                                    placeholder={t(
+                                                        'servicesView.addService.extraOptions.optionPH',
+                                                        { number: index + 1 },
+                                                    )}
                                                     value={option}
                                                     onChange={(e) =>
                                                         updateOption(
@@ -323,13 +338,13 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                         onClick={() => addOption('select')}
                                         className="text-blue-600 text-sm self-start"
                                     >
-                                        + Add option
+                                        {t(
+                                            'servicesView.addService.extraOptions.addOption',
+                                        )}
                                     </button>
                                 </div>
                             )}
                         </div>
-
-                        {/* MULTISELECT */}
                         <div>
                             <label className="flex items-center gap-2 mb-2 cursor-pointer">
                                 <input
@@ -340,14 +355,18 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                     }
                                 />
                                 <span className="text-sm font-medium text-gray-700">
-                                    Multiple selection
+                                    {t(
+                                        'servicesView.addService.extraOptions.multiselect',
+                                    )}
                                 </span>
                             </label>
                             {multiSelectActive && (
                                 <div className="pl-6 flex flex-col gap-2">
                                     <Input
                                         type="text"
-                                        placeholder="Field name..."
+                                        placeholder={t(
+                                            'servicesView.addService.extraOptions.fieldNamePH',
+                                        )}
                                         value={multiSelectField.label}
                                         onChange={(e) =>
                                             setMultiSelectField((prev) => ({
@@ -364,7 +383,10 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                             >
                                                 <Input
                                                     type="text"
-                                                    placeholder={`Option ${index + 1}`}
+                                                    placeholder={t(
+                                                        'servicesView.addService.extraOptions.optionPH',
+                                                        { number: index + 1 },
+                                                    )}
                                                     value={option}
                                                     onChange={(e) =>
                                                         updateOption(
@@ -397,7 +419,9 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                                         onClick={() => addOption('multiselect')}
                                         className="text-blue-600 text-sm self-start"
                                     >
-                                        + Add option
+                                        {t(
+                                            'servicesView.addService.extraOptions.addOption',
+                                        )}
                                     </button>
                                 </div>
                             )}
@@ -412,13 +436,13 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
                     onClick={onCancel}
                     className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600"
                 >
-                    Cancel
+                    {t('modal.cancel')}
                 </button>
                 <button
                     type="submit"
                     className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700"
                 >
-                    Next
+                    {t('servicesView.addService.buttons.next')}
                 </button>
             </div>
         </Form>

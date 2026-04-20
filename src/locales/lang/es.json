@@ -135,6 +135,38 @@
         },
         "delete": {
             "confirm": "¿Está seguro que desea eliminar \"{{name}}\"?"
+        },
+        "addService": {
+            "title": "Agregar Servicio",
+            "step": "Paso {{current}} de {{total}}",
+            "fields": {
+                "name": "Nombre del Servicio",
+                "namePH": "Consultoría IT, Corte de Cabello...",
+                "description": "Descripción del Servicio",
+                "descriptionPH": "Detalles del servicio ofrecido",
+                "price": "Precio (opcional)",
+                "pricePH": "50"
+            },
+            "extraOptions": {
+                "title": "Opciones extra",
+                "numeric": "Numérico",
+                "select": "Selección",
+                "multiselect": "Selección múltiple",
+                "fieldNamePH": "Nombre del campo...",
+                "optionPH": "Opcion {{number}}",
+                "addOption": "+ Agregar opción"
+            },
+            "buttons": {
+                "next": "Siguiente",
+                "back": "Atrás",
+                "save": "Crear / Guardar",
+                "saving": "Guardando..."
+            },
+            "errors": {
+                "nameRequired": "El nombre del servicio es requerido",
+                "scheduleRequired": "Por favor selecciona al menos un horario",
+                "createError": "Ocurrió un error al crear el servicio"
+            }
         }
     }
 }

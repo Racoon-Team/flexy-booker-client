@@ -5,8 +5,10 @@ import { getMyBusiness, createService } from '@/services/BusinessService'
 import AddServiceStep1 from './AddServiceStep1'
 import AddServiceStep2 from './AddServiceStep2'
 import type { CustomField, Step1Data } from './addServiceTypes'
+import { useTranslation } from 'react-i18next'
 
 export default function AddServiceForm() {
+    const { t } = useTranslation()
     const { closeModal } = useModal()
     const { user } = useAuth()
 
@@ -43,7 +45,7 @@ export default function AddServiceForm() {
 
             closeModal()
         } catch {
-            setErrorMessage('An error occurred while creating the service')
+            setErrorMessage(t('servicesView.addService.errors.createError'))
         } finally {
             setIsSubmitting(false)
         }
@@ -52,10 +54,13 @@ export default function AddServiceForm() {
     return (
         <div className="p-4">
             <h2 className="text-lg font-semibold text-gray-800 mb-1">
-                Add Service
+                {t('servicesView.addService.title')}
             </h2>
             <p className="text-sm text-gray-400 mb-4">
-                Step {currentStep} of 2
+                {t('servicesView.addService.step', {
+                    current: currentStep,
+                    total: 2,
+                })}
             </p>
 
             {currentStep === 1 && (
