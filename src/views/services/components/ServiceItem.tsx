@@ -10,7 +10,7 @@ type Service = {
 
 type Props = {
     service: Service
-    onDelete: (id: number) => void
+   onDelete: (id: number, name: string) => void
 }
 
 const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
@@ -82,7 +82,7 @@ const ServiceItem = ({ service, onDelete }: Props) => {
                 </button>
 
                 <button
-                    onClick={() => onDelete(service.id)}
+                    onClick={() => onDelete(service.id, service.name)}
                     className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                 >
                     {t('common.buttons.delete')}

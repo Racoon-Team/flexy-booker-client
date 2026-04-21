@@ -9,7 +9,7 @@ type Service = {
 }
 type Props = {
     services: Service[]
-    onDelete: (id: number) => void
+   onDelete: (id: number, name: string) => void
 }
 
 const ServicesList = ({ services, onDelete }: Props) => {

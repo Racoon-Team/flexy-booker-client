@@ -5,6 +5,7 @@ import ServicesList from './components/ServicesList'
 import Pagination from '../../components/Pagination'
 import { getServices, deleteService } from './servicesServices'
 import { useModal } from '@/components/modal/ModalProvider'
+import { Notification, toast } from '@/components/ui'
 
 type Service = {
     id: number
@@ -16,7 +17,6 @@ type Service = {
 
 const ServicesView = () => {
     const { t } = useTranslation()
-    const [active, setActive] = useState('services')
     const { openModal } = useModal()
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -44,6 +44,8 @@ const ServicesView = () => {
 
     const handleDelete = (id: number, name: string) => {
         openModal({
+            title: t('common.buttons.delete'),
+            type: 'danger',
             message: t('servicesView.delete.confirm', { name }),
             onAccept: async () => {
                 try {
@@ -51,6 +53,13 @@ const ServicesView = () => {
 
                     setServices((prev) =>
                         prev.filter((service) => service.id !== id),
+                    )
+
+                    toast.push(
+                        <Notification type="success">
+                            {t('servicesView.delete.success', { name })}
+                        </Notification>,
+                        { placement: 'top-center' },
                     )
                 } catch (error) {
                     console.error(error)

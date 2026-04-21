@@ -134,7 +134,8 @@
             "page": "Página {{current}} de {{total}}"
         },
         "delete": {
-            "confirm": "¿Está seguro que desea eliminar \"{{name}}\"?"
+            "confirm": "¿Está seguro que desea eliminar \"{{name}}\"?",
+              "success": "\"{{name}}\" eliminado correctamente"
         },
         "addService": {
             "title": "Agregar Servicio",
