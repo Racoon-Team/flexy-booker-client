@@ -1,6 +1,5 @@
 import axios from 'axios'
 import AxiosResponseIntrceptorErrorCallback from './AxiosResponseIntrceptorErrorCallback'
-import AxiosRequestIntrceptorConfigCallback from './AxiosRequestIntrceptorConfigCallback'
 import appConfig from '@/configs/app.config'
 import type { AxiosError } from 'axios'
 
@@ -11,7 +10,13 @@ const AxiosBase = axios.create({
 
 AxiosBase.interceptors.request.use(
     (config) => {
-        return AxiosRequestIntrceptorConfigCallback(config)
+        const token = localStorage.getItem("token")
+
+        if (token) {
+            config.headers.set('Authorization', `Bearer ${token}`)
+        }
+
+        return config
     },
     (error) => {
         return Promise.reject(error)
