@@ -27,10 +27,16 @@ const AllRoutes = (props: AllRoutesProps) => {
     return (
         <Routes>
             <Route path="/" element={<Landing />} />
-            <Route element={<ServicesLayout />}>
-                <Route path="/services" element={<ServicesView />} />
-                <Route path="/reservations" element={<ReservationsView />} />
-                <Route path="/settings" element={<SettingsView />} />
+
+            <Route element={<ProtectedRoute />}>
+                <Route element={<ServicesLayout />}>
+                    <Route path="/services" element={<ServicesView />} />
+                    <Route
+                        path="/reservations"
+                        element={<ReservationsView />}
+                    />
+                    <Route path="/settings" element={<SettingsView />} />
+                </Route>
             </Route>
 
             <Route element={<PublicRoute />}>
