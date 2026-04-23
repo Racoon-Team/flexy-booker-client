@@ -131,8 +131,40 @@
         "pagination": {
             "page": "Page {{current}} of {{total}}"
         },
-        "delete":{
-            "confirm":"Are you sure you want to delete \"{{name}}\"?"
+        "delete": {
+            "confirm": "Are you sure you want to delete \"{{name}}\"?"
+        },
+        "addService": {
+            "title": "Add Service",
+            "step": "Step {{current}} of {{total}}",
+            "fields": {
+                "name": "Service Name",
+                "namePH": "IT Consulting, Haircut...",
+                "description": "Service Description",
+                "descriptionPH": "Details about the service",
+                "price": "Price (optional)",
+                "pricePH": "50"
+            },
+            "extraOptions": {
+                "title": "Extra options",
+                "numeric": "Numeric",
+                "select": "Selection",
+                "multiselect": "Multiple selection",
+                "fieldNamePH": "Field name...",
+                "optionPH": "Option {{number}}",
+                "addOption": "+ Add option"
+            },
+            "buttons": {
+                "next": "Next",
+                "back": "Back",
+                "save": "Create / Save",
+                "saving": "Saving..."
+            },
+            "errors": {
+                "nameRequired": "Service name is required",
+                "scheduleRequired": "Please select at least one time slot",
+                "createError": "An error occurred while creating the service"
+            }
         }
     }
 }

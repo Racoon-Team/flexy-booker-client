@@ -58,6 +58,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
         if (user) {
             setUser({
+                userId: user.userId,
                 userName: user.userName,
                 email: user.email,
             })
@@ -77,9 +78,9 @@ function AuthProvider({ children }: AuthProviderProps) {
                 handleSignIn(
                     { accessToken: resp.token },
                     {
-                        userId: String(resp.id),
-                        userName: resp.name,
-                        email: resp.email,
+                        userId: String(resp.user.userId),
+                        userName: resp.user.userName,
+                        email: resp.user.email,
                     },
                 )
                 redirect()
@@ -108,9 +109,9 @@ function AuthProvider({ children }: AuthProviderProps) {
                 handleSignIn(
                     { accessToken: resp.token },
                     {
-                        userId: String(resp.id),
-                        userName: resp.name,
-                        email: resp.email,
+                        userId: String(resp.user.userId),
+                        userName: resp.user.userName,
+                        email: resp.user.email,
                     },
                 )
                 redirect()
