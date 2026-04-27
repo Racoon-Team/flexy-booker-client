@@ -9,9 +9,8 @@ type Service = {
 }
 type Props = {
     services: Service[]
-   onDelete: (id: number, name: string) => void
+    onDelete: (service: Service) => void
 }
-
 const ServicesList = ({ services, onDelete }: Props) => {
     return (
         <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6 shadow-sm">
