@@ -1,6 +1,7 @@
 import axios from 'axios'
 import AxiosResponseIntrceptorErrorCallback from './AxiosResponseIntrceptorErrorCallback'
 import appConfig from '@/configs/app.config'
+import { useToken } from '@/store/authStore'
 import type { AxiosError } from 'axios'
 
 const AxiosBase = axios.create({
@@ -10,10 +11,10 @@ const AxiosBase = axios.create({
 
 AxiosBase.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token")
+        const { token } = useToken()
 
         if (token) {
-            config.headers.set('Authorization', `Bearer ${token}`)
+            config.headers.Authorization = `Bearer ${token}`
         }
 
         return config
