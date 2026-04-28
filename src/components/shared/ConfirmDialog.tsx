@@ -53,7 +53,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
                 </Alert>
             </div>
 
-            <div className="px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-bl-2xl rounded-br-2xl">
+            <div className="px-6 py-3 bg-white rounded-bl-2xl rounded-br-2xl">
                 <div className="flex justify-end items-center gap-2">
                     <Button
                         size="sm"

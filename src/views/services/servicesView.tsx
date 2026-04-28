@@ -4,7 +4,6 @@ import ServicesHeader from './components/ServicesHeader'
 import ServicesList from './components/ServicesList'
 import Pagination from '../../components/Pagination'
 import { getServices, deleteService } from './servicesServices'
-import { Notification, toast } from '@/components/ui'
 import ConfirmDialog from '@/components/shared/ConfirmDialog'
 
 type Service = {
