@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState } from 'react'
 import Modal from './Modal'
 
@@ -61,3 +62,4 @@ export const useModal = () => {
     if (!context) throw new Error('useModal must be used inside ModalProvider')
     return context
 }
+

@@ -1,15 +1,15 @@
-import {
-    HiCheckCircle,
-    HiOutlineInformationCircle,
-    HiOutlineExclamation,
-    HiOutlineExclamationCircle,
-} from 'react-icons/hi'
 import Avatar from '@/components/ui/Avatar'
+import type { ButtonProps } from '@/components/ui/Button'
 import Button from '@/components/ui/Button'
+import type { DialogProps } from '@/components/ui/Dialog'
 import Dialog from '@/components/ui/Dialog'
 import type { ReactNode } from 'react'
-import type { DialogProps } from '@/components/ui/Dialog'
-import type { ButtonProps } from '@/components/ui/Button'
+import {
+    HiCheckCircle,
+    HiOutlineExclamation,
+    HiOutlineExclamationCircle,
+    HiOutlineInformationCircle,
+} from 'react-icons/hi'
 
 type StatusType = 'info' | 'success' | 'warning' | 'danger'
 
@@ -99,7 +99,12 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
     }
 
     return (
-        <Dialog contentClassName="pb-0 px-0" {...rest}>
+        <Dialog
+            contentClassName="pb-0 px-0"
+            onClose={onCancel}
+            onRequestClose={onCancel}
+            {...rest}
+        >
             <div className="px-6 pb-6 pt-2 flex">
                 <div>
                     <StatusIcon status={type} />
@@ -109,7 +114,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
                     {children}
                 </div>
             </div>
-            <div className="px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-bl-2xl rounded-br-2xl">
+            <div className="px-6 py-3 dark:bg-gray-700 rounded-bl-2xl rounded-br-2xl">
                 <div className="flex justify-end items-center gap-2">
                     <Button
                         size="sm"
