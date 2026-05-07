@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 function generateHours(): string[] {
@@ -25,14 +25,23 @@ function createCellId(dayIndex: number, hourIndex: number): string {
 
 export interface AvailabilityCalendarProps {
     initialValues?: string[]
+    startingHour?: number
     onChange?: (selectedCells: string[]) => void
 }
 
 export default function AvailabilityCalendar({
     initialValues = [],
+    startingHour = 0,
     onChange,
 }: AvailabilityCalendarProps) {
     const { t } = useTranslation()
+    const scrollRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (scrollRef.current && startingHour > 0) {
+            scrollRef.current.scrollTop = startingHour * 32
+        }
+    }, [startingHour])
 
     const DAYS = useMemo(
         () => [
@@ -134,7 +143,10 @@ export default function AvailabilityCalendar({
     }
 
     return (
-        <div className="select-none overflow-auto max-h-[420px] rounded-lg border border-gray-200">
+        <div
+            ref={scrollRef}
+            className="select-none overflow-auto max-h-[420px] rounded-lg border border-gray-200"
+        >
             <table className="w-full border-collapse text-sm min-w-[500px]">
                 <thead className="sticky top-0 bg-white z-10 shadow-sm">
                     <tr>

@@ -37,6 +37,7 @@ export default function AddServiceStep2({
         <div>
             <AvailabilityCalendar
                 initialValues={initialSchedule}
+                startingHour={1}
                 onChange={(cells) => setSchedule(cells)}
             />
 
