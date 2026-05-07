@@ -435,7 +435,7 @@ export default function AddServiceStep1({ initialData, onNext, onCancel }: Props
                 <button
                     type="button"
                     onClick={onCancel}
-                    className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600"
+                    className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm hover:bg-gray-200"
                 >
                     {t('modal.cancel')}
                 </button>
