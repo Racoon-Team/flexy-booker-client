@@ -1,46 +1,37 @@
+import { useEffect, useState } from 'react'
 import { useModal } from '@/components/modal/ModalProvider'
 import LandingNavbar from '@/components/template/LandingNavbar'
 import { useTranslation } from 'react-i18next'
+import { getServices } from './services/servicesServices'
 
-const services = [
-    {
-        id: 1,
-        title: 'Sports Courts',
-        description:
-            'Find and book soccer, tennis, basketball courts and more.',
-    },
-    {
-        id: 2,
-        title: 'Nail Salons',
-        description:
-            'Book your appointment for manicures, pedicures and other nail services.',
-    },
-    {
-        id: 3,
-        title: 'Hair Salons',
-        description:
-            'Find your ideal stylist and book your next haircut or hairstyle.',
-    },
-    {
-        id: 4,
-        title: 'Accommodation Booking',
-        description: 'Book your accommodation.',
-    },
-    {
-        id: 5,
-        title: 'Private Movie Rooms',
-        description: 'Book private movie screenings.',
-    },
-    {
-        id: 6,
-        title: 'Pet Daycare',
-        description: 'Book care for your pet.',
-    },
-]
+type Service = {
+    id: number
+    name: string
+    description: string
+    price: number
+    schedule: string[]
+}
 
 const Landing = () => {
     const { t } = useTranslation()
     const { openModal } = useModal()
+
+    const [services, setServices] = useState<Service[]>([])
+    const [search, setSearch] = useState('')
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const data = await getServices(search)
+                setServices(data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        fetchServices()
+    }, [search])
+
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <LandingNavbar />
@@ -50,6 +41,16 @@ const Landing = () => {
                     {t('landing.exploreServices')}
                 </h2>
 
+                <div className="mb-6">
+                    <input
+                        type="text"
+                        placeholder="Search services..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                    />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {services.map((service) => (
                         <div
@@ -57,8 +58,9 @@ const Landing = () => {
                             className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow"
                         >
                             <h3 className="text-lg font-semibold text-gray-800">
-                                {service.title}
+                                {service.name}
                             </h3>
+
                             <p className="text-gray-500 text-sm flex-1">
                                 {service.description}
                             </p>
@@ -68,14 +70,14 @@ const Landing = () => {
                                     openModal({
                                         message: t(
                                             'landing.modal.confirmService',
-                                            { service: service.title },
+                                            { service: service.name },
                                         ),
                                         onAccept: () => {
                                             console.log(
                                                 t(
                                                     'landing.modal.selectedService',
                                                     {
-                                                        service: service.title,
+                                                        service: service.name,
                                                     },
                                                 ),
                                             )
