@@ -1,7 +1,7 @@
 import ApiService from './ApiService'
 import endpointConfig from '@/configs/endpoint.config'
 
-export async function getMyBusiness(userId: number) {
+export async function getMyBusiness() {
     return ApiService.fetchDataWithAxios<{
         id: number
         user_id: number
@@ -10,7 +10,7 @@ export async function getMyBusiness(userId: number) {
         description: string
     }>({
         method: 'get',
-        url: `${endpointConfig.businesses}/user/${userId}`,
+        url: `${endpointConfig.businesses}/me`,
     })
 }
 

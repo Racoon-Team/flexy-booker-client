@@ -49,7 +49,7 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
                 })
             } else {
                 if (!user.userId) return
-                const business = await getMyBusiness(Number(user.userId))
+                const business = await getMyBusiness()
                 await createService({
                     business_id: business.id,
                     name: step1Data.name,

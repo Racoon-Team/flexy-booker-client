@@ -1,5 +1,6 @@
 
 import { createContext, useContext, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import Modal from './Modal'
 
 export type ModalData = {
@@ -45,14 +46,16 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         <ModalContext.Provider value={{ openModal, closeModal }}>
             {children}
 
-            {modal.isOpen && (
-                <Modal
-                    message={modal.message}
-                    content={modal.content}
-                    onAccept={modal.onAccept}
-                    onClose={closeModal}
-                />
-            )}
+            <AnimatePresence>
+                {modal.isOpen && (
+                    <Modal
+                        message={modal.message}
+                        content={modal.content}
+                        onAccept={modal.onAccept}
+                        onClose={closeModal}
+                    />
+                )}
+            </AnimatePresence>
         </ModalContext.Provider>
     )
 }
