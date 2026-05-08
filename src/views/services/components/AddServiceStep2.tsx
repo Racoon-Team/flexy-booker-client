@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import { AvailabilityCalendar } from '@/components/ui'
-import type { CustomField } from './addServiceTypes'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { CustomField } from './addServiceTypes'
 
 type Props = {
     isSubmitting: boolean
@@ -37,6 +37,7 @@ export default function AddServiceStep2({
         <div>
             <AvailabilityCalendar
                 initialValues={initialSchedule}
+                startingHour={8}
                 onChange={(cells) => setSchedule(cells)}
             />
 
@@ -50,7 +51,7 @@ export default function AddServiceStep2({
                 <button
                     type="button"
                     onClick={onCancel}
-                    className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600"
+                    className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm hover:bg-gray-200"
                 >
                     {t('modal.cancel')}
                 </button>
