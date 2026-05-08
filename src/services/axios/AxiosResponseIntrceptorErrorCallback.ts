@@ -1,11 +1,11 @@
-import { useSessionUser, useToken } from '@/store/authStore'
+import { useSessionUser, getToken } from '@/store/authStore'
 import type { AxiosError } from 'axios'
 
 const unauthorizedCode = [401, 419, 440]
 
 const AxiosResponseIntrceptorErrorCallback = (error: AxiosError) => {
     const { response } = error
-    const { setToken } = useToken()
+    const { setToken } = getToken()
 
     if (response && unauthorizedCode.includes(response.status)) {
         setToken('')

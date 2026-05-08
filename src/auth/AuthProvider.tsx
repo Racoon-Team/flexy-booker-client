@@ -1,7 +1,7 @@
 import { useRef, useImperativeHandle, useState } from 'react'
 import AuthContext from './AuthContext'
 import appConfig from '@/configs/app.config'
-import { useSessionUser, useToken } from '@/store/authStore'
+import { useSessionUser, getToken } from '@/store/authStore'
 import { apiSignIn, apiSignOut, apiSignUp } from '@/services/AuthService'
 import { useNavigate } from 'react-router'
 import type {
@@ -40,7 +40,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const setSessionSignedIn = useSessionUser(
         (state) => state.setSessionSignedIn,
     )
-    const { token, setToken } = useToken()
+    const { token, setToken } = getToken()
     const [tokenState, setTokenState] = useState(token)
 
     const authenticated = Boolean(tokenState && signedIn)

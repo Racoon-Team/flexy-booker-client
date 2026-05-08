@@ -5,22 +5,23 @@ import ServicesList from './components/ServicesList'
 import Pagination from '../../components/Pagination'
 import { getServices, deleteService } from './servicesServices'
 import ConfirmDialog from '@/components/shared/ConfirmDialog'
-
-type Service = {
-    id: number
-    name: string
-    description: string
-    price: number
-    schedule: string[]
-}
+import toast from '@/components/ui/toast'
+import Notification from '@/components/ui/Notification'
+import type { Service } from './components/addServiceTypes'
+import AddServiceForm from './components/AddServiceForm'
+import { useModal } from '@/components/modal/ModalProvider'
+import Skeleton from '@/components/ui/Skeleton'
+import NoDataFound from '@/assets/svg/NoDataFound'
 
 const ServicesView = () => {
     const { t } = useTranslation()
+    const { openModal } = useModal()
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [selected, setSelected] = useState<Service | null>(null)
 
+    const [loading, setLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
-    const itemsPerPage = 3
+    const itemsPerPage = 5
     const [services, setServices] = useState<Service[]>([])
 
     const indexOfLast = currentPage * itemsPerPage
@@ -29,18 +30,32 @@ const ServicesView = () => {
 
     const totalPages = Math.ceil(services.length / itemsPerPage)
 
-    useEffect(() => {
-        const fetchServices = async () => {
-            try {
-                const data = await getServices()
-                setServices(data)
-            } catch (error) {
-                console.error(error)
-            }
+    const fetchServices = async () => {
+        setLoading(true)
+        try {
+            const data = await getServices()
+            setServices(data)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
         }
+    }
 
+    useEffect(() => {
         fetchServices()
     }, [])
+
+    const handleEdit = (service: Service) => {
+        openModal({
+            content: (
+                <AddServiceForm
+                    initialService={service}
+                    onSuccess={fetchServices}
+                />
+            ),
+        })
+    }
 
     const handleDelete = (service: Service) => {
         setSelected(service)
@@ -52,10 +67,19 @@ const ServicesView = () => {
 
         try {
             await deleteService(selected.id)
-
             setServices((prev) => prev.filter((s) => s.id !== selected.id))
+            toast.push(
+                <Notification type="success">
+                    {t('servicesView.delete.success', { name: selected.name })}
+                </Notification>,
+            )
         } catch (error) {
             console.error(error)
+            toast.push(
+                <Notification type="danger">
+                    {t('servicesView.delete.error', { name: selected.name })}
+                </Notification>,
+            )
         }
 
         setConfirmOpen(false)
@@ -66,16 +90,42 @@ const ServicesView = () => {
             <div className="flex flex-1">
                 <main className="flex-1 p-10 bg-gray-50">
                     <>
-                        <ServicesHeader />
-                        <ServicesList
-                            services={currentServices}
-                            onDelete={handleDelete}
-                        />
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            setCurrentPage={setCurrentPage}
-                        />
+                        <ServicesHeader onServiceAdded={fetchServices} />
+                        {loading ? (
+                            <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6 shadow-sm">
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <div key={i} className="space-y-2">
+                                        <Skeleton height={22} width="40%" />
+                                        <Skeleton height={16} width="70%" />
+                                        <Skeleton height={16} width="30%" />
+                                        <Skeleton height={16} width="55%" />
+                                        <div className="flex gap-2 mt-2">
+                                            <Skeleton height={30} width={60} />
+                                            <Skeleton height={30} width={60} />
+                                        </div>
+                                        {i < 4 && <hr className="mt-4" />}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : services.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-20 gap-4 text-gray-400">
+                                <NoDataFound />
+                                <p>{t('servicesView.services.empty')}</p>
+                            </div>
+                        ) : (
+                            <>
+                                <ServicesList
+                                    services={currentServices}
+                                    onDelete={handleDelete}
+                                    onEdit={handleEdit}
+                                />
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    setCurrentPage={setCurrentPage}
+                                />
+                            </>
+                        )}
                     </>
                 </main>
             </div>

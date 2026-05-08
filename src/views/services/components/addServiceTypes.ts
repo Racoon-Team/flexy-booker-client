@@ -1,3 +1,11 @@
+export type Service = {
+    id: number
+    name: string
+    description: string
+    price: number
+    schedule: string[]
+}
+
 export type Step1Data = {
     name: string
     description?: string

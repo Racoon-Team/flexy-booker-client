@@ -2,7 +2,11 @@ import { useTranslation } from 'react-i18next'
 import { useModal } from '@/components/modal/ModalProvider'
 import AddServiceForm from './AddServiceForm'
 
-const ServicesHeader = () => {
+type Props = {
+    onServiceAdded: () => void
+}
+
+const ServicesHeader = ({ onServiceAdded }: Props) => {
     const { t } = useTranslation()
     const { openModal } = useModal()
 
@@ -14,7 +18,11 @@ const ServicesHeader = () => {
 
             <button
                 className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                onClick={() => openModal({ content: <AddServiceForm /> })}
+                onClick={() =>
+                    openModal({
+                        content: <AddServiceForm onSuccess={onServiceAdded} />,
+                    })
+                }
             >
                 {t('common.buttons.add')}
             </button>
