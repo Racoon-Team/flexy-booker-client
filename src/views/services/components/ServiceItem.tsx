@@ -69,12 +69,17 @@ const ServiceItem = ({ service, onDelete }: Props) => {
             <h2 className="font-semibold text-lg">{service.name}</h2>
 
             <p className="text-gray-600 text-sm">
-                {t('servicesView.services.description')}:{service.description}
+                {t('servicesView.services.description')}: {service.description}
             </p>
 
+            {service.price != null && (
+                <p className="text-gray-600 text-sm">
+                    {t('servicesView.services.price')}: {service.price}
+                </p>
+            )}
+
             <p className="text-gray-600 text-sm">
-                {t('servicesView.services.availability')}:{service.price},{' '}
-                {formatSchedule(service.schedule)}
+                {t('servicesView.services.schedule')}: {formatSchedule(service.schedule)}
             </p>
 
             <div className="flex gap-2 mt-2">

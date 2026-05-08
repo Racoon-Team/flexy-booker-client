@@ -128,6 +128,8 @@
         "services": {
             "title": "Mis Servicios y Horarios Actuales",
             "description": "Descripción",
+            "price": "Precio",
+            "schedule": "Horario",
             "availability": "Disponibilidad"
         },
         "pagination": {
@@ -135,7 +137,8 @@
         },
         "delete": {
             "confirm": "¿Está seguro que desea eliminar \"{{name}}\"?",
-              "success": "\"{{name}}\" eliminado correctamente"
+            "success": "\"{{name}}\" eliminado correctamente",
+            "error": "No se pudo eliminar \"{{name}}\". Por favor intente nuevamente."
         },
         "addService": {
             "title": "Agregar Servicio",

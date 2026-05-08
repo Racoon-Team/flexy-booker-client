@@ -5,6 +5,8 @@ import ServicesList from './components/ServicesList'
 import Pagination from '../../components/Pagination'
 import { getServices, deleteService } from './servicesServices'
 import ConfirmDialog from '@/components/shared/ConfirmDialog'
+import toast from '@/components/ui/toast'
+import Notification from '@/components/ui/Notification'
 
 type Service = {
     id: number
@@ -52,10 +54,19 @@ const ServicesView = () => {
 
         try {
             await deleteService(selected.id)
-
             setServices((prev) => prev.filter((s) => s.id !== selected.id))
+            toast.push(
+                <Notification type="success">
+                    {t('servicesView.delete.success', { name: selected.name })}
+                </Notification>,
+            )
         } catch (error) {
             console.error(error)
+            toast.push(
+                <Notification type="danger">
+                    {t('servicesView.delete.error', { name: selected.name })}
+                </Notification>,
+            )
         }
 
         setConfirmOpen(false)

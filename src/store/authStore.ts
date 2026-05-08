@@ -67,7 +67,7 @@ export const useSessionUser = create<AuthState & AuthAction>()(
     ),
 )
 
-export const useToken = () => {
+export const getToken = () => {
     const storage = getPersistStorage()
 
     const setToken = (token: string) => {
