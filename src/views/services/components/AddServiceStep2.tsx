@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import { AvailabilityCalendar } from '@/components/ui'
-import type { CustomField } from './addServiceTypes'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { CustomField } from './addServiceTypes'
 
 type Props = {
     isSubmitting: boolean
@@ -37,7 +37,7 @@ export default function AddServiceStep2({
         <div>
             <AvailabilityCalendar
                 initialValues={initialSchedule}
-                startingHour={1}
+                startingHour={8}
                 onChange={(cells) => setSchedule(cells)}
             />
 
