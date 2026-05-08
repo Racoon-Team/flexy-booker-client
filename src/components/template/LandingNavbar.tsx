@@ -1,16 +1,22 @@
-import { Link, useNavigate } from 'react-router'
 import { useAuth } from '@/auth'
+import { useLocaleStore } from '@/store/localeStore'
 import { useTranslation } from 'react-i18next'
+import { Link, useNavigate } from 'react-router'
+
+const LANGUAGES = [
+    { value: 'en', label: '🇺🇸 EN' },
+    { value: 'es', label: '🇧🇴 ES' },
+]
 
 const LandingNavbar = () => {
     const { authenticated, signOut } = useAuth()
     const navigate = useNavigate()
+    const { t } = useTranslation()
+    const { currentLang, setLang } = useLocaleStore()
 
     const handleSignOut = async () => {
         await signOut()
     }
-
-    const { t } = useTranslation()
 
     return (
         <nav className="bg-white border-b border-gray-200 px-6 py-4">
@@ -35,6 +41,18 @@ const LandingNavbar = () => {
                             {t('landing.navbar.myReservations')}
                         </Link>
                     )}
+
+                    <select
+                        value={currentLang}
+                        onChange={(e) => setLang(e.target.value)}
+                        className="text-sm text-gray-600 bg-transparent border border-gray-200 rounded-lg px-2 py-1 cursor-pointer hover:border-blue-400 focus:outline-none focus:border-blue-500 transition-colors"
+                    >
+                        {LANGUAGES.map((lang) => (
+                            <option key={lang.value} value={lang.value}>
+                                {lang.label}
+                            </option>
+                        ))}
+                    </select>
 
                     {authenticated ? (
                         <button
