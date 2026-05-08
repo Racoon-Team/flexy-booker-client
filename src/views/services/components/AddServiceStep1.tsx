@@ -21,11 +21,12 @@ type Step1FormSchema = {
 }
 
 type Props = {
+    initialData?: Step1Data
     onNext: (data: Step1Data, customFields: CustomField[]) => void
     onCancel: () => void
 }
 
-export default function AddServiceStep1({ onNext, onCancel }: Props) {
+export default function AddServiceStep1({ initialData, onNext, onCancel }: Props) {
     const { t } = useTranslation()
 
     const step1Schema = z.object({
@@ -66,9 +67,9 @@ export default function AddServiceStep1({ onNext, onCancel }: Props) {
     } = useForm<Step1FormSchema>({
         resolver: zodResolver(step1Schema),
         defaultValues: {
-            name: '',
-            description: '',
-            price: undefined,
+            name: initialData?.name ?? '',
+            description: initialData?.description ?? '',
+            price: initialData?.price ?? undefined,
         },
     })
 

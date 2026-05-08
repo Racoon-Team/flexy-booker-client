@@ -128,7 +128,8 @@
             "description": "Description",
             "price": "Price",
             "schedule": "Schedule",
-            "availability": "Availability"
+            "availability": "Availability",
+            "empty": "You haven't added any services yet."
         },
         "pagination": {
             "page": "Page {{current}} of {{total}}"
@@ -140,6 +141,7 @@
         },
         "addService": {
             "title": "Add Service",
+            "editTitle": "Edit Service",
             "step": "Step {{current}} of {{total}}",
             "fields": {
                 "name": "Service Name",
@@ -167,7 +169,8 @@
             "errors": {
                 "nameRequired": "Service name is required",
                 "scheduleRequired": "Please select at least one time slot",
-                "createError": "An error occurred while creating the service"
+                "createError": "An error occurred while creating the service",
+                "updateError": "An error occurred while updating the service"
             }
         }
     }

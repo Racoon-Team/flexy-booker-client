@@ -7,20 +7,19 @@ import { getServices, deleteService } from './servicesServices'
 import ConfirmDialog from '@/components/shared/ConfirmDialog'
 import toast from '@/components/ui/toast'
 import Notification from '@/components/ui/Notification'
-
-type Service = {
-    id: number
-    name: string
-    description: string
-    price: number
-    schedule: string[]
-}
+import type { Service } from './components/addServiceTypes'
+import AddServiceForm from './components/AddServiceForm'
+import { useModal } from '@/components/modal/ModalProvider'
+import Spinner from '@/components/ui/Spinner'
+import NoDataFound from '@/assets/svg/NoDataFound'
 
 const ServicesView = () => {
     const { t } = useTranslation()
+    const { openModal } = useModal()
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [selected, setSelected] = useState<Service | null>(null)
 
+    const [loading, setLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 3
     const [services, setServices] = useState<Service[]>([])
@@ -31,18 +30,32 @@ const ServicesView = () => {
 
     const totalPages = Math.ceil(services.length / itemsPerPage)
 
-    useEffect(() => {
-        const fetchServices = async () => {
-            try {
-                const data = await getServices()
-                setServices(data)
-            } catch (error) {
-                console.error(error)
-            }
+    const fetchServices = async () => {
+        setLoading(true)
+        try {
+            const data = await getServices()
+            setServices(data)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
         }
+    }
 
+    useEffect(() => {
         fetchServices()
     }, [])
+
+    const handleEdit = (service: Service) => {
+        openModal({
+            content: (
+                <AddServiceForm
+                    initialService={service}
+                    onSuccess={fetchServices}
+                />
+            ),
+        })
+    }
 
     const handleDelete = (service: Service) => {
         setSelected(service)
@@ -78,15 +91,29 @@ const ServicesView = () => {
                 <main className="flex-1 p-10 bg-gray-50">
                     <>
                         <ServicesHeader />
-                        <ServicesList
-                            services={currentServices}
-                            onDelete={handleDelete}
-                        />
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            setCurrentPage={setCurrentPage}
-                        />
+                        {loading ? (
+                            <div className="flex justify-center items-center py-20">
+                                <Spinner size={40} />
+                            </div>
+                        ) : services.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-20 gap-4 text-gray-400">
+                                <NoDataFound />
+                                <p>{t('servicesView.services.empty')}</p>
+                            </div>
+                        ) : (
+                            <>
+                                <ServicesList
+                                    services={currentServices}
+                                    onDelete={handleDelete}
+                                    onEdit={handleEdit}
+                                />
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    setCurrentPage={setCurrentPage}
+                                />
+                            </>
+                        )}
                     </>
                 </main>
             </div>

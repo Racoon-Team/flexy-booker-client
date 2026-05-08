@@ -1,17 +1,10 @@
 import { useTranslation } from 'react-i18next'
-
-type Service = {
-    id: number
-    name: string
-    description: string
-    price: number
-    schedule: string[]
-}
+import type { Service } from './addServiceTypes'
 
 type Props = {
     service: Service
     onDelete: (service: Service) => void
-
+    onEdit: (service: Service) => void
 }
 
 const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
@@ -61,7 +54,7 @@ function formatSchedule(schedule: string[]): string {
     return result.join(', ')
 }
 
-const ServiceItem = ({ service, onDelete }: Props) => {
+const ServiceItem = ({ service, onDelete, onEdit }: Props) => {
     const { t } = useTranslation()
 
     return (
@@ -83,7 +76,10 @@ const ServiceItem = ({ service, onDelete }: Props) => {
             </p>
 
             <div className="flex gap-2 mt-2">
-                <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                <button
+                    onClick={() => onEdit(service)}
+                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                >
                     {t('common.buttons.edit')}
                 </button>
 

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 type Props = {
     isSubmitting: boolean
     errorMessage: string
+    initialSchedule?: string[]
     onBack: () => void
     onCancel: () => void
     onSubmit: (schedule: string[], customFields: CustomField[]) => void
@@ -14,11 +15,12 @@ type Props = {
 export default function AddServiceStep2({
     isSubmitting,
     errorMessage,
+    initialSchedule,
     onBack,
     onCancel,
     onSubmit,
 }: Props) {
-    const [schedule, setSchedule] = useState<string[]>([])
+    const [schedule, setSchedule] = useState<string[]>(initialSchedule ?? [])
     const [localError, setLocalError] = useState('')
     const { t } = useTranslation()
 
@@ -33,7 +35,10 @@ export default function AddServiceStep2({
 
     return (
         <div>
-            <AvailabilityCalendar onChange={(cells) => setSchedule(cells)} />
+            <AvailabilityCalendar
+                initialValues={initialSchedule}
+                onChange={(cells) => setSchedule(cells)}
+            />
 
             {(localError || errorMessage) && (
                 <p className="text-red-500 text-sm mt-2">

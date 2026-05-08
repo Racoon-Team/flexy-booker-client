@@ -130,7 +130,8 @@
             "description": "Descripción",
             "price": "Precio",
             "schedule": "Horario",
-            "availability": "Disponibilidad"
+            "availability": "Disponibilidad",
+            "empty": "Aún no has agregado ningún servicio."
         },
         "pagination": {
             "page": "Página {{current}} de {{total}}"
@@ -142,6 +143,7 @@
         },
         "addService": {
             "title": "Agregar Servicio",
+            "editTitle": "Editar Servicio",
             "step": "Paso {{current}} de {{total}}",
             "fields": {
                 "name": "Nombre del Servicio",
@@ -169,7 +171,8 @@
             "errors": {
                 "nameRequired": "El nombre del servicio es requerido",
                 "scheduleRequired": "Por favor selecciona al menos un horario",
-                "createError": "Ocurrió un error al crear el servicio"
+                "createError": "Ocurrió un error al crear el servicio",
+                "updateError": "Ocurrió un error al actualizar el servicio"
             }
         }
     }

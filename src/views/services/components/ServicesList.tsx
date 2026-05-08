@@ -1,17 +1,11 @@
 import ServiceItem from './ServiceItem'
-
-type Service = {
-    id: number
-    name: string
-    description: string
-    price: number
-    schedule: string[]
-}
+import type { Service } from './addServiceTypes'
 type Props = {
     services: Service[]
     onDelete: (service: Service) => void
+    onEdit: (service: Service) => void
 }
-const ServicesList = ({ services, onDelete }: Props) => {
+const ServicesList = ({ services, onDelete, onEdit }: Props) => {
     return (
         <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-6 shadow-sm">
             {Array.isArray(services) &&
@@ -20,6 +14,7 @@ const ServicesList = ({ services, onDelete }: Props) => {
                         key={service.id}
                         service={service}
                         onDelete={onDelete}
+                        onEdit={onEdit}
                     />
                 ))}
         </div>
