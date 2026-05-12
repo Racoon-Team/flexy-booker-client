@@ -22,18 +22,19 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
     const [step1Data, setStep1Data] = useState<Step1Data | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [step1CustomFields, setStep1CustomFields] = useState<CustomField[]>(
+        [],
+    )
 
     const isEditing = Boolean(initialService)
 
-    function handleStep1Next(data: Step1Data) {
+    function handleStep1Next(data: Step1Data, fields: CustomField[]) {
         setStep1Data(data)
+        setStep1CustomFields(fields)
         setCurrentStep(2)
     }
 
-    async function handleStep2Submit(
-        schedule: string[],
-        customFields: CustomField[],
-    ) {
+    async function handleStep2Submit(schedule: string[]) {
         if (!step1Data) return
 
         setIsSubmitting(true)
@@ -44,8 +45,11 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
                 await updateService(initialService.id, {
                     name: step1Data.name,
                     description: step1Data.description,
-                    price: step1Data.price ? Number(step1Data.price) : undefined,
+                    price: step1Data.price
+                        ? Number(step1Data.price)
+                        : undefined,
                     schedule,
+                    custom_fields: step1CustomFields,
                 })
             } else {
                 if (!user.userId) return
@@ -54,9 +58,11 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
                     business_id: business.id,
                     name: step1Data.name,
                     description: step1Data.description,
-                    price: step1Data.price ? Number(step1Data.price) : undefined,
+                    price: step1Data.price
+                        ? Number(step1Data.price)
+                        : undefined,
                     schedule,
-                    custom_fields: customFields,
+                    custom_fields: step1CustomFields,
                 })
             }
 
@@ -78,7 +84,11 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
     return (
         <div className="p-4">
             <h2 className="text-lg font-semibold text-gray-800 mb-1">
-                {t(isEditing ? 'servicesView.addService.editTitle' : 'servicesView.addService.title')}
+                {t(
+                    isEditing
+                        ? 'servicesView.addService.editTitle'
+                        : 'servicesView.addService.title',
+                )}
             </h2>
             <p className="text-sm text-gray-400 mb-4">
                 {t('servicesView.addService.step', {
@@ -89,11 +99,16 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
 
             {currentStep === 1 && (
                 <AddServiceStep1
-                    initialData={initialService ? {
-                        name: initialService.name,
-                        description: initialService.description,
-                        price: initialService.price,
-                    } : undefined}
+                    initialData={
+                        initialService
+                            ? {
+                                  name: initialService.name,
+                                  description: initialService.description,
+                                  price: initialService.price,
+                                  custom_fields: initialService.custom_fields,
+                              }
+                            : undefined
+                    }
                     onNext={handleStep1Next}
                     onCancel={closeModal}
                 />
