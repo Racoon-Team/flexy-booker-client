@@ -6,6 +6,26 @@ import toast from '@/components/ui/toast'
 
 const unauthorizedCode = [401, 419, 440]
 
+const showToast = (
+    title: string,
+    type: 'danger' | 'warning' | 'success' | 'info',
+    message: string,
+) => {
+    toast.push(
+        React.createElement(
+            Notification,
+            {
+                title,
+                type,
+            },
+            message,
+        ),
+        {
+            placement: 'top-center',
+        },
+    )
+}
+
 const AxiosResponseIntrceptorErrorCallback = (error: AxiosError) => {
     const { response } = error
     const { setToken } = getToken()
@@ -13,18 +33,10 @@ const AxiosResponseIntrceptorErrorCallback = (error: AxiosError) => {
     const message = (response?.data as { message?: string })?.message
 
     if (!response) {
-        toast.push(
-            React.createElement(
-                Notification,
-                {
-                    title: 'Network Error',
-                    type: 'danger',
-                },
-                'Unable to connect to server',
-            ),
-            {
-                placement: 'top-center',
-            },
+        showToast(
+            'Network Error',
+            'danger',
+            'Unable to connect to server',
         )
 
         return
@@ -38,18 +50,10 @@ const AxiosResponseIntrceptorErrorCallback = (error: AxiosError) => {
         useSessionUser.getState().setUser({})
         useSessionUser.getState().setSessionSignedIn(false)
 
-        toast.push(
-            React.createElement(
-                Notification,
-                {
-                    title: 'Session Expired',
-                    type: 'danger',
-                },
-                'Please login again',
-            ),
-            {
-                placement: 'top-center',
-            },
+        showToast(
+            'Session Expired',
+            'danger',
+            'Please login again',
         )
 
         return
@@ -57,50 +61,26 @@ const AxiosResponseIntrceptorErrorCallback = (error: AxiosError) => {
 
     switch (response.status) {
         case 403:
-            toast.push(
-                React.createElement(
-                    Notification,
-                    {
-                        title: 'Forbidden',
-                        type: 'danger',
-                    },
-                    message || 'Insufficient privileges',
-                ),
-                {
-                    placement: 'top-center',
-                },
+            showToast(
+                'Forbidden',
+                'danger',
+                message || 'Insufficient privileges',
             )
             break
 
         case 404:
-            toast.push(
-                React.createElement(
-                    Notification,
-                    {
-                        title: 'Not Found',
-                        type: 'warning',
-                    },
-                    'Resource not found',
-                ),
-                {
-                    placement: 'top-center',
-                },
+            showToast(
+                'Not Found',
+                'warning',
+                'Resource not found',
             )
             break
 
         case 500:
-            toast.push(
-                React.createElement(
-                    Notification,
-                    {
-                        title: 'Server Error',
-                        type: 'danger',
-                    },
-                    message || 'Internal server error',
-                ),
-                {
-                    placement: 'top-center',
-                },
+            showToast(
+                'Server Error',
+                'danger',
+                message || 'Internal server error',
             )
             break
     }
