@@ -22,11 +22,15 @@ type Step1FormSchema = {
 
 type Props = {
     initialData?: Step1Data
-    onNext: (data: Step1Data, customFields: CustomField[]) => void
+    onNext: (data: Step1Data) => void
     onCancel: () => void
 }
 
-export default function AddServiceStep1({ initialData, onNext, onCancel }: Props) {
+export default function AddServiceStep1({
+    initialData,
+    onNext,
+    onCancel,
+}: Props) {
     const { t } = useTranslation()
 
     const step1Schema = z.object({
@@ -37,28 +41,40 @@ export default function AddServiceStep1({ initialData, onNext, onCancel }: Props
         price: z.number().positive().optional(),
     })
 
-    const [showCustomFields, setShowCustomFields] = useState(false)
+    const existingCustomFields = initialData?.custom_fields ?? []
 
-    const [numericActive, setNumericActive] = useState(false)
-    const [selectActive, setSelectActive] = useState(false)
-    const [multiSelectActive, setMultiSelectActive] = useState(false)
+    const existingNumeric = existingCustomFields.find(
+        (f) => f.type === 'numeric',
+    ) as NumericField | undefined
+    const existingSelect = existingCustomFields.find(
+        (f) => f.type === 'select',
+    ) as SelectField | undefined
+    const existingMultiSelect = existingCustomFields.find(
+        (f) => f.type === 'multiselect',
+    ) as MultiSelectField | undefined
 
-    const [numericField, setNumericField] = useState<NumericField>({
-        type: 'numeric',
-        label: '',
-    })
+    const [showCustomFields, setShowCustomFields] = useState(
+        existingCustomFields.length > 0,
+    )
+    const [numericActive, setNumericActive] = useState(Boolean(existingNumeric))
+    const [selectActive, setSelectActive] = useState(Boolean(existingSelect))
+    const [multiSelectActive, setMultiSelectActive] = useState(
+        Boolean(existingMultiSelect),
+    )
 
-    const [selectField, setSelectField] = useState<SelectField>({
-        type: 'select',
-        label: '',
-        options: [''],
-    })
-
-    const [multiSelectField, setMultiSelectField] = useState<MultiSelectField>({
-        type: 'multiselect',
-        label: '',
-        options: [''],
-    })
+    const [numericField, setNumericField] = useState<NumericField>(
+        existingNumeric ?? { type: 'numeric', label: '' },
+    )
+    const [selectField, setSelectField] = useState<SelectField>(
+        existingSelect ?? { type: 'select', label: '', options: [''] },
+    )
+    const [multiSelectField, setMultiSelectField] = useState<MultiSelectField>(
+        existingMultiSelect ?? {
+            type: 'multiselect',
+            label: '',
+            options: [''],
+        },
+    )
 
     const {
         handleSubmit,
@@ -69,7 +85,7 @@ export default function AddServiceStep1({ initialData, onNext, onCancel }: Props
         defaultValues: {
             name: initialData?.name ?? '',
             description: initialData?.description ?? '',
-            price: initialData?.price ?? undefined,
+            price: initialData?.price ? Number(initialData.price) : undefined,
         },
     })
 
@@ -147,7 +163,7 @@ export default function AddServiceStep1({ initialData, onNext, onCancel }: Props
 
     function handleFormSubmit(values: Step1FormSchema) {
         const customFields = showCustomFields ? buildCustomFields() : []
-        onNext(values, customFields)
+        onNext({ ...values, custom_fields: customFields })
     }
 
     return (

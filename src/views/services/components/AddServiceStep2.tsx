@@ -1,7 +1,6 @@
 import { AvailabilityCalendar } from '@/components/ui'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { CustomField } from './addServiceTypes'
 
 type Props = {
     isSubmitting: boolean
@@ -9,7 +8,7 @@ type Props = {
     initialSchedule?: string[]
     onBack: () => void
     onCancel: () => void
-    onSubmit: (schedule: string[], customFields: CustomField[]) => void
+    onSubmit: (schedule: string[]) => void
 }
 
 export default function AddServiceStep2({
@@ -30,7 +29,7 @@ export default function AddServiceStep2({
             return
         }
         setLocalError('')
-        onSubmit(schedule, [])
+        onSubmit(schedule)
     }
 
     return (

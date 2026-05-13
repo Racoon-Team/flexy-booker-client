@@ -4,12 +4,14 @@ export type Service = {
     description: string
     price: number
     schedule: string[]
+    custom_fields?: CustomField[]
 }
 
 export type Step1Data = {
     name: string
     description?: string
     price?: number
+    custom_fields?: CustomField[]
 }
 
 export type NumericField = {

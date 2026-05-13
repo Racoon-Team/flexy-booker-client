@@ -1,6 +1,6 @@
 import endpointConfig from '@/configs/endpoint.config'
 import ApiService from '@/services/ApiService'
-import type { Service } from './components/addServiceTypes'
+import type { CustomField, Service } from './components/addServiceTypes'
 
 export const getServices = async (search = ''): Promise<Service[]> => {
     return ApiService.fetchDataWithAxios<Service[]>({
@@ -23,6 +23,7 @@ export const updateService = async (
         description?: string
         price?: number
         schedule: string[]
+        custom_fields?: CustomField[]
     },
 ) => {
     return ApiService.fetchDataWithAxios({
