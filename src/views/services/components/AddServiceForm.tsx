@@ -28,9 +28,9 @@ export default function AddServiceForm({ initialService, onSuccess }: Props) {
 
     const isEditing = Boolean(initialService)
 
-    function handleStep1Next(data: Step1Data, fields: CustomField[]) {
+    function handleStep1Next(data: Step1Data) {
         setStep1Data(data)
-        setStep1CustomFields(fields)
+        setStep1CustomFields(data.custom_fields ?? [])
         setCurrentStep(2)
     }
 

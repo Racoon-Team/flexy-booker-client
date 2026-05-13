@@ -22,7 +22,7 @@ type Step1FormSchema = {
 
 type Props = {
     initialData?: Step1Data
-    onNext: (data: Step1Data, customFields: CustomField[]) => void
+    onNext: (data: Step1Data) => void
     onCancel: () => void
 }
 
@@ -163,7 +163,7 @@ export default function AddServiceStep1({
 
     function handleFormSubmit(values: Step1FormSchema) {
         const customFields = showCustomFields ? buildCustomFields() : []
-        onNext(values, customFields)
+        onNext({ ...values, custom_fields: customFields })
     }
 
     return (
