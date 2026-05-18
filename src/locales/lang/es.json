@@ -96,7 +96,9 @@
 
         "exploreServices": "Explora nuestros servicios",
         "copyright": "© 2026 ReservaYa. Todos los derechos reservados.",
-        "showOptionsBtn": "Ver Opciones"
+        "showOptionsBtn": "Ver Opciones",
+        "verified": "Verificado",
+        "currency": "Bs."
     },
 
     "modal": {
