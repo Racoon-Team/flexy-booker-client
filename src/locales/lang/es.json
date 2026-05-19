@@ -93,6 +93,10 @@
             "confirmService": "¿Ver opciones de {{service}}?",
             "selectedService": "Servicio seleccionado: {{service}}"
         },
+        "map": {
+            "fromPrice": "Desde",
+            "seeDetails": "Ver detalles"
+        },
 
         "exploreServices": "Explora nuestros servicios",
         "copyright": "© 2026 ReservaYa. Todos los derechos reservados.",
