@@ -3,7 +3,6 @@ import { useModal } from '@/components/modal/ModalProvider'
 import LandingNavbar from '@/components/template/LandingNavbar'
 import { useTranslation } from 'react-i18next'
 import { getServices } from './services/servicesServices'
-import Map from '@/components/ui/Map'
 
 type Service = {
     id: number
@@ -36,9 +35,6 @@ const Landing = () => {
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <LandingNavbar />
-            <div style={{ height: '400px', width: '600px', margin: '0 auto' }}>
-                <Map />
-            </div>
             <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-10">
                 <h2 className="text-2xl font-semibold text-gray-700 mb-6">
                     {t('landing.exploreServices')}
