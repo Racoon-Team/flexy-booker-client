@@ -15,39 +15,12 @@ L.Icon.Default.mergeOptions({
     shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 })
 
-const FAKE_POINTS: Business[] = [
-    {
-        id: 1,
-        name: 'Discoteca MoonLight',
-        rating: 4.5,
-        price_from: 50,
-        lat: -17.783,
-        lng: -63.182,
-    },
-    {
-        id: 2,
-        name: 'Club Eclipse',
-        rating: 4.0,
-        price_from: 45,
-        lat: -17.79,
-        lng: -63.175,
-    },
-    {
-        id: 3,
-        name: 'Bar Nocturno',
-        rating: 3.8,
-        price_from: 30,
-        lat: -17.775,
-        lng: -63.19,
-    },
-]
-
 type Props = {
     points?: Business[]
     onSelectPoint?: (point: Business) => void
 }
 
-export default function Map({ points = FAKE_POINTS, onSelectPoint }: Props) {
+export default function Map({ points = [], onSelectPoint }: Props) {
     const { t } = useTranslation()
     const center: [number, number] =
         points.length > 0 ? [points[0].lat, points[0].lng] : [-17.783, -63.182]
