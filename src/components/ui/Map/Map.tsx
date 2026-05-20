@@ -2,6 +2,9 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import type { Business } from '@/@types/business'
 import { useTranslation } from 'react-i18next'
+import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
+import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
 delete (
     L.Icon.Default.prototype as typeof L.Icon.Default.prototype & {
@@ -9,10 +12,9 @@ delete (
     }
 )._getIconUrl
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl:
-        'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    iconRetinaUrl: markerIcon2x,
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
 })
 
 type Props = {
