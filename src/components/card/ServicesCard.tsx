@@ -1,5 +1,4 @@
-import { useTranslation } from "react-i18next"
-
+import { useTranslation } from 'react-i18next'
 
 type ServicesCardProps = {
     title: string
@@ -21,43 +20,31 @@ const ServicesCard = ({
     const { t } = useTranslation()
 
     return (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow">
-            <div className="w-full h-40 bg-gray-200 rounded-lg" />
+        <div
+            onClick={onClick}
+            className="flex gap-4 bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:shadow-md transition-shadow"
+        >
+            <div className="w-24 h-24 bg-gray-200 rounded-lg shrink-0" />
 
-            <div className="flex flex-col gap-1">
-                <h3 className="text-lg font-semibold text-gray-800">
-                    {title}
-                </h3>
+            <div className="flex flex-col justify-center">
+                <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
 
-                <p className="text-gray-500 text-sm">
-                    {description}
-                </p>
+                {rating && <p className="text-sm text-gray-700">{rating}</p>}
 
-                {rating && (
-                    <p className="text-sm text-gray-600">
-                         {rating}
-                    </p>
-                )}
+                <p className="text-sm text-gray-500">{description}</p>
 
                 {price && (
-                    <p className="text-sm font-medium text-gray-700">
+                    <p className="text-sm text-gray-700">
                         {t('landing.currency')} {price}
                     </p>
                 )}
 
                 {verified && (
-                    <span className="w-fit text-xs border border-green-500 text-green-600 px-2 py-1 rounded-full">
+                    <span className="w-fit mt-1 text-xs border border-green-500 text-green-600 px-2 py-1 rounded-full">
                         {t('landing.verified')}
                     </span>
                 )}
             </div>
-
-            <button
-                onClick={onClick}
-                className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors text-sm font-medium"
-            >
-                {t('landing.showOptionsBtn')}
-            </button>
         </div>
     )
 }
