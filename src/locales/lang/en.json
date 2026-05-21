@@ -92,6 +92,10 @@
             "confirmService": "View options for {{service}}?",
             "selectedService": "Selected service: {{service}}"
         },
+        "map": {
+            "fromPrice": "From",
+            "seeDetails": "See details"
+        },
 
         "exploreServices": "Explore our services",
         "copyright": "© 2026 ReservaYa. All rights reserved.",
