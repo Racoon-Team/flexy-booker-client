@@ -21,22 +21,22 @@ export const Default: Story = {
     },
 }
 
-export const WithoutPrice: Story = {
-    args: {
-        title: 'Basic Cleaning',
-        description: 'Simple cleaning service',
-        price: 55,
-        rating: 4.4,
-        verified: true,
-    },
-}
-
 export const Verified: Story = {
     args: {
         title: 'Premium Service',
         description: 'Verified professional',
         price: 29,
-        rating: 5.5,
+        rating: 5.0,
         verified: true,
+    },
+}
+
+export const NotVerified: Story = {
+    args: {
+        title: 'Standard Service',
+        description: 'Non verified professional',
+        price: 20,
+        rating: 4.0,
+        verified: false,
     },
 }
