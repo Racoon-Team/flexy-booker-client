@@ -6,8 +6,9 @@ import { useThemeStore } from '@/store/themeStore'
 import { useSessionUser } from '@/store/authStore'
 import { useRouteKeyStore } from '@/store/routeKeyStore'
 import navigationConfig from '@/configs/navigation.config'
+import adminNavigationConfig from '@/configs/navigation.config/adminNavigationConfig'
 import appConfig from '@/configs/app.config'
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import {
     SIDE_NAV_WIDTH,
     SIDE_NAV_COLLAPSED_WIDTH,
@@ -52,6 +53,11 @@ const SideNav = ({
 
     const userAuthority = useSessionUser((state) => state.user.authority)
 
+    const { pathname } = useLocation()
+    const activeNavConfig = pathname.startsWith('/admin')
+        ? adminNavigationConfig
+        : navigationConfig
+
     return (
         <div
             style={sideNavCollapse ? sideNavCollapseStyle : sideNavStyle}
@@ -83,7 +89,7 @@ const SideNav = ({
                 <ScrollBar style={{ height: '100%' }} direction={direction}>
                     <VerticalMenuContent
                         collapsed={sideNavCollapse}
-                        navigationTree={navigationConfig}
+                        navigationTree={activeNavConfig}
                         routeKey={currentRouteKey}
                         direction={direction}
                         translationSetup={translationSetup}

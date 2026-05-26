@@ -6,6 +6,17 @@ import {
     PiAcornDuotone,
     PiBagSimpleDuotone,
 } from 'react-icons/pi'
+import {
+    HiOutlineChartBar,
+    HiOutlineUsers,
+    HiOutlineOfficeBuilding,
+    HiOutlineCollection,
+    HiOutlineFlag,
+    HiOutlineClipboardList,
+    HiOutlineCog,
+    HiOutlineUserGroup,
+    HiOutlineLockClosed,
+} from 'react-icons/hi'
 import type { JSX } from 'react'
 
 export type NavigationIcons = Record<string, JSX.Element>
@@ -17,6 +28,15 @@ const navigationIcon: NavigationIcons = {
     groupSingleMenu: <PiBookOpenUserDuotone />,
     groupCollapseMenu: <PiBookBookmarkDuotone />,
     groupMenu: <PiBagSimpleDuotone />,
+    adminOverview: <HiOutlineChartBar />,
+    adminUsers: <HiOutlineUsers />,
+    adminBusinesses: <HiOutlineOfficeBuilding />,
+    adminCategories: <HiOutlineCollection />,
+    adminReports: <HiOutlineFlag />,
+    adminActivity: <HiOutlineClipboardList />,
+    adminSettings: <HiOutlineCog />,
+    adminTeam: <HiOutlineUserGroup />,
+    adminAudit: <HiOutlineLockClosed />,
 }
 
 export default navigationIcon

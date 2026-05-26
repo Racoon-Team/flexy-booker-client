@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import '@/locales'
+import type { Meta, StoryObj } from '@storybook/react'
 import AvailabilityCalendar from './AvailabilityCalendar'
 
 const meta: Meta<typeof AvailabilityCalendar> = {
@@ -24,9 +24,15 @@ export const Empty: Story = {
 export const PreFilled: Story = {
     args: {
         initialValues: [
-            '1-9', '1-10', '1-11',
-            '3-9', '3-10', '3-11',
-            '5-9', '5-10', '5-11',
+            '1-9',
+            '1-10',
+            '1-11',
+            '3-9',
+            '3-10',
+            '3-11',
+            '5-9',
+            '5-10',
+            '5-11',
         ],
         startingHour: 8,
     },
