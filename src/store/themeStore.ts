@@ -40,6 +40,7 @@ export const useThemeStore = create<ThemeState & ThemeAction>()(
         }),
         {
             name: 'theme',
+            version: 1,
         },
     ),
 )

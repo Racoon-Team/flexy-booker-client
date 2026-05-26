@@ -28,3 +28,7 @@ build
 
 package-lock.json
 yarn.lock
+
+.claude
+.codegraph
+.mcp.json

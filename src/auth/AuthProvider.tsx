@@ -4,6 +4,7 @@ import appConfig from '@/configs/app.config'
 import { useSessionUser, getToken } from '@/store/authStore'
 import { apiSignIn, apiSignOut, apiSignUp } from '@/services/AuthService'
 import { useNavigate } from 'react-router'
+import { ADMIN } from '@/constants/roles.constant'
 import type {
     SignInCredential,
     SignUpCredential,
@@ -75,15 +76,21 @@ function AuthProvider({ children }: AuthProviderProps) {
         try {
             const resp = await apiSignIn(values)
             if (resp) {
+                const authority = resp.user.authority ?? []
                 handleSignIn(
                     { accessToken: resp.token },
                     {
                         userId: String(resp.user.userId),
                         userName: resp.user.userName,
                         email: resp.user.email,
+                        authority,
                     },
                 )
-                redirect()
+                navigatorRef.current?.navigate(
+                    authority.includes(ADMIN)
+                        ? '/admin'
+                        : appConfig.authenticatedEntryPath,
+                )
                 return {
                     status: 'success',
                     message: '',

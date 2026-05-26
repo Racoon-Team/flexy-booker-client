@@ -1,11 +1,11 @@
+import { useAuth } from '@/auth'
 import Avatar from '@/components/ui/Avatar'
 import Dropdown from '@/components/ui/Dropdown'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
 import { useSessionUser } from '@/store/authStore'
-import { Link } from 'react-router'
-import { PiUserDuotone, PiSignOutDuotone } from 'react-icons/pi'
-import { useAuth } from '@/auth'
+import withHeaderItem from '@/utils/hoc/withHeaderItem'
 import type { JSX } from 'react'
+import { PiSignOutDuotone, PiUserDuotone } from 'react-icons/pi'
+import { Link } from 'react-router'
 
 type DropdownList = {
     label: string
