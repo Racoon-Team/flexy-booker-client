@@ -1,25 +1,71 @@
-import { HiOutlineCollection } from 'react-icons/hi'
+import { getCategories } from '@/services/categoriesServices'
+import { useEffect, useMemo, useState } from 'react'
+
+type Category = {
+    id: string
+    name: string
+    children?: Category[]
+}
 
 const CategoriesView = () => {
+    const [categories, setCategories] = useState<Category[]>([])
+    useEffect(() => {
+        const loadCategories = async () => {
+            try {
+                const data = await getCategories()
+
+                console.log('CATEGORIES:', data)
+
+                setCategories(data)
+            } catch (error) {
+                console.error('Error loading categories', error)
+            }
+        }
+
+        loadCategories()
+    }, [])
+    const parentCount = categories.length
+
+    const subcategoryCount = useMemo(() => {
+        return categories.reduce(
+            (acc, category) => acc + (category.children?.length || 0),
+            0,
+        )
+    }, [categories])
+
     return (
-        <div className="p-8 max-w-screen-xl">
-            <div className="mb-8">
-                <p className="text-sm text-gray-500 mb-1">Admin · Categories</p>
-                <h1 className="text-4xl font-bold italic text-gray-900">
-                    Categories
-                </h1>
+        <div className="flex h-full min-h-0 flex-col p-6">
+            <div className="mb-6 flex items-center justify-between">
+                <div>
+                    <p className="mb-1 text-sm text-gray-500">
+                        Admin · Categories
+                    </p>
+
+                    <h1 className="text-3xl font-bold italic text-gray-900">
+                        Categories · {parentCount} parents · {subcategoryCount}{' '}
+                        subcategories
+                    </h1>
+                </div>
+
+                <div className="flex gap-3">
+                    <button className="rounded-lg border border-gray-300 px-4 py-2">
+                        Reorder
+                    </button>
+
+                    <button className="rounded-lg bg-black px-4 py-2 text-white">
+                        + New Category
+                    </button>
+                </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-16 flex flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-4">
-                    <HiOutlineCollection className="text-3xl text-gray-400" />
-                </div>
-                <p className="text-lg font-semibold text-gray-800 mb-1">
-                    Work in progress
-                </p>
-                <p className="text-sm text-gray-500">
-                    This section is under construction.
-                </p>
+            <div className="flex flex-1 min-h-0 overflow-hidden rounded-xl border border-gray-200 bg-white">
+                <aside className="w-[340px] min-w-[340px] overflow-y-auto border-r border-gray-200">
+                    <div className="p-4">Category Tree Placeholder</div>
+                </aside>
+
+                <main className="flex-1 overflow-y-auto">
+                    <div className="p-6">Category Detail Placeholder</div>
+                </main>
             </div>
         </div>
     )
