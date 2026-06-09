@@ -179,5 +179,15 @@
                 "updateError": "An error occurred while updating the service"
             }
         }
+    },
+    "categoriesView": {
+        "admin": "Admin · Categories",
+        "title": "Categories · {{parents}} parents · {{subcategories}} subcategories",
+        "reorder": "Reorder",
+        "newCategory": "+ New Category",
+        "treePlaceholder": "Category Tree Placeholder",
+        "detailPlaceholder": "Category Detail Placeholder",
+        "selectCategory": "Select a category",
+        "categoryId": "ID: {{id}}"
     }
 }
