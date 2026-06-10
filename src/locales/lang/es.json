@@ -181,5 +181,16 @@
                 "updateError": "Ocurrió un error al actualizar el servicio"
             }
         }
+    },
+
+    "categoriesView": {
+        "admin": "Admin · Categorías",
+        "title": "Categorías · {{parents}} padres · {{subcategories}} subcategorías",
+        "reorder": "Reordenar",
+        "newCategory": "+ Nueva categoría",
+        "treePlaceholder": "Árbol de categorías",
+        "detailPlaceholder": "Detalle de categoría",
+        "selectCategory": "Selecciona una categoría",
+        "categoryId": "ID: {{id}}"
     }
 }
