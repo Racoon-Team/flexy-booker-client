@@ -1,5 +1,6 @@
 import { HiChevronRight, HiChevronDown } from 'react-icons/hi'
 import type { Category } from '@/services/categoriesServices'
+import { useTranslation } from 'react-i18next'
 
 export type { Category }
 
@@ -124,8 +125,16 @@ const CategoryTree = ({
     onSelect,
     onToggle,
 }: CategoryTreeProps) => {
-    if (loading) return <TreeSkeleton />
+    const { t } = useTranslation()
 
+    if (loading) return <TreeSkeleton />
+    if (!categories.length) {
+        return (
+            <div className="p-4 text-sm text-gray-500">
+                {t('categoriesView.noResults')}
+            </div>
+        )
+    }
     return (
         <div>
             {categories.map((node) => (
