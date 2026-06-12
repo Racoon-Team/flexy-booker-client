@@ -12,7 +12,16 @@ const CategoriesView = () => {
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     )
-    const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
+    const EXPANDED_IDS_KEY = 'categories_expanded_ids'
+
+    const [expandedIds, setExpandedIds] = useState<Set<string>>(() => {
+        try {
+            const stored = sessionStorage.getItem(EXPANDED_IDS_KEY)
+            return stored ? new Set(JSON.parse(stored)) : new Set()
+        } catch {
+            return new Set()
+        }
+    })
 
     const loadCategories = async () => {
         setLoading(true)
@@ -47,6 +56,10 @@ const CategoriesView = () => {
             } else {
                 next.add(id)
             }
+            sessionStorage.setItem(
+                EXPANDED_IDS_KEY,
+                JSON.stringify(Array.from(next)),
+            )
             return next
         })
     }
