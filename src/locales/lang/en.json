@@ -200,7 +200,26 @@
 
         "searchPlaceholder": "Search category...",
         "noResults": "No results found",
+
         "businesses": "Businesses",
-        "servicesListed": "Listed Services"
+        "servicesListed": "Listed Services",
+
+        "form": {
+            "nameLbl": "Name",
+            "slugLbl": "Slug",
+            "parentLbl": "Parent",
+            "iconLbl": "Icon",
+            "descriptionLbl": "Description",
+            "namePh": "Category name",
+            "slugPh": "category-slug",
+            "parentPh": "Search parent category...",
+            "iconPh": "⚡ emoji or icon",
+            "descriptionPh": "Category description...",
+            "nameRequired": "Name is required",
+            "slugRequired": "Slug is required",
+            "saveBtn": "Save",
+            "savingBtn": "Saving...",
+            "saveSuccess": "Category saved successfully"
+        }
     }
 }

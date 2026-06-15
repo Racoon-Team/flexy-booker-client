@@ -12,19 +12,10 @@ import {
     type CategoryDetail,
 } from '@/services/categoriesServices'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
-
-const schema = z.object({
-    name: z.string().min(1, 'Name is required'),
-    slug: z.string().min(1, 'Slug is required'),
-    icon: z.string().optional(),
-    description: z.string().optional(),
-    parent_id: z.string().nullable().optional(),
-})
-
-type FormSchema = z.infer<typeof schema>
+import { useTranslation } from 'react-i18next'
 
 type ParentOption = {
     value: string
@@ -43,6 +34,21 @@ const CategoryDetailForm = ({
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
     const [category, setCategory] = useState<CategoryDetail | null>(null)
+    const { t } = useTranslation()
+
+    const schema = useMemo(
+        () =>
+            z.object({
+                name: z.string().min(1, t('categoriesView.form.nameRequired')),
+                slug: z.string().min(1, t('categoriesView.form.slugRequired')),
+                icon: z.string().optional(),
+                description: z.string().optional(),
+                parent_id: z.string().nullable().optional(),
+            }),
+        [t],
+    )
+
+    type FormSchema = z.infer<typeof schema>
 
     const {
         handleSubmit,
@@ -124,7 +130,7 @@ const CategoryDetailForm = ({
             })
             toast.push(
                 <Notification type="success">
-                    Category saved successfully
+                    {t('categoriesView.form.saveSuccess')}
                 </Notification>,
                 { placement: 'top-center' },
             )
@@ -164,7 +170,7 @@ const CategoryDetailForm = ({
         <div className="p-6">
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <FormItem
-                    label="Name"
+                    label={t('categoriesView.form.nameLbl')}
                     invalid={Boolean(errors.name)}
                     errorMessage={errors.name?.message}
                 >
@@ -172,13 +178,16 @@ const CategoryDetailForm = ({
                         name="name"
                         control={control}
                         render={({ field }) => (
-                            <Input placeholder="Category name" {...field} />
+                            <Input
+                                placeholder={t('categoriesView.form.namePh')}
+                                {...field}
+                            />
                         )}
                     />
                 </FormItem>
 
                 <FormItem
-                    label="Slug"
+                    label={t('categoriesView.form.slugLbl')}
                     invalid={Boolean(errors.slug)}
                     errorMessage={errors.slug?.message}
                 >
@@ -186,13 +195,16 @@ const CategoryDetailForm = ({
                         name="slug"
                         control={control}
                         render={({ field }) => (
-                            <Input placeholder="category-slug" {...field} />
+                            <Input
+                                placeholder={t('categoriesView.form.slugPh')}
+                                {...field}
+                            />
                         )}
                     />
                 </FormItem>
 
                 <FormItem
-                    label="Parent"
+                    label={t('categoriesView.form.parentLbl')}
                     invalid={Boolean(errors.parent_id)}
                     errorMessage={errors.parent_id?.message}
                 >
@@ -206,7 +218,7 @@ const CategoryDetailForm = ({
                                 cacheOptions
                                 loadOptions={loadParentOptions}
                                 defaultOptions
-                                placeholder="Search parent category..."
+                                placeholder={t('categoriesView.form.parentPh')}
                                 value={
                                     field.value
                                         ? {
@@ -228,7 +240,7 @@ const CategoryDetailForm = ({
                 </FormItem>
 
                 <FormItem
-                    label="Icon"
+                    label={t('categoriesView.form.iconLbl')}
                     invalid={Boolean(errors.icon)}
                     errorMessage={errors.icon?.message}
                 >
@@ -236,13 +248,16 @@ const CategoryDetailForm = ({
                         name="icon"
                         control={control}
                         render={({ field }) => (
-                            <Input placeholder="⚡ emoji or icon" {...field} />
+                            <Input
+                                placeholder={t('categoriesView.form.iconPh')}
+                                {...field}
+                            />
                         )}
                     />
                 </FormItem>
 
                 <FormItem
-                    label="Description"
+                    label={t('categoriesView.form.descriptionLbl')}
                     invalid={Boolean(errors.description)}
                     errorMessage={errors.description?.message}
                 >
@@ -252,7 +267,9 @@ const CategoryDetailForm = ({
                         render={({ field }) => (
                             <textarea
                                 className="w-full rounded-lg border border-gray-200 bg-gray-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary min-h-[80px]"
-                                placeholder="Category description..."
+                                placeholder={t(
+                                    'categoriesView.form.descriptionPh',
+                                )}
                                 rows={3}
                                 {...field}
                             />
@@ -262,7 +279,9 @@ const CategoryDetailForm = ({
 
                 <div className="flex justify-end mt-2">
                     <Button type="submit" variant="solid" loading={saving}>
-                        {saving ? 'Saving...' : 'Save'}
+                        {saving
+                            ? t('categoriesView.form.savingBtn')
+                            : t('categoriesView.form.saveBtn')}
                     </Button>
                 </div>
             </Form>
