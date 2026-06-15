@@ -200,12 +200,8 @@
         "archiveError": "Error al archivar la categoría",
         "unarchiveSuccess": "Categoría desarchivada exitosamente",
         "unarchiveError": "Error al desarchivar la categoría",
-
         "searchPlaceholder": "Buscar categoría...",
         "noResults": "Sin resultados",
-        "previewBtn": "Vista previa",
-        "archiveBtn": "Archivar",
-
         "businesses": "Negocios",
         "servicesListed": "Servicios listados",
 
