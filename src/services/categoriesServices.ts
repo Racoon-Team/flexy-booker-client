@@ -10,6 +10,7 @@ export type Category = {
     business_count: number
     children: Category[]
 }
+
 export type CategoryStats = {
     businesses: {
         total: number
@@ -21,11 +22,13 @@ export type CategoryStats = {
         delta: number | null
     }
 }
+
 export type CategoryDetail = {
     id: string
     name: string
     slug: string
     icon: string | null
+    description: string | null
     status: string
     sort_order: number
     parent: { id: string; name: string; slug: string } | null
@@ -39,18 +42,31 @@ export type CategoryDetail = {
     created_at: string
     updated_at: string
 }
+
+export type CategorySearchResult = {
+    id: string
+    name: string
+    slug: string
+    icon: string | null
+    status: string
+    business_count: number
+    parent: { id: string; name: string } | null
+}
+
 export const getCategories = async () => {
     return ApiService.fetchDataWithAxios<Category[]>({
         url: '/categories/tree',
         method: 'GET',
     })
 }
+
 export const getCategoryStats = async (id: string) => {
     return ApiService.fetchDataWithAxios<CategoryStats>({
         url: `/categories/${id}/stats`,
         method: 'GET',
     })
 }
+
 export const getCategoryById = async (id: string) => {
     return ApiService.fetchDataWithAxios<CategoryDetail>({
         url: `/categories/${id}`,
@@ -82,5 +98,13 @@ export const unarchiveCategory = async (id: string) => {
     return ApiService.fetchDataWithAxios<{ message: string }>({
         url: `/categories/${id}/unarchive`,
         method: 'PATCH',
+    })
+}
+
+export const searchCategories = async (q: string, limit = 20) => {
+    return ApiService.fetchDataWithAxios<CategorySearchResult[]>({
+        url: `/categories/search`,
+        method: 'GET',
+        params: { q, limit },
     })
 }

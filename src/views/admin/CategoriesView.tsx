@@ -11,6 +11,7 @@ import {
 } from '@/services/categoriesServices'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import CategoryDetailForm from '@/components/ui/CategoryDetailForm'
 
 const normalizeText = (text: string) =>
     text
@@ -308,6 +309,7 @@ const CategoriesView = () => {
                                     </button>
                                 </div>
                             </div>
+
                             <div className="p-6">
                                 {statsLoading ? (
                                     <div className="grid grid-cols-2 gap-4">
@@ -361,6 +363,11 @@ const CategoriesView = () => {
                                     </div>
                                 ) : null}
                             </div>
+
+                            <CategoryDetailForm
+                                categoryId={selectedCategory.id}
+                                onSaveSuccess={loadCategories}
+                            />
                         </div>
                     ) : (
                         <div className="p-6 text-gray-500">
