@@ -189,7 +189,10 @@
         "detailPlaceholder": "Category Detail Placeholder",
         "selectCategory": "Select a category",
         "categoryId": "ID: {{id}}",
+
         "searchPlaceholder": "Search category...",
-        "noResults": "No results found"
+        "noResults": "No results found",
+        "businesses": "Businesses",
+        "servicesListed": "Listed Services"
     }
 }

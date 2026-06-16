@@ -10,9 +10,26 @@ export type Category = {
     business_count: number
     children: Category[]
 }
+export type CategoryStats = {
+    businesses: {
+        total: number
+        delta: number | null
+        delta_label: string | null
+    }
+    services_listed: {
+        total: number
+        delta: number | null
+    }
+}
 export const getCategories = async () => {
     return ApiService.fetchDataWithAxios<Category[]>({
         url: '/categories/tree',
+        method: 'GET',
+    })
+}
+export const getCategoryStats = async (id: string) => {
+    return ApiService.fetchDataWithAxios<CategoryStats>({
+        url: `/categories/${id}/stats`,
         method: 'GET',
     })
 }

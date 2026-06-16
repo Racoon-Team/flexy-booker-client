@@ -192,7 +192,10 @@
         "detailPlaceholder": "Detalle de categoría",
         "selectCategory": "Selecciona una categoría",
         "categoryId": "ID: {{id}}",
+
         "searchPlaceholder": "Buscar categoría...",
-        "noResults": "Sin resultados"
+        "noResults": "Sin resultados",
+        "businesses": "Negocios",
+        "servicesListed": "Servicios listados"
     }
 }
