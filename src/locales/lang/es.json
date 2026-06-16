@@ -191,6 +191,8 @@
         "treePlaceholder": "Árbol de categorías",
         "detailPlaceholder": "Detalle de categoría",
         "selectCategory": "Selecciona una categoría",
-        "categoryId": "ID: {{id}}"
+        "categoryId": "ID: {{id}}",
+        "searchPlaceholder": "Buscar categoría...",
+        "noResults": "Sin resultados"
     }
 }

@@ -188,6 +188,8 @@
         "treePlaceholder": "Category Tree Placeholder",
         "detailPlaceholder": "Category Detail Placeholder",
         "selectCategory": "Select a category",
-        "categoryId": "ID: {{id}}"
+        "categoryId": "ID: {{id}}",
+        "searchPlaceholder": "Search category...",
+        "noResults": "No results found"
     }
 }

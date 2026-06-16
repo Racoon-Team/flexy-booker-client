@@ -4,6 +4,60 @@ import { getCategories } from '@/services/categoriesServices'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+const normalizeText = (text: string) =>
+    text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+
+const filterCategories = (
+    categories: Category[],
+    search: string,
+): Category[] => {
+    const normalizedSearch = normalizeText(search)
+
+    return categories.reduce<Category[]>((acc, category) => {
+        const matches = normalizeText(category.name).includes(normalizedSearch)
+
+        const filteredChildren = category.children
+            ? filterCategories(category.children, search)
+            : []
+
+        if (matches || filteredChildren.length > 0) {
+            acc.push({
+                ...category,
+                children: filteredChildren,
+            })
+        }
+
+        return acc
+    }, [])
+}
+
+const getExpandedIdsForSearch = (
+    categories: Category[],
+    search: string,
+): Set<string> => {
+    const expanded = new Set<string>()
+    const normalizedSearch = normalizeText(search)
+
+    const visit = (node: Category): boolean => {
+        const selfMatches = normalizeText(node.name).includes(normalizedSearch)
+
+        const childMatches =
+            node.children?.some((child) => visit(child)) ?? false
+
+        if (childMatches) {
+            expanded.add(node.id)
+        }
+
+        return selfMatches || childMatches
+    }
+
+    categories.forEach((category) => visit(category))
+
+    return expanded
+}
 const CategoriesView = () => {
     const { t } = useTranslation()
 
@@ -12,6 +66,7 @@ const CategoriesView = () => {
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     )
+
     const EXPANDED_IDS_KEY = 'categories_expanded_ids'
 
     const [expandedIds, setExpandedIds] = useState<Set<string>>(() => {
@@ -22,6 +77,8 @@ const CategoriesView = () => {
             return new Set()
         }
     })
+
+    const [searchTerm, setSearchTerm] = useState('')
 
     const loadCategories = async () => {
         setLoading(true)
@@ -63,6 +120,21 @@ const CategoriesView = () => {
             return next
         })
     }
+    const filteredCategories = useMemo(() => {
+        if (!searchTerm.trim()) {
+            return categories
+        }
+
+        return filterCategories(categories, searchTerm)
+    }, [categories, searchTerm])
+
+    const searchExpandedIds = useMemo(() => {
+        if (!searchTerm.trim()) {
+            return expandedIds
+        }
+
+        return getExpandedIdsForSearch(categories, searchTerm)
+    }, [categories, searchTerm, expandedIds])
 
     return (
         <div className="flex h-full min-h-0 flex-col p-6">
@@ -91,11 +163,21 @@ const CategoriesView = () => {
 
             <div className="flex flex-1 min-h-0 overflow-hidden rounded-xl border border-gray-200 bg-white">
                 <aside className="w-[340px] min-w-[340px] overflow-y-auto border-r border-gray-200 py-2">
+                    <div className="px-3 pb-3">
+                        <input
+                            type="text"
+                            placeholder={t('categoriesView.searchPlaceholder')}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                        />
+                    </div>
+
                     <CategoryTree
-                        categories={categories}
+                        categories={filteredCategories}
                         loading={loading}
                         selectedId={selectedCategory?.id ?? null}
-                        expandedIds={expandedIds}
+                        expandedIds={searchExpandedIds}
                         onSelect={setSelectedCategory}
                         onToggle={handleToggle}
                     />
