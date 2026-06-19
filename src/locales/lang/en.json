@@ -223,6 +223,14 @@
             "saveBtn": "Save",
             "savingBtn": "Saving...",
             "saveSuccess": "Category saved successfully"
+        },
+
+        "tags": {
+            "label": "Tags",
+            "addBtn": "+ add",
+            "inputPh": "Search or create tag...",
+            "removeError": "Failed to remove tag",
+            "addError": "Failed to add tag"
         }
     }
 }

@@ -226,6 +226,14 @@
             "saveBtn": "Guardar",
             "savingBtn": "Guardando...",
             "saveSuccess": "Categoría guardada exitosamente"
+        },
+
+        "tags": {
+            "label": "Tags",
+            "addBtn": "+ añadir",
+            "inputPh": "Buscar o crear tag...",
+            "removeError": "Error al eliminar el tag",
+            "addError": "Error al agregar el tag"
         }
     }
 }
