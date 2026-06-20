@@ -1,6 +1,10 @@
 import CategoryTree from '@/components/ui/CategoryTree'
 import type { Category } from '@/components/ui/CategoryTree'
-import { getCategories } from '@/services/categoriesServices'
+import {
+    getCategories,
+    getCategoryStats,
+    type CategoryStats,
+} from '@/services/categoriesServices'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -63,6 +67,8 @@ const CategoriesView = () => {
 
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(true)
+    const [stats, setStats] = useState<CategoryStats | null>(null)
+    const [statsLoading, setStatsLoading] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     )
@@ -95,7 +101,27 @@ const CategoriesView = () => {
     useEffect(() => {
         loadCategories()
     }, [])
+    useEffect(() => {
+        if (!selectedCategory) {
+            setStats(null)
+            return
+        }
 
+        const loadStats = async () => {
+            setStatsLoading(true)
+
+            try {
+                const data = await getCategoryStats(selectedCategory.id)
+                setStats(data)
+            } catch (error) {
+                console.error('Error loading stats', error)
+            } finally {
+                setStatsLoading(false)
+            }
+        }
+
+        loadStats()
+    }, [selectedCategory])
     const parentCount = categories.length
 
     const subcategoryCount = useMemo(() => {
@@ -190,11 +216,67 @@ const CategoriesView = () => {
                                 <h2 className="text-2xl font-bold">
                                     {selectedCategory.name}
                                 </h2>
-                                <p className="text-gray-600 mt-2">
+
+                                <p className="mt-2 text-gray-600">
                                     {t('categoriesView.categoryId', {
                                         id: selectedCategory.id,
                                     })}
                                 </p>
+
+                                {statsLoading ? (
+                                    <div className="mt-6 grid grid-cols-2 gap-4">
+                                        {[1, 2].map((item) => (
+                                            <div
+                                                key={item}
+                                                className="h-28 animate-pulse rounded-lg border border-gray-200 bg-gray-100"
+                                            />
+                                        ))}
+                                    </div>
+                                ) : stats ? (
+                                    <div className="mt-6 grid grid-cols-2 gap-4">
+                                        <div className="rounded-lg border border-gray-200 p-4">
+                                            <p className="text-sm text-gray-500">
+                                                {t('categoriesView.businesses')}
+                                            </p>
+
+                                            <p className="mt-2 text-3xl font-bold">
+                                                {stats.businesses.total}
+                                            </p>
+
+                                            {stats.businesses.delta !==
+                                                null && (
+                                                <p className="mt-2 text-sm text-green-600">
+                                                    ↑ {stats.businesses.delta}{' '}
+                                                    {
+                                                        stats.businesses
+                                                            .delta_label
+                                                    }
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div className="rounded-lg border border-gray-200 p-4">
+                                            <p className="text-sm text-gray-500">
+                                                {t('categoriesView.servicesListed')}
+                                            </p>
+
+                                            <p className="mt-2 text-3xl font-bold">
+                                                {stats.services_listed.total}
+                                            </p>
+
+                                            {stats.services_listed.delta !==
+                                                null && (
+                                                <p className="mt-2 text-sm text-green-600">
+                                                    ↑{' '}
+                                                    {
+                                                        stats.services_listed
+                                                            .delta
+                                                    }
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                ) : null}
                             </div>
                         ) : (
                             <div className="text-gray-500">
