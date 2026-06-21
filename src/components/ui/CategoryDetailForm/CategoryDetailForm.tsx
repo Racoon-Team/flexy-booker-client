@@ -2,7 +2,6 @@ import AsyncSelect from 'react-select/async'
 import { Form, FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import Button from '@/components/ui/Button'
 import toast from '@/components/ui/toast'
 import Notification from '@/components/ui/Notification'
 import {
@@ -25,14 +24,15 @@ type ParentOption = {
 type CategoryDetailFormProps = {
     categoryId: string
     onSaveSuccess?: () => void
+    onSavingChange?: (saving: boolean) => void
 }
 
 const CategoryDetailForm = ({
     categoryId,
     onSaveSuccess,
+    onSavingChange,
 }: CategoryDetailFormProps) => {
     const [loading, setLoading] = useState(true)
-    const [saving, setSaving] = useState(false)
     const [category, setCategory] = useState<CategoryDetail | null>(null)
     const { t } = useTranslation()
 
@@ -101,7 +101,8 @@ const CategoryDetailForm = ({
 
     const onSubmit = async (values: FormSchema) => {
         if (!category) return
-        setSaving(true)
+
+        onSavingChange?.(true)
 
         const patch: Record<string, unknown> = {}
         if (values.name !== category.name) patch.name = values.name
@@ -113,7 +114,7 @@ const CategoryDetailForm = ({
             patch.parent_id = values.parent_id
 
         if (Object.keys(patch).length === 0) {
-            setSaving(false)
+            onSavingChange?.(false)
             return
         }
 
@@ -149,7 +150,7 @@ const CategoryDetailForm = ({
                 setError('name', { message })
             }
         } finally {
-            setSaving(false)
+            onSavingChange?.(false)
         }
     }
 
@@ -168,7 +169,7 @@ const CategoryDetailForm = ({
 
     return (
         <div className="p-6">
-            <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form id="category-detail-form" onSubmit={handleSubmit(onSubmit)}>
                 <FormItem
                     label={t('categoriesView.form.nameLbl')}
                     invalid={Boolean(errors.name)}
@@ -276,14 +277,6 @@ const CategoryDetailForm = ({
                         )}
                     />
                 </FormItem>
-
-                <div className="flex justify-end mt-2">
-                    <Button type="submit" variant="solid" loading={saving}>
-                        {saving
-                            ? t('categoriesView.form.savingBtn')
-                            : t('categoriesView.form.saveBtn')}
-                    </Button>
-                </div>
             </Form>
         </div>
     )

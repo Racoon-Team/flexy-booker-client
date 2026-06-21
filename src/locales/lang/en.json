@@ -200,6 +200,8 @@
 
         "searchPlaceholder": "Search category...",
         "noResults": "No results found",
+        "previewBtn": "Preview",
+        "archiveBtn": "Archive",
 
         "businesses": "Businesses",
         "servicesListed": "Listed Services",

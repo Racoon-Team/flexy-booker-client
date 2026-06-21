@@ -12,6 +12,7 @@ import {
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CategoryDetailForm from '@/components/ui/CategoryDetailForm'
+import Button from '@/components/ui/Button'
 
 const normalizeText = (text: string) =>
     text
@@ -67,6 +68,7 @@ const getExpandedIdsForSearch = (
 
     return expanded
 }
+
 const CategoriesView = () => {
     const { t } = useTranslation()
 
@@ -77,6 +79,7 @@ const CategoriesView = () => {
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     )
+    const [savingDetail, setSavingDetail] = useState(false)
 
     const EXPANDED_IDS_KEY = 'categories_expanded_ids'
 
@@ -151,11 +154,11 @@ const CategoriesView = () => {
             return next
         })
     }
+
     const filteredCategories = useMemo(() => {
         if (!searchTerm.trim()) {
             return categories
         }
-
         return filterCategories(categories, searchTerm)
     }, [categories, searchTerm])
 
@@ -163,7 +166,6 @@ const CategoriesView = () => {
         if (!searchTerm.trim()) {
             return expandedIds
         }
-
         return getExpandedIdsForSearch(categories, searchTerm)
     }, [categories, searchTerm, expandedIds])
 
@@ -209,6 +211,11 @@ const CategoriesView = () => {
         }
     }
 
+    const handleSelectCategory = (category: Category) => {
+        setSelectedCategory(category)
+        setSavingDetail(false)
+    }
+
     return (
         <div className="flex h-full min-h-0 flex-col p-6">
             <div className="mb-6 flex items-center justify-between">
@@ -251,12 +258,12 @@ const CategoriesView = () => {
                         loading={loading}
                         selectedId={selectedCategory?.id ?? null}
                         expandedIds={searchExpandedIds}
-                        onSelect={setSelectedCategory}
+                        onSelect={handleSelectCategory}
                         onToggle={handleToggle}
                     />
                 </aside>
 
-                <main className="flex-1 overflow-y-auto">
+                <main className="flex-1 overflow-y-auto flex flex-col">
                     {selectedCategory ? (
                         <div>
                             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
@@ -304,9 +311,17 @@ const CategoriesView = () => {
                                         </button>
                                     )}
 
-                                    <button className="rounded-lg bg-black text-white px-3 py-1.5 text-sm">
-                                        {t('categoriesView.saveBtn')}
-                                    </button>
+                                    <Button
+                                        type="submit"
+                                        form="category-detail-form"
+                                        variant="solid"
+                                        size="sm"
+                                        loading={savingDetail}
+                                    >
+                                        {savingDetail
+                                            ? t('categoriesView.form.savingBtn')
+                                            : t('categoriesView.form.saveBtn')}
+                                    </Button>
                                 </div>
                             </div>
 
@@ -367,6 +382,7 @@ const CategoriesView = () => {
                             <CategoryDetailForm
                                 categoryId={selectedCategory.id}
                                 onSaveSuccess={loadCategories}
+                                onSavingChange={setSavingDetail}
                             />
                         </div>
                     ) : (

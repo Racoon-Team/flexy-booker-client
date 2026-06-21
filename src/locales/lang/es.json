@@ -203,6 +203,8 @@
 
         "searchPlaceholder": "Buscar categoría...",
         "noResults": "Sin resultados",
+        "previewBtn": "Vista previa",
+        "archiveBtn": "Archivar",
 
         "businesses": "Negocios",
         "servicesListed": "Servicios listados",
