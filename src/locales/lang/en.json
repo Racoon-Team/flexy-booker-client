@@ -204,6 +204,12 @@
         "categoryCreated": "Category created successfully",
         "slug": "slug",
         "addSubcategory": "add subcategory",
+        "archive": "Archive",
+        "unarchive": "Unarchive",
+        "confirmArchive": "Are you sure you want to archive this category? Businesses associated with this category may no longer be visible.",
+        "confirmUnarchive": "Are you sure you want to unarchive this category?",
+        "activeStatus": "Active",
+        "archivedStatus": "Archived",
 
         "form": {
             "infoSection": "Information",
