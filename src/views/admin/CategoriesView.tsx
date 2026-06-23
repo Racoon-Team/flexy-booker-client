@@ -1,8 +1,12 @@
 import CategoryTree from '@/components/ui/CategoryTree'
 import type { Category } from '@/components/ui/CategoryTree'
+import toast from '@/components/ui/toast'
+import Notification from '@/components/ui/Notification'
 import {
     getCategories,
     getCategoryStats,
+    archiveCategory,
+    unarchiveCategory,
     type CategoryStats,
 } from '@/services/categoriesServices'
 import { useEffect, useMemo, useState } from 'react'
@@ -162,6 +166,48 @@ const CategoriesView = () => {
         return getExpandedIdsForSearch(categories, searchTerm)
     }, [categories, searchTerm, expandedIds])
 
+    const handleArchive = async (id: string) => {
+        try {
+            const result = await archiveCategory(id)
+            await loadCategories()
+            setSelectedCategory(null)
+            toast.push(
+                <Notification type="success">
+                    {result.warning ?? t('categoriesView.archiveSuccess')}
+                </Notification>,
+                { placement: 'top-center' },
+            )
+        } catch {
+            toast.push(
+                <Notification type="danger">
+                    {t('categoriesView.archiveError')}
+                </Notification>,
+                { placement: 'top-center' },
+            )
+        }
+    }
+
+    const handleUnarchive = async (id: string) => {
+        try {
+            await unarchiveCategory(id)
+            await loadCategories()
+            setSelectedCategory(null)
+            toast.push(
+                <Notification type="success">
+                    {t('categoriesView.unarchiveSuccess')}
+                </Notification>,
+                { placement: 'top-center' },
+            )
+        } catch {
+            toast.push(
+                <Notification type="danger">
+                    {t('categoriesView.unarchiveError')}
+                </Notification>,
+                { placement: 'top-center' },
+            )
+        }
+    }
+
     return (
         <div className="flex h-full min-h-0 flex-col p-6">
             <div className="mb-6 flex items-center justify-between">
@@ -210,21 +256,61 @@ const CategoriesView = () => {
                 </aside>
 
                 <main className="flex-1 overflow-y-auto">
-                    <div className="p-6">
-                        {selectedCategory ? (
-                            <div>
-                                <h2 className="text-2xl font-bold">
-                                    {selectedCategory.name}
-                                </h2>
+                    {selectedCategory ? (
+                        <div>
+                            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-2xl flex-shrink-0">
+                                        {selectedCategory.icon ?? '📁'}
+                                    </div>
+                                    <div>
+                                        <h2 className="text-xl font-bold text-gray-900">
+                                            {selectedCategory.name}
+                                        </h2>
+                                        <p className="text-sm text-gray-400 mt-0.5">
+                                            {selectedCategory.id.slice(0, 8)}...
+                                            {' · '}
+                                            slug: {selectedCategory.slug}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm">
+                                        {t('categoriesView.previewBtn')}
+                                    </button>
 
-                                <p className="mt-2 text-gray-600">
-                                    {t('categoriesView.categoryId', {
-                                        id: selectedCategory.id,
-                                    })}
-                                </p>
+                                    {selectedCategory.status === 'archived' ? (
+                                        <button
+                                            onClick={() =>
+                                                handleUnarchive(
+                                                    selectedCategory.id,
+                                                )
+                                            }
+                                            className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm"
+                                        >
+                                            {t('categoriesView.unarchiveBtn')}
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() =>
+                                                handleArchive(
+                                                    selectedCategory.id,
+                                                )
+                                            }
+                                            className="rounded-lg border border-orange-300 text-orange-600 px-3 py-1.5 text-sm"
+                                        >
+                                            {t('categoriesView.archiveBtn')}
+                                        </button>
+                                    )}
 
+                                    <button className="rounded-lg bg-black text-white px-3 py-1.5 text-sm">
+                                        {t('categoriesView.saveBtn')}
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="p-6">
                                 {statsLoading ? (
-                                    <div className="mt-6 grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-2 gap-4">
                                         {[1, 2].map((item) => (
                                             <div
                                                 key={item}
@@ -233,16 +319,14 @@ const CategoriesView = () => {
                                         ))}
                                     </div>
                                 ) : stats ? (
-                                    <div className="mt-6 grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-2 gap-4">
                                         <div className="rounded-lg border border-gray-200 p-4">
                                             <p className="text-sm text-gray-500">
                                                 {t('categoriesView.businesses')}
                                             </p>
-
                                             <p className="mt-2 text-3xl font-bold">
                                                 {stats.businesses.total}
                                             </p>
-
                                             {stats.businesses.delta !==
                                                 null && (
                                                 <p className="mt-2 text-sm text-green-600">
@@ -254,16 +338,15 @@ const CategoriesView = () => {
                                                 </p>
                                             )}
                                         </div>
-
                                         <div className="rounded-lg border border-gray-200 p-4">
                                             <p className="text-sm text-gray-500">
-                                                {t('categoriesView.servicesListed')}
+                                                {t(
+                                                    'categoriesView.servicesListed',
+                                                )}
                                             </p>
-
                                             <p className="mt-2 text-3xl font-bold">
                                                 {stats.services_listed.total}
                                             </p>
-
                                             {stats.services_listed.delta !==
                                                 null && (
                                                 <p className="mt-2 text-sm text-green-600">
@@ -278,12 +361,12 @@ const CategoriesView = () => {
                                     </div>
                                 ) : null}
                             </div>
-                        ) : (
-                            <div className="text-gray-500">
-                                {t('categoriesView.selectCategory')}
-                            </div>
-                        )}
-                    </div>
+                        </div>
+                    ) : (
+                        <div className="p-6 text-gray-500">
+                            {t('categoriesView.selectCategory')}
+                        </div>
+                    )}
                 </main>
             </div>
         </div>
