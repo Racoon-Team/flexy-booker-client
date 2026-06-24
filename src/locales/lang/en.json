@@ -207,6 +207,11 @@
         "servicesListed": "Listed Services",
 
         "form": {
+            "infoSection": "Information",
+            "visibilitySection": "Visibility",
+            "tagsSection": "Related tags",
+            "visibilityPlaceholder": "In progress",
+            "tagsPlaceholder": "In progress",
             "nameLbl": "Name",
             "slugLbl": "Slug",
             "parentLbl": "Parent",

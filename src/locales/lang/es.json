@@ -210,6 +210,11 @@
         "servicesListed": "Servicios listados",
 
         "form": {
+            "infoSection": "Información",
+            "visibilitySection": "Visibilidad",
+            "tagsSection": "Tags relacionados",
+            "visibilityPlaceholder": "En progreso",
+            "tagsPlaceholder": "En progreso",
             "nameLbl": "Nombre",
             "slugLbl": "Slug",
             "parentLbl": "Categoría padre",
