@@ -204,36 +204,54 @@
         "noResults": "Sin resultados",
         "businesses": "Negocios",
         "servicesListed": "Servicios listados",
+        "categoryCreated": "Categoría creada correctamente",
+        "slug": "slug"
+    },
+    "createCategoryModal": {
+        "title": "Nueva categoría",
+        "type": "Tipo",
+        "parent": "Categoría padre",
+        "subcategory": "Subcategoría",
+        "name": "Nombre",
+        "slug": "Slug",
+        "icon": "Ícono",
+        "description": "Descripción",
+        "searchParent": "Buscar categoría padre",
+        "cancel": "Cancelar",
+        "create": "Crear",
+        "creating": "Creando...",
+        "created": "Categoría creada correctamente",
+        "error": "Error al crear la categoría"
+    },
 
-        "form": {
-            "infoSection": "Información",
-            "visibilitySection": "Visibilidad",
-            "tagsSection": "Tags relacionados",
-            "visibilityPlaceholder": "En progreso",
-            "tagsPlaceholder": "En progreso",
-            "nameLbl": "Nombre",
-            "slugLbl": "Slug",
-            "parentLbl": "Categoría padre",
-            "iconLbl": "Icono",
-            "descriptionLbl": "Descripción",
-            "namePh": "Nombre de la categoría",
-            "slugPh": "slug-de-categoria",
-            "parentPh": "Buscar categoría padre...",
-            "iconPh": "⚡ emoji o icono",
-            "descriptionPh": "Descripción de la categoría...",
-            "nameRequired": "El nombre es requerido",
-            "slugRequired": "El slug es requerido",
-            "saveBtn": "Guardar",
-            "savingBtn": "Guardando...",
-            "saveSuccess": "Categoría guardada exitosamente"
-        },
+    "form": {
+        "infoSection": "Información",
+        "visibilitySection": "Visibilidad",
+        "tagsSection": "Tags relacionados",
+        "visibilityPlaceholder": "En progreso",
+        "tagsPlaceholder": "En progreso",
+        "nameLbl": "Nombre",
+        "slugLbl": "Slug",
+        "parentLbl": "Categoría padre",
+        "iconLbl": "Icono",
+        "descriptionLbl": "Descripción",
+        "namePh": "Nombre de la categoría",
+        "slugPh": "slug-de-categoria",
+        "parentPh": "Buscar categoría padre...",
+        "iconPh": "⚡ emoji o icono",
+        "descriptionPh": "Descripción de la categoría...",
+        "nameRequired": "El nombre es requerido",
+        "slugRequired": "El slug es requerido",
+        "saveBtn": "Guardar",
+        "savingBtn": "Guardando...",
+        "saveSuccess": "Categoría guardada exitosamente"
+    },
 
-        "tags": {
-            "label": "Tags",
-            "addBtn": "+ añadir",
-            "inputPh": "Buscar o crear tag...",
-            "removeError": "Error al eliminar el tag",
-            "addError": "Error al agregar el tag"
-        }
+    "tags": {
+        "label": "Tags",
+        "addBtn": "+ añadir",
+        "inputPh": "Buscar o crear tag...",
+        "removeError": "Error al eliminar el tag",
+        "addError": "Error al agregar el tag"
     }
 }
