@@ -203,7 +203,33 @@
 
         "searchPlaceholder": "Buscar categoría...",
         "noResults": "Sin resultados",
+        "previewBtn": "Vista previa",
+        "archiveBtn": "Archivar",
+
         "businesses": "Negocios",
-        "servicesListed": "Servicios listados"
+        "servicesListed": "Servicios listados",
+
+        "form": {
+            "infoSection": "Información",
+            "visibilitySection": "Visibilidad",
+            "tagsSection": "Tags relacionados",
+            "visibilityPlaceholder": "En progreso",
+            "tagsPlaceholder": "En progreso",
+            "nameLbl": "Nombre",
+            "slugLbl": "Slug",
+            "parentLbl": "Categoría padre",
+            "iconLbl": "Icono",
+            "descriptionLbl": "Descripción",
+            "namePh": "Nombre de la categoría",
+            "slugPh": "slug-de-categoria",
+            "parentPh": "Buscar categoría padre...",
+            "iconPh": "⚡ emoji o icono",
+            "descriptionPh": "Descripción de la categoría...",
+            "nameRequired": "El nombre es requerido",
+            "slugRequired": "El slug es requerido",
+            "saveBtn": "Guardar",
+            "savingBtn": "Guardando...",
+            "saveSuccess": "Categoría guardada exitosamente"
+        }
     }
 }
