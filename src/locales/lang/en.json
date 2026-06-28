@@ -197,12 +197,8 @@
         "archiveError": "Failed to archive category",
         "unarchiveSuccess": "Category unarchived successfully",
         "unarchiveError": "Failed to unarchive category",
-
         "searchPlaceholder": "Search category...",
         "noResults": "No results found",
-        "previewBtn": "Preview",
-        "archiveBtn": "Archive",
-
         "businesses": "Businesses",
         "servicesListed": "Listed Services",
 
@@ -227,6 +223,14 @@
             "saveBtn": "Save",
             "savingBtn": "Saving...",
             "saveSuccess": "Category saved successfully"
+        },
+
+        "tags": {
+            "label": "Tags",
+            "addBtn": "+ add",
+            "inputPh": "Search or create tag...",
+            "removeError": "Failed to remove tag",
+            "addError": "Failed to add tag"
         }
     }
 }

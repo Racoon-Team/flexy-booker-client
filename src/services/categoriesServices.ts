@@ -108,3 +108,35 @@ export const searchCategories = async (q: string, limit = 20) => {
         params: { q, limit },
     })
 }
+
+export type Tag = {
+    id: string
+    name: string
+    slug: string
+}
+
+export const addTagToCategory = async (categoryId: string, name: string) => {
+    return ApiService.fetchDataWithAxios<Tag>({
+        url: `/categories/${categoryId}/tags`,
+        method: 'POST',
+        data: { name },
+    })
+}
+
+export const removeTagFromCategory = async (
+    categoryId: string,
+    tagId: string,
+) => {
+    return ApiService.fetchDataWithAxios<void>({
+        url: `/categories/${categoryId}/tags/${tagId}`,
+        method: 'DELETE',
+    })
+}
+
+export const searchTags = async (q: string, limit = 10) => {
+    return ApiService.fetchDataWithAxios<Tag[]>({
+        url: `/categories/tags`,
+        method: 'GET',
+        params: { q, limit },
+    })
+}

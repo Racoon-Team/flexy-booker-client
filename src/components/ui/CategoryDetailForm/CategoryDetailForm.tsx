@@ -1,3 +1,4 @@
+import CategoryTagsEditor from '@/components/ui/CategoryTagsEditor'
 import AsyncSelect from 'react-select/async'
 import { Form, FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
@@ -309,12 +310,12 @@ const CategoryDetailForm = ({
                         </div>
 
                         <div className="border border-gray-200 rounded-xl p-4">
-                            <p className="text-sm font-semibold text-gray-700 mb-3">
-                                {t('categoriesView.form.tagsSection')}
-                            </p>
-                            <p className="text-sm text-gray-400">
-                                {t('categoriesView.form.tagsPlaceholder')}
-                            </p>
+                            {category && (
+                                <CategoryTagsEditor
+                                    categoryId={categoryId}
+                                    initialTags={category.tags}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
