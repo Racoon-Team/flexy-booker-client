@@ -53,7 +53,12 @@ const CreateCategoryModal = ({
     const [slug, setSlug] = useState('')
     const [icon, setIcon] = useState('🎉')
     const [description, setDescription] = useState('')
-
+    const [visibility, setVisibility] = useState({
+        show_on_homepage: false,
+        show_in_search: true,
+        allow_new_businesses: true,
+        featured_on_homepage: false,
+    })
     const [parent, setParent] = useState<Option | null>(null)
     const [parentSearch, setParentSearch] = useState('')
     const [parentOptions, setParentOptions] = useState<Option[]>([])
@@ -102,12 +107,7 @@ const CreateCategoryModal = ({
             icon,
             description,
             parent_id: type === 'sub' ? (parent?.id ?? null) : null,
-            visibility: {
-                show_on_homepage: false,
-                show_in_search: true,
-                allow_new_businesses: true,
-                featured_on_homepage: false,
-            },
+            visibility,
         }
 
         try {
@@ -130,6 +130,12 @@ const CreateCategoryModal = ({
             setParent(null)
             setParentSearch('')
             setType('parent')
+            setVisibility({
+                show_on_homepage: false,
+                show_in_search: true,
+                allow_new_businesses: true,
+                featured_on_homepage: false,
+            })
         } catch (err: unknown) {
             console.error('createCategory error:', err)
 
@@ -189,50 +195,99 @@ const CreateCategoryModal = ({
                     </div>
                 </div>
 
-                <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full border rounded-lg p-2 text-sm mb-1"
-                    placeholder={t('createCategoryModal.name')}
-                />
-                {errors.name && (
-                    <p className="text-red-500 text-xs mb-2">{errors.name}</p>
-                )}
-
-                <div className="grid grid-cols-2 gap-3 mb-1">
-                    <input
-                        value={slug}
-                        onChange={(e) => setSlug(normalizeSlug(e.target.value))}
-                        className="border rounded-lg p-2 text-sm"
-                        placeholder={t('createCategoryModal.slug')}
-                    />
+                <div className="mb-3">
+                    <label
+                        htmlFor="category-name"
+                        className="mb-1 block text-sm font-medium"
+                    >
+                        {t('createCategoryModal.name')} *
+                    </label>
 
                     <input
-                        value={icon}
-                        onChange={(e) => setIcon(e.target.value)}
-                        className="border rounded-lg p-2 text-sm"
-                        placeholder={t('createCategoryModal.icon')}
+                        id="category-name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full border rounded-lg p-2 text-sm"
+                        placeholder={t('createCategoryModal.name')}
                     />
+
+                    {errors.name && (
+                        <p className="text-red-500 text-xs">{errors.name}</p>
+                    )}
                 </div>
-                {errors.slug && (
-                    <p className="text-red-500 text-xs mb-2">{errors.slug}</p>
-                )}
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label
+                            htmlFor="category-slug"
+                            className="mb-1 block text-sm font-medium"
+                        >
+                            {t('createCategoryModal.slug')}
+                        </label>
 
-                <input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-full border rounded-lg p-2 text-sm mb-3"
-                    placeholder={t('createCategoryModal.description')}
-                />
-                {errors.description && (
-                    <p className="text-red-500 text-xs mb-2">
-                        {errors.description}
-                    </p>
-                )}
+                        <input
+                            id="category-slug"
+                            value={slug}
+                            onChange={(e) =>
+                                setSlug(normalizeSlug(e.target.value))
+                            }
+                            className="w-full border rounded-lg p-2 text-sm"
+                        />
+                        {errors.slug && (
+                            <p className="text-red-500 text-xs">
+                                {errors.slug}
+                            </p>
+                        )}
+                    </div>
+
+                    <div>
+                        <label
+                            htmlFor="category-icon"
+                            className="mb-1 block text-sm font-medium"
+                        >
+                            {t('createCategoryModal.icon')}
+                        </label>
+
+                        <input
+                            id="category-icon"
+                            value={icon}
+                            onChange={(e) => setIcon(e.target.value)}
+                            className="w-full border rounded-lg p-2 text-sm"
+                        />
+                    </div>
+                </div>
+                <div className="mb-3">
+                    <label
+                        htmlFor="category-description"
+                        className="mb-1 block text-sm font-medium"
+                    >
+                        {t('createCategoryModal.description')}
+                    </label>
+
+                    <input
+                        id="category-description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="w-full border rounded-lg p-2 text-sm"
+                        placeholder={t('createCategoryModal.description')}
+                    />
+
+                    {errors.description && (
+                        <p className="text-red-500 text-xs">
+                            {errors.description}
+                        </p>
+                    )}
+                </div>
 
                 {type === 'sub' && (
                     <div className="mb-3">
+                        <label
+                            htmlFor="parent-search"
+                            className="mb-1 block text-sm font-medium"
+                        >
+                            {t('createCategoryModal.parent')}
+                        </label>
                         <input
+                            id="parent-search"
                             value={parentSearch}
                             onChange={(e) => setParentSearch(e.target.value)}
                             className="w-full border rounded-lg p-2 text-sm"
@@ -258,6 +313,108 @@ const CreateCategoryModal = ({
                         )}
                     </div>
                 )}
+                <hr className="my-5" />
+
+                <h3 className="mb-4 text-sm font-semibold">
+                    {t('createCategoryModal.visibility')}
+                </h3>
+
+                <div className="space-y-4 mb-5">
+                    <label
+                        htmlFor="show-homepage"
+                        className="flex items-center justify-between"
+                    >
+                        <div>
+                            <p>{t('createCategoryModal.showHomepage')}</p>
+                            <p className="text-xs text-gray-500">
+                                {t('createCategoryModal.showHomepageDesc')}
+                            </p>
+                        </div>
+                        <input
+                            id="show-homepage"
+                            type="checkbox"
+                            checked={visibility.show_on_homepage}
+                            onChange={(e) =>
+                                setVisibility({
+                                    ...visibility,
+                                    show_on_homepage: e.target.checked,
+                                })
+                            }
+                        />
+                    </label>
+
+                    <label
+                        htmlFor="show-search"
+                        className="flex items-center justify-between"
+                    >
+                        <div>
+                            <p>{t('createCategoryModal.showSearch')}</p>
+                            <p className="text-xs text-gray-500">
+                                {t('createCategoryModal.showSearchDesc')}
+                            </p>
+                        </div>
+
+                        <input
+                            id="show-search"
+                            type="checkbox"
+                            checked={visibility.show_in_search}
+                            onChange={(e) =>
+                                setVisibility({
+                                    ...visibility,
+                                    show_in_search: e.target.checked,
+                                })
+                            }
+                        />
+                    </label>
+
+                    <label
+                        htmlFor="allow-businesses"
+                        className="flex items-center justify-between"
+                    >
+                        <div>
+                            <p>{t('createCategoryModal.allowBusinesses')}</p>
+                            <p className="text-xs text-gray-500">
+                                {t('createCategoryModal.allowBusinessesDesc')}
+                            </p>
+                        </div>
+
+                        <input
+                            id="allow-businesses"
+                            type="checkbox"
+                            checked={visibility.allow_new_businesses}
+                            onChange={(e) =>
+                                setVisibility({
+                                    ...visibility,
+                                    allow_new_businesses: e.target.checked,
+                                })
+                            }
+                        />
+                    </label>
+
+                    <label
+                        htmlFor="featured-homepage"
+                        className="flex items-center justify-between"
+                    >
+                        <div>
+                            <p>{t('createCategoryModal.featuredHomepage')}</p>
+                            <p className="text-xs text-gray-500">
+                                {t('createCategoryModal.featuredHomepageDesc')}
+                            </p>
+                        </div>
+
+                        <input
+                            id="featured-homepage"
+                            type="checkbox"
+                            checked={visibility.featured_on_homepage}
+                            onChange={(e) =>
+                                setVisibility({
+                                    ...visibility,
+                                    featured_on_homepage: e.target.checked,
+                                })
+                            }
+                        />
+                    </label>
+                </div>
 
                 <div className="flex justify-end gap-2 mt-6">
                     <button
@@ -268,7 +425,9 @@ const CreateCategoryModal = ({
                     </button>
 
                     <button
-                        disabled={!name || loading}
+                        disabled={
+                            !name || loading || (type === 'sub' && !parent?.id)
+                        }
                         onClick={handleSubmit}
                         className="bg-black text-white px-3 py-1.5 rounded-lg disabled:opacity-50"
                     >

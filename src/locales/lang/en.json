@@ -219,7 +219,16 @@
         "create": "Create",
         "creating": "Creating...",
         "created": "Category created successfully",
-        "error": "Error creating category"
+        "error": "Error creating category",
+        "visibility": "Visibility",
+        "showHomepage": "Show on homepage",
+        "showHomepageDesc": "This category will appear on the homepage",
+        "showSearch": "Show in search",
+        "showSearchDesc": "This category will be visible in search results",
+        "allowBusinesses": "Allow new businesses",
+        "allowBusinessesDesc": "Businesses can be created under this category",
+        "featuredHomepage": "Featured on homepage",
+        "featuredHomepageDesc": "This category will be highlighted on the homepage"
     },
     "form": {
         "infoSection": "Information",

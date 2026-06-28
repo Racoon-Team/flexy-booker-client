@@ -221,7 +221,15 @@
         "create": "Crear",
         "creating": "Creando...",
         "created": "Categoría creada correctamente",
-        "error": "Error al crear la categoría"
+        "error": "Error al crear la categoría",
+        "showHomepage": "Mostrar en inicio",
+        "showHomepageDesc": "Esta categoría aparecerá en la página principal",
+        "showSearch": "Mostrar en búsqueda",
+        "showSearchDesc": "Visible en resultados de búsqueda",
+        "allowBusinesses": "Permitir nuevos negocios",
+        "allowBusinessesDesc": "Se podrán crear negocios bajo esta categoría",
+        "featuredHomepage": "Destacada en inicio",
+        "featuredHomepageDesc": "Se mostrará como destacada en la página principal"
     },
 
     "form": {
