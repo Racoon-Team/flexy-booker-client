@@ -1,5 +1,5 @@
 import CategoryTree from '@/components/ui/CategoryTree'
-import type { Category } from '@/components/ui/CategoryTree'
+
 import toast from '@/components/ui/toast'
 import Notification from '@/components/ui/Notification'
 import {
@@ -9,10 +9,13 @@ import {
     unarchiveCategory,
     type CategoryStats,
 } from '@/services/categoriesServices'
+
+import type { Category } from '@/@types/category'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CategoryDetailForm from '@/components/ui/CategoryDetailForm'
 import Button from '@/components/ui/Button'
+import CreateCategoryModal from './CreateCategoryModal'
 
 const normalizeText = (text: string) =>
     text
@@ -54,8 +57,7 @@ const getExpandedIdsForSearch = (
     const visit = (node: Category): boolean => {
         const selfMatches = normalizeText(node.name).includes(normalizedSearch)
 
-        const childMatches =
-            node.children?.some((child) => visit(child)) ?? false
+        const childMatches = node.children?.some(visit) ?? false
 
         if (childMatches) {
             expanded.add(node.id)
@@ -93,7 +95,8 @@ const CategoriesView = () => {
     })
 
     const [searchTerm, setSearchTerm] = useState('')
-
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [initialParentId, setInitialParentId] = useState<string | null>(null)
     const loadCategories = async () => {
         setLoading(true)
         try {
@@ -235,7 +238,13 @@ const CategoriesView = () => {
                     <button className="rounded-lg border border-gray-300 px-4 py-2 text-sm">
                         {t('categoriesView.reorder')}
                     </button>
-                    <button className="rounded-lg bg-black px-4 py-2 text-white text-sm">
+                    <button
+                        onClick={() => {
+                            setInitialParentId(null)
+                            setIsModalOpen(true)
+                        }}
+                        className="rounded-lg bg-black px-4 py-2 text-white text-sm"
+                    >
                         {t('categoriesView.newCategory')}
                     </button>
                 </div>
@@ -257,7 +266,9 @@ const CategoriesView = () => {
                         categories={filteredCategories}
                         loading={loading}
                         selectedId={selectedCategory?.id ?? null}
-                        expandedIds={searchExpandedIds}
+                        expandedIds={
+                            searchTerm ? searchExpandedIds : expandedIds
+                        }
                         onSelect={handleSelectCategory}
                         onToggle={handleToggle}
                     />
@@ -278,7 +289,8 @@ const CategoriesView = () => {
                                         <p className="text-sm text-gray-400 mt-0.5">
                                             {selectedCategory.id.slice(0, 8)}...
                                             {' · '}
-                                            slug: {selectedCategory.slug}
+                                            {t('categoriesView.slug')}:{' '}
+                                            {selectedCategory.slug}
                                         </p>
                                     </div>
                                 </div>
@@ -392,6 +404,22 @@ const CategoriesView = () => {
                     )}
                 </main>
             </div>
+            <CreateCategoryModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                initialParentId={initialParentId}
+                onSuccess={(category) => {
+                    loadCategories()
+                    setSelectedCategory(category)
+
+                    toast.push(
+                        <Notification type="success">
+                            {t('categoriesView.categoryCreated')}
+                        </Notification>,
+                        { placement: 'top-center' },
+                    )
+                }}
+            />
         </div>
     )
 }

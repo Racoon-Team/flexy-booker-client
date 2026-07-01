@@ -1,8 +1,8 @@
 import { HiChevronRight, HiChevronDown } from 'react-icons/hi'
-import type { Category } from '@/services/categoriesServices'
-import { useTranslation } from 'react-i18next'
 
-export type { Category }
+import { useTranslation } from 'react-i18next'
+import { Category } from '@/@types/category'
+
 
 const TreeSkeleton = () => (
     <div className="animate-pulse space-y-2 p-4">
