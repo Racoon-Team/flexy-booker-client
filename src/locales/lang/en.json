@@ -202,7 +202,46 @@
         "businesses": "Businesses",
         "servicesListed": "Listed Services",
         "categoryCreated": "Category created successfully",
-        "slug": "slug"
+        "slug": "slug",
+        "addSubcategory": "add subcategory",
+
+        "form": {
+            "infoSection": "Information",
+            "visibilitySection": "Visibility",
+            "tagsSection": "Related tags",
+            "visibilityPlaceholder": "In progress",
+            "tagsPlaceholder": "In progress",
+            "nameLbl": "Name",
+            "slugLbl": "Slug",
+            "parentLbl": "Parent",
+            "iconLbl": "Icon",
+            "descriptionLbl": "Description",
+            "namePh": "Category name",
+            "slugPh": "category-slug",
+            "parentPh": "Search parent category...",
+            "iconPh": "⚡ emoji or icon",
+            "descriptionPh": "Category description...",
+            "nameRequired": "Name is required",
+            "slugRequired": "Slug is required",
+            "saveBtn": "Save",
+            "savingBtn": "Saving...",
+            "saveSuccess": "Category saved successfully"
+        },
+
+        "tags": {
+            "label": "Tags",
+            "addBtn": "+ add",
+            "inputPh": "Search or create tag...",
+            "removeError": "Failed to remove tag",
+            "addError": "Failed to add tag"
+        },
+
+        "create": {
+            "infoSection": "New subcategory",
+            "nameRequired": "Name is required",
+            "slugRequired": "Slug is required",
+            "createSuccess": "Subcategory created successfully"
+        }
     },
 
     "createCategoryModal": {
@@ -229,35 +268,5 @@
         "allowBusinessesDesc": "Businesses can be created under this category",
         "featuredHomepage": "Featured on homepage",
         "featuredHomepageDesc": "This category will be highlighted on the homepage"
-    },
-    "form": {
-        "infoSection": "Information",
-        "visibilitySection": "Visibility",
-        "tagsSection": "Related tags",
-        "visibilityPlaceholder": "In progress",
-        "tagsPlaceholder": "In progress",
-        "nameLbl": "Name",
-        "slugLbl": "Slug",
-        "parentLbl": "Parent",
-        "iconLbl": "Icon",
-        "descriptionLbl": "Description",
-        "namePh": "Category name",
-        "slugPh": "category-slug",
-        "parentPh": "Search parent category...",
-        "iconPh": "⚡ emoji or icon",
-        "descriptionPh": "Category description...",
-        "nameRequired": "Name is required",
-        "slugRequired": "Slug is required",
-        "saveBtn": "Save",
-        "savingBtn": "Saving...",
-        "saveSuccess": "Category saved successfully"
-    },
-
-    "tags": {
-        "label": "Tags",
-        "addBtn": "+ add",
-        "inputPh": "Search or create tag...",
-        "removeError": "Failed to remove tag",
-        "addError": "Failed to add tag"
     }
 }

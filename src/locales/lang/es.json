@@ -205,8 +205,48 @@
         "businesses": "Negocios",
         "servicesListed": "Servicios listados",
         "categoryCreated": "Categoría creada correctamente",
-        "slug": "slug"
+        "slug": "slug",
+        "addSubcategory": "añadir subcategoría",
+
+        "form": {
+            "infoSection": "Información",
+            "visibilitySection": "Visibilidad",
+            "tagsSection": "Tags relacionados",
+            "visibilityPlaceholder": "En progreso",
+            "tagsPlaceholder": "En progreso",
+            "nameLbl": "Nombre",
+            "slugLbl": "Slug",
+            "parentLbl": "Categoría padre",
+            "iconLbl": "Icono",
+            "descriptionLbl": "Descripción",
+            "namePh": "Nombre de la categoría",
+            "slugPh": "slug-de-categoria",
+            "parentPh": "Buscar categoría padre...",
+            "iconPh": "⚡ emoji o icono",
+            "descriptionPh": "Descripción de la categoría...",
+            "nameRequired": "El nombre es requerido",
+            "slugRequired": "El slug es requerido",
+            "saveBtn": "Guardar",
+            "savingBtn": "Guardando...",
+            "saveSuccess": "Categoría guardada exitosamente"
+        },
+
+        "tags": {
+            "label": "Tags",
+            "addBtn": "+ añadir",
+            "inputPh": "Buscar o crear tag...",
+            "removeError": "Error al eliminar el tag",
+            "addError": "Error al agregar el tag"
+        },
+
+        "create": {
+            "infoSection": "Nueva subcategoría",
+            "nameRequired": "El nombre es requerido",
+            "slugRequired": "El slug es requerido",
+            "createSuccess": "Subcategoría creada exitosamente"
+        }
     },
+
     "createCategoryModal": {
         "title": "Nueva categoría",
         "type": "Tipo",
@@ -230,36 +270,5 @@
         "allowBusinessesDesc": "Se podrán crear negocios bajo esta categoría",
         "featuredHomepage": "Destacada en inicio",
         "featuredHomepageDesc": "Se mostrará como destacada en la página principal"
-    },
-
-    "form": {
-        "infoSection": "Información",
-        "visibilitySection": "Visibilidad",
-        "tagsSection": "Tags relacionados",
-        "visibilityPlaceholder": "En progreso",
-        "tagsPlaceholder": "En progreso",
-        "nameLbl": "Nombre",
-        "slugLbl": "Slug",
-        "parentLbl": "Categoría padre",
-        "iconLbl": "Icono",
-        "descriptionLbl": "Descripción",
-        "namePh": "Nombre de la categoría",
-        "slugPh": "slug-de-categoria",
-        "parentPh": "Buscar categoría padre...",
-        "iconPh": "⚡ emoji o icono",
-        "descriptionPh": "Descripción de la categoría...",
-        "nameRequired": "El nombre es requerido",
-        "slugRequired": "El slug es requerido",
-        "saveBtn": "Guardar",
-        "savingBtn": "Guardando...",
-        "saveSuccess": "Categoría guardada exitosamente"
-    },
-
-    "tags": {
-        "label": "Tags",
-        "addBtn": "+ añadir",
-        "inputPh": "Buscar o crear tag...",
-        "removeError": "Error al eliminar el tag",
-        "addError": "Error al agregar el tag"
     }
 }
