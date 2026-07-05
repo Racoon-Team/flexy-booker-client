@@ -1,5 +1,4 @@
 import CategoryCreateForm from '@/components/ui/CategoryCreateForm'
-import { useModal } from '@/components/modal/ModalProvider'
 import CategoryTree from '@/components/ui/CategoryTree'
 
 import toast from '@/components/ui/toast'
@@ -75,7 +74,6 @@ const getExpandedIdsForSearch = (
 
 const CategoriesView = () => {
     const { t } = useTranslation()
-    const { openModal } = useModal()
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(true)
     const [stats, setStats] = useState<CategoryStats | null>(null)
