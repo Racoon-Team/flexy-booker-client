@@ -1,3 +1,4 @@
+import CategoryCreateForm from '@/components/ui/CategoryCreateForm'
 import CategoryTree from '@/components/ui/CategoryTree'
 
 import toast from '@/components/ui/toast'
@@ -78,6 +79,10 @@ const CategoriesView = () => {
     const [loading, setLoading] = useState(true)
     const [stats, setStats] = useState<CategoryStats | null>(null)
     const [statsLoading, setStatsLoading] = useState(false)
+    const [createParent, setCreateParent] = useState<{
+        id: string
+        name: string
+    } | null>(null)
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     )
@@ -214,8 +219,15 @@ const CategoriesView = () => {
         }
     }
 
+    const handleAddSubcategory = (parentId: string, parentName: string) => {
+        setSelectedCategory(null)
+        setCreateParent({ id: parentId, name: parentName })
+        setSavingDetail(false)
+    }
+
     const handleSelectCategory = (category: Category) => {
         setSelectedCategory(category)
+        setCreateParent(null)
         setSavingDetail(false)
     }
 
@@ -271,11 +283,56 @@ const CategoriesView = () => {
                         }
                         onSelect={handleSelectCategory}
                         onToggle={handleToggle}
+                        onAddSubcategory={handleAddSubcategory}
                     />
                 </aside>
 
                 <main className="flex-1 overflow-y-auto flex flex-col">
-                    {selectedCategory ? (
+                    {createParent ? (
+                        <>
+                            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-2xl flex-shrink-0">
+                                        📁
+                                    </div>
+                                    <div>
+                                        <h2 className="text-xl font-bold text-gray-900">
+                                            {t(
+                                                'categoriesView.create.infoSection',
+                                            )}
+                                        </h2>
+                                        <p className="text-sm text-gray-400 mt-0.5">
+                                            {t('categoriesView.form.parentLbl')}
+                                            : {createParent.name}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2">
+                                    <Button
+                                        type="submit"
+                                        form="category-create-form"
+                                        variant="solid"
+                                        size="sm"
+                                        loading={savingDetail}
+                                    >
+                                        {savingDetail
+                                            ? t('categoriesView.form.savingBtn')
+                                            : t('categoriesView.form.saveBtn')}
+                                    </Button>
+                                </div>
+                            </div>
+
+                            <CategoryCreateForm
+                                parentId={createParent.id}
+                                parentName={createParent.name}
+                                onCreateSuccess={() => {
+                                    loadCategories()
+                                    setCreateParent(null)
+                                }}
+                                onSavingChange={setSavingDetail}
+                            />
+                        </>
+                    ) : selectedCategory ? (
                         <div>
                             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
                                 <div className="flex items-center gap-4">

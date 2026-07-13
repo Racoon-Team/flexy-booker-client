@@ -26,6 +26,7 @@ const TreeNode = ({
     expandedIds,
     onSelect,
     onToggle,
+    onAddSubcategory,
 }: {
     node: Category
     depth: number
@@ -33,7 +34,9 @@ const TreeNode = ({
     expandedIds: Set<string>
     onSelect: (node: Category) => void
     onToggle: (id: string) => void
+    onAddSubcategory: (parentId: string, parentName: string) => void
 }) => {
+    const { t } = useTranslation()
     const isExpanded = expandedIds.has(node.id)
     const isSelected = selectedId === node.id
     const isArchived = node.status === 'archived'
@@ -100,8 +103,19 @@ const TreeNode = ({
                             expandedIds={expandedIds}
                             onSelect={onSelect}
                             onToggle={onToggle}
+                            onAddSubcategory={onAddSubcategory}
                         />
                     ))}
+                    <button
+                        type="button"
+                        onClick={() => onAddSubcategory(node.id, node.name)}
+                        className="text-xs text-gray-400 hover:text-gray-600 py-1"
+                        style={{
+                            paddingLeft: `${12 + (depth + 1) * 16 + 20}px`,
+                        }}
+                    >
+                        + {t('categoriesView.addSubcategory')}
+                    </button>
                 </div>
             )}
         </div>
@@ -115,6 +129,7 @@ type CategoryTreeProps = {
     expandedIds: Set<string>
     onSelect: (node: Category) => void
     onToggle: (id: string) => void
+    onAddSubcategory: (parentId: string, parentName: string) => void
 }
 
 const CategoryTree = ({
@@ -124,6 +139,7 @@ const CategoryTree = ({
     expandedIds,
     onSelect,
     onToggle,
+    onAddSubcategory,
 }: CategoryTreeProps) => {
     const { t } = useTranslation()
 
@@ -146,6 +162,7 @@ const CategoryTree = ({
                     expandedIds={expandedIds}
                     onSelect={onSelect}
                     onToggle={onToggle}
+                    onAddSubcategory={onAddSubcategory}
                 />
             ))}
         </div>

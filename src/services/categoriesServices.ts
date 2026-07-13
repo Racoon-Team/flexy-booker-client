@@ -1,4 +1,5 @@
 import { Category } from '@/@types/category'
+import type { CreateCategoryPayload } from '@/@types/category'
 import ApiService from './ApiService'
 
 export type CategoryStats = {
@@ -42,6 +43,8 @@ export type CategorySearchResult = {
     business_count: number
     parent: { id: string; name: string } | null
 }
+
+export type { CreateCategoryPayload }
 
 export const getCategories = async () => {
     return ApiService.fetchDataWithAxios<Category[]>({
@@ -130,21 +133,9 @@ export const searchTags = async (q: string, limit = 10) => {
         params: { q, limit },
     })
 }
-export type CreateCategoryPayload = {
-    name: string
-    slug?: string
-    parent_id?: string | null
-    icon?: string
-    description?: string
-    visibility?: {
-        show_on_homepage: boolean
-        show_in_search: boolean
-        allow_new_businesses: boolean
-        featured_on_homepage: boolean
-    }
-}
+
 export const createCategory = async (data: CreateCategoryPayload) => {
-    return ApiService.fetchDataWithAxios<Category>({
+    return ApiService.fetchDataWithAxios<CategoryDetail>({
         url: '/categories',
         method: 'POST',
         data,
