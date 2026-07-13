@@ -48,7 +48,7 @@
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "marked": "^18.0.4",
-    "react": "19.2.3",
+    "react": "19.2.7",
     "react-apexcharts": "^2.1.0",
     "react-csv": "^2.2.2",
     "react-dom": "19.2.3",
