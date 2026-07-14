@@ -74,7 +74,6 @@ const getExpandedIdsForSearch = (
 
 const CategoriesView = () => {
     const { t } = useTranslation()
-
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(true)
     const [stats, setStats] = useState<CategoryStats | null>(null)
@@ -395,6 +394,13 @@ const CategoriesView = () => {
                             </div>
 
                             <div className="p-6">
+                                <p className="mt-2 text-gray-600">
+                                    {t('categoriesView.categoryId', {
+                                        id: selectedCategory.id,
+                                    })}
+                                </p>
+                                <div className="mt-4"></div>
+
                                 {statsLoading ? (
                                     <div className="grid grid-cols-2 gap-4">
                                         {[1, 2].map((item) => (

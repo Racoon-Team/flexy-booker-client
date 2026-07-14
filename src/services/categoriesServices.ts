@@ -46,9 +46,9 @@ export type CategorySearchResult = {
 
 export type { CreateCategoryPayload }
 
-export const getCategories = async () => {
+export const getCategories = async (includeArchived = true) => {
     return ApiService.fetchDataWithAxios<Category[]>({
-        url: '/categories/tree',
+        url: `/categories/tree?include_archived=${includeArchived}`,
         method: 'GET',
     })
 }

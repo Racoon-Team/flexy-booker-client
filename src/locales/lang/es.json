@@ -207,7 +207,13 @@
         "categoryCreated": "Categoría creada correctamente",
         "slug": "slug",
         "addSubcategory": "añadir subcategoría",
-
+        "archive": "Archivar",
+        "unarchive": "Desarchivar",
+        "confirmArchive": "¿Seguro que deseas archivar esta categoría? Los negocios asociados podrían dejar de mostrarse.",
+        "confirmUnarchive": "¿Seguro que deseas desarchivar esta categoría?",
+        "activeStatus": "Activo",
+        "archivedStatus": "Archivado",
+        
         "form": {
             "infoSection": "Información",
             "visibilitySection": "Visibilidad",
@@ -262,6 +268,7 @@
         "creating": "Creando...",
         "created": "Categoría creada correctamente",
         "error": "Error al crear la categoría",
+        "visibility": "Visibilidad",
         "showHomepage": "Mostrar en inicio",
         "showHomepageDesc": "Esta categoría aparecerá en la página principal",
         "showSearch": "Mostrar en búsqueda",
