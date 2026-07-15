@@ -27,7 +27,7 @@
     "@tanstack/match-sorter-utils": "^8.19.4",
     "@tanstack/react-table": "^8.20.5",
     "@tanstack/react-virtual": "^3.11.2",
-    "@tiptap/pm": "^2.10.4",
+    "@tiptap/pm": "^3.28.0",
     "@tiptap/react": "^2.10.4",
     "@tiptap/starter-kit": "^2.10.4",
     "@visx/pattern": "^3.13.0-alpha.0",
