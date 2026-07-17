@@ -45,6 +45,11 @@ const CategoryDetailForm = ({
                 icon: z.string().optional(),
                 description: z.string().optional(),
                 parent_id: z.string().nullable().optional(),
+
+                show_on_homepage: z.boolean(),
+                show_in_search: z.boolean(),
+                allow_new_businesses: z.boolean(),
+                featured_on_homepage: z.boolean(),
             }),
         [t],
     )
@@ -57,6 +62,8 @@ const CategoryDetailForm = ({
         control,
         reset,
         setError,
+        watch,
+        setValue,
     } = useForm<FormSchema>({
         resolver: zodResolver(schema),
     })
@@ -73,6 +80,11 @@ const CategoryDetailForm = ({
                     icon: data.icon ?? '',
                     description: data.description ?? '',
                     parent_id: data.parent?.id ?? null,
+
+                    show_on_homepage: data.visibility.show_on_homepage,
+                    show_in_search: data.visibility.show_in_search,
+                    allow_new_businesses: data.visibility.allow_new_businesses,
+                    featured_on_homepage: data.visibility.featured_on_homepage,
                 })
             } catch (error) {
                 console.error('Failed to load category', error)
@@ -82,6 +94,14 @@ const CategoryDetailForm = ({
         }
         load()
     }, [categoryId, reset])
+
+    const showHomepage = watch('show_on_homepage')
+
+    useEffect(() => {
+        if (!showHomepage) {
+            setValue('featured_on_homepage', false)
+        }
+    }, [showHomepage, setValue])
 
     const loadParentOptions = async (
         inputValue: string,
@@ -113,7 +133,12 @@ const CategoryDetailForm = ({
             patch.description = values.description
         if (values.parent_id !== (category.parent?.id ?? null))
             patch.parent_id = values.parent_id
-
+        patch.visibility = {
+            show_on_homepage: values.show_on_homepage,
+            show_in_search: values.show_in_search,
+            allow_new_businesses: values.allow_new_businesses,
+            featured_on_homepage: values.featured_on_homepage,
+        }
         if (Object.keys(patch).length === 0) {
             onSavingChange?.(false)
             return
@@ -129,6 +154,11 @@ const CategoryDetailForm = ({
                 icon: updated.icon ?? '',
                 description: updated.description ?? '',
                 parent_id: updated.parent?.id ?? null,
+
+                show_on_homepage: updated.visibility.show_on_homepage,
+                show_in_search: updated.visibility.show_in_search,
+                allow_new_businesses: updated.visibility.allow_new_businesses,
+                featured_on_homepage: updated.visibility.featured_on_homepage,
             })
             toast.push(
                 <Notification type="success">
@@ -148,7 +178,9 @@ const CategoryDetailForm = ({
             if (status === 409) {
                 setError('slug', { message })
             } else if (status === 422) {
-                setError('name', { message })
+                setError('featured_on_homepage', {
+                    message,
+                })
             }
         } finally {
             onSavingChange?.(false)
@@ -301,14 +333,115 @@ const CategoryDetailForm = ({
 
                     <div className="w-64 flex-shrink-0 space-y-4">
                         <div className="border border-gray-200 rounded-xl p-4">
-                            <p className="text-sm font-semibold text-gray-700 mb-3">
-                                {t('categoriesView.form.visibilitySection')}
+                            <p className="text-sm font-semibold text-gray-700 mb-4">
+                                {t('createCategoryModal.visibility')}
                             </p>
-                            <p className="text-sm text-gray-400">
-                                {t('categoriesView.form.visibilityPlaceholder')}
-                            </p>
-                        </div>
 
+                            <Controller
+                                name="show_on_homepage"
+                                control={control}
+                                render={({ field }) => (
+                                    <label className="flex justify-between items-center py-2">
+                                        <span>
+                                            {t(
+                                                'createCategoryModal.showHomepage',
+                                            )}
+                                        </span>
+
+                                        <input
+                                            type="checkbox"
+                                            checked={field.value}
+                                            disabled={
+                                                category?.status === 'archived'
+                                            }
+                                            onChange={(e) =>
+                                                field.onChange(e.target.checked)
+                                            }
+                                        />
+                                    </label>
+                                )}
+                            />
+                            <Controller
+                                name="show_in_search"
+                                control={control}
+                                render={({ field }) => (
+                                    <label className="flex justify-between items-center py-2">
+                                        <span>
+                                            {t(
+                                                'createCategoryModal.showSearch',
+                                            )}
+                                        </span>
+
+                                        <input
+                                            type="checkbox"
+                                            checked={field.value}
+                                            disabled={
+                                                category?.status === 'archived'
+                                            }
+                                            onChange={(e) =>
+                                                field.onChange(e.target.checked)
+                                            }
+                                        />
+                                    </label>
+                                )}
+                            />
+                            <Controller
+                                name="allow_new_businesses"
+                                control={control}
+                                render={({ field }) => (
+                                    <label className="flex justify-between items-center py-2">
+                                        <span>
+                                            {t(
+                                                'createCategoryModal.allowBusinesses',
+                                            )}
+                                        </span>
+
+                                        <input
+                                            type="checkbox"
+                                            checked={field.value}
+                                            disabled={
+                                                category?.status === 'archived'
+                                            }
+                                            onChange={(e) =>
+                                                field.onChange(e.target.checked)
+                                            }
+                                        />
+                                    </label>
+                                )}
+                            />
+
+                            <Controller
+                                name="featured_on_homepage"
+                                control={control}
+                                render={({ field }) => (
+                                    <label className="flex justify-between items-center py-2">
+                                        <span>
+                                            {t(
+                                                'createCategoryModal.featuredHomepage',
+                                            )}
+                                        </span>
+
+                                        <input
+                                            type="checkbox"
+                                            checked={field.value}
+                                            disabled={
+                                                !showHomepage ||
+                                                category?.status === 'archived'
+                                            }
+                                            onChange={(e) =>
+                                                field.onChange(e.target.checked)
+                                            }
+                                        />
+                                    </label>
+                                )}
+                            />
+
+                            {errors.featured_on_homepage && (
+                                <p className="text-xs text-red-500 mt-2">
+                                    {errors.featured_on_homepage.message}
+                                </p>
+                            )}
+                        </div>
                         <div className="border border-gray-200 rounded-xl p-4">
                             {category && (
                                 <CategoryTagsEditor
