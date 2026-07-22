@@ -1,13 +1,26 @@
 import { HiOutlineUsers } from 'react-icons/hi'
+import { useState } from 'react'
+import CreateUserModal from '@/components/CreateUserModal'
 
 const UsersView = () => {
+    const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false)
     return (
         <div className="p-8 max-w-screen-xl">
-            <div className="mb-8">
-                <p className="text-sm text-gray-500 mb-1">Admin · Users</p>
-                <h1 className="text-4xl font-bold italic text-gray-900">
-                    Users
-                </h1>
+            <div className="mb-8 flex items-center justify-between">
+                <div>
+                    <p className="text-sm text-gray-500 mb-1">Admin · Users</p>
+                    <h1 className="text-4xl font-bold italic text-gray-900">
+                        Users
+                    </h1>
+                </div>
+
+                <button
+                    type="button"
+                    onClick={() => setIsCreateUserModalOpen(true)}
+                    className="rounded-lg bg-black px-4 py-2 text-sm text-white"
+                >
+                    Create User
+                </button>
             </div>
 
             <div className="bg-white rounded-xl border border-gray-200 p-16 flex flex-col items-center justify-center text-center">
@@ -21,6 +34,10 @@ const UsersView = () => {
                     This section is under construction.
                 </p>
             </div>
+            <CreateUserModal
+                isOpen={isCreateUserModalOpen}
+                onClose={() => setIsCreateUserModalOpen(false)}
+            />
         </div>
     )
 }

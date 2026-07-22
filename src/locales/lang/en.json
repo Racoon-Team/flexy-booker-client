@@ -274,5 +274,46 @@
         "allowBusinessesDesc": "Businesses can be created under this category",
         "featuredHomepage": "Featured on homepage",
         "featuredHomepageDesc": "This category will be highlighted on the homepage"
+    },
+
+    "createUserModal": {
+        "adminAction": "Admin action",
+        "title": "Create user",
+        "description": "An invitation will be sent to the email.",
+        "accountType": "Account Type",
+
+        "roles": {
+            "client": {
+                "title": "Client",
+                "description": "Can book services."
+            },
+            "owner": {
+                "title": "Owner",
+                "description": "Can manage a business."
+            },
+            "admin": {
+                "title": "Admin",
+                "description": "Full platform access."
+            }
+        },
+
+        "fields": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "phone": "Phone"
+        },
+
+        "switches": {
+            "verified": "Verified account",
+            "verifiedDesc": "Activate the account immediately.",
+            "welcomeEmail": "Send welcome email",
+            "welcomeEmailDesc": "Send an email with account information."
+        },
+
+        "buttons": {
+            "cancel": "Cancel",
+            "create": "Create user"
+        }
     }
 }
