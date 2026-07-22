@@ -213,7 +213,7 @@
         "confirmUnarchive": "¿Seguro que deseas desarchivar esta categoría?",
         "activeStatus": "Activo",
         "archivedStatus": "Archivado",
-        
+
         "form": {
             "infoSection": "Información",
             "visibilitySection": "Visibilidad",
@@ -277,5 +277,46 @@
         "allowBusinessesDesc": "Se podrán crear negocios bajo esta categoría",
         "featuredHomepage": "Destacada en inicio",
         "featuredHomepageDesc": "Se mostrará como destacada en la página principal"
+    },
+
+    "createUserModal": {
+        "adminAction": "Acción de administrador",
+        "title": "Crear usuario",
+        "description": "Se enviará una invitación al correo electrónico.",
+        "accountType": "Tipo de cuenta",
+
+        "roles": {
+            "client": {
+                "title": "Cliente",
+                "description": "Puede reservar servicios."
+            },
+            "owner": {
+                "title": "Propietario",
+                "description": "Puede administrar un negocio."
+            },
+            "admin": {
+                "title": "Administrador",
+                "description": "Acceso completo a la plataforma."
+            }
+        },
+
+        "fields": {
+            "firstName": "Nombre",
+            "lastName": "Apellido",
+            "email": "Correo electrónico",
+            "phone": "Teléfono"
+        },
+
+        "switches": {
+            "verified": "Cuenta verificada",
+            "verifiedDesc": "Activa la cuenta inmediatamente.",
+            "welcomeEmail": "Enviar correo de bienvenida",
+            "welcomeEmailDesc": "Enviar un correo con la información de la cuenta."
+        },
+
+        "buttons": {
+            "cancel": "Cancelar",
+            "create": "Crear usuario"
+        }
     }
 }
