@@ -316,7 +316,16 @@
 
         "buttons": {
             "cancel": "Cancelar",
-            "create": "Crear usuario"
+            "create": "Crear usuario",
+            "creating": "Creando..."
+        },
+
+        "errors": {
+            "firstNameRequired": "El nombre es requerido",
+            "emailRequired": "El correo es requerido",
+            "emailInvalid": "Por favor ingresa un correo válido",
+            "emailExists": "Este correo ya está registrado",
+            "generic": "Algo salió mal. Por favor intenta de nuevo."
         }
     }
 }

@@ -313,7 +313,16 @@
 
         "buttons": {
             "cancel": "Cancel",
-            "create": "Create user"
+            "create": "Create user",
+            "creating": "Creating..."
+        },
+
+        "errors": {
+            "firstNameRequired": "First name is required",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Please enter a valid email address",
+            "emailExists": "This email is already registered",
+            "generic": "Something went wrong. Please try again."
         }
     }
 }
