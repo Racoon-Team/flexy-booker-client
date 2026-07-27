@@ -324,5 +324,19 @@
             "emailExists": "This email is already registered",
             "generic": "Something went wrong. Please try again."
         }
+    },
+
+    "usersView": {
+        "admin": "Admin · Users",
+        "title": "Users",
+        "createUser": "+ Create user",
+
+        "table": {
+            "name": "Name",
+            "email": "Email",
+            "role": "Role",
+            "status": "Status",
+            "createdDate": "Created Date"
+        }
     }
 }
