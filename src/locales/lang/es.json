@@ -327,5 +327,19 @@
             "emailExists": "Este correo ya está registrado",
             "generic": "Algo salió mal. Por favor intenta de nuevo."
         }
+    },
+
+    "usersView": {
+        "admin": "Admin · Usuarios",
+        "title": "Usuarios",
+        "createUser": "+ Crear usuario",
+
+        "table": {
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "role": "Rol",
+            "status": "Estado",
+            "createdDate": "Fecha de creación"
+        }
     }
 }
